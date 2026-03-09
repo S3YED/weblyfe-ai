@@ -1,79 +1,116 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Calendar, Sparkles } from 'lucide-react';
+import { ArrowRight, Calendar, Clock, Check } from 'lucide-react';
+
+const benefits = [
+  'Free 30-min strategy session',
+  'Custom AI roadmap for your business',
+  'No obligation, no pitch',
+  'Clear pricing before we start',
+];
 
 export default function CTA() {
   return (
-    <section id="book" className="py-24 bg-[#050508] relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 via-transparent to-transparent" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-3xl" />
+    <section id="book" className="py-24 md:py-32 bg-gradient-to-br from-[#031D16] via-[#0E3D31] to-[#031D16] relative overflow-hidden">
+      {/* Decorative elements */}
+      <motion.div 
+        animate={{ 
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.5, 0.3],
+        }}
+        transition={{ duration: 8, repeat: Infinity }}
+        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-[#DFB771]/10 blur-3xl"
+      />
+      <motion.div 
+        animate={{ 
+          scale: [1, 1.1, 1],
+          opacity: [0.2, 0.4, 0.2],
+        }}
+        transition={{ duration: 10, repeat: Infinity, delay: 2 }}
+        className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-[#247459]/20 blur-3xl"
+      />
+      
+      {/* Diamond decorations */}
+      <div className="absolute top-20 left-10 w-3 h-3 bg-[#DFB771] rotate-45 hidden md:block" />
+      <div className="absolute bottom-20 right-20 w-4 h-4 bg-[#DFB771]/60 rotate-45 hidden md:block" />
+      <div className="absolute top-1/2 right-10 w-2 h-2 bg-[#FFD99A] rotate-45 hidden md:block" />
       
       <div className="container mx-auto px-6 relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-3xl mx-auto text-center"
-        >
+        <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 mb-8">
-            <Sparkles className="w-4 h-4 text-purple-400" />
-            <span className="text-sm text-purple-300">Free 30-Minute Strategy Call</span>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#DFB771]/40 bg-[#DFB771]/10 mb-8"
+          >
+            <Calendar className="w-4 h-4 text-[#DFB771]" />
+            <span className="text-sm text-[#DFB771] font-medium">Limited spots available this month</span>
+          </motion.div>
 
           {/* Headline */}
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Ready to Put Your Business on{' '}
-            <span className="text-gradient">Autopilot?</span>
-          </h2>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#F6FEFC] mb-6"
+          >
+            Ready to Put Your Business<br />
+            <span className="text-gradient">on Autopilot?</span>
+          </motion.h2>
 
           {/* Subheadline */}
-          <p className="text-xl text-gray-400 mb-10">
-            Book a free call. We&apos;ll show you exactly how AI can save you 20+ hours 
-            per week — tailored to your specific business.
-          </p>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-xl text-[#F6FEFC]/70 max-w-2xl mx-auto mb-10"
+          >
+            Book a free strategy call and let&apos;s map out exactly how AI can 
+            save you time, capture more leads, and scale your business.
+          </motion.p>
 
-          {/* What you get */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-10">
-            <div className="flex items-center gap-3">
-              <div className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center">
-                <span className="text-purple-400 text-sm">✓</span>
+          {/* Benefits */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-wrap justify-center gap-4 mb-10"
+          >
+            {benefits.map((benefit) => (
+              <div 
+                key={benefit}
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#247459]/20 border border-[#247459]/30"
+              >
+                <Check className="w-4 h-4 text-[#DFB771]" />
+                <span className="text-[#F6FEFC]/80 text-sm">{benefit}</span>
               </div>
-              <span className="text-gray-300">Custom automation audit</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center">
-                <span className="text-purple-400 text-sm">✓</span>
-              </div>
-              <span className="text-gray-300">ROI projection</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center">
-                <span className="text-purple-400 text-sm">✓</span>
-              </div>
-              <span className="text-gray-300">No obligations</span>
-            </div>
-          </div>
+            ))}
+          </motion.div>
 
           {/* CTA Button */}
-          <a 
-            href="https://cal.com/weblyfe"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary inline-flex items-center gap-3 text-lg group"
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
           >
-            <Calendar className="w-5 h-5" />
-            Book Your Free Strategy Call
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </a>
-
-          {/* Trust signal */}
-          <p className="text-sm text-gray-500 mt-6">
-            Join 50+ businesses already automating their growth
-          </p>
-        </motion.div>
+            <a 
+              href="https://cal.com/weblyfe/strategy-call" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary text-lg group inline-flex"
+            >
+              Book Your Free Strategy Call
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </a>
+            
+            <p className="flex items-center justify-center gap-2 text-[#F6FEFC]/50 text-sm mt-4">
+              <Clock className="w-4 h-4" />
+              Takes 30 seconds to book
+            </p>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -1,3 +1,4 @@
+import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
 import CaseStudies from '@/components/CaseStudies';
@@ -9,7 +10,8 @@ import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0A0A0F]">
+    <main className="min-h-screen">
+      <Navbar />
       <Hero />
       <Services />
       <CaseStudies />

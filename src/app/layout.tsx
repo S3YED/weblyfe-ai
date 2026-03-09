@@ -1,8 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'AI Automation for Creators & Agencies | Weblyfe.ai',
@@ -16,6 +13,8 @@ export const metadata: Metadata = {
     'n8n automation',
     'digital employee',
     'AI business automation',
+    'Weblyfe',
+    'no-code automation',
   ],
   openGraph: {
     title: 'AI Automation That Actually Works | Weblyfe.ai',
@@ -42,6 +41,10 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({
@@ -53,7 +56,10 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#031D16" />
         <link rel="canonical" href="https://weblyfe.ai" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -62,10 +68,11 @@ export default function RootLayout({
               '@type': 'Organization',
               name: 'Weblyfe.ai',
               url: 'https://weblyfe.ai',
-              logo: 'https://weblyfe.ai/logo.png',
+              logo: 'https://weblyfe.ai/logo-gold.svg',
               description: 'AI automation and chatbot services for creators and agencies',
               sameAs: [
-                'https://twitter.com/weblyfenl',
+                'https://instagram.com/seyed.jpg',
+                'https://youtube.com/@weblyfenl',
                 'https://linkedin.com/company/weblyfe',
               ],
               contactPoint: {
@@ -77,7 +84,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={inter.className}>
+      <body className="antialiased">
         {children}
       </body>
     </html>

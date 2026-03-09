@@ -16,7 +16,6 @@ const caseStudies = [
       { label: 'After-Hours Leads', value: '40%', icon: TrendingUp },
     ],
     tech: ['GPT-4', 'Gemini', 'WhatsApp API', 'Monday.com', 'n8n'],
-    gradient: 'from-orange-500/20 to-red-500/20',
     quote: '"We used to lose jobs because we couldn\'t respond fast enough. Now leads get answers immediately."',
     author: 'Ben, Owner',
   },
@@ -31,7 +30,6 @@ const caseStudies = [
       { label: 'User Satisfaction', value: '98%', icon: TrendingUp },
     ],
     tech: ['Claude AI', 'Next.js', 'Twilio', 'Stripe', 'Supabase'],
-    gradient: 'from-green-500/20 to-emerald-500/20',
     quote: '"The AI crafts messages that are caring and constructive — exactly what we needed."',
     author: 'Hesam, Founder',
   },
@@ -46,7 +44,6 @@ const caseStudies = [
       { label: 'Uptime', value: '99.9%', icon: Clock },
     ],
     tech: ['Claude', 'n8n', 'Notion', 'Google Workspace', 'Tailscale'],
-    gradient: 'from-purple-500/20 to-violet-500/20',
     quote: '"Having Appie is like having a team that never sleeps. It just handles things."',
     author: 'Seyed, CEO',
   },
@@ -54,29 +51,36 @@ const caseStudies = [
 
 export default function CaseStudies() {
   return (
-    <section id="case-studies" className="py-24 bg-[#050508]">
-      <div className="container mx-auto px-6">
+    <section id="case-studies" className="py-24 md:py-32 bg-[#031D16] relative overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#F6FEFC] to-transparent opacity-5" />
+      <div className="absolute top-40 right-0 w-96 h-96 rounded-full bg-[#247459]/10 blur-3xl" />
+      <div className="absolute bottom-40 left-0 w-80 h-80 rounded-full bg-[#DFB771]/5 blur-3xl" />
+      
+      <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <span className="text-purple-400 text-sm font-medium uppercase tracking-wider">
+          <span className="inline-flex items-center gap-2 text-[#DFB771] text-sm font-semibold uppercase tracking-wider mb-4">
+            <span className="w-2 h-2 bg-[#DFB771] rotate-45" />
             Case Studies
+            <span className="w-2 h-2 bg-[#DFB771] rotate-45" />
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mt-4 mb-6">
-            Real Results, Real Clients
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#F6FEFC] mt-4 mb-6">
+            Real Results, <span className="text-[#DFB771]">Real Clients</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="text-[#F6FEFC]/60 max-w-2xl mx-auto text-lg">
             Don&apos;t just take our word for it. See how we&apos;ve helped businesses 
             automate their operations and scale faster.
           </p>
         </motion.div>
 
         {/* Case Studies */}
-        <div className="space-y-16">
+        <div className="space-y-20">
           {caseStudies.map((study, index) => (
             <motion.div
               key={study.title}
@@ -84,55 +88,60 @@ export default function CaseStudies() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`grid lg:grid-cols-2 gap-8 items-center ${
+              className={`grid lg:grid-cols-2 gap-12 items-center ${
                 index % 2 === 1 ? 'lg:flex-row-reverse' : ''
               }`}
             >
               {/* Image */}
-              <div className={`relative rounded-2xl overflow-hidden bg-gradient-to-br ${study.gradient} p-1 ${
-                index % 2 === 1 ? 'lg:order-2' : ''
-              }`}>
-                <div className="relative aspect-video rounded-xl overflow-hidden bg-[#0A0A0F]">
-                  <Image
-                    src={study.image}
-                    alt={study.title}
-                    fill
-                    className="object-cover"
-                  />
+              <div className={`relative ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+                <div className="relative rounded-3xl overflow-hidden border border-[#247459]/20 shadow-2xl shadow-[#000]/30">
+                  <div className="relative aspect-video">
+                    <Image
+                      src={study.image}
+                      alt={study.title}
+                      fill
+                      className="object-cover"
+                    />
+                    {/* Overlay gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#031D16]/50 to-transparent" />
+                  </div>
                 </div>
+                {/* Decorative shapes */}
+                <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-[#DFB771]/20 blur-2xl" />
+                <div className="absolute -bottom-4 -left-4 w-32 h-32 rounded-full bg-[#247459]/20 blur-2xl" />
               </div>
 
               {/* Content */}
               <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
-                <span className="text-sm text-purple-400 font-medium">
+                <span className="inline-block px-4 py-1.5 rounded-full bg-[#247459]/20 text-[#DFB771] text-sm font-medium mb-4">
                   {study.subtitle}
                 </span>
-                <h3 className="text-3xl font-bold text-white mt-2 mb-4">
+                <h3 className="text-3xl md:text-4xl font-bold text-[#F6FEFC] mb-4">
                   {study.title}
                 </h3>
-                <p className="text-gray-400 mb-6">
+                <p className="text-[#F6FEFC]/60 mb-8 text-lg leading-relaxed">
                   {study.description}
                 </p>
 
                 {/* Stats */}
-                <div className="grid grid-cols-3 gap-4 mb-6">
+                <div className="grid grid-cols-3 gap-4 mb-8">
                   {study.stats.map((stat) => (
-                    <div key={stat.label} className="text-center p-4 rounded-xl bg-white/5">
-                      <div className="text-2xl font-bold text-white">{stat.value}</div>
-                      <div className="text-xs text-gray-500 mt-1">{stat.label}</div>
+                    <div key={stat.label} className="text-center p-5 rounded-2xl bg-[#0E3D31]/50 border border-[#247459]/20">
+                      <div className="text-2xl md:text-3xl font-bold text-[#DFB771]">{stat.value}</div>
+                      <div className="text-xs text-[#F6FEFC]/50 mt-1">{stat.label}</div>
                       {stat.before && (
-                        <div className="text-xs text-gray-600 line-through">{stat.before}</div>
+                        <div className="text-xs text-[#F6FEFC]/30 line-through mt-1">{stat.before}</div>
                       )}
                     </div>
                   ))}
                 </div>
 
                 {/* Tech Stack */}
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="flex flex-wrap gap-2 mb-8">
                   {study.tech.map((tech) => (
                     <span 
                       key={tech}
-                      className="px-3 py-1 text-xs rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/20"
+                      className="px-3 py-1.5 text-xs rounded-full bg-[#247459]/20 text-[#F6FEFC]/80 border border-[#247459]/30"
                     >
                       {tech}
                     </span>
@@ -140,9 +149,11 @@ export default function CaseStudies() {
                 </div>
 
                 {/* Quote */}
-                <blockquote className="border-l-2 border-purple-500 pl-4 italic text-gray-400">
-                  {study.quote}
-                  <footer className="text-sm text-gray-500 mt-2 not-italic">
+                <blockquote className="border-l-4 border-[#DFB771] pl-5 py-2">
+                  <p className="italic text-[#F6FEFC]/80 text-lg">
+                    {study.quote}
+                  </p>
+                  <footer className="text-sm text-[#DFB771] mt-3 font-medium">
                     — {study.author}
                   </footer>
                 </blockquote>
@@ -156,14 +167,14 @@ export default function CaseStudies() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="text-center mt-20"
         >
           <a 
             href="#book" 
-            className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 font-medium group"
+            className="inline-flex items-center gap-2 text-[#DFB771] hover:text-[#FFD99A] font-semibold text-lg group"
           >
             Ready to be our next success story?
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
           </a>
         </motion.div>
       </div>

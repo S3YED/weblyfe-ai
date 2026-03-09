@@ -33,7 +33,6 @@ const services = [
       { icon: RefreshCw, text: 'Zero manual handoffs' },
       { icon: BarChart3, text: 'Custom real-time dashboards' },
     ],
-    gradient: 'from-purple-500 to-pink-500',
   },
   {
     icon: MessageSquare,
@@ -45,7 +44,6 @@ const services = [
       { icon: Route, text: 'Smart routing to humans when needed' },
       { icon: Phone, text: 'WhatsApp, web, or SMS' },
     ],
-    gradient: 'from-cyan-500 to-blue-500',
   },
   {
     icon: Brain,
@@ -57,7 +55,6 @@ const services = [
       { icon: Sparkles, text: 'Always improving over time' },
       { icon: Lock, text: 'Your data stays private' },
     ],
-    gradient: 'from-green-500 to-emerald-500',
   },
   {
     icon: Target,
@@ -69,7 +66,6 @@ const services = [
       { icon: Mail, text: 'Auto follow-ups that feel personal' },
       { icon: Bell, text: 'Real-time high-intent alerts' },
     ],
-    gradient: 'from-orange-500 to-red-500',
   },
   {
     icon: UserCog,
@@ -81,35 +77,40 @@ const services = [
       { icon: Plug, text: 'Full system access (calendar, email, docs)' },
       { icon: BarChart3, text: 'Scales with your business' },
     ],
-    gradient: 'from-violet-500 to-purple-500',
   },
 ];
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 bg-[#0A0A0F]">
-      <div className="container mx-auto px-6">
+    <section id="services" className="py-24 md:py-32 bg-[#F6FEFC] relative overflow-hidden">
+      {/* Decorative shapes */}
+      <div className="absolute top-20 right-0 w-64 h-64 rounded-full bg-gradient-to-br from-[#247459]/5 to-transparent blur-3xl" />
+      <div className="absolute bottom-20 left-0 w-80 h-80 rounded-full bg-gradient-to-br from-[#DFB771]/10 to-transparent blur-3xl" />
+      
+      <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <span className="text-purple-400 text-sm font-medium uppercase tracking-wider">
+          <span className="inline-flex items-center gap-2 text-[#247459] text-sm font-semibold uppercase tracking-wider mb-4">
+            <span className="w-2 h-2 bg-[#DFB771] rotate-45" />
             Our Services
+            <span className="w-2 h-2 bg-[#DFB771] rotate-45" />
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mt-4 mb-6">
-            AI Solutions That Actually Work
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#031D16] mt-4 mb-6">
+            AI Solutions That <span className="text-[#247459]">Actually Work</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="text-[#031D16]/60 max-w-2xl mx-auto text-lg">
             From simple automations to full digital employees — we build AI systems 
             tailored to your specific business needs.
           </p>
         </motion.div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
@@ -117,37 +118,64 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="card p-8 hover:border-purple-500/30 transition-all group"
+              className="card p-8 group relative"
             >
               {/* Icon */}
-              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.gradient} p-3 mb-6 group-hover:scale-110 transition-transform`}>
-                <service.icon className="w-full h-full text-white" />
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#247459] to-[#0E3D31] p-3.5 mb-6 group-hover:scale-110 transition-transform shadow-lg">
+                <service.icon className="w-full h-full text-[#F6FEFC]" />
               </div>
 
               {/* Title */}
-              <h3 className="text-sm text-purple-400 font-medium mb-2">
+              <span className="text-[#247459] text-sm font-semibold uppercase tracking-wider">
                 {service.title}
-              </h3>
-              <h4 className="text-xl font-bold text-white mb-3">
+              </span>
+              <h3 className="text-xl font-bold text-[#031D16] mt-2 mb-3">
                 {service.headline}
-              </h4>
+              </h3>
 
               {/* Description */}
-              <p className="text-gray-400 text-sm mb-6">
+              <p className="text-[#031D16]/60 text-sm mb-6 leading-relaxed">
                 {service.description}
               </p>
 
               {/* Benefits */}
               <ul className="space-y-3">
                 {service.benefits.map((benefit) => (
-                  <li key={benefit.text} className="flex items-center gap-3 text-sm text-gray-300">
-                    <benefit.icon className="w-4 h-4 text-purple-400 flex-shrink-0" />
+                  <li key={benefit.text} className="flex items-center gap-3 text-sm text-[#031D16]/80">
+                    <span className="w-8 h-8 rounded-lg bg-[#DFB771]/20 flex items-center justify-center flex-shrink-0">
+                      <benefit.icon className="w-4 h-4 text-[#247459]" />
+                    </span>
                     {benefit.text}
                   </li>
                 ))}
               </ul>
+
+              {/* Hover accent line */}
+              <div className="absolute bottom-0 left-8 right-8 h-1 bg-gradient-to-r from-[#DFB771] to-[#FFD99A] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
             </motion.div>
           ))}
+
+          {/* CTA Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+            className="card-dark p-8 bg-gradient-to-br from-[#0E3D31] to-[#031D16] flex flex-col justify-center items-center text-center"
+          >
+            <div className="w-14 h-14 rounded-full bg-[#DFB771]/20 flex items-center justify-center mb-6">
+              <Sparkles className="w-7 h-7 text-[#DFB771]" />
+            </div>
+            <h3 className="text-2xl font-bold text-[#F6FEFC] mb-3">
+              Not Sure What You Need?
+            </h3>
+            <p className="text-[#F6FEFC]/60 mb-6">
+              Book a free strategy call and we&apos;ll map out the perfect AI solution for your business.
+            </p>
+            <a href="#book" className="btn-primary">
+              Get Your Free Roadmap
+            </a>
+          </motion.div>
         </div>
       </div>
     </section>

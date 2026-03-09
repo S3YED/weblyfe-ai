@@ -1,126 +1,130 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MessageSquare, FileSearch, Cog, Rocket, ArrowRight } from 'lucide-react';
+import { MessageSquare, Lightbulb, Rocket, CheckCircle2, ArrowRight } from 'lucide-react';
 
 const steps = [
   {
     number: '01',
     icon: MessageSquare,
     title: 'Discovery Call',
-    description: 'We learn about your pain points, current tools, and goals. No sales pitch — just real conversation about what\'s slowing you down.',
-    duration: '30 min',
+    description: 'We learn about your business, pain points, and goals. No pitch — just understanding what you actually need.',
+    duration: '30 min call',
   },
   {
     number: '02',
-    icon: FileSearch,
-    title: 'Custom Blueprint',
-    description: 'We design your AI automation system tailored to your specific workflows. You\'ll see exactly what we\'ll build before we start.',
-    duration: '2-3 days',
+    icon: Lightbulb,
+    title: 'Custom Strategy',
+    description: 'Within 48 hours, you get a detailed roadmap showing exactly what we\'ll build and the ROI you can expect.',
+    duration: '48 hours',
   },
   {
     number: '03',
-    icon: Cog,
-    title: 'Build & Integrate',
-    description: 'We build, test, and connect everything to your existing tools. You approve at each step — no surprises.',
-    duration: '1-2 weeks',
+    icon: Rocket,
+    title: 'Build & Deploy',
+    description: 'We build your AI system in 2-4 weeks. You get weekly demos, and nothing goes live until you\'re 100% happy.',
+    duration: '2-4 weeks',
   },
   {
     number: '04',
-    icon: Rocket,
+    icon: CheckCircle2,
     title: 'Launch & Optimize',
-    description: 'Your AI goes live. We monitor performance, handle edge cases, and continuously improve as we learn more about your business.',
+    description: 'Go live with full support. We monitor performance and continuously improve based on real data.',
     duration: 'Ongoing',
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-24 bg-[#0A0A0F]">
-      <div className="container mx-auto px-6">
+    <section id="how-it-works" className="py-24 md:py-32 bg-[#F6FEFC] relative overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-1/4 right-0 w-96 h-96 rounded-full bg-[#DFB771]/10 blur-3xl" />
+      <div className="absolute bottom-1/4 left-0 w-80 h-80 rounded-full bg-[#247459]/10 blur-3xl" />
+      
+      <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <span className="text-purple-400 text-sm font-medium uppercase tracking-wider">
+          <span className="inline-flex items-center gap-2 text-[#247459] text-sm font-semibold uppercase tracking-wider mb-4">
+            <span className="w-2 h-2 bg-[#DFB771] rotate-45" />
             How It Works
+            <span className="w-2 h-2 bg-[#DFB771] rotate-45" />
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mt-4 mb-6">
-            From Chaos to Autopilot in 4 Steps
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#031D16] mt-4 mb-6">
+            From Idea to <span className="text-[#247459]">Automation</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            No lengthy onboarding. No complicated training. We handle the technical 
-            stuff so you can focus on running your business.
+          <p className="text-[#031D16]/60 max-w-2xl mx-auto text-lg">
+            A clear, proven process that takes you from overwhelmed to automated in weeks — not months.
           </p>
         </motion.div>
 
         {/* Steps */}
         <div className="relative">
-          {/* Connection Line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-purple-500/50 via-cyan-500/50 to-purple-500/50 hidden lg:block" />
-
-          <div className="space-y-12 lg:space-y-0">
+          {/* Connection line */}
+          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#247459]/20 to-transparent -translate-y-1/2" />
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {steps.map((step, index) => (
               <motion.div
-                key={step.number}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                key={step.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className={`lg:flex items-center gap-8 ${
-                  index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-                }`}
+                transition={{ delay: index * 0.15 }}
+                className="relative"
               >
-                {/* Content */}
-                <div className={`lg:w-5/12 ${index % 2 === 0 ? 'lg:text-right' : 'lg:text-left'}`}>
-                  <div className="card p-8">
-                    <div className={`flex items-center gap-4 mb-4 ${
-                      index % 2 === 0 ? 'lg:flex-row-reverse' : ''
-                    }`}>
-                      <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center">
-                        <step.icon className="w-6 h-6 text-purple-400" />
-                      </div>
-                      <div>
-                        <span className="text-xs text-gray-500 uppercase tracking-wider">
-                          {step.duration}
-                        </span>
-                        <h3 className="text-xl font-bold text-white">{step.title}</h3>
-                      </div>
-                    </div>
-                    <p className="text-gray-400">
-                      {step.description}
-                    </p>
+                <div className="card p-8 h-full text-center relative z-10">
+                  {/* Step number */}
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#031D16] rounded-full">
+                    <span className="text-[#DFB771] text-sm font-bold">{step.number}</span>
                   </div>
+                  
+                  {/* Icon */}
+                  <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-[#247459] to-[#0E3D31] p-4 mt-4 mb-6 shadow-lg">
+                    <step.icon className="w-full h-full text-[#F6FEFC]" />
+                  </div>
+                  
+                  {/* Content */}
+                  <h3 className="text-xl font-bold text-[#031D16] mb-3">{step.title}</h3>
+                  <p className="text-[#031D16]/60 text-sm leading-relaxed mb-4">{step.description}</p>
+                  
+                  {/* Duration badge */}
+                  <span className="inline-block px-3 py-1 rounded-full bg-[#DFB771]/20 text-[#247459] text-xs font-semibold">
+                    {step.duration}
+                  </span>
                 </div>
 
-                {/* Number (center) */}
-                <div className="hidden lg:flex lg:w-2/12 justify-center">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-purple-500/25">
-                    {step.number}
+                {/* Arrow (hidden on last item and mobile) */}
+                {index < steps.length - 1 && (
+                  <div className="hidden lg:flex absolute top-1/2 -right-4 w-8 h-8 bg-[#F6FEFC] rounded-full items-center justify-center z-20 -translate-y-1/2 border-2 border-[#247459]/20">
+                    <ArrowRight className="w-4 h-4 text-[#247459]" />
                   </div>
-                </div>
-
-                {/* Empty space for layout */}
-                <div className="hidden lg:block lg:w-5/12" />
+                )}
               </motion.div>
             ))}
           </div>
         </div>
 
-        {/* CTA */}
+        {/* Bottom CTA */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mt-16"
         >
-          <a href="#book" className="btn-primary inline-flex items-center gap-2 group">
-            Start with Step 1
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
+          <div className="inline-flex flex-col sm:flex-row items-center gap-4 p-6 rounded-2xl bg-gradient-to-r from-[#031D16] to-[#0E3D31]">
+            <p className="text-[#F6FEFC] font-medium">
+              Ready to start your automation journey?
+            </p>
+            <a href="#book" className="btn-primary whitespace-nowrap">
+              Book Your Discovery Call
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>
