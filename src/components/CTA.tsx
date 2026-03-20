@@ -96,7 +96,7 @@ export default function CTA() {
             viewport={{ once: true }}
           >
             <a 
-              href="https://cal.com/weblyfe/strategy-call" 
+              href="https://cal.com/weblyfe/30min" 
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary text-lg group inline-flex"
