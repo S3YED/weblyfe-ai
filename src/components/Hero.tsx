@@ -2,8 +2,11 @@
 
 import { motion } from 'framer-motion';
 import { ArrowRight, Play, Sparkles } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export default function Hero() {
+  const t = useTranslations('hero');
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#031D16]">
       {/* Background gradient */}
@@ -48,7 +51,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#DFB771]/40 bg-[#DFB771]/10 mb-8"
         >
           <Sparkles className="w-4 h-4 text-[#DFB771]" />
-          <span className="text-sm text-[#DFB771] font-medium">Join 50+ businesses automating their growth</span>
+          <span className="text-sm text-[#DFB771] font-medium">{t('badge')}</span>
         </motion.div>
 
         {/* Headline */}
@@ -58,8 +61,8 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-5xl md:text-7xl lg:text-8xl font-bold text-[#F6FEFC] mb-6 leading-[1.1]"
         >
-          Your Business,<br />
-          <span className="text-gradient">Running on Autopilot</span>
+          {t('title1')}<br />
+          <span className="text-gradient">{t('title2')}</span>
         </motion.h1>
 
         {/* Subheadline */}
@@ -69,10 +72,9 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-xl md:text-2xl text-[#F6FEFC]/70 max-w-3xl mx-auto mb-12 leading-relaxed"
         >
-          We build AI systems that handle your leads, support, and operations 24/7. 
-          Focus on the work that actually matters.{' '}
+          {t('subtitle')}{' '}
           <span className="text-[#DFB771] font-medium">
-            Clients save 20+ hours per week.
+            {t('highlight')}
           </span>
         </motion.p>
 
@@ -87,7 +89,7 @@ export default function Hero() {
             href="#book" 
             className="btn-primary group text-lg"
           >
-            Book a Free Strategy Call
+            {t('cta')}
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </a>
           <a 
@@ -95,7 +97,7 @@ export default function Hero() {
             className="btn-secondary group text-lg"
           >
             <Play className="w-5 h-5" />
-            See How It Works
+            {t('ctaSecondary')}
           </a>
         </motion.div>
 
@@ -106,7 +108,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="text-sm text-[#F6FEFC]/50 mt-8"
         >
-          No coding required • No monthly retainers • Just results
+          {t('microcopy')}
         </motion.p>
 
         {/* Scroll indicator */}

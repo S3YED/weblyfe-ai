@@ -2,15 +2,18 @@
 
 import { motion } from 'framer-motion';
 import { ArrowRight, Calendar, Clock, Check } from 'lucide-react';
-
-const benefits = [
-  'Free 30-min strategy session',
-  'Custom AI roadmap for your business',
-  'No obligation, no pitch',
-  'Clear pricing before we start',
-];
+import { useTranslations } from 'next-intl';
 
 export default function CTA() {
+  const t = useTranslations('cta');
+
+  const benefits = [
+    t('benefit1'),
+    t('benefit2'),
+    t('benefit3'),
+    t('benefit4'),
+  ];
+
   return (
     <section id="final-cta" className="py-24 md:py-32 bg-gradient-to-br from-[#031D16] via-[#0E3D31] to-[#031D16] relative overflow-hidden">
       {/* Decorative elements */}
@@ -46,7 +49,7 @@ export default function CTA() {
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#DFB771]/40 bg-[#DFB771]/10 mb-8"
           >
             <Calendar className="w-4 h-4 text-[#DFB771]" />
-            <span className="text-sm text-[#DFB771] font-medium">Limited spots available this month</span>
+            <span className="text-sm text-[#DFB771] font-medium">{t('badge')}</span>
           </motion.div>
 
           {/* Headline */}
@@ -56,8 +59,8 @@ export default function CTA() {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#F6FEFC] mb-6"
           >
-            Ready to Put Your Business<br />
-            <span className="text-gradient">on Autopilot?</span>
+            {t('title')}<br />
+            <span className="text-gradient">{t('titleHighlight')}</span>
           </motion.h2>
 
           {/* Subheadline */}
@@ -67,8 +70,7 @@ export default function CTA() {
             viewport={{ once: true }}
             className="text-xl text-[#F6FEFC]/70 max-w-2xl mx-auto mb-10"
           >
-            Book a free strategy call and let&apos;s map out exactly how AI can 
-            save you time, capture more leads, and scale your business.
+            {t('subtitle')}
           </motion.p>
 
           {/* Benefits */}
@@ -101,13 +103,13 @@ export default function CTA() {
               rel="noopener noreferrer"
               className="btn-primary text-lg group inline-flex"
             >
-              Book Your Free Strategy Call
+              {t('button')}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
             
             <p className="flex items-center justify-center gap-2 text-[#F6FEFC]/50 text-sm mt-4">
               <Clock className="w-4 h-4" />
-              Takes 30 seconds to book
+              {t('microcopy')}
             </p>
           </motion.div>
         </div>

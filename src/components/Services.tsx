@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 import { 
   Workflow, 
   MessageSquare, 
@@ -22,65 +23,67 @@ import {
   Plug
 } from 'lucide-react';
 
-const services = [
-  {
-    icon: Workflow,
-    title: 'Workflow Automation',
-    headline: 'Connect Everything. Automate Anything.',
-    description: 'Your tools should talk to each other without you playing middleman. We build custom automation flows that connect your CRM, email, calendar, Notion, Slack, and 400+ other apps.',
-    benefits: [
-      { icon: Zap, text: 'Instant data sync across all tools' },
-      { icon: RefreshCw, text: 'Zero manual handoffs' },
-      { icon: BarChart3, text: 'Custom real-time dashboards' },
-    ],
-  },
-  {
-    icon: MessageSquare,
-    title: 'AI Chatbots',
-    headline: '24/7 Support That Sounds Like You',
-    description: 'Your customers don\'t want to wait until Monday morning. Our AI chatbots handle inquiries, book appointments, and answer FAQs instantly. Trained on your brand voice.',
-    benefits: [
-      { icon: Moon, text: 'Never miss a lead (even at 3am)' },
-      { icon: Route, text: 'Smart routing to humans when needed' },
-      { icon: Phone, text: 'WhatsApp, web, or SMS' },
-    ],
-  },
-  {
-    icon: Brain,
-    title: 'Training Bots',
-    headline: 'AI That Knows Your Business Inside Out',
-    description: 'Generic AI gives generic answers. We train custom AI models on YOUR content (your docs, processes, FAQs) so it becomes an expert on your specific business.',
-    benefits: [
-      { icon: BookOpen, text: 'Trained on your content' },
-      { icon: Sparkles, text: 'Always improving over time' },
-      { icon: Lock, text: 'Your data stays private' },
-    ],
-  },
-  {
-    icon: Target,
-    title: 'AI-Powered CRM',
-    headline: 'Leads Scored, Sorted, and Followed Up',
-    description: 'Stop letting hot leads go cold. Our AI-powered CRM scores every lead instantly, sends personalized follow-ups, and alerts you when someone\'s ready to buy.',
-    benefits: [
-      { icon: Target, text: 'Instant lead scoring' },
-      { icon: Mail, text: 'Auto follow-ups that feel personal' },
-      { icon: Bell, text: 'Real-time high-intent alerts' },
-    ],
-  },
-  {
-    icon: UserCog,
-    title: 'Digital Employee',
-    headline: 'Hire an AI Team Member',
-    description: 'This isn\'t a chatbot. It\'s a digital employee. Powered by our Appie system, it handles scheduling, research, content drafts, CRM updates, and email management. Unlimited tasks. No PTO.',
-    benefits: [
-      { icon: Users, text: 'True multi-tasking in parallel' },
-      { icon: Plug, text: 'Full system access (calendar, email, docs)' },
-      { icon: BarChart3, text: 'Scales with your business' },
-    ],
-  },
-];
-
 export default function Services() {
+  const t = useTranslations('services');
+
+  const services = [
+    {
+      icon: Workflow,
+      title: t('workflow.title'),
+      headline: t('workflow.headline'),
+      description: t('workflow.description'),
+      benefits: [
+        { icon: Zap, text: t('workflow.benefit1') },
+        { icon: RefreshCw, text: t('workflow.benefit2') },
+        { icon: BarChart3, text: t('workflow.benefit3') },
+      ],
+    },
+    {
+      icon: MessageSquare,
+      title: t('chatbots.title'),
+      headline: t('chatbots.headline'),
+      description: t('chatbots.description'),
+      benefits: [
+        { icon: Moon, text: t('chatbots.benefit1') },
+        { icon: Route, text: t('chatbots.benefit2') },
+        { icon: Phone, text: t('chatbots.benefit3') },
+      ],
+    },
+    {
+      icon: Brain,
+      title: t('training.title'),
+      headline: t('training.headline'),
+      description: t('training.description'),
+      benefits: [
+        { icon: BookOpen, text: t('training.benefit1') },
+        { icon: Sparkles, text: t('training.benefit2') },
+        { icon: Lock, text: t('training.benefit3') },
+      ],
+    },
+    {
+      icon: Target,
+      title: t('crm.title'),
+      headline: t('crm.headline'),
+      description: t('crm.description'),
+      benefits: [
+        { icon: Target, text: t('crm.benefit1') },
+        { icon: Mail, text: t('crm.benefit2') },
+        { icon: Bell, text: t('crm.benefit3') },
+      ],
+    },
+    {
+      icon: UserCog,
+      title: t('employee.title'),
+      headline: t('employee.headline'),
+      description: t('employee.description'),
+      benefits: [
+        { icon: Users, text: t('employee.benefit1') },
+        { icon: Plug, text: t('employee.benefit2') },
+        { icon: BarChart3, text: t('employee.benefit3') },
+      ],
+    },
+  ];
+
   return (
     <section id="services" className="py-24 md:py-32 bg-[#F6FEFC] relative overflow-hidden">
       {/* Decorative shapes */}
@@ -97,15 +100,14 @@ export default function Services() {
         >
           <span className="inline-flex items-center gap-2 text-[#247459] text-sm font-semibold uppercase tracking-wider mb-4">
             <span className="w-2 h-2 bg-[#DFB771] rotate-45" />
-            Our Services
+            {t('label')}
             <span className="w-2 h-2 bg-[#DFB771] rotate-45" />
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#031D16] mt-4 mb-6">
-            AI Solutions That <span className="text-[#247459]">Actually Work</span>
+            {t('title')} <span className="text-[#247459]">{t('titleHighlight')}</span>
           </h2>
           <p className="text-[#031D16]/60 max-w-2xl mx-auto text-lg">
-            From simple automations to full digital employees: we build AI systems 
-            tailored to your specific business needs.
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -167,13 +169,13 @@ export default function Services() {
               <Sparkles className="w-7 h-7 text-[#DFB771]" />
             </div>
             <h3 className="text-2xl font-bold text-[#F6FEFC] mb-3">
-              Not Sure What You Need?
+              {t('ctaTitle')}
             </h3>
             <p className="text-[#F6FEFC]/60 mb-6">
-              Book a free strategy call and we&apos;ll map out the perfect AI solution for your business.
+              {t('ctaText')}
             </p>
             <a href="#book" className="btn-primary">
-              Get Your Free Roadmap
+              {t('ctaButton')}
             </a>
           </motion.div>
         </div>

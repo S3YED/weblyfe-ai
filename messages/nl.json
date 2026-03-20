@@ -1,0 +1,189 @@
+{
+  "metadata": {
+    "title": "Weblyfe.ai | AI Automatisering Bureau",
+    "description": "Wij bouwen AI-systemen die je leads, support en bedrijfsvoering 24/7 afhandelen. Custom chatbots, workflow automatisering en digitale medewerkers voor groeiende bedrijven."
+  },
+  "nav": {
+    "services": "Diensten",
+    "caseStudies": "Cases",
+    "howItWorks": "Werkwijze",
+    "faq": "FAQ",
+    "book": "Plan een Gesprek"
+  },
+  "hero": {
+    "badge": "Sluit je aan bij 50+ bedrijven die hun groei automatiseren",
+    "title1": "Jouw Bedrijf,",
+    "title2": "Op de Automatische Piloot",
+    "subtitle": "Wij bouwen AI-systemen die je leads, support en bedrijfsvoering 24/7 afhandelen. Focus op het werk dat er echt toe doet.",
+    "highlight": "Klanten besparen 20+ uur per week.",
+    "cta": "Plan een Gratis Strategiegesprek",
+    "ctaSecondary": "Bekijk Hoe Het Werkt",
+    "microcopy": "Geen code nodig • Geen maandelijkse kosten • Alleen resultaten"
+  },
+  "services": {
+    "label": "Onze Diensten",
+    "title": "AI-Oplossingen Die",
+    "titleHighlight": "Echt Werken",
+    "subtitle": "Van simpele automatiseringen tot volledige digitale medewerkers: wij bouwen AI-systemen op maat voor jouw specifieke bedrijf.",
+    "workflow": {
+      "title": "Workflow Automatisering",
+      "headline": "Verbind Alles. Automatiseer Alles.",
+      "description": "Je tools moeten met elkaar praten zonder dat jij tussenpersoon speelt. Wij bouwen custom automatiseringsflows die je CRM, e-mail, agenda, Notion, Slack en 400+ andere apps verbinden.",
+      "benefit1": "Directe datasync tussen alle tools",
+      "benefit2": "Geen handmatige overdrachten meer",
+      "benefit3": "Custom realtime dashboards"
+    },
+    "chatbots": {
+      "title": "AI Chatbots",
+      "headline": "24/7 Support Die Klinkt Als Jij",
+      "description": "Je klanten willen niet wachten tot maandagochtend. Onze AI-chatbots beantwoorden vragen, plannen afspraken en beantwoorden FAQs direct. Getraind op jouw merkstem.",
+      "benefit1": "Mis nooit een lead (zelfs om 3 uur 's nachts)",
+      "benefit2": "Slimme doorschakeling naar mensen indien nodig",
+      "benefit3": "WhatsApp, web of SMS"
+    },
+    "training": {
+      "title": "Training Bots",
+      "headline": "AI Die Jouw Bedrijf Door en Door Kent",
+      "description": "Generieke AI geeft generieke antwoorden. Wij trainen custom AI-modellen op JOUW content (je documenten, processen, FAQs) zodat het een expert wordt in jouw specifieke bedrijf.",
+      "benefit1": "Getraind op jouw content",
+      "benefit2": "Wordt steeds beter",
+      "benefit3": "Jouw data blijft privé"
+    },
+    "crm": {
+      "title": "AI-Gestuurde CRM",
+      "headline": "Leads Gescoord, Gesorteerd en Opgevolgd",
+      "description": "Laat hete leads niet koud worden. Onze AI-gestuurde CRM scoort elke lead direct, stuurt gepersonaliseerde follow-ups en waarschuwt je wanneer iemand klaar is om te kopen.",
+      "benefit1": "Directe lead scoring",
+      "benefit2": "Automatische follow-ups die persoonlijk aanvoelen",
+      "benefit3": "Realtime high-intent alerts"
+    },
+    "employee": {
+      "title": "Digitale Medewerker",
+      "headline": "Neem een AI Teamlid Aan",
+      "description": "Dit is geen chatbot. Het is een digitale medewerker. Aangedreven door ons Appie-systeem, handelt het planning, onderzoek, content concepten, CRM-updates en e-mailbeheer af. Onbeperkte taken. Geen vrije dagen.",
+      "benefit1": "Echte multitasking parallel",
+      "benefit2": "Volledige systeemtoegang (agenda, e-mail, docs)",
+      "benefit3": "Schaalt mee met je bedrijf"
+    },
+    "ctaTitle": "Niet Zeker Wat Je Nodig Hebt?",
+    "ctaText": "Plan een gratis strategiegesprek en we stippelen de perfecte AI-oplossing uit voor jouw bedrijf.",
+    "ctaButton": "Krijg Je Gratis Stappenplan"
+  },
+  "caseStudies": {
+    "label": "Cases",
+    "title": "Echte Resultaten,",
+    "titleHighlight": "Echte Klanten",
+    "subtitle": "Geen concepten. Geen demo's. Echte AI-systemen die nu echte bedrijven runnen. Elke statistiek is verifieerbaar. Elke klant is bereikbaar.",
+    "viewFull": "Lees volledige case study",
+    "cta": "Klaar om onze volgende succesverhaal te zijn?"
+  },
+  "leadMagnet": {
+    "badge": "Gratis Gids",
+    "title": "Het AI Automatisering Draaiboek",
+    "subtitle": "Leer hoe je repetitieve taken automatiseert en je bedrijf schaalt met AI. Geen developers nodig. Geen code nodig.",
+    "benefit1": "5 automatiseringen die je vandaag kunt implementeren",
+    "benefit2": "Echte voorbeelden van onze klanten",
+    "benefit3": "Stap-voor-stap implementatiegidsen",
+    "placeholder": "Vul je e-mail in",
+    "cta": "Download Gratis Draaiboek",
+    "privacy": "Geen spam. Uitschrijven wanneer je wilt."
+  },
+  "howItWorks": {
+    "label": "Werkwijze",
+    "title": "Van Idee tot",
+    "titleHighlight": "Automatisering",
+    "subtitle": "Een helder, bewezen proces dat je in weken van overweldigd naar geautomatiseerd brengt, niet maanden.",
+    "step1": {
+      "title": "Kennismakingsgesprek",
+      "description": "We leren over je bedrijf, pijnpunten en doelen. Geen pitch, alleen begrijpen wat je echt nodig hebt."
+    },
+    "step2": {
+      "title": "Custom Stappenplan",
+      "description": "We ontwerpen een op maat gemaakte AI-strategie met duidelijke mijlpalen, tijdlijnen en verwachte ROI. Je weet precies wat je krijgt."
+    },
+    "step3": {
+      "title": "Bouwen & Lanceren",
+      "description": "Ons team bouwt je AI-oplossing. Je krijgt regelmatige updates en kunt gedurende het proces testen. Geen verrassingen bij de lancering."
+    },
+    "step4": {
+      "title": "Optimaliseren & Schalen",
+      "description": "We monitoren prestaties, verzamelen feedback en verbeteren continu. Je AI wordt steeds slimmer."
+    },
+    "cta": "Start Je Reis"
+  },
+  "testimonials": {
+    "label": "Testimonials",
+    "title": "Wat Onze",
+    "titleHighlight": "Klanten Zeggen",
+    "subtitle": "Geloof ons niet op ons woord. Hoor van de founders en teams die we hebben geholpen automatiseren."
+  },
+  "faq": {
+    "label": "FAQ",
+    "title": "Vragen?",
+    "titleHighlight": "Wij Hebben Antwoorden",
+    "subtitle": "Alles wat je moet weten over samenwerken met ons. Kun je niet vinden wat je zoekt? Vraag het gewoon. We helpen je graag.",
+    "q1": "Hoe lang duurt het om een AI-automatisering te bouwen?",
+    "a1": "De meeste projecten duren 2-4 weken van kickoff tot lancering. Simpele chatbots kunnen in 1-2 weken klaar zijn, terwijl complexe multi-agent systemen 4-6 weken kunnen duren. We geven je een duidelijke tijdlijn tijdens het strategiegesprek.",
+    "q2": "Heb ik technische kennis nodig om deze systemen te gebruiken?",
+    "a2": "Helemaal niet. We bouwen alles voor je en maken simpele dashboards zodat je de prestaties kunt monitoren. Training is inbegrepen, en we bieden doorlopende support om ervoor te zorgen dat je je op je gemak voelt.",
+    "q3": "Wat kosten AI-automatiseringsdiensten?",
+    "a3": "Projecten beginnen meestal bij €2.500 voor simpele automatiseringen en schalen op basis van complexiteit. We bieden eenmalige builds (je bent eigenaar van alles) of managed services met maandelijkse support. Je krijgt een duidelijke offerte voordat we beginnen.",
+    "q4": "Klinkt de AI als een robot?",
+    "a4": "Nee. We trainen AI op je merkstem, toon en communicatiestijl. De meeste klanten kunnen niet zien dat ze met AI praten. We finetunen totdat het precies klinkt zoals je team zou antwoorden.",
+    "q5": "Wat als er iets misgaat?",
+    "a5": "We bouwen met failsafes. Complexe vragen worden doorgestuurd naar mensen, en je hebt altijd override-controles. Plus, we bieden 30 dagen support na lancering, en bieden doorlopende onderhoudspakketten.",
+    "q6": "Kun je integreren met mijn bestaande tools?",
+    "a6": "Ja. We werken met 400+ apps waaronder Notion, Slack, Gmail, HubSpot, Salesforce, Airtable, WhatsApp en custom APIs. Als het een API heeft, kunnen we het verbinden.",
+    "q7": "Is mijn data veilig?",
+    "a7": "Absoluut. We volgen industrie best practices: versleutelde verbindingen, veilige API-afhandeling, en we slaan je data nooit langer op dan nodig. Voor gevoelige industrieën kunnen we aanvullende beveiligingsmaatregelen bespreken.",
+    "q8": "Wat als ik wijzigingen nodig heb na lancering?",
+    "a8": "Wijzigingen zijn normaal! We bieden een revisieperiode na lancering. Voor doorlopende aanpassingen bieden we supportpakketten of kun je simpele wijzigingen zelf maken via de dashboards die we leveren.",
+    "stillQuestions": "Nog vragen?",
+    "emailUs": "Mail ons op hello@weblyfe.ai →"
+  },
+  "booking": {
+    "label": "Plan een Gesprek",
+    "title": "Plan Je Gratis Kennismakingsgesprek",
+    "subtitle": "Kies een tijd die voor jou werkt. We bespreken je bedrijf, identificeren kansen en laten zien wat mogelijk is met AI.",
+    "benefit1": "30 min gesprek",
+    "benefit2": "Video of telefoon",
+    "benefit3": "Vrijblijvend",
+    "fallback": "Agenda laadt niet?",
+    "fallbackLink": "Boek direct op TidyCal →"
+  },
+  "cta": {
+    "badge": "Beperkt aantal plekken deze maand",
+    "title": "Klaar Om Je Bedrijf",
+    "titleHighlight": "Op de Automatische Piloot Te Zetten?",
+    "subtitle": "Plan een gratis strategiegesprek en laten we uitstippelen hoe AI je tijd kan besparen, meer leads kan vangen en je bedrijf kan schalen.",
+    "benefit1": "Gratis 30-min strategiesessie",
+    "benefit2": "Custom AI-stappenplan voor je bedrijf",
+    "benefit3": "Vrijblijvend, geen pitch",
+    "benefit4": "Duidelijke prijzen voordat we beginnen",
+    "button": "Plan Je Gratis Strategiegesprek",
+    "microcopy": "Duurt 30 seconden om te boeken"
+  },
+  "footer": {
+    "tagline": "AI-automatisering voor bedrijven die willen schalen zonder op te branden.",
+    "services": "Diensten",
+    "company": "Bedrijf",
+    "caseStudies": "Cases",
+    "about": "Over Ons",
+    "contact": "Contact",
+    "copyright": "© {year} Weblyfe.ai · Een Weblyfe by Techwiz LLC bedrijf"
+  },
+  "common": {
+    "learnMore": "Meer Informatie",
+    "getStarted": "Aan de Slag",
+    "backToCaseStudies": "Terug naar Cases",
+    "viewLiveProject": "Bekijk Live Project",
+    "viewOnWeblyfe": "Bekijk op Weblyfe",
+    "theChallenge": "De Uitdaging",
+    "theSolution": "De Oplossing",
+    "results": "Resultaten",
+    "techStack": "Tech Stack",
+    "readyForResults": "Klaar voor dit soort resultaten?",
+    "letsDiscuss": "Laten we bespreken hoe AI-automatisering je bedrijf kan transformeren.",
+    "bookDiscoveryCall": "Plan een Kennismakingsgesprek"
+  }
+}

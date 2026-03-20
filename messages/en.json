@@ -1,0 +1,189 @@
+{
+  "metadata": {
+    "title": "Weblyfe.ai | AI Automation Agency",
+    "description": "We build AI systems that handle your leads, support, and operations 24/7. Custom chatbots, workflow automation, and digital employees for growing businesses."
+  },
+  "nav": {
+    "services": "Services",
+    "caseStudies": "Case Studies",
+    "howItWorks": "How It Works",
+    "faq": "FAQ",
+    "book": "Book a Call"
+  },
+  "hero": {
+    "badge": "Join 50+ businesses automating their growth",
+    "title1": "Your Business,",
+    "title2": "Running on Autopilot",
+    "subtitle": "We build AI systems that handle your leads, support, and operations 24/7. Focus on the work that actually matters.",
+    "highlight": "Clients save 20+ hours per week.",
+    "cta": "Book a Free Strategy Call",
+    "ctaSecondary": "See How It Works",
+    "microcopy": "No coding required • No monthly retainers • Just results"
+  },
+  "services": {
+    "label": "Our Services",
+    "title": "AI Solutions That",
+    "titleHighlight": "Actually Work",
+    "subtitle": "From simple automations to full digital employees: we build AI systems tailored to your specific business needs.",
+    "workflow": {
+      "title": "Workflow Automation",
+      "headline": "Connect Everything. Automate Anything.",
+      "description": "Your tools should talk to each other without you playing middleman. We build custom automation flows that connect your CRM, email, calendar, Notion, Slack, and 400+ other apps.",
+      "benefit1": "Instant data sync across all tools",
+      "benefit2": "Zero manual handoffs",
+      "benefit3": "Custom real-time dashboards"
+    },
+    "chatbots": {
+      "title": "AI Chatbots",
+      "headline": "24/7 Support That Sounds Like You",
+      "description": "Your customers don't want to wait until Monday morning. Our AI chatbots handle inquiries, book appointments, and answer FAQs instantly. Trained on your brand voice.",
+      "benefit1": "Never miss a lead (even at 3am)",
+      "benefit2": "Smart routing to humans when needed",
+      "benefit3": "WhatsApp, web, or SMS"
+    },
+    "training": {
+      "title": "Training Bots",
+      "headline": "AI That Knows Your Business Inside Out",
+      "description": "Generic AI gives generic answers. We train custom AI models on YOUR content (your docs, processes, FAQs) so it becomes an expert on your specific business.",
+      "benefit1": "Trained on your content",
+      "benefit2": "Always improving over time",
+      "benefit3": "Your data stays private"
+    },
+    "crm": {
+      "title": "AI-Powered CRM",
+      "headline": "Leads Scored, Sorted, and Followed Up",
+      "description": "Stop letting hot leads go cold. Our AI-powered CRM scores every lead instantly, sends personalized follow-ups, and alerts you when someone's ready to buy.",
+      "benefit1": "Instant lead scoring",
+      "benefit2": "Auto follow-ups that feel personal",
+      "benefit3": "Real-time high-intent alerts"
+    },
+    "employee": {
+      "title": "Digital Employee",
+      "headline": "Hire an AI Team Member",
+      "description": "This isn't a chatbot. It's a digital employee. Powered by our Appie system, it handles scheduling, research, content drafts, CRM updates, and email management. Unlimited tasks. No PTO.",
+      "benefit1": "True multi-tasking in parallel",
+      "benefit2": "Full system access (calendar, email, docs)",
+      "benefit3": "Scales with your business"
+    },
+    "ctaTitle": "Not Sure What You Need?",
+    "ctaText": "Book a free strategy call and we'll map out the perfect AI solution for your business.",
+    "ctaButton": "Get Your Free Roadmap"
+  },
+  "caseStudies": {
+    "label": "Case Studies",
+    "title": "Real Results,",
+    "titleHighlight": "Real Clients",
+    "subtitle": "Not concepts. Not demos. Real AI systems running real businesses right now. Every stat is verifiable. Every client is reachable.",
+    "viewFull": "Read full case study",
+    "cta": "Ready to be our next success story?"
+  },
+  "leadMagnet": {
+    "badge": "Free Guide",
+    "title": "The AI Automation Playbook",
+    "subtitle": "Learn how to automate repetitive tasks and scale your business with AI. No developers needed. No coding required.",
+    "benefit1": "5 automations you can implement today",
+    "benefit2": "Real examples from our clients",
+    "benefit3": "Step-by-step implementation guides",
+    "placeholder": "Enter your email",
+    "cta": "Get Free Playbook",
+    "privacy": "No spam. Unsubscribe anytime."
+  },
+  "howItWorks": {
+    "label": "How It Works",
+    "title": "From Idea to",
+    "titleHighlight": "Automation",
+    "subtitle": "A clear, proven process that takes you from overwhelmed to automated in weeks, not months.",
+    "step1": {
+      "title": "Discovery Call",
+      "description": "We learn about your business, pain points, and goals. No pitch, just understanding what you actually need."
+    },
+    "step2": {
+      "title": "Custom Roadmap",
+      "description": "We design a tailored AI strategy with clear milestones, timelines, and expected ROI. You know exactly what you're getting."
+    },
+    "step3": {
+      "title": "Build & Launch",
+      "description": "Our team builds your AI solution. You get regular updates and can test throughout. No surprises at launch."
+    },
+    "step4": {
+      "title": "Optimize & Scale",
+      "description": "We monitor performance, gather feedback, and continuously improve. Your AI gets smarter over time."
+    },
+    "cta": "Start Your Journey"
+  },
+  "testimonials": {
+    "label": "Testimonials",
+    "title": "What Our",
+    "titleHighlight": "Clients Say",
+    "subtitle": "Don't just take our word for it. Hear from the founders and teams we've helped automate."
+  },
+  "faq": {
+    "label": "FAQ",
+    "title": "Questions?",
+    "titleHighlight": "We've Got Answers",
+    "subtitle": "Everything you need to know about working with us. Can't find what you're looking for? Just ask. We're here to help.",
+    "q1": "How long does it take to build an AI automation?",
+    "a1": "Most projects take 2-4 weeks from kickoff to launch. Simple chatbots can be ready in 1-2 weeks, while complex multi-agent systems may take 4-6 weeks. We give you a clear timeline during the strategy call.",
+    "q2": "Do I need technical knowledge to use these systems?",
+    "a2": "Not at all. We build everything for you and create simple dashboards so you can monitor performance. Training is included, and we provide ongoing support to make sure you're comfortable.",
+    "q3": "What's the cost of AI automation services?",
+    "a3": "Projects typically start at €2,500 for simple automations and scale based on complexity. We offer one-time builds (you own everything) or managed services with monthly support. You get a clear quote before we start.",
+    "q4": "Will the AI sound like a robot?",
+    "a4": "No. We train AI on your brand voice, tone, and communication style. Most customers can't tell they're talking to AI. We fine-tune until it sounds exactly like your team would respond.",
+    "q5": "What if something goes wrong?",
+    "a5": "We build with failsafes. Complex queries route to humans, and you always have override controls. Plus, we include 30 days of support after launch, and offer ongoing maintenance packages.",
+    "q6": "Can you integrate with my existing tools?",
+    "a6": "Yes. We work with 400+ apps including Notion, Slack, Gmail, HubSpot, Salesforce, Airtable, WhatsApp, and custom APIs. If it has an API, we can connect it.",
+    "q7": "Is my data secure?",
+    "a7": "Absolutely. We follow industry best practices: encrypted connections, secure API handling, and we never store your data beyond what's needed. For sensitive industries, we can discuss additional security measures.",
+    "q8": "What if I need changes after launch?",
+    "a8": "Changes are normal! We include a revision period after launch. For ongoing tweaks, we offer support packages or you can make simple changes yourself through the dashboards we provide.",
+    "stillQuestions": "Still have questions?",
+    "emailUs": "Email us at hello@weblyfe.ai →"
+  },
+  "booking": {
+    "label": "Book a Call",
+    "title": "Schedule Your Free Discovery Call",
+    "subtitle": "Pick a time that works for you. We'll discuss your business, identify opportunities, and show you what's possible with AI.",
+    "benefit1": "30 min call",
+    "benefit2": "Video or phone",
+    "benefit3": "No obligation",
+    "fallback": "Calendar not loading?",
+    "fallbackLink": "Book directly on TidyCal →"
+  },
+  "cta": {
+    "badge": "Limited spots available this month",
+    "title": "Ready to Put Your Business",
+    "titleHighlight": "on Autopilot?",
+    "subtitle": "Book a free strategy call and let's map out exactly how AI can save you time, capture more leads, and scale your business.",
+    "benefit1": "Free 30-min strategy session",
+    "benefit2": "Custom AI roadmap for your business",
+    "benefit3": "No obligation, no pitch",
+    "benefit4": "Clear pricing before we start",
+    "button": "Book Your Free Strategy Call",
+    "microcopy": "Takes 30 seconds to book"
+  },
+  "footer": {
+    "tagline": "AI automation for businesses that want to scale without burning out.",
+    "services": "Services",
+    "company": "Company",
+    "caseStudies": "Case Studies",
+    "about": "About",
+    "contact": "Contact",
+    "copyright": "© {year} Weblyfe.ai · A Weblyfe by Techwiz LLC company"
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "backToCaseStudies": "Back to Case Studies",
+    "viewLiveProject": "View Live Project",
+    "viewOnWeblyfe": "View on Weblyfe",
+    "theChallenge": "The Challenge",
+    "theSolution": "The Solution",
+    "results": "Results",
+    "techStack": "Tech Stack",
+    "readyForResults": "Ready for results like these?",
+    "letsDiscuss": "Let's discuss how AI automation can transform your business.",
+    "bookDiscoveryCall": "Book a Discovery Call"
+  }
+}

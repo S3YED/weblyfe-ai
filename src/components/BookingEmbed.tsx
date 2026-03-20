@@ -3,14 +3,17 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, Check, Video } from 'lucide-react';
-
-const benefits = [
-  { icon: Clock, text: '30 min call' },
-  { icon: Video, text: 'Video or phone' },
-  { icon: Check, text: 'No obligation' },
-];
+import { useTranslations } from 'next-intl';
 
 export default function BookingEmbed() {
+  const t = useTranslations('booking');
+
+  const benefits = [
+    { icon: Clock, text: t('benefit1') },
+    { icon: Video, text: t('benefit2') },
+    { icon: Check, text: t('benefit3') },
+  ];
+
   useEffect(() => {
     // Load TidyCal embed script
     const script = document.createElement('script');
@@ -36,14 +39,13 @@ export default function BookingEmbed() {
         >
           <span className="inline-flex items-center gap-2 text-[#247459] text-sm font-semibold uppercase tracking-wider mb-4">
             <Calendar className="w-4 h-4" />
-            Book a Call
+            {t('label')}
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-[#031D16] mb-4">
-            Schedule Your Free Discovery Call
+            {t('title')}
           </h2>
           <p className="text-[#031D16]/60 max-w-xl mx-auto">
-            Pick a time that works for you. We&apos;ll discuss your business, 
-            identify opportunities, and show you what&apos;s possible with AI.
+            {t('subtitle')}
           </p>
           
           {/* Quick benefits */}
@@ -73,14 +75,14 @@ export default function BookingEmbed() {
 
         {/* Fallback link */}
         <p className="text-center text-sm text-[#031D16]/50 mt-6">
-          Calendar not loading?{' '}
+          {t('fallback')}{' '}
           <a 
             href="https://tidycal.com/weblyfe/discovery" 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-[#247459] hover:underline"
           >
-            Book directly on TidyCal →
+            {t('fallbackLink')}
           </a>
         </p>
       </div>

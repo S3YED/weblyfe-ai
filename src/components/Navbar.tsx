@@ -4,17 +4,20 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
-
-const navLinks = [
-  { label: 'Services', href: '#services' },
-  { label: 'Case Studies', href: '#case-studies' },
-  { label: 'How It Works', href: '#how-it-works' },
-  { label: 'FAQ', href: '#faq' },
-];
+import { useTranslations } from 'next-intl';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Navbar() {
+  const t = useTranslations('nav');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const navLinks = [
+    { label: t('services'), href: '#services' },
+    { label: t('caseStudies'), href: '#case-studies' },
+    { label: t('howItWorks'), href: '#how-it-works' },
+    { label: t('faq'), href: '#faq' },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,7 +52,7 @@ export default function Navbar() {
           </a>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <a
                 key={link.label}
@@ -59,11 +62,12 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
+            <LanguageSwitcher />
             <a
               href="#book"
               className="btn-primary text-sm py-3 px-6"
             >
-              Book a Call
+              {t('book')}
             </a>
           </div>
 
@@ -99,12 +103,15 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
+              <div className="py-4">
+                <LanguageSwitcher />
+              </div>
               <a
                 href="#book"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="btn-primary text-center mt-4"
               >
-                Book a Call
+                {t('book')}
               </a>
             </div>
 

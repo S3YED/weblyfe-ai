@@ -54,43 +54,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <html lang="en" className="scroll-smooth">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#031D16" />
-        <link rel="canonical" href="https://weblyfe.ai" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'Organization',
-              name: 'Weblyfe.ai',
-              url: 'https://weblyfe.ai',
-              logo: 'https://weblyfe.ai/logo-gold.svg',
-              description: 'AI automation and chatbot services for creators and agencies',
-              sameAs: [
-                'https://instagram.com/seyed.jpg',
-                'https://youtube.com/@weblyfenl',
-                'https://linkedin.com/company/weblyfe',
-              ],
-              contactPoint: {
-                '@type': 'ContactPoint',
-                contactType: 'Sales',
-                email: 'hello@weblyfe.ai',
-              },
-            }),
-          }}
-        />
-      </head>
-      <body className="antialiased">
-        {children}
-        <Analytics />
-        <SpeedInsights />
-      </body>
-    </html>
-  );
+  return children;
 }
