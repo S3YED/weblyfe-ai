@@ -90,7 +90,7 @@ const caseStudies = [
   },
   {
     slug: 'eva-dubai-property',
-    title: 'Eva — Dubai Property',
+    title: 'Eva · Dubai Property',
     subtitle: 'AI Real Estate Operations Manager',
     description: 'Real estate company drowning in operational tasks. Eva now manages their website, analyzes CRM data, monitors all client messaging, transcribes sales calls, and builds custom dashboards on demand.',
     image: '/screenshots/team-dashboard.jpg',
@@ -100,7 +100,7 @@ const caseStudies = [
       { label: 'FTEs Replaced', value: '3', icon: Users },
     ],
     tech: ['Claude AI', 'CRM Integration', 'Call Analysis', 'Mission Control', 'Tailscale', 'Custom Dashboards'],
-    quote: '"Eva handles what used to take 3 people. Website updates, lead follow-ups, reporting — all automated."',
+    quote: '"Eva handles what used to take 3 people. Website updates, lead follow-ups, reporting: all automated."',
     author: 'Dubai Property Team',
   },
   {
@@ -137,7 +137,7 @@ const caseStudies = [
     slug: 'executive-assistant',
     title: 'Executive Assistant',
     subtitle: 'AI That Uses Your Computer',
-    description: 'Appie and Garavito work as executive assistants with full computer access. They book appointments, fill out forms, send calendar invites, process refunds — triggered by a voice note, screenshot, or forwarded message.',
+    description: 'Appie and Garavito work as executive assistants with full computer access. They book appointments, fill out forms, send calendar invites, process refunds. Triggered by a voice note, screenshot, or forwarded message.',
     image: '/screenshots/team-dashboard.jpg',
     stats: [
       { label: 'Hours Saved Weekly', value: '15+', icon: Clock },
@@ -145,7 +145,7 @@ const caseStudies = [
       { label: 'Faster Than Manual', value: '97%', before: '30 min → 1 min' },
     ],
     tech: ['Browser Automation', 'Google Calendar', 'Voice Notes', 'Puppeteer', 'Form Filling'],
-    quote: '"Forward a message, send a voice note, or drop a screenshot. Appie handles the rest — bookings, refunds, invites, whatever."',
+    quote: '"Forward a message, send a voice note, or drop a screenshot. Appie handles the rest: bookings, refunds, invites, whatever."',
     author: 'Seyed, CEO',
   },
   {
@@ -320,7 +320,7 @@ export default function CaseStudies() {
                     {study.quote}
                   </p>
                   <footer className="text-xs sm:text-sm text-[#DFB771] mt-2 sm:mt-3 font-medium">
-                    — {study.author}
+                    – {study.author}
                   </footer>
                 </blockquote>
 

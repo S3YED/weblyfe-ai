@@ -51,7 +51,7 @@ const caseStudies: Record<string, {
     title: 'SAFESITE Security',
     subtitle: 'Voice-to-Website in 24 Hours',
     description: 'Former military bodyguard needed a corporate website.',
-    fullDescription: 'Shay, a former military bodyguard starting his own security company, needed a professional corporate website. But he didn\'t have time for traditional web development processes — endless email chains, Figma reviews, revision cycles.',
+    fullDescription: 'Shay, a former military bodyguard starting his own security company, needed a professional corporate website. But he didn\'t have time for traditional web development processes: endless email chains, Figma reviews, revision cycles.',
     image: '/screenshots/safesite-fresh.jpg',
     stats: [
       { label: 'Faster Than Agency', value: '93%', before: '2 weeks → 1 day' },
@@ -61,7 +61,7 @@ const caseStudies: Record<string, {
     tech: ['Webflow', 'Claude AI', 'Telegram', 'WhatsApp', 'Faster Whisper'],
     quote: '"I just talked about what I needed. Next morning, the website was live."',
     author: 'Shay, Founder',
-    challenge: 'Traditional web projects take 2-4 weeks minimum. Shay needed something faster. He also wanted a process that felt natural — just talking about his business, not filling out forms or reviewing mockups.',
+    challenge: 'Traditional web projects take 2-4 weeks minimum. Shay needed something faster. He also wanted a process that felt natural: just talking about his business, not filling out forms or reviewing mockups.',
     solution: 'We set up a voice-to-website pipeline: (1) Shay sent voice notes via Telegram/WhatsApp describing his business, (2) AI transcribed and extracted key information automatically, (3) Website was designed and built in Webflow based on the voice inputs, (4) Feedback came back as voice notes → auto-transcribed → implemented, (5) Live within 24 hours.',
     results: [
       '95% faster than traditional web development',
@@ -74,7 +74,7 @@ const caseStudies: Record<string, {
     weblyfeUrl: 'https://weblyfe.nl/projects/safesite',
   },
   'eva-dubai-property': {
-    title: 'Eva — Dubai Property',
+    title: 'Eva · Dubai Property',
     subtitle: 'AI Real Estate Operations Manager',
     description: 'Full-stack AI assistant managing website content, CRM analysis, and client communications.',
     fullDescription: 'Dubai Property needed an AI that could handle multiple operational tasks simultaneously: updating website content, analyzing CRM data, monitoring client communications, analyzing sales calls, and generating custom reports. Eva was born.',
@@ -85,14 +85,14 @@ const caseStudies: Record<string, {
       { label: 'FTEs Replaced', value: '3' },
     ],
     tech: ['Claude AI', 'CRM Integration', 'Call Analysis', 'Mission Control', 'Tailscale', 'Custom Dashboards'],
-    quote: '"Eva handles what used to take 3 people. Website updates, lead follow-ups, reporting — all automated."',
+    quote: '"Eva handles what used to take 3 people. Website updates, lead follow-ups, reporting: all automated."',
     author: 'Dubai Property Team',
     challenge: 'The team was drowning in operational tasks: manually updating property listings, chasing leads through the CRM, listening to sales calls for insights, building weekly reports. Three people\'s worth of work.',
-    solution: 'Eva is a comprehensive AI operations manager with: (1) Website management — updates listings, images, and content autonomously, (2) CRM analysis — tracks lead status, suggests follow-ups, identifies hot prospects, (3) Communication monitoring — summarizes all incoming messages, flags urgent items, (4) Call analysis — listens to sales calls, extracts key points, identifies objections, (5) Custom dashboards — builds whatever reports the team needs, (6) Mission Control — dedicated interface to oversee Eva\'s operations.',
+    solution: 'Eva is a comprehensive AI operations manager with: (1) Website management that updates listings, images, and content autonomously, (2) CRM analysis that tracks lead status, suggests follow-ups, identifies hot prospects, (3) Communication monitoring that summarizes all incoming messages, flags urgent items, (4) Call analysis that listens to sales calls, extracts key points, identifies objections, (5) Custom dashboards that build whatever reports the team needs, (6) Mission Control, a dedicated interface to oversee Eva\'s operations.',
     results: [
       '80% of operational tasks now fully automated',
       'Response time to leads dropped from hours to minutes',
-      '99.9% uptime — Eva works while the team sleeps',
+      '99.9% uptime. Eva works while the team sleeps',
       'Custom dashboards generated on-demand',
       'Call insights help improve sales performance',
     ],
@@ -125,7 +125,7 @@ const caseStudies: Record<string, {
     title: 'PrivaNotify',
     subtitle: 'AI-Powered Anonymous Messaging SaaS',
     description: 'Platform for sending anonymous, AI-crafted messages about sensitive topics.',
-    fullDescription: 'Sometimes people need to communicate sensitive information anonymously — whether it\'s telling someone about a health issue, reporting workplace concerns, or delivering feedback that\'s too awkward face-to-face. PrivaNotify makes this possible while preventing abuse.',
+    fullDescription: 'Sometimes people need to communicate sensitive information anonymously, whether it\'s telling someone about a health issue, reporting workplace concerns, or delivering feedback that\'s too awkward face-to-face. PrivaNotify makes this possible while preventing abuse.',
     image: '/screenshots/privanotify-fresh.jpg',
     stats: [
       { label: 'Abuse Blocked', value: '100%' },
@@ -136,7 +136,7 @@ const caseStudies: Record<string, {
     quote: '"The AI crafts messages that are caring and constructive. Exactly what we needed."',
     author: 'Hesam, Founder',
     challenge: 'Anonymous messaging platforms are magnets for abuse. The challenge was enabling legitimate sensitive communication while making abuse impossible.',
-    solution: 'PrivaNotify uses AI at every step: (1) Users describe what they want to communicate, (2) AI rewrites the message to be empathetic and constructive, (3) Abuse detection runs on every message — threats, harassment, and inappropriate content are blocked, (4) Recipients can reply (anonymously) to start a dialogue, (5) All messages go through SMS for maximum reach.',
+    solution: 'PrivaNotify uses AI at every step: (1) Users describe what they want to communicate, (2) AI rewrites the message to be empathetic and constructive, (3) Abuse detection runs on every message, blocking threats, harassment, and inappropriate content, (4) Recipients can reply (anonymously) to start a dialogue, (5) All messages go through SMS for maximum reach.',
     results: [
       '100% of abusive messages blocked by AI',
       '98% user satisfaction rating',
@@ -150,7 +150,7 @@ const caseStudies: Record<string, {
     title: 'Executive Assistant',
     subtitle: 'AI That Uses Your Computer',
     description: 'Full executive assistants with computer access.',
-    fullDescription: 'Appie (for Seyed) and Garavito (for DV Institute) are AI assistants that go beyond chat. They have actual computer access — they can book appointments, fill out forms, send calendar invites, navigate websites, and execute complex multi-step tasks.',
+    fullDescription: 'Appie (for Seyed) and Garavito (for DV Institute) are AI assistants that go beyond chat. They have actual computer access: booking appointments, filling out forms, sending calendar invites, navigating websites, and executing complex multi-step tasks.',
     image: '/screenshots/team-dashboard.jpg',
     stats: [
       { label: 'Hours Saved Weekly', value: '15+' },
@@ -158,15 +158,15 @@ const caseStudies: Record<string, {
       { label: 'Faster Than Manual', value: '97%', before: '30 min → 1 min' },
     ],
     tech: ['Browser Automation', 'Google Calendar', 'Voice Notes', 'Puppeteer', 'Form Filling'],
-    quote: '"Forward a message, send a voice note, or drop a screenshot. Appie handles the rest — bookings, refunds, invites, whatever."',
+    quote: '"Forward a message, send a voice note, or drop a screenshot. Appie handles the rest: bookings, refunds, invites, whatever."',
     author: 'Seyed, CEO',
     challenge: 'Executive tasks are repetitive but require judgment: booking the right restaurant, filling out the right refund form, inviting the right people to a meeting. Too complex for simple automation, too time-consuming for humans.',
-    solution: 'The assistants have full computer capabilities: (1) Book and cancel appointments across any booking system, (2) Fill out forms — refunds, applications, registrations, (3) Send calendar invites with proper details, (4) Navigate complex web interfaces, (5) Accept instructions via voice note, screenshot, or forwarded message, (6) Execute multi-step workflows autonomously.',
+    solution: 'The assistants have full computer capabilities: (1) Book and cancel appointments across any booking system, (2) Fill out forms (refunds, applications, registrations), (3) Send calendar invites with proper details, (4) Navigate complex web interfaces, (5) Accept instructions via voice note, screenshot, or forwarded message, (6) Execute multi-step workflows autonomously.',
     results: [
       '15+ hours saved per week on administrative tasks',
       '50+ tasks handled per day',
       '97% faster than doing tasks manually',
-      'Works from voice notes — no typing required',
+      'Works from voice notes, no typing required',
       'Handles multi-step workflows end-to-end',
     ],
   },
@@ -174,7 +174,7 @@ const caseStudies: Record<string, {
     title: 'Legal Email Automation',
     subtitle: 'Domain Dispute Resolution',
     description: 'Months-long domain dispute resolved with one instruction.',
-    fullDescription: 'A domain dispute had been dragging on for months. Multiple email threads, various parties involved, payment complications. At 10:49 PM, lying in bed, Seyed sent one voice instruction — and the AI handled everything.',
+    fullDescription: 'A domain dispute had been dragging on for months. Multiple email threads, various parties involved, payment complications. At 10:49 PM, lying in bed, Seyed sent one voice instruction. The AI handled everything.',
     image: '/screenshots/email.jpg',
     stats: [
       { label: 'Time to Send', value: '1 min', before: '30+ min' },
@@ -184,7 +184,7 @@ const caseStudies: Record<string, {
     tech: ['Gmail API', 'Claude AI', 'Thread Analysis', 'Stripe Payment Links'],
     quote: '"Find that email thread. Send them a message that I can\'t cash checks and give them this payment link."',
     author: 'Seyed, CEO',
-    challenge: 'Complex email threads are hard to navigate. Finding the right conversation, identifying all parties, writing a professional response, and following up — each step takes time.',
+    challenge: 'Complex email threads are hard to navigate. Finding the right conversation, identifying all parties, writing a professional response, and following up: each step takes time.',
     solution: 'The AI email automation: (1) Searched Gmail for the specific thread based on context clues, (2) Identified all parties involved in the dispute, (3) Understood the history and current status, (4) Wrote a professional email explaining the check issue, (5) Generated and attached a Stripe payment link, (6) Sent the email, (7) Set up automatic follow-up reminders.',
     results: [
       'Task completed in 1 minute vs. 30+ minutes manually',
@@ -224,7 +224,7 @@ const caseStudies: Record<string, {
     title: 'Titan Transfers',
     subtitle: 'Limousine Booking Platform',
     description: 'Premium limousine service with sleek 4-step booking.',
-    fullDescription: 'Titan Transfers provides premium limousine services for airport transfers and executive travel. They needed a booking system as sleek as their vehicles — dark theme, smooth flow, multilingual support.',
+    fullDescription: 'Titan Transfers provides premium limousine services for airport transfers and executive travel. They needed a booking system as sleek as their vehicles: dark theme, smooth flow, multilingual support.',
     image: '/screenshots/titantransfers-booking-fresh.jpg',
     stats: [
       { label: 'Time to Book', value: '<2 min' },
@@ -235,7 +235,7 @@ const caseStudies: Record<string, {
     quote: '"Book Transfer. One-way or hourly. Airport pickups. Executive travel."',
     author: 'Titan Transfers',
     challenge: 'Premium services need premium experiences. The booking flow had to feel executive-level while being simple enough for quick mobile bookings.',
-    solution: 'A 4-step luxury booking experience: (1) Choose transfer type — one-way, round-trip, or hourly, (2) Enter journey details — pickup, dropoff, date, time, (3) Select vehicle — from sedan to stretch limo, (4) Confirm and pay. Full EN/NL language support, dark theme, fully mobile-optimized.',
+    solution: 'A 4-step luxury booking experience: (1) Choose transfer type (one-way, round-trip, or hourly), (2) Enter journey details (pickup, dropoff, date, time), (3) Select vehicle (from sedan to stretch limo), (4) Confirm and pay. Full EN/NL language support, dark theme, fully mobile-optimized.',
     results: [
       '100% mobile-responsive design',
       'Bilingual support (English/Dutch)',
@@ -250,7 +250,7 @@ const caseStudies: Record<string, {
     title: 'Appie System',
     subtitle: 'Digital Employee for Entrepreneurs',
     description: 'Multi-agent AI assistant handling everything.',
-    fullDescription: 'The Appie System is the AI infrastructure behind everything on this page. Three specialized agents — Appie-1 (Orchestrator), Appie-2 (Marketing/Content), and Appie-3 (Engineering/Security) — work 24/7 to handle operations.',
+    fullDescription: 'The Appie System is the AI infrastructure behind everything on this page. Three specialized agents (Appie-1 the Orchestrator, Appie-2 for Marketing/Content, and Appie-3 for Engineering/Security) work 24/7 to handle operations.',
     image: '/screenshots/team-dashboard.jpg',
     stats: [
       { label: 'Always Working', value: '24/7' },
@@ -261,7 +261,7 @@ const caseStudies: Record<string, {
     quote: '"Having Appie is like having a team that never sleeps. It just handles things."',
     author: 'Seyed, CEO',
     challenge: 'Running a business solo means wearing every hat: developer, marketer, support, admin. There aren\'t enough hours in the day.',
-    solution: 'The Appie System is a multi-agent architecture: (1) Appie-1 orchestrates all operations, handles scheduling and coordination, (2) Appie-2 manages marketing, content creation, social media, (3) Appie-3 handles engineering, security audits, infrastructure, (4) All agents share memory and can hand off tasks, (5) Connected to Notion, Google Workspace, GitHub, and more, (6) Works across time zones — always online.',
+    solution: 'The Appie System is a multi-agent architecture: (1) Appie-1 orchestrates all operations, handles scheduling and coordination, (2) Appie-2 manages marketing, content creation, social media, (3) Appie-3 handles engineering, security audits, infrastructure, (4) All agents share memory and can hand off tasks, (5) Connected to Notion, Google Workspace, GitHub, and more, (6) Works across time zones, always online.',
     results: [
       '3 specialized AI agents working 24/7',
       '50+ tasks handled daily',
@@ -426,7 +426,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <p className="text-2xl md:text-4xl font-medium text-[#F6FEFC] italic mb-6">
               {study.quote}
             </p>
-            <footer className="text-[#DFB771] font-semibold">— {study.author}</footer>
+            <footer className="text-[#DFB771] font-semibold">– {study.author}</footer>
           </blockquote>
         </div>
       </section>

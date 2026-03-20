@@ -174,7 +174,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="pt-8 border-t border-[#247459]/20 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-[#F6FEFC]/40 text-sm">
-            © {new Date().getFullYear()} Weblyfe.ai — A Weblyfe by Techwiz LLC company
+            © {new Date().getFullYear()} Weblyfe.ai · A Weblyfe by Techwiz LLC company
           </p>
           <div className="flex gap-6">
             <a href="#" className="text-[#F6FEFC]/40 hover:text-[#F6FEFC]/60 text-sm transition-colors">

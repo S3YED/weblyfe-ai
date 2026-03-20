@@ -38,7 +38,7 @@ const services = [
     icon: MessageSquare,
     title: 'AI Chatbots',
     headline: '24/7 Support That Sounds Like You',
-    description: 'Your customers don\'t want to wait until Monday morning. Our AI chatbots handle inquiries, book appointments, and answer FAQs instantly — trained on your brand voice.',
+    description: 'Your customers don\'t want to wait until Monday morning. Our AI chatbots handle inquiries, book appointments, and answer FAQs instantly. Trained on your brand voice.',
     benefits: [
       { icon: Moon, text: 'Never miss a lead (even at 3am)' },
       { icon: Route, text: 'Smart routing to humans when needed' },
@@ -49,7 +49,7 @@ const services = [
     icon: Brain,
     title: 'Training Bots',
     headline: 'AI That Knows Your Business Inside Out',
-    description: 'Generic AI gives generic answers. We train custom AI models on YOUR content — your docs, processes, FAQs — so it becomes an expert on your specific business.',
+    description: 'Generic AI gives generic answers. We train custom AI models on YOUR content (your docs, processes, FAQs) so it becomes an expert on your specific business.',
     benefits: [
       { icon: BookOpen, text: 'Trained on your content' },
       { icon: Sparkles, text: 'Always improving over time' },
@@ -71,7 +71,7 @@ const services = [
     icon: UserCog,
     title: 'Digital Employee',
     headline: 'Hire an AI Team Member',
-    description: 'This isn\'t a chatbot — it\'s a digital employee. Powered by our Appie system, it handles scheduling, research, content drafts, CRM updates, and email management. Unlimited tasks. No PTO.',
+    description: 'This isn\'t a chatbot. It\'s a digital employee. Powered by our Appie system, it handles scheduling, research, content drafts, CRM updates, and email management. Unlimited tasks. No PTO.',
     benefits: [
       { icon: Users, text: 'True multi-tasking in parallel' },
       { icon: Plug, text: 'Full system access (calendar, email, docs)' },
@@ -104,7 +104,7 @@ export default function Services() {
             AI Solutions That <span className="text-[#247459]">Actually Work</span>
           </h2>
           <p className="text-[#031D16]/60 max-w-2xl mx-auto text-lg">
-            From simple automations to full digital employees — we build AI systems 
+            From simple automations to full digital employees: we build AI systems 
             tailored to your specific business needs.
           </p>
         </motion.div>

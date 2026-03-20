@@ -79,7 +79,7 @@ export default function LeadMagnet() {
                   
                   <p className="text-white/70 mb-6">
                     Learn how businesses like yours are saving 20+ hours per week 
-                    with AI — without hiring developers or learning to code.
+                    with AI. No developers needed. No coding required.
                   </p>
 
                   <ul className="space-y-3 mb-6">

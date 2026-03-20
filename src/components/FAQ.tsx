@@ -66,7 +66,7 @@ export default function FAQ() {
           </h2>
           <p className="text-[#031D16]/60 max-w-2xl mx-auto text-lg">
             Everything you need to know about working with us. Can&apos;t find what you&apos;re looking for? 
-            Just ask — we&apos;re here to help.
+            Just ask. We&apos;re here to help.
           </p>
         </motion.div>
 
