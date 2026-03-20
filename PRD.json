@@ -1,0 +1,287 @@
+{
+  "project": {
+    "name": "WebLife AI",
+    "tagline": "AI Agency Showcase & Lead Generation",
+    "url": "https://weblyfe-ai-standalone.vercel.app",
+    "repo": "https://github.com/S3YED/weblyfe-ai",
+    "stack": ["Next.js 16", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
+    "created": "2026-03-19",
+    "status": "in_progress"
+  },
+
+  "goals": {
+    "primary": "Showcase AI automation capabilities to attract high-value clients",
+    "secondary": [
+      "Demonstrate real results with real clients",
+      "Build credibility through detailed case studies",
+      "Convert visitors into discovery call bookings",
+      "Position Weblyfe as AI-first agency"
+    ]
+  },
+
+  "brand": {
+    "colors": {
+      "primary_dark": "#062421",
+      "text": "#E9F6F1",
+      "secondary": "#A5C2BC",
+      "accent": "#F7D69E",
+      "divider": "#9FBEB6"
+    },
+    "font": "Rethink Sans",
+    "tone": "Professional, results-focused, no BS"
+  },
+
+  "pages": {
+    "home": {
+      "status": "done",
+      "sections": [
+        { "name": "Hero", "status": "done" },
+        { "name": "Services", "status": "done" },
+        { "name": "How It Works", "status": "done" },
+        { "name": "Case Studies", "status": "in_progress" },
+        { "name": "Testimonials", "status": "done" },
+        { "name": "FAQ", "status": "done" },
+        { "name": "CTA/Booking", "status": "done" },
+        { "name": "Footer", "status": "done" }
+      ]
+    },
+    "case_study_detail": {
+      "status": "done",
+      "route": "/case-studies/[slug]",
+      "features": [
+        "Full description",
+        "Challenge/Solution sections",
+        "Results list",
+        "Stats with animations",
+        "Tech stack display",
+        "External links (project URL, Weblyfe portfolio)",
+        "CTA to book call"
+      ]
+    }
+  },
+
+  "case_studies": [
+    {
+      "slug": "cza-ben-de-voorman",
+      "title": "CZA Ben de Voorman",
+      "type": "AI WhatsApp Lead Qualification",
+      "screenshot_status": "done",
+      "mobile_screenshot": "needed",
+      "detail_page": "done"
+    },
+    {
+      "slug": "safesite-security",
+      "title": "SAFESITE Security",
+      "type": "Voice-to-Website",
+      "screenshot_status": "done",
+      "mobile_screenshot": "needed",
+      "detail_page": "done"
+    },
+    {
+      "slug": "eva-dubai-property",
+      "title": "Eva — Dubai Property",
+      "type": "AI Operations Manager",
+      "screenshot_status": "needs_mission_control",
+      "mobile_screenshot": "needed",
+      "detail_page": "done",
+      "blocked_by": "Mission Control URL + password from Seyed"
+    },
+    {
+      "slug": "bot-farm-defense",
+      "title": "Bot Farm Defense",
+      "type": "Reputation Protection",
+      "screenshot_status": "done",
+      "mobile_screenshot": "needed",
+      "detail_page": "done"
+    },
+    {
+      "slug": "privanotify",
+      "title": "PrivaNotify",
+      "type": "Anonymous Messaging SaaS",
+      "screenshot_status": "done",
+      "mobile_screenshot": "needed",
+      "detail_page": "done"
+    },
+    {
+      "slug": "executive-assistant",
+      "title": "Executive Assistant",
+      "type": "AI Computer Access",
+      "screenshot_status": "needs_fresh",
+      "mobile_screenshot": "needed",
+      "detail_page": "done"
+    },
+    {
+      "slug": "legal-email-automation",
+      "title": "Legal Email Automation",
+      "type": "Email Automation",
+      "screenshot_status": "done",
+      "mobile_screenshot": "needed",
+      "detail_page": "done"
+    },
+    {
+      "slug": "boooth-booking",
+      "title": "Boooth.me",
+      "type": "Booking System",
+      "screenshot_status": "needs_fresh",
+      "screenshot_issue": "Page was still loading when captured",
+      "mobile_screenshot": "needed",
+      "detail_page": "done"
+    },
+    {
+      "slug": "titan-transfers",
+      "title": "Titan Transfers",
+      "type": "Limousine Booking",
+      "screenshot_status": "done",
+      "mobile_screenshot": "needed",
+      "detail_page": "done"
+    },
+    {
+      "slug": "appie-system",
+      "title": "Appie System",
+      "type": "Multi-Agent AI",
+      "screenshot_status": "needs_fresh",
+      "mobile_screenshot": "needed",
+      "detail_page": "done"
+    }
+  ],
+
+  "features": {
+    "implemented": [
+      {
+        "name": "Counter Animations",
+        "description": "Stats count up when scrolled into view",
+        "status": "done"
+      },
+      {
+        "name": "Case Study Detail Pages",
+        "description": "Individual pages with full content for each case study",
+        "status": "done"
+      },
+      {
+        "name": "Mobile Responsive",
+        "description": "Responsive design for all screen sizes",
+        "status": "done"
+      },
+      {
+        "name": "Auto Deploy",
+        "description": "Push to main branch triggers Vercel deployment",
+        "status": "done"
+      },
+      {
+        "name": "Framer Motion Animations",
+        "description": "Scroll-triggered animations throughout",
+        "status": "done"
+      }
+    ],
+    "pending": [
+      {
+        "name": "Fresh Screenshots",
+        "description": "Re-capture screenshots with fully loaded pages",
+        "priority": "high",
+        "affected": ["boooth-booking", "executive-assistant", "appie-system"]
+      },
+      {
+        "name": "Mobile Screenshots",
+        "description": "Add mobile device screenshots to detail pages",
+        "priority": "high",
+        "affected": "all"
+      },
+      {
+        "name": "Eva Mission Control Screenshot",
+        "description": "Capture Eva's Mission Control dashboard",
+        "priority": "high",
+        "blocked_by": "URL + password from Seyed"
+      },
+      {
+        "name": "Gallery Component",
+        "description": "Multiple screenshots per case study on detail pages",
+        "priority": "medium"
+      },
+      {
+        "name": "Booking Integration",
+        "description": "Connect CTA to actual booking system (Calendly/Cal.com)",
+        "priority": "medium"
+      },
+      {
+        "name": "SEO Optimization",
+        "description": "Meta tags, OG images, structured data",
+        "priority": "medium"
+      },
+      {
+        "name": "Analytics",
+        "description": "Add tracking for conversions and engagement",
+        "priority": "low"
+      }
+    ]
+  },
+
+  "usps": {
+    "philosophy": "Focus on measurable results, not features",
+    "examples": {
+      "good": ["95% faster", "40% more leads", "99% response improvement", "15+ hrs/week saved"],
+      "bad": ["50+ voice notes used", "Built in 1 day", "Real-time revisions"]
+    },
+    "rule": "Every stat should answer: 'What business outcome did this deliver?'"
+  },
+
+  "content_requirements": {
+    "case_studies": {
+      "required_fields": [
+        "title",
+        "subtitle",
+        "description",
+        "fullDescription",
+        "image",
+        "stats (3, with measurable outcomes)",
+        "tech",
+        "quote",
+        "author",
+        "challenge",
+        "solution",
+        "results (5 bullet points)"
+      ],
+      "optional_fields": [
+        "mobileImage",
+        "gallery",
+        "projectUrl",
+        "weblyfeUrl"
+      ]
+    }
+  },
+
+  "deployment": {
+    "platform": "Vercel",
+    "branch": "main",
+    "auto_deploy": true,
+    "build_time": "~30 seconds",
+    "git_email": "s3yed@users.noreply.github.com",
+    "note": "Must use lowercase noreply email for Vercel Hobby plan"
+  },
+
+  "tasks": {
+    "immediate": [
+      "Get Mission Control URL + password from Seyed",
+      "Re-capture Boooth screenshot (fully loaded)",
+      "Re-capture Executive Assistant screenshot",
+      "Re-capture Appie System screenshot"
+    ],
+    "next": [
+      "Add mobile screenshots to all case studies",
+      "Create gallery component for detail pages",
+      "Add Eva Mission Control screenshot"
+    ],
+    "backlog": [
+      "Connect booking CTA to calendar",
+      "Add OG images for social sharing",
+      "Implement analytics tracking",
+      "Add video testimonials",
+      "Create comparison calculator (ROI tool)"
+    ]
+  },
+
+  "notes": {
+    "vercel_deployment": "See memory/topics/vercel-deployment-flow.md for deployment rules",
+    "brand_guide": "See branding/BRAND-GUIDE.md for colors and fonts",
+    "screenshot_tool": "Use Puppeteer with stealth plugin for captures"
+  }
+}
