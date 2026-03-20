@@ -2,6 +2,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { locales } from '@/i18n/config';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import LogoCarousel from '@/components/LogoCarousel';
 import Services from '@/components/Services';
 import CaseStudies from '@/components/CaseStudies';
 import LeadMagnet from '@/components/LeadMagnet';
@@ -28,6 +29,7 @@ export default async function Home({
     <main className="min-h-screen">
       <Navbar />
       <Hero />
+      <LogoCarousel />
       <Services />
       <CaseStudies />
       <LeadMagnet />

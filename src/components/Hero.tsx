@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Play, Sparkles } from 'lucide-react';
+import { ArrowRight, Play, Sparkles, Star } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 export default function Hero() {
@@ -110,6 +110,26 @@ export default function Hero() {
         >
           {t('microcopy')}
         </motion.p>
+
+        {/* Google Maps Rating - Trust Signal */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="flex items-center justify-center gap-2 mt-6"
+        >
+          <div className="flex items-center gap-1">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-4 h-4 fill-[#DFB771] text-[#DFB771]" />
+            ))}
+          </div>
+          <span className="text-[#F6FEFC]/70 text-sm font-medium">
+            5.0 on Google Maps
+          </span>
+          <span className="text-[#F6FEFC]/40 text-sm">
+            · 50+ reviews
+          </span>
+        </motion.div>
 
         {/* Scroll indicator */}
         <motion.div 
