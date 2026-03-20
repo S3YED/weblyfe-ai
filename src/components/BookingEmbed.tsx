@@ -12,14 +12,16 @@ const benefits = [
 
 export default function BookingEmbed() {
   useEffect(() => {
-    // Load Cal.com embed script
+    // Load TidyCal embed script
     const script = document.createElement('script');
-    script.src = 'https://app.cal.com/embed/embed.js';
+    script.src = 'https://asset-tidycal.b-cdn.net/js/embed.js';
     script.async = true;
     document.body.appendChild(script);
 
     return () => {
-      document.body.removeChild(script);
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
     };
   }, []);
 
@@ -37,7 +39,7 @@ export default function BookingEmbed() {
             Book a Call
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-[#031D16] mb-4">
-            Schedule Your Free Strategy Session
+            Schedule Your Free Discovery Call
           </h2>
           <p className="text-[#031D16]/60 max-w-xl mx-auto">
             Pick a time that works for you. We&apos;ll discuss your business, 
@@ -55,7 +57,7 @@ export default function BookingEmbed() {
           </div>
         </motion.div>
 
-        {/* Cal.com Embed */}
+        {/* TidyCal Embed */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -63,8 +65,8 @@ export default function BookingEmbed() {
           className="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
         >
           <div 
-            data-cal-link="weblyfe/30min"
-            data-cal-config='{"layout":"month_view","theme":"light"}'
+            className="tidycal-embed" 
+            data-path="weblyfe/discovery"
             style={{ width: '100%', height: '100%', minHeight: '500px' }}
           />
         </motion.div>
@@ -73,12 +75,12 @@ export default function BookingEmbed() {
         <p className="text-center text-sm text-[#031D16]/50 mt-6">
           Calendar not loading?{' '}
           <a 
-            href="https://cal.com/weblyfe/30min" 
+            href="https://tidycal.com/weblyfe/discovery" 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-[#247459] hover:underline"
           >
-            Book directly on Cal.com →
+            Book directly on TidyCal →
           </a>
         </p>
       </div>

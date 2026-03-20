@@ -2,7 +2,7 @@
   "project": {
     "name": "WebLife AI",
     "tagline": "AI Agency Showcase & Lead Generation",
-    "url": "https://weblyfe-ai-standalone.vercel.app",
+    "url": "https://weblyfe-ai.vercel.app",
     "repo": "https://github.com/S3YED/weblyfe-ai",
     "stack": ["Next.js 16", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
     "created": "2026-03-19",
