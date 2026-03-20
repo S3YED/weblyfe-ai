@@ -1,46 +1,118 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
-import { ArrowUpRight, Clock, Zap, TrendingUp, MessageSquare, Shield, Mail, Calendar, Camera, Car } from 'lucide-react';
+import Link from 'next/link';
+import { useRef, useEffect, useState } from 'react';
+import { ArrowUpRight, Clock, Zap, TrendingUp, MessageSquare, Shield, Mail, Calendar, Camera, Car, Bot, Building2 } from 'lucide-react';
+
+// Counter animation component
+function CountUp({ value, className = '' }: { value: string; className?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-50px' });
+  const [displayValue, setDisplayValue] = useState('0');
+  
+  useEffect(() => {
+    if (!isInView) {
+      setDisplayValue('0');
+      return;
+    }
+    
+    // Extract number and suffix from value like "15+", "<2 min", "99.9%", "95%"
+    const match = value.match(/^([<>]?)(\d+\.?\d*)(.*)/);
+    if (!match) {
+      setDisplayValue(value);
+      return;
+    }
+    
+    const prefix = match[1] || '';
+    const targetNum = parseFloat(match[2]);
+    const suffix = match[3] || '';
+    
+    const isDecimal = match[2].includes('.');
+    const decimalPlaces = isDecimal ? (match[2].split('.')[1]?.length || 0) : 0;
+    
+    const duration = 1200;
+    const steps = 30;
+    const stepDuration = duration / steps;
+    
+    let currentStep = 0;
+    
+    const timer = setInterval(() => {
+      currentStep++;
+      const progress = currentStep / steps;
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      const currentValue = targetNum * easeOut;
+      
+      if (currentStep >= steps) {
+        setDisplayValue(`${prefix}${isDecimal ? targetNum.toFixed(decimalPlaces) : Math.round(targetNum)}${suffix}`);
+        clearInterval(timer);
+      } else {
+        setDisplayValue(`${prefix}${isDecimal ? currentValue.toFixed(decimalPlaces) : Math.round(currentValue)}${suffix}`);
+      }
+    }, stepDuration);
+    
+    return () => clearInterval(timer);
+  }, [isInView, value]);
+  
+  return <span ref={ref} className={className}>{displayValue}</span>;
+}
 
 const caseStudies = [
   {
+    slug: 'cza-ben-de-voorman',
     title: 'CZA Ben de Voorman',
     subtitle: 'AI WhatsApp Lead Qualification',
     description: 'Dutch construction company handling dozens of inquiries weekly. We built a complete dashboard with real-time chat interface, AI that scores leads 0-100, and automatic sync with Monday CRM.',
     image: '/screenshots/cza-fresh.jpg',
     stats: [
-      { label: 'Response Time', value: '<2 min', before: '4-24 hrs' },
-      { label: 'Time Saved', value: '13+ hrs/week', icon: Clock },
-      { label: 'After-Hours Leads', value: '40%', icon: TrendingUp },
+      { label: 'Faster Response', value: '99%', before: '4-24 hrs → 2 min' },
+      { label: 'Time Saved Weekly', value: '13+ hrs', icon: Clock },
+      { label: 'More Leads Captured', value: '40%', icon: TrendingUp },
     ],
     tech: ['GPT-4.1', 'Gemini', 'WhatsApp API', 'Monday.com', 'Supabase', 'React'],
     quote: '"We used to lose jobs because we couldn\'t respond fast enough. Now leads get answers immediately."',
     author: 'Ben, Owner',
   },
   {
+    slug: 'safesite-security',
     title: 'SAFESITE Security',
-    subtitle: 'Website Built Via Voice Notes',
-    description: 'Former military bodyguard needed a corporate website. The entire site was built by talking to an AI agent via Telegram voice notes. Feedback from WhatsApp was auto-transcribed and implemented.',
+    subtitle: 'Voice-to-Website in 24 Hours',
+    description: 'Former military bodyguard needed a corporate website. No emails, no Figma reviews. Just voice notes. The entire site was designed, built, and launched in one day through natural conversation.',
     image: '/screenshots/safesite-fresh.jpg',
     stats: [
-      { label: 'Build Time', value: '1 day', before: '2 weeks' },
-      { label: 'Voice Notes Used', value: '50+', icon: MessageSquare },
-      { label: 'Revisions', value: 'Real-time', icon: Zap },
+      { label: 'Faster Than Traditional', value: '95%', before: '2 weeks → 1 day' },
+      { label: 'Meetings Required', value: '0', icon: MessageSquare },
+      { label: 'Live Same Day', value: '100%', icon: Zap },
     ],
-    tech: ['Webflow', 'Claude AI', 'Telegram', 'WhatsApp Timelines API', 'Faster Whisper'],
-    quote: '"That tone of voice really is Shay. Needs to look corporate professional."',
-    author: 'Amir, Business Partner',
+    tech: ['Webflow', 'Claude AI', 'Telegram', 'WhatsApp', 'Faster Whisper'],
+    quote: '"I just talked about what I needed. Next morning, the website was live."',
+    author: 'Shay, Founder',
   },
   {
+    slug: 'eva-dubai-property',
+    title: 'Eva — Dubai Property',
+    subtitle: 'AI Real Estate Operations Manager',
+    description: 'Full-stack AI assistant managing website content, CRM analysis, client messaging, call analysis, and custom reporting dashboards. Eva monitors everything 24/7 and has her own Mission Control interface.',
+    image: '/screenshots/team-dashboard.jpg',
+    stats: [
+      { label: 'Tasks Automated', value: '80%', icon: Bot },
+      { label: 'Response Time', value: '<5 min', before: '2-4 hrs' },
+      { label: 'Uptime', value: '99.9%', icon: Clock },
+    ],
+    tech: ['Claude AI', 'CRM Integration', 'Call Analysis', 'Mission Control', 'Tailscale', 'Custom Dashboards'],
+    quote: '"Eva handles what used to take 3 people. Website updates, lead follow-ups, reporting — all automated."',
+    author: 'Dubai Property Team',
+  },
+  {
+    slug: 'bot-farm-defense',
     title: 'Bot Farm Defense',
     subtitle: 'Automated Reputation Protection',
-    description: '10 fake one-star reviews hit in one hour. AI agent analyzed all accounts, found patterns (same IP ranges, identical profiles), documented evidence, and we got all 9 fake reviews removed by Google.',
+    description: '10 fake one-star reviews hit in one hour. AI agent analyzed all accounts, found patterns (same IP ranges, identical profiles), documented evidence, and we got 9 fake reviews removed by Google.',
     image: '/screenshots/botfarm.jpg',
     stats: [
-      { label: 'Fake Reviews', value: '9 removed', icon: Shield },
-      { label: 'Analysis Time', value: '2 hours', before: '2 days' },
+      { label: 'Reviews Removed', value: '9', icon: Shield },
+      { label: 'Faster Analysis', value: '96%', before: '2 days → 2 hrs' },
       { label: 'Evidence Points', value: '50+', icon: TrendingUp },
     ],
     tech: ['OSINT Analysis', 'Google Account Analysis', 'Pattern Detection', 'Automated Reporting'],
@@ -48,83 +120,89 @@ const caseStudies = [
     author: 'Analysis Report',
   },
   {
+    slug: 'privanotify',
     title: 'PrivaNotify',
-    subtitle: 'AI-Powered Anonymous Messaging',
-    description: 'SaaS platform that lets users send anonymous, AI-crafted messages about sensitive topics. Built while on the treadmill, closed a €3,000 deal via voice notes to the AI agent.',
+    subtitle: 'AI-Powered Anonymous Messaging SaaS',
+    description: 'Platform for sending anonymous, AI-crafted messages about sensitive topics. Built while on the treadmill. The AI writes empathetic messages while blocking all abuse attempts.',
     image: '/screenshots/privanotify-fresh.jpg',
     stats: [
-      { label: 'AI Messages/Month', value: '1,000+', icon: MessageSquare },
-      { label: 'Abuse Blocked', value: '100%', icon: Zap },
+      { label: 'Abuse Blocked', value: '100%', icon: Shield },
       { label: 'User Satisfaction', value: '98%', icon: TrendingUp },
+      { label: 'Messages Sent', value: '1000+', icon: MessageSquare },
     ],
     tech: ['Claude AI', 'Next.js', 'Twilio', 'Stripe', 'Supabase'],
     quote: '"The AI crafts messages that are caring and constructive. Exactly what we needed."',
     author: 'Hesam, Founder',
   },
   {
+    slug: 'executive-assistant',
     title: 'Executive Assistant',
     subtitle: 'AI That Uses Your Computer',
-    description: 'Appie and Garavito (built for DV Institute) act as full executive assistants with computer access. They book and cancel appointments, navigate web interfaces, fill out forms, send calendar invites — all from a voice note, screenshot, or forwarded message.',
+    description: 'Appie and Garavito (DV Institute) act as full executive assistants with computer access. They book and cancel appointments, navigate web interfaces, fill out forms, send calendar invites — all from a voice note, screenshot, or forwarded message.',
     image: '/screenshots/team-dashboard.jpg',
     stats: [
-      { label: 'Hours Saved', value: '15+/week', icon: Clock },
-      { label: 'Tasks Handled', value: '50+/day', icon: Zap },
-      { label: 'Response Time', value: '<1 min', before: '30 min' },
+      { label: 'Time Saved Weekly', value: '15+ hrs', icon: Clock },
+      { label: 'Tasks Per Day', value: '50+', icon: Zap },
+      { label: 'Faster Than Manual', value: '97%', before: '30 min → 1 min' },
     ],
     tech: ['Browser Automation', 'Google Calendar', 'Voice Notes', 'Puppeteer', 'Form Filling'],
     quote: '"Forward a message, send a voice note, or drop a screenshot. Appie handles the rest — bookings, refunds, invites, whatever."',
     author: 'Seyed, CEO',
   },
   {
+    slug: 'legal-email-automation',
     title: 'Legal Email Automation',
     subtitle: 'Domain Dispute Resolution',
-    description: 'Months-long domain dispute. Lying in bed at 10:49 PM, sent one instruction. AI searched Gmail, found the thread, identified all parties, wrote professional email with payment link, and sent it.',
+    description: 'Months-long domain dispute. One instruction at 10:49 PM. AI searched Gmail, found the thread, identified all parties, wrote professional email with payment link, and sent it.',
     image: '/screenshots/email.jpg',
     stats: [
       { label: 'Time Spent', value: '1 min', before: '30 min' },
-      { label: 'Email Written', value: 'AI', icon: Mail },
-      { label: 'Follow-ups', value: 'Auto', icon: TrendingUp },
+      { label: 'Faster Process', value: '97%', icon: Mail },
+      { label: 'Follow-ups', value: '100% Auto', icon: TrendingUp },
     ],
     tech: ['Gmail API', 'Claude AI', 'Thread Analysis', 'Stripe Payment Links'],
     quote: '"Find that email thread. Send them a message that I can\'t cash checks and give them this payment link."',
     author: 'Seyed, CEO',
   },
   {
+    slug: 'boooth-booking',
     title: 'Boooth.me',
     subtitle: 'Photo Booth Rental Booking System',
-    description: 'Photo booth rental company needed a complete booking system. We built a multi-step configurator: choose booth type, customize options, add extras, see VAT breakdown, and complete booking. All integrated with their operations.',
+    description: 'Complete booking system with multi-step configurator: choose booth type, customize options, add extras, see VAT breakdown, and book. Conversion increased 40% compared to manual quotes.',
     image: '/screenshots/boooth-home-fresh.jpg',
     stats: [
-      { label: 'Booth Options', value: '5+', icon: Camera },
-      { label: 'Booking Steps', value: '5', icon: TrendingUp },
-      { label: 'Conversion', value: '+40%', before: 'Manual quotes' },
+      { label: 'Conversion Increase', value: '40%', icon: TrendingUp },
+      { label: 'Booking Available', value: '24/7', icon: Clock },
+      { label: 'Manual Work Saved', value: '90%', icon: Zap },
     ],
     tech: ['Next.js', 'Stripe', 'Multi-step Forms', 'VAT Calculator', 'CRM Integration'],
     quote: '"Customers can now configure and book their perfect photo booth experience online, 24/7."',
     author: 'Client',
   },
   {
+    slug: 'titan-transfers',
     title: 'Titan Transfers',
     subtitle: 'Limousine Booking Platform',
-    description: 'Premium limousine service needed a sleek booking flow. Built a 4-step booking system: choose transfer type (one-way or hourly), set journey details, select vehicle, and confirm. Multilingual with EN/NL support.',
+    description: 'Premium limousine service with sleek 4-step booking: transfer type, journey details, vehicle selection, confirmation. Multilingual EN/NL support. Fully mobile-optimized.',
     image: '/screenshots/titantransfers-booking-fresh.jpg',
     stats: [
-      { label: 'Booking Steps', value: '4', icon: Car },
+      { label: 'Mobile Bookings', value: '100%', icon: Car },
       { label: 'Languages', value: '2', icon: Zap },
-      { label: 'Mobile Ready', value: '100%', icon: TrendingUp },
+      { label: 'Booking Steps', value: '4', icon: TrendingUp },
     ],
     tech: ['Next.js', 'Booking Engine', 'Vehicle Selection', 'Multi-language', 'Dark Theme'],
     quote: '"Book Transfer. One-way or hourly. Airport pickups. Executive travel."',
     author: 'Titan Transfers',
   },
   {
+    slug: 'appie-system',
     title: 'Appie System',
     subtitle: 'Digital Employee for Entrepreneurs',
     description: 'Multi-agent AI assistant handling scheduling, research, content, CRM, and operations. Three agents working 24/7 across time zones. The backbone of everything else on this page.',
     image: '/screenshots/team-dashboard.jpg',
     stats: [
-      { label: 'Agents Working', value: '3', icon: Zap },
-      { label: 'Tasks/Day', value: '50+', icon: TrendingUp },
+      { label: 'Active Agents', value: '3', icon: Bot },
+      { label: 'Tasks Per Day', value: '50+', icon: TrendingUp },
       { label: 'Uptime', value: '99.9%', icon: Clock },
     ],
     tech: ['Claude', 'OpenClaw', 'n8n', 'Notion', 'Google Workspace', 'Tailscale'],
@@ -158,8 +236,8 @@ export default function CaseStudies() {
             Real Results, <span className="text-[#DFB771]">Real Clients</span>
           </h2>
           <p className="text-[#F6FEFC]/60 max-w-2xl mx-auto text-lg">
-            From fighting bot farms to booking dinner reservations. See how AI agents 
-            handle real tasks for real businesses.
+            From fighting bot farms to managing real estate operations. See how AI agents 
+            deliver measurable results for real businesses.
           </p>
         </motion.div>
 
@@ -177,8 +255,8 @@ export default function CaseStudies() {
               }`}
             >
               {/* Image */}
-              <div className={`relative ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-                <div className="relative rounded-3xl overflow-hidden border border-[#247459]/20 shadow-2xl shadow-[#000]/30">
+              <Link href={`/case-studies/${study.slug}`} className={`relative group ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+                <div className="relative rounded-3xl overflow-hidden border border-[#247459]/20 shadow-2xl shadow-[#000]/30 transition-transform group-hover:scale-[1.02]">
                   <div className="relative aspect-video">
                     <Image
                       src={study.image}
@@ -188,12 +266,18 @@ export default function CaseStudies() {
                     />
                     {/* Overlay gradient */}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#031D16]/50 to-transparent" />
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 bg-[#DFB771]/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <span className="bg-[#DFB771] text-[#031D16] px-4 py-2 rounded-full font-semibold text-sm flex items-center gap-2">
+                        View Full Case Study <ArrowUpRight className="w-4 h-4" />
+                      </span>
+                    </div>
                   </div>
                 </div>
                 {/* Decorative shapes */}
                 <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-[#DFB771]/20 blur-2xl" />
                 <div className="absolute -bottom-4 -left-4 w-32 h-32 rounded-full bg-[#247459]/20 blur-2xl" />
-              </div>
+              </Link>
 
               {/* Content */}
               <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
@@ -207,11 +291,13 @@ export default function CaseStudies() {
                   {study.description}
                 </p>
 
-                {/* Stats */}
+                {/* Stats with counter animation */}
                 <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-8">
                   {study.stats.map((stat) => (
                     <div key={stat.label} className="text-center p-3 sm:p-5 rounded-xl sm:rounded-2xl bg-[#0E3D31]/50 border border-[#247459]/20">
-                      <div className="text-lg sm:text-2xl md:text-3xl font-bold text-[#DFB771]">{stat.value}</div>
+                      <div className="text-lg sm:text-2xl md:text-3xl font-bold text-[#DFB771]">
+                        <CountUp value={stat.value} />
+                      </div>
                       <div className="text-[10px] sm:text-xs text-[#F6FEFC]/50 mt-1 leading-tight">{stat.label}</div>
                       {stat.before && (
                         <div className="text-[10px] sm:text-xs text-[#F6FEFC]/30 line-through mt-1">{stat.before}</div>
@@ -233,7 +319,7 @@ export default function CaseStudies() {
                 </div>
 
                 {/* Quote */}
-                <blockquote className="border-l-3 sm:border-l-4 border-[#DFB771] pl-4 sm:pl-5 py-2">
+                <blockquote className="border-l-2 sm:border-l-4 border-[#DFB771] pl-4 sm:pl-5 py-2">
                   <p className="italic text-[#F6FEFC]/80 text-base sm:text-lg leading-relaxed">
                     {study.quote}
                   </p>
@@ -241,6 +327,15 @@ export default function CaseStudies() {
                     — {study.author}
                   </footer>
                 </blockquote>
+
+                {/* Read More Link */}
+                <Link 
+                  href={`/case-studies/${study.slug}`}
+                  className="inline-flex items-center gap-2 text-[#DFB771] hover:text-[#FFD99A] font-medium text-sm mt-4 group"
+                >
+                  Read full case study
+                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </Link>
               </div>
             </motion.div>
           ))}
