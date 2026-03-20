@@ -93,7 +93,7 @@ const caseStudies = [
     title: 'Eva · Dubai Property',
     subtitle: 'AI Real Estate Operations Manager',
     description: 'Real estate company drowning in operational tasks. Eva now manages their website, analyzes CRM data, monitors all client messaging, transcribes sales calls, and builds custom dashboards on demand.',
-    image: '/screenshots/team-dashboard.jpg',
+    image: '/screenshots/eva-mission-control.jpg',
     stats: [
       { label: 'Tasks Automated', value: '80%', icon: Bot },
       { label: 'Response Time', value: '<5 min', before: '2-4 hrs' },

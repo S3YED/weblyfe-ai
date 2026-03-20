@@ -78,7 +78,14 @@ const caseStudies: Record<string, {
     subtitle: 'AI Real Estate Operations Manager',
     description: 'Full-stack AI assistant managing website content, CRM analysis, and client communications.',
     fullDescription: 'Dubai Property needed an AI that could handle multiple operational tasks simultaneously: updating website content, analyzing CRM data, monitoring client communications, analyzing sales calls, and generating custom reports. Eva was born.',
-    image: '/screenshots/team-dashboard.jpg',
+    image: '/screenshots/eva-mission-control.jpg',
+    gallery: [
+      '/screenshots/eva-mission-control.jpg',
+      '/screenshots/eva-projects.jpg',
+      '/screenshots/eva-prd.jpg',
+      '/screenshots/eva-team-org.jpg',
+      '/screenshots/eva-calendar.jpg',
+    ],
     stats: [
       { label: 'Tasks Automated', value: '80%' },
       { label: 'Response Time', value: '<5 min', before: '2-4 hrs' },
