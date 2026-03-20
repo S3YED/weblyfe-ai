@@ -135,19 +135,19 @@ const caseStudies = [
 
 export default function CaseStudies() {
   return (
-    <section id="case-studies" className="py-24 md:py-32 bg-[#031D16] relative overflow-hidden">
+    <section id="case-studies" className="py-16 sm:py-24 md:py-32 bg-[#031D16] relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#F6FEFC] to-transparent opacity-5" />
       <div className="absolute top-40 right-0 w-96 h-96 rounded-full bg-[#247459]/10 blur-3xl" />
       <div className="absolute bottom-40 left-0 w-80 h-80 rounded-full bg-[#DFB771]/5 blur-3xl" />
       
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-12 sm:mb-20"
         >
           <span className="inline-flex items-center gap-2 text-[#DFB771] text-sm font-semibold uppercase tracking-wider mb-4">
             <span className="w-2 h-2 bg-[#DFB771] rotate-45" />
@@ -164,7 +164,7 @@ export default function CaseStudies() {
         </motion.div>
 
         {/* Case Studies */}
-        <div className="space-y-20">
+        <div className="space-y-12 sm:space-y-20">
           {caseStudies.map((study, index) => (
             <motion.div
               key={study.title}
@@ -172,7 +172,7 @@ export default function CaseStudies() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`grid lg:grid-cols-2 gap-12 items-center ${
+              className={`grid lg:grid-cols-2 gap-6 sm:gap-12 items-center ${
                 index % 2 === 1 ? 'lg:flex-row-reverse' : ''
               }`}
             >
@@ -197,35 +197,35 @@ export default function CaseStudies() {
 
               {/* Content */}
               <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
-                <span className="inline-block px-4 py-1.5 rounded-full bg-[#247459]/20 text-[#DFB771] text-sm font-medium mb-4">
+                <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-[#247459]/20 text-[#DFB771] text-xs sm:text-sm font-medium mb-3 sm:mb-4">
                   {study.subtitle}
                 </span>
-                <h3 className="text-3xl md:text-4xl font-bold text-[#F6FEFC] mb-4">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#F6FEFC] mb-3 sm:mb-4">
                   {study.title}
                 </h3>
-                <p className="text-[#F6FEFC]/60 mb-8 text-lg leading-relaxed">
+                <p className="text-[#F6FEFC]/60 mb-6 sm:mb-8 text-base sm:text-lg leading-relaxed">
                   {study.description}
                 </p>
 
                 {/* Stats */}
-                <div className="grid grid-cols-3 gap-4 mb-8">
+                <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-8">
                   {study.stats.map((stat) => (
-                    <div key={stat.label} className="text-center p-5 rounded-2xl bg-[#0E3D31]/50 border border-[#247459]/20">
-                      <div className="text-2xl md:text-3xl font-bold text-[#DFB771]">{stat.value}</div>
-                      <div className="text-xs text-[#F6FEFC]/50 mt-1">{stat.label}</div>
+                    <div key={stat.label} className="text-center p-3 sm:p-5 rounded-xl sm:rounded-2xl bg-[#0E3D31]/50 border border-[#247459]/20">
+                      <div className="text-lg sm:text-2xl md:text-3xl font-bold text-[#DFB771]">{stat.value}</div>
+                      <div className="text-[10px] sm:text-xs text-[#F6FEFC]/50 mt-1 leading-tight">{stat.label}</div>
                       {stat.before && (
-                        <div className="text-xs text-[#F6FEFC]/30 line-through mt-1">{stat.before}</div>
+                        <div className="text-[10px] sm:text-xs text-[#F6FEFC]/30 line-through mt-1">{stat.before}</div>
                       )}
                     </div>
                   ))}
                 </div>
 
                 {/* Tech Stack */}
-                <div className="flex flex-wrap gap-2 mb-8">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-6 sm:mb-8">
                   {study.tech.map((tech) => (
                     <span 
                       key={tech}
-                      className="px-3 py-1.5 text-xs rounded-full bg-[#247459]/20 text-[#F6FEFC]/80 border border-[#247459]/30"
+                      className="px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs rounded-full bg-[#247459]/20 text-[#F6FEFC]/80 border border-[#247459]/30"
                     >
                       {tech}
                     </span>
@@ -233,11 +233,11 @@ export default function CaseStudies() {
                 </div>
 
                 {/* Quote */}
-                <blockquote className="border-l-4 border-[#DFB771] pl-5 py-2">
-                  <p className="italic text-[#F6FEFC]/80 text-lg">
+                <blockquote className="border-l-3 sm:border-l-4 border-[#DFB771] pl-4 sm:pl-5 py-2">
+                  <p className="italic text-[#F6FEFC]/80 text-base sm:text-lg leading-relaxed">
                     {study.quote}
                   </p>
-                  <footer className="text-sm text-[#DFB771] mt-3 font-medium">
+                  <footer className="text-xs sm:text-sm text-[#DFB771] mt-2 sm:mt-3 font-medium">
                     — {study.author}
                   </footer>
                 </blockquote>
