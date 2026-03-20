@@ -3,27 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Instagram, Youtube, Linkedin, Mail, ArrowUpRight } from 'lucide-react';
-
-const footerLinks = {
-  services: [
-    { label: 'Workflow Automation', href: '#services' },
-    { label: 'AI Chatbots', href: '#services' },
-    { label: 'Training Bots', href: '#services' },
-    { label: 'AI-Powered CRM', href: '#services' },
-    { label: 'Digital Employee', href: '#services' },
-  ],
-  company: [
-    { label: 'Case Studies', href: '#case-studies' },
-    { label: 'How It Works', href: '#how-it-works' },
-    { label: 'FAQ', href: '#faq' },
-    { label: 'Contact', href: 'mailto:hello@weblyfe.ai' },
-  ],
-  resources: [
-    { label: 'Weblyfe.nl', href: 'https://weblyfe.nl', external: true },
-    { label: 'Blog', href: '#', coming: true },
-    { label: 'Free Resources', href: '#', coming: true },
-  ],
-};
+import { useTranslations } from 'next-intl';
 
 const socialLinks = [
   { icon: Instagram, href: 'https://instagram.com/seyed.jpg', label: 'Instagram' },
@@ -33,6 +13,26 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const t = useTranslations('footer');
+  const tNav = useTranslations('nav');
+  const tServices = useTranslations('services');
+
+  const footerLinks = {
+    services: [
+      { label: tServices('workflow.title'), href: '#services' },
+      { label: tServices('chatbots.title'), href: '#services' },
+      { label: tServices('training.title'), href: '#services' },
+      { label: tServices('crm.title'), href: '#services' },
+      { label: tServices('employee.title'), href: '#services' },
+    ],
+    company: [
+      { label: t('caseStudies'), href: '#case-studies' },
+      { label: tNav('howItWorks'), href: '#how-it-works' },
+      { label: tNav('faq'), href: '#faq' },
+      { label: t('contact'), href: 'mailto:hello@weblyfe.ai' },
+    ],
+  };
+
   return (
     <footer className="bg-[#031D16] pt-20 pb-8 relative overflow-hidden">
       {/* Decorative elements */}
@@ -41,7 +41,7 @@ export default function Footer() {
       
       <div className="container mx-auto px-6 relative z-10">
         {/* Main footer content */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand column */}
           <div className="lg:col-span-2">
             <a href="#" className="inline-block mb-6">
@@ -54,8 +54,7 @@ export default function Footer() {
               />
             </a>
             <p className="text-[#F6FEFC]/60 mb-6 max-w-sm leading-relaxed">
-              AI automation services for creators, agencies, and service businesses. 
-              We build systems that save you time and help you scale.
+              {t('tagline')}
             </p>
             
             {/* Social links */}
@@ -77,7 +76,7 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="text-[#F6FEFC] font-semibold mb-4">Services</h3>
+            <h3 className="text-[#F6FEFC] font-semibold mb-4">{t('services')}</h3>
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
                 <li key={link.label}>
@@ -94,7 +93,7 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="text-[#F6FEFC] font-semibold mb-4">Company</h3>
+            <h3 className="text-[#F6FEFC] font-semibold mb-4">{t('company')}</h3>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
@@ -108,73 +107,12 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-
-          {/* Resources */}
-          <div>
-            <h3 className="text-[#F6FEFC] font-semibold mb-4">Resources</h3>
-            <ul className="space-y-3">
-              {footerLinks.resources.map((link) => (
-                <li key={link.label}>
-                  {link.coming ? (
-                    <span className="text-[#F6FEFC]/40 text-sm flex items-center gap-1">
-                      {link.label}
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-[#247459]/30 text-[#DFB771]">
-                        Soon
-                      </span>
-                    </span>
-                  ) : (
-                    <a 
-                      href={link.href}
-                      target={link.external ? '_blank' : undefined}
-                      rel={link.external ? 'noopener noreferrer' : undefined}
-                      className="text-[#F6FEFC]/60 hover:text-[#DFB771] transition-colors text-sm inline-flex items-center gap-1"
-                    >
-                      {link.label}
-                      {link.external && <ArrowUpRight className="w-3 h-3" />}
-                    </a>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
-
-        {/* Newsletter */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="p-8 rounded-2xl bg-gradient-to-r from-[#0E3D31] to-[#0E3D31]/50 border border-[#247459]/20 mb-16"
-        >
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <h3 className="text-xl font-bold text-[#F6FEFC] mb-2">
-                Get AI insights delivered weekly
-              </h3>
-              <p className="text-[#F6FEFC]/60 text-sm">
-                Practical tips on automation, AI tools, and scaling your business. No spam.
-              </p>
-            </div>
-            <form className="flex w-full md:w-auto gap-3">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 md:w-64 px-4 py-3 rounded-xl bg-[#031D16] border border-[#247459]/30 text-[#F6FEFC] placeholder-[#F6FEFC]/40 focus:outline-none focus:border-[#DFB771] transition-colors"
-              />
-              <button 
-                type="submit"
-                className="btn-primary whitespace-nowrap py-3"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </motion.div>
 
         {/* Bottom bar */}
         <div className="pt-8 border-t border-[#247459]/20 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-[#F6FEFC]/40 text-sm">
-            © {new Date().getFullYear()} Weblyfe.ai · A Weblyfe by Techwiz LLC company
+            {t('copyright', { year: new Date().getFullYear() })}
           </p>
           <div className="flex gap-6">
             <a href="#" className="text-[#F6FEFC]/40 hover:text-[#F6FEFC]/60 text-sm transition-colors">
