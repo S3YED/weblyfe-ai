@@ -26,7 +26,7 @@ export default function BookingEmbed() {
   }, []);
 
   return (
-    <section id="booking" className="py-16 sm:py-24 bg-[#F6FEFC]">
+    <section id="book" className="py-16 sm:py-24 bg-[#F6FEFC]">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -6,6 +6,7 @@ import LeadMagnet from '@/components/LeadMagnet';
 import HowItWorks from '@/components/HowItWorks';
 import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
+import BookingEmbed from '@/components/BookingEmbed';
 import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
 
@@ -20,6 +21,7 @@ export default function Home() {
       <HowItWorks />
       <Testimonials />
       <FAQ />
+      <BookingEmbed />
       <CTA />
       <Footer />
     </main>

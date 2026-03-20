@@ -12,7 +12,7 @@ const benefits = [
 
 export default function CTA() {
   return (
-    <section id="book" className="py-24 md:py-32 bg-gradient-to-br from-[#031D16] via-[#0E3D31] to-[#031D16] relative overflow-hidden">
+    <section id="final-cta" className="py-24 md:py-32 bg-gradient-to-br from-[#031D16] via-[#0E3D31] to-[#031D16] relative overflow-hidden">
       {/* Decorative elements */}
       <motion.div 
         animate={{ 
