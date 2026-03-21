@@ -11,6 +11,17 @@ export const metadata: Metadata = {
 // Blog posts data (will be moved to MDX/CMS later)
 const posts = [
   {
+    slug: 'weblyfe-ai-launch',
+    title: 'Introducing Weblyfe.ai: AI automation that actually works',
+    titleNl: 'Introductie Weblyfe.ai: AI automatisering die echt werkt',
+    description: 'We launched weblyfe.ai. Real AI systems running real businesses. From workflow automation to digital employees.',
+    category: 'announcement',
+    date: '2026-03-22',
+    readingTime: 4,
+    image: '/images/team/67a46f77857a24b0e1beb865_Main%20Techwiz%20Seyed%20Hosseini%20from%20Weblyfe%20University%20building%20website%20high-end%20sophisticated.avif',
+    featured: true,
+  },
+  {
     slug: 'what-is-openclaw',
     title: 'What is OpenClaw? The AI Operations Platform Explained',
     titleNl: 'Wat is OpenClaw? Het AI Operations Platform Uitgelegd',
