@@ -4,7 +4,7 @@ import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRef, useEffect, useState } from 'react';
-import { ArrowUpRight, Clock, Zap, TrendingUp, MessageSquare, Shield, Mail, Calendar, Camera, Car, Bot, Building2, DollarSign, Users } from 'lucide-react';
+import { ArrowUpRight, Clock, Zap, TrendingUp, MessageSquare, Shield, Mail, Calendar, Camera, Car, Bot, Building2, DollarSign, Users, ExternalLink } from 'lucide-react';
 
 // Counter animation component
 function CountUp({ value, className = '' }: { value: string; className?: string }) {
@@ -101,7 +101,8 @@ const secondaryCaseStudies = [
     title: 'SAFESITE Security',
     subtitle: 'Voice-to-Website in 24 Hours',
     description: 'Military bodyguard launching a security firm. No time for design meetings or revision cycles. He sent voice notes describing his vision. The next morning, his website was live.',
-    image: '/screenshots/safesite-fresh.jpg',
+    image: '/screenshots/safesite-hero.jpg',
+    liveUrl: 'https://safesite-security.vercel.app/',
     stats: [
       { label: 'Faster Than Agency', value: '93%', before: '2 weeks → 1 day' },
       { label: 'Design Meetings', value: '0', icon: MessageSquare },
@@ -116,7 +117,8 @@ const secondaryCaseStudies = [
     title: 'PrivaNotify',
     subtitle: 'AI-Powered Anonymous Messaging SaaS',
     description: 'Platform for sending anonymous messages about sensitive topics. The AI rewrites every message to be empathetic and constructive while blocking 100% of abuse attempts. First deal closed for €3,000.',
-    image: '/screenshots/privanotify-fresh.jpg',
+    image: '/screenshots/privanotify-hero.jpg',
+    liveUrl: 'https://privanotify.com/',
     stats: [
       { label: 'Abuse Blocked', value: '100%', icon: Shield },
       { label: 'User Satisfaction', value: '98%', icon: TrendingUp },
@@ -290,14 +292,27 @@ export default function CaseStudies() {
                   </footer>
                 </blockquote>
 
-                {/* Read More Link */}
-                <Link 
-                  href={`/case-studies/${study.slug}`}
-                  className="inline-flex items-center gap-2 text-[#DFB771] hover:text-[#FFD99A] font-medium text-sm mt-4 group"
-                >
-                  Read full case study
-                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </Link>
+                {/* Action Links */}
+                <div className="flex flex-wrap items-center gap-4 mt-4">
+                  <Link 
+                    href={`/case-studies/${study.slug}`}
+                    className="inline-flex items-center gap-2 text-[#DFB771] hover:text-[#FFD99A] font-medium text-sm group"
+                  >
+                    Read full case study
+                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </Link>
+                  {'liveUrl' in study && study.liveUrl && (
+                    <a 
+                      href={study.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#247459]/30 text-[#F6FEFC] hover:bg-[#247459]/50 font-medium text-sm transition-colors border border-[#247459]/40"
+                    >
+                      View Live Site
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+                </div>
               </div>
             </motion.div>
           ))}
