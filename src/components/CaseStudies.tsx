@@ -137,7 +137,7 @@ const secondaryCaseStudies = [
     stats: [
       { label: 'Removal Rate', value: '100%', icon: Shield },
       { label: 'Faster Than Manual', value: '96%', before: '2 days → 2 hrs' },
-      { label: 'Rating Restored', value: '4.8★', icon: TrendingUp },
+      { label: 'Rating Restored', value: '5.0★', icon: TrendingUp },
     ],
     tech: ['OSINT Analysis', 'Google Account Analysis', 'Pattern Detection', 'Automated Reporting'],
     quote: '"The chance that 9 legitimate reviewers have the exact same profile is less than 0.000001%."',

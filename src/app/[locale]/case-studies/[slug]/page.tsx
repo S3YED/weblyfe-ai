@@ -6,6 +6,26 @@ import { ArrowLeft, ArrowUpRight, Clock, Zap, TrendingUp, Shield, MessageSquare,
 
 // SEO metadata for each case study (EN and NL)
 const seoMeta: Record<string, { en: { title: string; description: string }; nl: { title: string; description: string } }> = {
+  'openclaw': {
+    en: {
+      title: 'OpenClaw: The AI Operations Platform Case Study',
+      description: 'Infrastructure powering autonomous AI agents. 200+ daily tasks automated across 5+ companies. Bookings, content, dashboards, 24/7.',
+    },
+    nl: {
+      title: 'OpenClaw: Het AI Operations Platform Case Study',
+      description: 'Infrastructuur voor autonome AI agents. 200+ dagelijkse taken geautomatiseerd bij 5+ bedrijven. Boekingen, content, dashboards, 24/7.',
+    },
+  },
+  'super-assistant-employee': {
+    en: {
+      title: 'Super Assistant Employee: AI Digital Workers Case Study',
+      description: 'Meet Eva, Ben, Appie, and Garavito. Real AI assistants running real businesses. 500+ hours saved monthly, 5+ FTEs replaced.',
+    },
+    nl: {
+      title: 'Super Assistant Employee: AI Digitale Medewerkers Case Study',
+      description: 'Maak kennis met Eva, Ben, Appie en Garavito. Echte AI assistenten die echte bedrijven runnen. 500+ uur per maand bespaard.',
+    },
+  },
   'cza-ben-de-voorman': {
     en: {
       title: 'CZA Ben de Voorman: AI WhatsApp Lead Qualification Case Study',
@@ -106,27 +126,7 @@ const seoMeta: Record<string, { en: { title: string; description: string }; nl: 
       description: 'Multi agent AI systeem met 3 gespecialiseerde agents. Werkt 24/7, geen deadlines gemist, 50000+ euro waarde gecreeerd.',
     },
   },
-  'openclaw': {
-    en: {
-      title: 'OpenClaw: The AI Operations Platform Case Study',
-      description: 'Infrastructure powering autonomous AI agents. Bookings, content, site management, dashboards. Running 5+ companies 24/7.',
-    },
-    nl: {
-      title: 'OpenClaw: Het AI Operations Platform Case Study',
-      description: 'Infrastructuur voor autonome AI agents. Boekingen, content, sitebeheer, dashboards. Draait 5+ bedrijven 24/7.',
-    },
-  },
-  'super-assistant-employee': {
-    en: {
-      title: 'Super Assistant Employee: AI That Replaces Full Time Hires Case Study',
-      description: 'Meet Eva, Ben, Appie, and Garavito. Real AI assistants running real businesses. 500+ hours saved monthly, 5+ FTEs replaced.',
-    },
-    nl: {
-      title: 'Super Assistant Employee: AI Die Fulltime Medewerkers Vervangt Case Study',
-      description: 'Maak kennis met Eva, Ben, Appie en Garavito. Echte AI assistenten die echte bedrijven runnen. 500+ uur per maand bespaard.',
-    },
-  },
-};
+  };
 
 // Generate metadata for SEO
 export async function generateMetadata({ 
@@ -188,6 +188,7 @@ const caseStudies: Record<string, {
   description: string;
   fullDescription: string;
   image: string;
+  secondaryImage?: string;
   mobileImage?: string;
   gallery?: string[];
   stats: { label: string; value: string; before?: string }[];
@@ -200,12 +201,76 @@ const caseStudies: Record<string, {
   projectUrl?: string;
   weblyfeUrl?: string;
 }> = {
+  'openclaw': {
+    title: 'OpenClaw',
+    subtitle: 'The AI Operations Platform',
+    description: 'The infrastructure powering autonomous AI agents for business operations.',
+    fullDescription: 'OpenClaw is the AI operations platform that powers everything at Weblyfe.ai. It enables businesses to deploy autonomous AI agents that handle bookings, content management, site updates, costing, analytics, and custom dashboards. Running 24/7, these agents work while you sleep.',
+    image: '/images/team/67a46f77857a24b0e1beb865_Main%20Techwiz%20Seyed%20Hosseini%20from%20Weblyfe%20University%20building%20website%20high-end%20sophisticated.avif',
+    secondaryImage: '/screenshots/team-dashboard.jpg',
+    gallery: [
+      '/screenshots/team-dashboard.jpg',
+      '/screenshots/eva-mission-control.jpg',
+    ],
+    stats: [
+      { label: 'Companies Powered', value: '5+' },
+      { label: 'Tasks Automated Daily', value: '200+' },
+      { label: 'Monthly Value Created', value: '€15k+' },
+    ],
+    tech: ['Claude AI', 'Mission Control', 'Google Calendar', 'n8n', 'Notion', 'Tailscale', 'Supabase', 'Next.js'],
+    quote: '"OpenClaw is like having an operations team that never sleeps. Bookings, content, deployments, reporting. It just handles everything."',
+    author: 'Seyed Hosseini, CEO',
+    challenge: 'Running a business means wearing every hat: developer, marketer, support agent, administrator. There are not enough hours in the day. Traditional automation tools require constant maintenance and break when things change.',
+    solution: 'OpenClaw operates on a three-layer architecture that separates concerns for maximum reliability: (1) Directives Layer: Natural language instructions define what the AI should do. No coding required. (2) Orchestration Layer: AI agents make intelligent decisions about which tools to use and in what order. They handle edge cases and ask for clarification when needed. (3) Execution Layer: Deterministic scripts perform the actual work. These are testable, fast, and predictable. This separation ensures that 90% of the system is reliable code, while AI handles only the judgment calls.',
+    results: [
+      'Running 5+ companies 24/7 with AI agents',
+      '200+ tasks automated per day across all deployments',
+      'Response times under 2 minutes for all customer inquiries',
+      'Zero missed deadlines since deployment',
+      '€15,000+ monthly value created through automation',
+      'Mission Control dashboard for real-time oversight',
+    ],
+    weblyfeUrl: 'https://weblyfe.nl',
+  },
+  'super-assistant-employee': {
+    title: 'Super Assistant Employee',
+    subtitle: 'AI That Replaces Full-Time Hires',
+    description: 'Meet Eva, Ben, Appie, and Garavito. Real AI assistants running real businesses.',
+    fullDescription: 'The Super Assistant Employee program deploys AI agents that function as full-time digital employees. Unlike chatbots that just answer questions, these assistants have real access to business systems. They can update websites, qualify leads, send emails, book appointments, and generate reports. They work 24/7, never take sick days, and scale instantly.',
+    image: '/screenshots/appie-fleet-telegram.jpg',
+    secondaryImage: '/screenshots/eva-mission-control.jpg',
+    gallery: [
+      '/screenshots/appie-fleet-telegram.jpg',
+      '/screenshots/eva-mission-control.jpg',
+      '/screenshots/cza-fresh.jpg',
+    ],
+    stats: [
+      { label: 'Hours Saved Monthly', value: '500+' },
+      { label: 'FTEs Replaced', value: '5+' },
+      { label: 'Always On', value: '24/7' },
+    ],
+    tech: ['Claude AI', 'OpenClaw', 'WhatsApp API', 'Telegram', 'CRM Integration', 'Browser Automation', 'Voice Transcription'],
+    quote: '"Eva handles what used to take 3 people. Ben never misses a site update. Appie runs our entire company."',
+    author: 'Multiple Clients',
+    challenge: 'Hiring is expensive, slow, and risky. Training takes months. Employees get sick, take vacations, and eventually leave. For small businesses and agencies, the overhead of HR, payroll, and management often exceeds the value of the work done.',
+    solution: 'We deploy AI assistants tailored to each business: (1) Eva at Dubai Property manages website content, analyzes CRM data, monitors communications, transcribes sales calls, and builds custom dashboards. She replaced 3 full-time employees. (2) Ben at CZA handles WhatsApp lead qualification, responding to inquiries in under 2 minutes and scoring leads automatically. (3) Appie at Weblyfe orchestrates marketing, engineering, and operations across the entire company. (4) Garavito at DV Institute handles executive tasks: booking appointments, filling forms, sending invites. Each assistant is connected to the business systems they need and trained on company-specific knowledge.',
+    results: [
+      'Eva (Dubai Property): 80% of operations automated, 3 FTEs replaced',
+      'Ben (CZA): Response time from 4 hours to 2 minutes, 40% more leads',
+      'Appie (Weblyfe): 50+ tasks daily, zero deadlines missed',
+      'Garavito (DV Institute): 15+ hours saved weekly on admin',
+      'All assistants: 24/7 availability, instant scaling, no HR overhead',
+      '500+ hours saved monthly across all deployments',
+    ],
+    weblyfeUrl: 'https://weblyfe.nl',
+  },
   'cza-ben-de-voorman': {
     title: 'CZA Ben de Voorman',
     subtitle: 'AI WhatsApp Lead Qualification',
     description: 'Dutch construction company handling dozens of inquiries weekly.',
     fullDescription: 'CZA Ben de Voorman is a Dutch construction company that was struggling to handle the volume of inquiries coming through their WhatsApp Business account. They were losing potential jobs because responses took hours or even days, especially for inquiries that came in after hours.',
     image: '/screenshots/cza-fresh.jpg',
+    secondaryImage: '/images/clients/699ef7bea1c0e5fe0ca41038_8aa564d2c89f1730944b4ecb1543a1c1_CZA.png',
     stats: [
       { label: 'Faster Response', value: '99%', before: '4-24 hrs → 2 min' },
       { label: 'Time Saved Weekly', value: '13+ hrs' },
@@ -231,6 +296,7 @@ const caseStudies: Record<string, {
     description: 'Former military bodyguard needed a corporate website.',
     fullDescription: 'Shay, a former military bodyguard starting his own security company, needed a professional corporate website. But he did not have time for traditional web development processes: endless email chains, Figma reviews, revision cycles.',
     image: '/screenshots/safesite-hero.jpg',
+    secondaryImage: '/screenshots/safesite-fresh.jpg',
     stats: [
       { label: 'Faster Than Agency', value: '93%', before: '2 weeks → 1 day' },
       { label: 'Design Meetings', value: '0' },
@@ -257,6 +323,7 @@ const caseStudies: Record<string, {
     description: 'Full stack AI assistant managing website content, CRM analysis, and client communications.',
     fullDescription: 'Dubai Property needed an AI that could handle multiple operational tasks simultaneously: updating website content, analyzing CRM data, monitoring client communications, analyzing sales calls, and generating custom reports. Eva was born.',
     image: '/screenshots/eva-mission-control.jpg',
+    secondaryImage: '/images/clients/67d557d164b93f2ad6f75ae3_Dubai%20Property.avif',
     projectUrl: 'https://dubai-property.nl',
     gallery: [
       '/screenshots/eva-mission-control.jpg',
@@ -289,10 +356,11 @@ const caseStudies: Record<string, {
     description: '10 fake one-star reviews hit in one hour.',
     fullDescription: 'A coordinated attack: 10 one-star reviews appeared within an hour, all from accounts with suspicious patterns. The client\'s rating was tanking, and Google\'s reporting system moves slowly.',
     image: '/screenshots/botfarm.jpg',
+    secondaryImage: '/screenshots/team-dashboard.jpg',
     stats: [
       { label: 'Removal Rate', value: '100%' },
       { label: 'Faster Than Manual', value: '96%', before: '2 days → 2 hrs' },
-      { label: 'Rating Restored', value: '4.8★' },
+      { label: 'Rating Restored', value: '5.0★' },
     ],
     tech: ['OSINT Analysis', 'Google Account Analysis', 'Pattern Detection', 'Automated Reporting'],
     quote: '"The chance that 9 legitimate reviewers have the exact same profile is less than 0.000001%."',
@@ -313,6 +381,7 @@ const caseStudies: Record<string, {
     description: 'Platform for sending anonymous, AI-crafted messages about sensitive topics.',
     fullDescription: 'Sometimes people need to communicate sensitive information anonymously, whether it\'s telling someone about a health issue, reporting workplace concerns, or delivering feedback that\'s too awkward face-to-face. PrivaNotify makes this possible while preventing abuse.',
     image: '/screenshots/privanotify-hero.jpg',
+    secondaryImage: '/screenshots/privanotify-fresh.jpg',
     stats: [
       { label: 'Abuse Blocked', value: '100%' },
       { label: 'User Satisfaction', value: '98%' },

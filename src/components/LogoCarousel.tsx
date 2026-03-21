@@ -2,18 +2,19 @@
 
 import { motion } from 'framer-motion';
 
-// Top AI tools we use
+// AI tools and integrations we use
 const logos = [
-  { name: 'OpenAI', svg: '/logos/openai.svg' },
-  { name: 'Anthropic', svg: '/logos/anthropic.svg' },
-  { name: 'Vercel', svg: '/logos/vercel.svg' },
-  { name: 'n8n', svg: '/logos/n8n.svg' },
-  { name: 'Supabase', svg: '/logos/supabase.svg' },
+  { name: 'Claude', svg: '/logos/claude.svg' },
+  { name: 'OpenClaw', svg: '/logos/openclaw.svg' },
   { name: 'Notion', svg: '/logos/notion.svg' },
-  { name: 'Slack', svg: '/logos/slack.svg' },
-  { name: 'Google Cloud', svg: '/logos/google-cloud.svg' },
-  { name: 'Webflow', svg: '/logos/webflow.svg' },
-  { name: 'Stripe', svg: '/logos/stripe.svg' },
+  { name: 'Supabase', svg: '/logos/supabase.svg' },
+  { name: 'Antigravity', svg: '/logos/antigravity.svg' },
+  { name: 'OpenAI', svg: '/logos/openai.svg' },
+  { name: 'WhatsApp', svg: '/logos/whatsapp.svg' },
+  { name: 'Monday', svg: '/logos/monday.svg' },
+  { name: 'Airtable', svg: '/logos/airtable.svg' },
+  { name: 'HeyGen', svg: '/logos/heygen.svg' },
+  { name: 'Gamma', svg: '/logos/gamma.svg' },
 ];
 
 // Duplicate for seamless loop
