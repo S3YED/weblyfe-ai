@@ -63,7 +63,7 @@ export default function HowItWorks() {
         </motion.div>
 
         {/* Steps */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
           {steps.map((step, index) => (
             <motion.div
               key={step.number}
@@ -78,22 +78,22 @@ export default function HowItWorks() {
                 <div className="hidden lg:block absolute top-10 left-[60%] w-full h-0.5 bg-gradient-to-r from-[#247459] to-transparent" />
               )}
               
-              <div className="card-dark p-8 bg-[#0E3D31]/50 border border-[#247459]/20 relative group hover:border-[#DFB771]/30 transition-colors">
+              <div className="card-dark p-8 bg-[#0E3D31]/50 border border-[#247459]/20 relative group hover:border-[#DFB771]/30 transition-colors h-full flex flex-col">
                 {/* Number badge */}
                 <div className="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-[#DFB771] flex items-center justify-center font-bold text-[#031D16]">
                   {step.number}
                 </div>
                 
                 {/* Icon */}
-                <div className="w-16 h-16 rounded-2xl bg-[#247459]/20 flex items-center justify-center mb-6 group-hover:bg-[#247459]/30 transition-colors">
+                <div className="w-16 h-16 rounded-2xl bg-[#247459]/20 flex items-center justify-center mb-6 group-hover:bg-[#247459]/30 transition-colors flex-shrink-0">
                   <step.icon className="w-8 h-8 text-[#DFB771]" />
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-bold text-[#F6FEFC] mb-3">
+                <h3 className="text-xl font-bold text-[#F6FEFC] mb-3 flex-shrink-0">
                   {step.title}
                 </h3>
-                <p className="text-[#F6FEFC]/60 leading-relaxed">
+                <p className="text-[#F6FEFC]/60 leading-relaxed flex-grow">
                   {step.description}
                 </p>
               </div>
