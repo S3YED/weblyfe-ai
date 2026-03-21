@@ -476,7 +476,7 @@ export default async function BlogPostPage({
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-3xl mx-auto">
             <article 
-              className="prose prose-lg prose-invert prose-headings:text-[#F6FEFC] prose-p:text-[#F6FEFC]/70 prose-a:text-[#DFB771] prose-strong:text-[#F6FEFC] prose-code:text-[#DFB771] prose-pre:bg-[#0E3D31] prose-pre:border prose-pre:border-[#247459]/20 max-w-none"
+              className="prose prose-lg prose-invert prose-headings:text-[#F6FEFC] prose-p:text-[#F6FEFC] prose-li:text-[#F6FEFC] prose-a:text-[#DFB771] prose-strong:text-[#F6FEFC] prose-code:text-[#DFB771] prose-pre:bg-[#0E3D31] prose-pre:border prose-pre:border-[#247459]/20 max-w-none"
               dangerouslySetInnerHTML={{ __html: renderMarkdown(content) }}
             />
           </div>
