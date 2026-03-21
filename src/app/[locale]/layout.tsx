@@ -44,19 +44,34 @@ export default async function LocaleLayout({
         <link rel="alternate" hrefLang="en" href="https://weblyfe.ai" />
         <link rel="alternate" hrefLang="nl" href="https://weblyfe.ai/nl" />
         <link rel="alternate" hrefLang="x-default" href="https://weblyfe.ai" />
+        {/* Organization Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'Organization',
+              '@id': 'https://weblyfe.ai/#organization',
               name: 'Weblyfe.ai',
               url: 'https://weblyfe.ai',
               logo: 'https://weblyfe.ai/logo-gold.svg',
+              image: 'https://weblyfe.ai/og-image.jpg',
               description: locale === 'nl' 
-                ? 'AI-automatisering en chatbot diensten voor makers en bureaus'
-                : 'AI automation and chatbot services for creators and agencies',
+                ? 'AI-automatisering bureau. Custom chatbots, workflow automatisering, en digitale medewerkers voor bedrijven.'
+                : 'AI automation agency. Custom chatbots, workflow automation, and digital employees for businesses.',
+              foundingDate: '2024',
+              founder: {
+                '@type': 'Person',
+                name: 'Seyed Hosseini',
+                url: 'https://instagram.com/seyed.jpg',
+              },
+              address: {
+                '@type': 'PostalAddress',
+                addressCountry: 'NL',
+              },
               sameAs: [
+                'https://weblyfe.nl',
+                'https://weblyfeuniversity.com',
                 'https://instagram.com/seyed.jpg',
                 'https://youtube.com/@weblyfenl',
                 'https://linkedin.com/company/weblyfe',
@@ -65,7 +80,132 @@ export default async function LocaleLayout({
                 '@type': 'ContactPoint',
                 contactType: 'Sales',
                 email: 'hello@weblyfe.ai',
+                availableLanguage: ['English', 'Dutch'],
               },
+              knowsAbout: [
+                'AI Automation',
+                'Chatbot Development',
+                'Workflow Automation',
+                'Digital Employees',
+                'Business Process Automation',
+                'Claude AI',
+                'OpenClaw',
+                'WhatsApp Business API',
+              ],
+            }),
+          }}
+        />
+        {/* Services Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'ItemList',
+              itemListElement: [
+                {
+                  '@type': 'Service',
+                  position: 1,
+                  name: 'OpenClaw Setup',
+                  description: 'Deploy your own AI operations platform with custom agents and integrations.',
+                  provider: { '@id': 'https://weblyfe.ai/#organization' },
+                  offers: {
+                    '@type': 'Offer',
+                    priceCurrency: 'EUR',
+                    price: '2500',
+                    priceSpecification: {
+                      '@type': 'PriceSpecification',
+                      minPrice: '2500',
+                      maxPrice: '10000',
+                      priceCurrency: 'EUR',
+                    },
+                  },
+                },
+                {
+                  '@type': 'Service',
+                  position: 2,
+                  name: 'Super Assistant Employee',
+                  description: 'AI assistant that replaces full-time hires. Works 24/7 across WhatsApp, Telegram, Email.',
+                  provider: { '@id': 'https://weblyfe.ai/#organization' },
+                  offers: {
+                    '@type': 'Offer',
+                    priceCurrency: 'EUR',
+                    price: '1500',
+                    priceSpecification: {
+                      '@type': 'UnitPriceSpecification',
+                      price: '1500',
+                      priceCurrency: 'EUR',
+                      billingDuration: 'P1M',
+                    },
+                  },
+                },
+                {
+                  '@type': 'Service',
+                  position: 3,
+                  name: 'Business Foundation Fix',
+                  description: 'Connect and optimize your entire tech stack with automation.',
+                  provider: { '@id': 'https://weblyfe.ai/#organization' },
+                  offers: {
+                    '@type': 'Offer',
+                    priceCurrency: 'EUR',
+                    priceSpecification: {
+                      '@type': 'PriceSpecification',
+                      minPrice: '3000',
+                      maxPrice: '15000',
+                      priceCurrency: 'EUR',
+                    },
+                  },
+                },
+                {
+                  '@type': 'Service',
+                  position: 4,
+                  name: 'AI-Powered Web Development',
+                  description: 'Websites built by AI, supervised by humans. Next.js or Webflow.',
+                  provider: { '@id': 'https://weblyfe.ai/#organization' },
+                  offers: {
+                    '@type': 'Offer',
+                    priceCurrency: 'EUR',
+                    priceSpecification: {
+                      '@type': 'PriceSpecification',
+                      minPrice: '2500',
+                      maxPrice: '25000',
+                      priceCurrency: 'EUR',
+                    },
+                  },
+                },
+                {
+                  '@type': 'Service',
+                  position: 5,
+                  name: 'AI Marketing Operations',
+                  description: 'Automated content, social media, and email marketing.',
+                  provider: { '@id': 'https://weblyfe.ai/#organization' },
+                  offers: {
+                    '@type': 'Offer',
+                    priceCurrency: 'EUR',
+                    price: '1000',
+                    priceSpecification: {
+                      '@type': 'UnitPriceSpecification',
+                      price: '1000',
+                      priceCurrency: 'EUR',
+                      billingDuration: 'P1M',
+                    },
+                  },
+                },
+              ],
+            }),
+          }}
+        />
+        {/* WebSite Schema for search */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'Weblyfe.ai',
+              url: 'https://weblyfe.ai',
+              inLanguage: [locale === 'nl' ? 'nl-NL' : 'en-US'],
+              publisher: { '@id': 'https://weblyfe.ai/#organization' },
             }),
           }}
         />

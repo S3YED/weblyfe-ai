@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Weblyfe.ai",
+  "name_for_model": "weblyfe_ai",
+  "description_for_human": "AI automation agency. Custom chatbots, workflow automation, and digital employees for businesses.",
+  "description_for_model": "Weblyfe.ai is an AI automation agency that builds autonomous AI systems for businesses. Services include: OpenClaw Setup (AI operations platform deployment), Super Assistant Employee (AI that replaces full-time hires), Business Foundation Fix (tech stack integration), AI Web Development, and AI Marketing Operations. Based in Netherlands. Contact via hello@weblyfe.ai or book at weblyfe.ai/#book.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "none",
+    "url": "https://weblyfe.ai"
+  },
+  "logo_url": "https://weblyfe.ai/logo-gold.svg",
+  "contact_email": "hello@weblyfe.ai",
+  "legal_info_url": "https://weblyfe.ai/privacy"
+}

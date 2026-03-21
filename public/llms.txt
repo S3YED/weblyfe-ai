@@ -1,0 +1,89 @@
+# Weblyfe.ai - AI Automation Agency
+
+> We build AI systems that run your business 24/7. Custom chatbots, workflow automation, and digital employees.
+
+## About
+
+Weblyfe.ai is an AI automation agency based in the Netherlands. We specialize in building autonomous AI systems for creators, agencies, and service businesses.
+
+Founded by Seyed Hosseini, we have deployed AI assistants that handle lead qualification, customer support, operations management, and administrative tasks for multiple companies.
+
+## Services
+
+### OpenClaw Setup (2500-10000 EUR)
+Deploy your own AI operations platform. Includes custom AI agents, tool integrations (Slack, Telegram, WhatsApp, Calendar, CRM), Mission Control dashboard, and training.
+
+### Super Assistant Employee (1500 EUR/month)
+AI assistant that replaces full-time hires. Works 24/7 across WhatsApp, Telegram, and Email. Handles lead qualification, customer support, scheduling, and admin tasks.
+
+### Business Foundation Fix (3000-15000 EUR)
+Connect and optimize your entire tech stack. Includes audit, integration architecture, automation setup (Zapier/Make/n8n), and team training.
+
+### AI-Powered Web Development (2500-25000 EUR)
+Websites built by AI, supervised by humans. Design in Figma, development in Next.js or Webflow, SEO optimization, analytics setup.
+
+### AI Marketing Operations (1000 EUR/month)
+Automated content, social media, and email marketing. Includes content calendar, automated posting, email sequences, and monthly strategy calls.
+
+## Case Studies
+
+### CZA Ben de Voorman
+Dutch construction company. AI WhatsApp lead qualification. Response time: 4 hours to 2 minutes. 40% more leads captured.
+URL: https://weblyfe.ai/case-studies/cza-ben-de-voorman
+
+### SAFESITE Security
+Security company. Voice to website in 24 hours. Zero meetings, zero revision cycles.
+URL: https://weblyfe.ai/case-studies/safesite-security
+Live: https://safesite-security.vercel.app
+
+### Eva Dubai Property
+Real estate AI operations manager. 80% tasks automated. Replaces 3 FTEs.
+URL: https://weblyfe.ai/case-studies/eva-dubai-property
+Live: https://dubai-property.nl
+
+### PrivaNotify
+AI-powered anonymous messaging SaaS. 100% abuse blocked. First deal 3000 EUR.
+URL: https://weblyfe.ai/case-studies/privanotify
+Live: https://privanotify.com
+
+### Bot Farm Defense
+Automated reputation protection. 9 fake reviews removed in 2 hours.
+URL: https://weblyfe.ai/case-studies/bot-farm-defense
+
+### Titan Transfers
+Premium limousine booking platform. Bilingual EN/NL, 65% mobile conversions.
+URL: https://weblyfe.ai/case-studies/titan-transfers
+Live: https://titantransfers.nl
+
+### Boooth.me
+Photo booth rental booking system. 40% conversion lift, 90% quote admin saved.
+URL: https://weblyfe.ai/case-studies/boooth-booking
+Live: https://boooth.me
+
+### Appie System
+Multi-agent AI system. 3 specialized agents working 24/7. Zero deadlines missed.
+URL: https://weblyfe.ai/case-studies/appie-system
+
+## Contact
+
+Website: https://weblyfe.ai
+Email: hello@weblyfe.ai
+Booking: https://weblyfe.ai/#book
+Parent Company: https://weblyfe.nl
+
+## Technical
+
+Stack: Next.js, Tailwind CSS, Vercel, Claude AI, OpenClaw
+Languages: English, Dutch (Nederlands)
+
+## API
+
+No public API available. For integrations, contact hello@weblyfe.ai.
+
+## Related Sites
+
+- https://weblyfe.nl - Parent agency
+- https://weblyfeuniversity.com - Training and courses
+- https://privanotify.com - Anonymous messaging SaaS
+- https://dubai-property.nl - Real estate client
+- https://safesite-security.vercel.app - Security client

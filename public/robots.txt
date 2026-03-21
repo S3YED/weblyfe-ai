@@ -1,10 +1,51 @@
 # Robots.txt for weblyfe.ai
+# AI-friendly configuration
+
+# Allow all crawlers
 User-agent: *
+Allow: /
+
+# Explicitly allow AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: YouBot
 Allow: /
 
 # Sitemap
 Sitemap: https://weblyfe.ai/sitemap.xml
 
-# Disallow admin/api routes
+# LLMs.txt for AI agents
+# See: https://weblyfe.ai/llms.txt
+
+# AI Plugin
+# See: https://weblyfe.ai/.well-known/ai-plugin.json
+
+# Disallow internal routes
 Disallow: /api/
-Disallow: /_next/
+Disallow: /_next/static/
+Disallow: /_next/image/
