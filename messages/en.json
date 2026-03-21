@@ -1,126 +1,126 @@
 {
   "metadata": {
-    "title": "Weblyfe.ai | AI Automation Agency",
+    "title": "Weblyfe.ai | AI automation agency",
     "description": "We build AI systems that handle your leads, support, and operations 24/7. Custom chatbots, workflow automation, and digital employees for growing businesses."
   },
   "nav": {
     "services": "Services",
-    "caseStudies": "Case Studies",
-    "howItWorks": "How It Works",
+    "caseStudies": "Case studies",
+    "howItWorks": "How it works",
     "faq": "FAQ",
-    "book": "Book a Call"
+    "book": "Book a call"
   },
   "hero": {
     "badge": "Join 50+ businesses automating their growth",
-    "title1": "Your Business,",
-    "title2": "Running on Autopilot",
+    "title1": "Your business,",
+    "title2": "running on autopilot",
     "subtitle": "We build AI systems that handle your leads, support, and operations 24/7. Focus on the work that actually matters.",
     "highlight": "Clients save 20+ hours per week.",
-    "cta": "Book a Free Strategy Call",
-    "ctaSecondary": "See How It Works",
+    "cta": "Book a free strategy call",
+    "ctaSecondary": "See how it works",
     "microcopy": "No coding required • No monthly retainers • Just results"
   },
   "services": {
-    "label": "Our Services",
-    "title": "AI Solutions That",
-    "titleHighlight": "Actually Work",
+    "label": "Our services",
+    "title": "AI solutions that",
+    "titleHighlight": "actually work",
     "subtitle": "From simple automations to full digital employees: we build AI systems tailored to your specific business needs.",
     "workflow": {
-      "title": "Workflow Automation",
-      "headline": "Connect Everything. Automate Anything.",
+      "title": "Workflow automation",
+      "headline": "Connect everything. Automate anything.",
       "description": "Your tools should talk to each other without you playing middleman. We build custom automation flows that connect your CRM, email, calendar, Notion, Slack, and 400+ other apps.",
       "benefit1": "Instant data sync across all tools",
       "benefit2": "Zero manual handoffs",
       "benefit3": "Custom real-time dashboards"
     },
     "chatbots": {
-      "title": "AI Chatbots",
-      "headline": "24/7 Support That Sounds Like You",
+      "title": "AI chatbots",
+      "headline": "24/7 support that sounds like you",
       "description": "Your customers don't want to wait until Monday morning. Our AI chatbots handle inquiries, book appointments, and answer FAQs instantly. Trained on your brand voice.",
       "benefit1": "Never miss a lead (even at 3am)",
       "benefit2": "Smart routing to humans when needed",
       "benefit3": "WhatsApp, web, or SMS"
     },
     "training": {
-      "title": "Training Bots",
-      "headline": "AI That Knows Your Business Inside Out",
+      "title": "Training bots",
+      "headline": "AI that knows your business inside out",
       "description": "Generic AI gives generic answers. We train custom AI models on YOUR content (your docs, processes, FAQs) so it becomes an expert on your specific business.",
       "benefit1": "Trained on your content",
       "benefit2": "Always improving over time",
       "benefit3": "Your data stays private"
     },
     "crm": {
-      "title": "AI-Powered CRM",
-      "headline": "Leads Scored, Sorted, and Followed Up",
+      "title": "AI-powered CRM",
+      "headline": "Leads scored, sorted, and followed up",
       "description": "Stop letting hot leads go cold. Our AI-powered CRM scores every lead instantly, sends personalized follow-ups, and alerts you when someone's ready to buy.",
       "benefit1": "Instant lead scoring",
       "benefit2": "Auto follow-ups that feel personal",
       "benefit3": "Real-time high-intent alerts"
     },
     "employee": {
-      "title": "Digital Employee",
-      "headline": "Hire an AI Team Member",
+      "title": "Digital employee",
+      "headline": "Hire an AI team member",
       "description": "This isn't a chatbot. It's a digital employee. Powered by our Appie system, it handles scheduling, research, content drafts, CRM updates, and email management. Unlimited tasks. No PTO.",
       "benefit1": "True multi-tasking in parallel",
       "benefit2": "Full system access (calendar, email, docs)",
       "benefit3": "Scales with your business"
     },
-    "ctaTitle": "Not Sure What You Need?",
+    "ctaTitle": "Not sure what you need?",
     "ctaText": "Book a free strategy call and we'll map out the perfect AI solution for your business.",
-    "ctaButton": "Get Your Free Roadmap"
+    "ctaButton": "Get your free roadmap"
   },
   "caseStudies": {
-    "label": "Case Studies",
-    "title": "Real Results,",
-    "titleHighlight": "Real Clients",
+    "label": "Case studies",
+    "title": "Real results,",
+    "titleHighlight": "real clients",
     "subtitle": "Not concepts. Not demos. Real AI systems running real businesses right now. Every stat is verifiable. Every client is reachable.",
     "viewFull": "Read full case study",
     "cta": "Ready to be our next success story?"
   },
   "leadMagnet": {
-    "badge": "Free Guide",
-    "title": "The AI Automation Playbook",
+    "badge": "Free guide",
+    "title": "The AI automation playbook",
     "subtitle": "Learn how to automate repetitive tasks and scale your business with AI. No developers needed. No coding required.",
     "benefit1": "5 automations you can implement today",
     "benefit2": "Real examples from our clients",
     "benefit3": "Step-by-step implementation guides",
     "placeholder": "Enter your email",
-    "cta": "Get Free Playbook",
+    "cta": "Get free playbook",
     "privacy": "No spam. Unsubscribe anytime."
   },
   "howItWorks": {
-    "label": "How It Works",
-    "title": "From Idea to",
-    "titleHighlight": "Automation",
+    "label": "How it works",
+    "title": "From idea to",
+    "titleHighlight": "automation",
     "subtitle": "A clear, proven process that takes you from overwhelmed to automated in weeks, not months.",
     "step1": {
-      "title": "Discovery Call",
+      "title": "Discovery call",
       "description": "We learn about your business, pain points, and goals. No pitch, just understanding what you actually need."
     },
     "step2": {
-      "title": "Custom Roadmap",
+      "title": "Custom roadmap",
       "description": "We design a tailored AI strategy with clear milestones, timelines, and expected ROI. You know exactly what you're getting."
     },
     "step3": {
-      "title": "Build & Launch",
+      "title": "Build & launch",
       "description": "Our team builds your AI solution. You get regular updates and can test throughout. No surprises at launch."
     },
     "step4": {
-      "title": "Optimize & Scale",
+      "title": "Optimize & scale",
       "description": "We monitor performance, gather feedback, and continuously improve. Your AI gets smarter over time."
     },
-    "cta": "Start Your Journey"
+    "cta": "Start your journey"
   },
   "testimonials": {
     "label": "Testimonials",
-    "title": "What Our",
-    "titleHighlight": "Clients Say",
+    "title": "What our",
+    "titleHighlight": "clients say",
     "subtitle": "Don't just take our word for it. Hear from the founders and teams we've helped automate."
   },
   "faq": {
     "label": "FAQ",
     "title": "Questions?",
-    "titleHighlight": "We've Got Answers",
+    "titleHighlight": "We've got answers",
     "subtitle": "Everything you need to know about working with us. Can't find what you're looking for? Just ask. We're here to help.",
     "q1": "How long does it take to build an AI automation?",
     "a1": "Most projects take 2-4 weeks from kickoff to launch. Simple chatbots can be ready in 1-2 weeks, while complex multi-agent systems may take 4-6 weeks. We give you a clear timeline during the strategy call.",
@@ -142,8 +142,8 @@
     "emailUs": "Email us at hello@weblyfe.ai →"
   },
   "booking": {
-    "label": "Book a Call",
-    "title": "Schedule Your Free Discovery Call",
+    "label": "Book a call",
+    "title": "Schedule your free discovery call",
     "subtitle": "Pick a time that works for you. We'll discuss your business, identify opportunities, and show you what's possible with AI.",
     "benefit1": "30 min call",
     "benefit2": "Video or phone",
@@ -153,37 +153,37 @@
   },
   "cta": {
     "badge": "Limited spots available this month",
-    "title": "Ready to Put Your Business",
-    "titleHighlight": "on Autopilot?",
+    "title": "Ready to put your business",
+    "titleHighlight": "on autopilot?",
     "subtitle": "Book a free strategy call and let's map out exactly how AI can save you time, capture more leads, and scale your business.",
     "benefit1": "Free 30-min strategy session",
     "benefit2": "Custom AI roadmap for your business",
     "benefit3": "No obligation, no pitch",
     "benefit4": "Clear pricing before we start",
-    "button": "Book Your Free Strategy Call",
+    "button": "Book your free strategy call",
     "microcopy": "Takes 30 seconds to book"
   },
   "footer": {
     "tagline": "AI automation for businesses that want to scale without burning out.",
     "services": "Services",
     "company": "Company",
-    "caseStudies": "Case Studies",
+    "caseStudies": "Case studies",
     "about": "About",
     "contact": "Contact",
     "copyright": "© {year} Weblyfe.ai · A Weblyfe by Techwiz LLC company"
   },
   "common": {
-    "learnMore": "Learn More",
-    "getStarted": "Get Started",
-    "backToCaseStudies": "Back to Case Studies",
-    "viewLiveProject": "View Live Project",
+    "learnMore": "Learn more",
+    "getStarted": "Get started",
+    "backToCaseStudies": "Back to case studies",
+    "viewLiveProject": "View live project",
     "viewOnWeblyfe": "View on Weblyfe",
-    "theChallenge": "The Challenge",
-    "theSolution": "The Solution",
+    "theChallenge": "The challenge",
+    "theSolution": "The solution",
     "results": "Results",
-    "techStack": "Tech Stack",
+    "techStack": "Tech stack",
     "readyForResults": "Ready for results like these?",
     "letsDiscuss": "Let's discuss how AI automation can transform your business.",
-    "bookDiscoveryCall": "Book a Discovery Call"
+    "bookDiscoveryCall": "Book a discovery call"
   }
 }
