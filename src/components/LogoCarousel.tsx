@@ -5,16 +5,17 @@ import { motion } from 'framer-motion';
 // AI tools and integrations we use
 const logos = [
   { name: 'Claude', svg: '/logos/claude.svg' },
-  { name: 'OpenClaw', svg: '/logos/openclaw.svg' },
+  { name: 'OpenAI', svg: '/logos/openai.svg' },
   { name: 'Notion', svg: '/logos/notion.svg' },
   { name: 'Supabase', svg: '/logos/supabase.svg' },
-  { name: 'Antigravity', svg: '/logos/antigravity.svg' },
-  { name: 'OpenAI', svg: '/logos/openai.svg' },
   { name: 'WhatsApp', svg: '/logos/whatsapp.svg' },
   { name: 'Monday', svg: '/logos/monday.svg' },
   { name: 'Airtable', svg: '/logos/airtable.svg' },
-  { name: 'HeyGen', svg: '/logos/heygen.svg' },
-  { name: 'Gamma', svg: '/logos/gamma.svg' },
+  { name: 'Slack', svg: '/logos/slack.svg' },
+  { name: 'Stripe', svg: '/logos/stripe.svg' },
+  { name: 'Vercel', svg: '/logos/vercel.svg' },
+  { name: 'Webflow', svg: '/logos/webflow.svg' },
+  { name: 'n8n', svg: '/logos/n8n.svg' },
 ];
 
 // Duplicate for seamless loop
@@ -50,7 +51,7 @@ export default function LogoCarousel() {
           {allLogos.map((logo, index) => (
             <div 
               key={`${logo.name}-${index}`}
-              className="flex-shrink-0 h-8 opacity-40 hover:opacity-70 transition-opacity grayscale hover:grayscale-0"
+              className="flex-shrink-0 h-8 opacity-50 hover:opacity-80 transition-opacity"
             >
               <img 
                 src={logo.svg} 
