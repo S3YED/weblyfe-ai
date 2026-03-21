@@ -1,7 +1,185 @@
 import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, ArrowUpRight, Clock, Zap, TrendingUp, Shield, MessageSquare, Bot, ExternalLink } from 'lucide-react';
+
+// SEO metadata for each case study (EN and NL)
+const seoMeta: Record<string, { en: { title: string; description: string }; nl: { title: string; description: string } }> = {
+  'cza-ben-de-voorman': {
+    en: {
+      title: 'CZA Ben de Voorman: AI WhatsApp Lead Qualification Case Study',
+      description: 'How a Dutch construction company reduced response time from 4 hours to 2 minutes with AI. 40% more leads captured, 13+ hours saved weekly.',
+    },
+    nl: {
+      title: 'CZA Ben de Voorman: AI WhatsApp Lead Kwalificatie Case Study',
+      description: 'Hoe een Nederlands bouwbedrijf de responstijd van 4 uur naar 2 minuten bracht met AI. 40% meer leads, 13+ uur per week bespaard.',
+    },
+  },
+  'safesite-security': {
+    en: {
+      title: 'SAFESITE Security: Voice to Website in 24 Hours Case Study',
+      description: 'Security company website built in 24 hours from voice notes. Zero meetings, zero revision cycles. 93% faster than traditional agencies.',
+    },
+    nl: {
+      title: 'SAFESITE Security: Van Spraak naar Website in 24 Uur Case Study',
+      description: 'Beveiligingsbedrijf website gebouwd in 24 uur via spraakberichten. Geen meetings, geen revisiecycli. 93% sneller dan traditionele bureaus.',
+    },
+  },
+  'eva-dubai-property': {
+    en: {
+      title: 'Eva Dubai Property: AI Real Estate Operations Manager Case Study',
+      description: 'AI assistant managing website, CRM, client communications, and custom dashboards. 80% tasks automated, replaces 3 FTEs.',
+    },
+    nl: {
+      title: 'Eva Dubai Property: AI Vastgoed Operations Manager Case Study',
+      description: 'AI assistent voor website, CRM, klantcommunicatie en dashboards. 80% taken geautomatiseerd, vervangt 3 medewerkers.',
+    },
+  },
+  'bot-farm-defense': {
+    en: {
+      title: 'Bot Farm Defense: Automated Reputation Protection Case Study',
+      description: 'How AI detected and removed 9 fake reviews in 2 hours. Pattern analysis, OSINT investigation, Google reporting automation.',
+    },
+    nl: {
+      title: 'Bot Farm Defense: Geautomatiseerde Reputatiebescherming Case Study',
+      description: 'Hoe AI 9 neprecensies detecteerde en verwijderde in 2 uur. Patroonanalyse, OSINT onderzoek, Google rapportage automatisering.',
+    },
+  },
+  'privanotify': {
+    en: {
+      title: 'PrivaNotify: AI Powered Anonymous Messaging SaaS Case Study',
+      description: 'Anonymous messaging platform with 100% abuse blocking. AI rewrites messages to be empathetic and constructive. First deal at 3000 euro.',
+    },
+    nl: {
+      title: 'PrivaNotify: AI Anonieme Berichten SaaS Case Study',
+      description: 'Anoniem berichtenplatform met 100% misbruikblokkering. AI herschrijft berichten empathisch en constructief. Eerste deal van 3000 euro.',
+    },
+  },
+  'executive-assistant': {
+    en: {
+      title: 'Executive Assistant: AI With Computer Access Case Study',
+      description: 'AI assistant that books appointments, fills forms, sends invites. 15+ hours saved weekly via voice notes and screenshots.',
+    },
+    nl: {
+      title: 'Executive Assistant: AI Met Computer Toegang Case Study',
+      description: 'AI assistent die afspraken boekt, formulieren invult, uitnodigingen verstuurt. 15+ uur per week bespaard via spraakberichten.',
+    },
+  },
+  'legal-email-automation': {
+    en: {
+      title: 'Legal Email Automation: Domain Dispute Resolution Case Study',
+      description: 'Months long domain dispute resolved with one voice instruction. AI found thread, identified parties, wrote email, sent payment link.',
+    },
+    nl: {
+      title: 'Legal Email Automation: Domein Geschil Oplossing Case Study',
+      description: 'Maandenlang domeingeschil opgelost met een spraakopdracht. AI vond thread, identificeerde partijen, schreef email, stuurde betaallink.',
+    },
+  },
+  'boooth-booking': {
+    en: {
+      title: 'Boooth.me: Photo Booth Rental Booking System Case Study',
+      description: 'Self service photo booth booking with configurator. 40% conversion lift, 90% quote admin saved, 35% revenue increase.',
+    },
+    nl: {
+      title: 'Boooth.me: Photobooth Verhuur Boekingssysteem Case Study',
+      description: 'Self service photobooth boeking met configurator. 40% meer conversies, 90% minder offertewerk, 35% meer omzet.',
+    },
+  },
+  'titan-transfers': {
+    en: {
+      title: 'Titan Transfers: Limousine Booking Platform Case Study',
+      description: 'Premium limousine booking with 4 step flow. Dark theme, bilingual EN/NL, 65% mobile conversions, 2x market reach.',
+    },
+    nl: {
+      title: 'Titan Transfers: Limousine Boekingsplatform Case Study',
+      description: 'Premium limousine boeking in 4 stappen. Donker thema, tweetalig EN/NL, 65% mobiele conversies, 2x marktbereik.',
+    },
+  },
+  'appie-system': {
+    en: {
+      title: 'Appie System: Digital Employee for Entrepreneurs Case Study',
+      description: 'Multi agent AI system with 3 specialized agents. Works 24/7, zero deadlines missed, 50000+ euro value created.',
+    },
+    nl: {
+      title: 'Appie System: Digitale Medewerker voor Ondernemers Case Study',
+      description: 'Multi agent AI systeem met 3 gespecialiseerde agents. Werkt 24/7, geen deadlines gemist, 50000+ euro waarde gecreeerd.',
+    },
+  },
+  'openclaw': {
+    en: {
+      title: 'OpenClaw: The AI Operations Platform Case Study',
+      description: 'Infrastructure powering autonomous AI agents. Bookings, content, site management, dashboards. Running 5+ companies 24/7.',
+    },
+    nl: {
+      title: 'OpenClaw: Het AI Operations Platform Case Study',
+      description: 'Infrastructuur voor autonome AI agents. Boekingen, content, sitebeheer, dashboards. Draait 5+ bedrijven 24/7.',
+    },
+  },
+  'super-assistant-employee': {
+    en: {
+      title: 'Super Assistant Employee: AI That Replaces Full Time Hires Case Study',
+      description: 'Meet Eva, Ben, Appie, and Garavito. Real AI assistants running real businesses. 500+ hours saved monthly, 5+ FTEs replaced.',
+    },
+    nl: {
+      title: 'Super Assistant Employee: AI Die Fulltime Medewerkers Vervangt Case Study',
+      description: 'Maak kennis met Eva, Ben, Appie en Garavito. Echte AI assistenten die echte bedrijven runnen. 500+ uur per maand bespaard.',
+    },
+  },
+};
+
+// Generate metadata for SEO
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: Promise<{ slug: string; locale: string }> 
+}): Promise<Metadata> {
+  const { slug, locale } = await params;
+  const meta = seoMeta[slug];
+  const lang = locale === 'nl' ? 'nl' : 'en';
+  
+  if (!meta) {
+    return {
+      title: 'Case Study',
+      description: 'AI automation case study by Weblyfe.ai',
+    };
+  }
+
+  const { title, description } = meta[lang];
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: 'article',
+      url: `https://weblyfe.ai/${locale === 'nl' ? 'nl/' : ''}case-studies/${slug}`,
+      siteName: 'Weblyfe.ai',
+      images: [
+        {
+          url: `/screenshots/${slug}-hero.jpg`,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [`/screenshots/${slug}-hero.jpg`],
+    },
+    alternates: {
+      canonical: `https://weblyfe.ai/case-studies/${slug}`,
+      languages: {
+        en: `https://weblyfe.ai/case-studies/${slug}`,
+        nl: `https://weblyfe.ai/nl/case-studies/${slug}`,
+      },
+    },
+  };
+}
 
 // Case study data with full content
 const caseStudies: Record<string, {
@@ -49,10 +227,10 @@ const caseStudies: Record<string, {
   },
   'safesite-security': {
     title: 'SAFESITE Security',
-    subtitle: 'Voice-to-Website in 24 Hours',
+    subtitle: 'Voice to Website in 24 Hours',
     description: 'Former military bodyguard needed a corporate website.',
-    fullDescription: 'Shay, a former military bodyguard starting his own security company, needed a professional corporate website. But he didn\'t have time for traditional web development processes: endless email chains, Figma reviews, revision cycles.',
-    image: '/screenshots/safesite-fresh.jpg',
+    fullDescription: 'Shay, a former military bodyguard starting his own security company, needed a professional corporate website. But he did not have time for traditional web development processes: endless email chains, Figma reviews, revision cycles.',
+    image: '/screenshots/safesite-hero.jpg',
     stats: [
       { label: 'Faster Than Agency', value: '93%', before: '2 weeks → 1 day' },
       { label: 'Design Meetings', value: '0' },
@@ -74,11 +252,12 @@ const caseStudies: Record<string, {
     weblyfeUrl: 'https://weblyfe.nl/projects/safesite',
   },
   'eva-dubai-property': {
-    title: 'Eva · Dubai Property',
+    title: 'Eva Dubai Property',
     subtitle: 'AI Real Estate Operations Manager',
-    description: 'Full-stack AI assistant managing website content, CRM analysis, and client communications.',
+    description: 'Full stack AI assistant managing website content, CRM analysis, and client communications.',
     fullDescription: 'Dubai Property needed an AI that could handle multiple operational tasks simultaneously: updating website content, analyzing CRM data, monitoring client communications, analyzing sales calls, and generating custom reports. Eva was born.',
     image: '/screenshots/eva-mission-control.jpg',
+    projectUrl: 'https://dubai-property.nl',
     gallery: [
       '/screenshots/eva-mission-control.jpg',
       '/screenshots/eva-projects.jpg',
@@ -133,7 +312,7 @@ const caseStudies: Record<string, {
     subtitle: 'AI-Powered Anonymous Messaging SaaS',
     description: 'Platform for sending anonymous, AI-crafted messages about sensitive topics.',
     fullDescription: 'Sometimes people need to communicate sensitive information anonymously, whether it\'s telling someone about a health issue, reporting workplace concerns, or delivering feedback that\'s too awkward face-to-face. PrivaNotify makes this possible while preventing abuse.',
-    image: '/screenshots/privanotify-fresh.jpg',
+    image: '/screenshots/privanotify-hero.jpg',
     stats: [
       { label: 'Abuse Blocked', value: '100%' },
       { label: 'User Satisfaction', value: '98%' },
