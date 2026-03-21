@@ -80,7 +80,7 @@ const primaryCaseStudies = [
     title: 'Super Assistant Employee',
     subtitle: 'AI That Replaces Full-Time Hires',
     description: 'Meet Eva, Ben, Appie, and Garavito. Real AI assistants running real businesses. From Dutch real estate to construction sites, these digital employees handle everything from lead qualification to project management.',
-    image: '/images/team/67a46d44541771441d3337d9_Seyed%20Hosseini%20Techwiz%20Lifestyle%20and%20results.avif',
+    image: '/screenshots/appie-fleet-telegram.jpg',
     featured: true,
     stats: [
       { label: 'Hours Saved Monthly', value: '500+', icon: Clock },
