@@ -57,22 +57,45 @@ function CountUp({ value, className = '' }: { value: string; className?: string 
   return <span ref={ref} className={className}>{displayValue}</span>;
 }
 
-const caseStudies = [
+// PRIMARY CASE STUDIES (featured)
+const primaryCaseStudies = [
   {
-    slug: 'cza-ben-de-voorman',
-    title: 'CZA Ben de Voorman',
-    subtitle: 'AI WhatsApp Lead Qualification',
-    description: 'Construction company losing jobs to faster competitors. Now their AI qualifies leads instantly, scores them 0-100, and syncs everything to their CRM. They never miss an after-hours inquiry again.',
-    image: '/screenshots/cza-fresh.jpg',
+    slug: 'openclaw',
+    title: 'OpenClaw',
+    subtitle: 'The AI Operations Platform',
+    description: 'The infrastructure powering autonomous AI agents. Bookings, content, site management, costing, dashboards, all automated. Running Weblyfe, Dubai Property, and CZA operations 24/7.',
+    image: '/images/team/67a46f77857a24b0e1beb865_Main%20Techwiz%20Seyed%20Hosseini%20from%20Weblyfe%20University%20building%20website%20high-end%20sophisticated.avif',
+    featured: true,
     stats: [
-      { label: 'Faster Response', value: '99%', before: '4-24 hrs → 2 min' },
-      { label: 'Weekly Hours Saved', value: '13+', icon: Clock },
-      { label: 'More Leads Captured', value: '40%', icon: TrendingUp },
+      { label: 'Companies Powered', value: '5+', icon: Building2 },
+      { label: 'Tasks Automated Daily', value: '200+', icon: Zap },
+      { label: 'Monthly Value Created', value: '€15k+', icon: DollarSign },
     ],
-    tech: ['GPT-4.1', 'Gemini', 'WhatsApp API', 'Monday.com', 'Supabase', 'React'],
-    quote: '"We used to lose jobs because we couldn\'t respond fast enough. Now leads get answers immediately."',
-    author: 'Ben, Owner',
+    tech: ['Claude AI', 'Mission Control', 'Google Calendar', 'n8n', 'Notion', 'Tailscale', 'Custom Dashboards'],
+    quote: '"OpenClaw is like having an operations team that never sleeps. Bookings, content, deployments, reporting. It just handles everything."',
+    author: 'Seyed Hosseini, CEO',
   },
+  {
+    slug: 'super-assistant-employee',
+    title: 'Super Assistant Employee',
+    subtitle: 'AI That Replaces Full-Time Hires',
+    description: 'Meet Eva, Ben, Appie, and Garavito. Real AI assistants running real businesses. From Dutch real estate to construction sites, these digital employees handle everything from lead qualification to project management.',
+    image: '/images/team/67a46d44541771441d3337d9_Seyed%20Hosseini%20Techwiz%20Lifestyle%20and%20results.avif',
+    featured: true,
+    stats: [
+      { label: 'Hours Saved Monthly', value: '500+', icon: Clock },
+      { label: 'FTEs Replaced', value: '5+', icon: Users },
+      { label: 'Always On', value: '24/7', icon: Bot },
+    ],
+    tech: ['WhatsApp', 'Telegram', 'Voice Notes', 'CRM Integration', 'Browser Automation', 'Multi-language'],
+    quote: '"Eva handles what used to take 3 people. Ben never misses a site update. Appie runs our entire company."',
+    author: 'Multiple Clients',
+    subStories: ['Eva @ Dubai Property', 'Ben @ CZA', 'Appie @ Weblyfe', 'Garavito'],
+  },
+];
+
+// SECONDARY CASE STUDIES
+const secondaryCaseStudies = [
   {
     slug: 'safesite-security',
     title: 'SAFESITE Security',
@@ -87,36 +110,6 @@ const caseStudies = [
     tech: ['Webflow', 'Claude AI', 'Telegram', 'WhatsApp', 'Faster Whisper'],
     quote: '"I just talked about what I needed. Next morning, the website was live."',
     author: 'Shay, Founder',
-  },
-  {
-    slug: 'eva-dubai-property',
-    title: 'Eva · Dubai Property',
-    subtitle: 'AI Real Estate Operations Manager',
-    description: 'Real estate company drowning in operational tasks. Eva now manages their website, analyzes CRM data, monitors all client messaging, transcribes sales calls, and builds custom dashboards on demand.',
-    image: '/screenshots/eva-mission-control.jpg',
-    stats: [
-      { label: 'Tasks Automated', value: '80%', icon: Bot },
-      { label: 'Response Time', value: '<5 min', before: '2-4 hrs' },
-      { label: 'FTEs Replaced', value: '3', icon: Users },
-    ],
-    tech: ['Claude AI', 'CRM Integration', 'Call Analysis', 'Mission Control', 'Tailscale', 'Custom Dashboards'],
-    quote: '"Eva handles what used to take 3 people. Website updates, lead follow-ups, reporting: all automated."',
-    author: 'Dubai Property Team',
-  },
-  {
-    slug: 'bot-farm-defense',
-    title: 'Bot Farm Defense',
-    subtitle: 'Automated Reputation Protection',
-    description: 'Coordinated attack: 10 fake one-star reviews in one hour. Our AI investigated every account, found identical patterns, built an evidence file, and got 9 reviews removed by Google.',
-    image: '/screenshots/botfarm.jpg',
-    stats: [
-      { label: 'Removal Rate', value: '100%', icon: Shield },
-      { label: 'Faster Than Manual', value: '96%', before: '2 days → 2 hrs' },
-      { label: 'Rating Restored', value: '4.8★', icon: TrendingUp },
-    ],
-    tech: ['OSINT Analysis', 'Google Account Analysis', 'Pattern Detection', 'Automated Reporting'],
-    quote: '"The chance that 9 legitimate reviewers have the exact same profile is less than 0.000001%."',
-    author: 'Analysis Report',
   },
   {
     slug: 'privanotify',
@@ -134,49 +127,19 @@ const caseStudies = [
     author: 'Hesam, Founder',
   },
   {
-    slug: 'executive-assistant',
-    title: 'Executive Assistant',
-    subtitle: 'AI That Uses Your Computer',
-    description: 'Appie and Garavito work as executive assistants with full computer access. They book appointments, fill out forms, send calendar invites, process refunds. Triggered by a voice note, screenshot, or forwarded message.',
-    image: '/screenshots/team-dashboard.jpg',
+    slug: 'bot-farm-defense',
+    title: 'Bot Farm Defense',
+    subtitle: 'Automated Reputation Protection',
+    description: 'Coordinated attack: 10 fake one-star reviews in one hour. Our AI investigated every account, found identical patterns, built an evidence file, and got 9 reviews removed by Google.',
+    image: '/screenshots/botfarm.jpg',
     stats: [
-      { label: 'Hours Saved Weekly', value: '15+', icon: Clock },
-      { label: 'Admin Costs', value: '€0', icon: DollarSign },
-      { label: 'Faster Than Manual', value: '97%', before: '30 min → 1 min' },
+      { label: 'Removal Rate', value: '100%', icon: Shield },
+      { label: 'Faster Than Manual', value: '96%', before: '2 days → 2 hrs' },
+      { label: 'Rating Restored', value: '4.8★', icon: TrendingUp },
     ],
-    tech: ['Browser Automation', 'Google Calendar', 'Voice Notes', 'Puppeteer', 'Form Filling'],
-    quote: '"Forward a message, send a voice note, or drop a screenshot. Appie handles the rest: bookings, refunds, invites, whatever."',
-    author: 'Seyed, CEO',
-  },
-  {
-    slug: 'legal-email-automation',
-    title: 'Legal Email Automation',
-    subtitle: 'Domain Dispute Resolution',
-    description: 'Months-long domain dispute. One voice instruction at 10:49 PM. AI searched Gmail, found the thread, identified all parties, wrote a professional email with payment link, and sent it. Dispute resolved.',
-    image: '/screenshots/email.jpg',
-    stats: [
-      { label: 'Time to Send', value: '1 min', before: '30+ min' },
-      { label: 'Faster Process', value: '97%', icon: Mail },
-      { label: 'Dispute Resolved', value: '✓', icon: TrendingUp },
-    ],
-    tech: ['Gmail API', 'Claude AI', 'Thread Analysis', 'Stripe Payment Links'],
-    quote: '"Find that email thread. Send them a message that I can\'t cash checks and give them this payment link."',
-    author: 'Seyed, CEO',
-  },
-  {
-    slug: 'boooth-booking',
-    title: 'Boooth.me',
-    subtitle: 'Photo Booth Rental Booking System',
-    description: 'Photo booth company wasting hours on manual quotes. Now customers configure their perfect booth setup online, see live pricing with VAT, and book instantly. Conversions jumped 40%.',
-    image: '/screenshots/boooth-home-fresh.jpg',
-    stats: [
-      { label: 'Conversion Lift', value: '40%', icon: TrendingUp },
-      { label: 'Quote Admin Saved', value: '90%', icon: Clock },
-      { label: 'Revenue Increase', value: '35%', icon: DollarSign },
-    ],
-    tech: ['Next.js', 'Stripe', 'Multi-step Forms', 'VAT Calculator', 'CRM Integration'],
-    quote: '"Customers can now configure and book their perfect photo booth experience online, 24/7."',
-    author: 'Client',
+    tech: ['OSINT Analysis', 'Google Account Analysis', 'Pattern Detection', 'Automated Reporting'],
+    quote: '"The chance that 9 legitimate reviewers have the exact same profile is less than 0.000001%."',
+    author: 'Analysis Report',
   },
   {
     slug: 'titan-transfers',
@@ -194,31 +157,34 @@ const caseStudies = [
     author: 'Titan Transfers',
   },
   {
-    slug: 'appie-system',
-    title: 'Appie System',
-    subtitle: 'Digital Employee for Entrepreneurs',
-    description: 'Three AI agents working 24/7: one orchestrates, one handles marketing, one manages engineering. They schedule, research, write content, update CRM, deploy code, and never miss a deadline.',
-    image: '/screenshots/team-dashboard.jpg',
+    slug: 'boooth-booking',
+    title: 'Boooth.me',
+    subtitle: 'Photo Booth Rental Booking System',
+    description: 'Photo booth company wasting hours on manual quotes. Now customers configure their perfect booth setup online, see live pricing with VAT, and book instantly. Conversions jumped 40%.',
+    image: '/screenshots/boooth-home-fresh.jpg',
     stats: [
-      { label: 'Always Working', value: '24/7', icon: Clock },
-      { label: 'Deadlines Missed', value: '0', icon: Zap },
-      { label: 'Value Created', value: '€50k+', icon: DollarSign },
+      { label: 'Conversion Lift', value: '40%', icon: TrendingUp },
+      { label: 'Quote Admin Saved', value: '90%', icon: Clock },
+      { label: 'Revenue Increase', value: '35%', icon: DollarSign },
     ],
-    tech: ['Claude', 'OpenClaw', 'n8n', 'Notion', 'Google Workspace', 'Tailscale'],
-    quote: '"Having Appie is like having a team that never sleeps. It just handles things."',
-    author: 'Seyed, CEO',
+    tech: ['Next.js', 'Stripe', 'Multi-step Forms', 'VAT Calculator', 'CRM Integration'],
+    quote: '"Customers can now configure and book their perfect photo booth experience online, 24/7."',
+    author: 'Client',
   },
 ];
 
+// Combine for rendering
+const caseStudies = [...primaryCaseStudies, ...secondaryCaseStudies];
+
 export default function CaseStudies() {
   return (
-    <section id="case-studies" className="py-16 sm:py-24 md:py-32 bg-[#031D16] relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#F6FEFC] to-transparent opacity-5" />
-      <div className="absolute top-40 right-0 w-96 h-96 rounded-full bg-[#247459]/10 blur-3xl" />
-      <div className="absolute bottom-40 left-0 w-80 h-80 rounded-full bg-[#DFB771]/5 blur-3xl" />
+    <section id="case-studies" className="py-16 sm:py-24 md:py-32 bg-[#031D16] relative overflow-hidden isolate">
+      {/* Decorative elements - lower z-index */}
+      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#F6FEFC] to-transparent opacity-5 z-0" />
+      <div className="absolute top-40 right-0 w-96 h-96 rounded-full bg-[#247459]/10 blur-3xl z-0 pointer-events-none" />
+      <div className="absolute bottom-40 left-0 w-80 h-80 rounded-full bg-[#DFB771]/5 blur-3xl z-0 pointer-events-none" />
       
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10 isolation-auto">
         {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -295,7 +261,7 @@ export default function CaseStudies() {
                         <CountUp value={stat.value} />
                       </div>
                       <div className="text-[10px] sm:text-xs text-[#F6FEFC]/50 mt-1 leading-tight">{stat.label}</div>
-                      {stat.before && (
+                      {'before' in stat && stat.before && (
                         <div className="text-[10px] sm:text-xs text-[#F6FEFC]/30 line-through mt-1">{stat.before}</div>
                       )}
                     </div>
