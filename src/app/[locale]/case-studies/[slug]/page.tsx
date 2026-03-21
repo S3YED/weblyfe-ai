@@ -479,6 +479,7 @@ const caseStudies: Record<string, {
       'All bookings sync to operations automatically',
     ],
     projectUrl: 'https://boooth.me',
+    contactEmail: 'info@boooth.me',
     weblyfeUrl: 'https://weblyfe.nl/projects/boooth',
   },
   'titan-transfers': {
@@ -494,8 +495,8 @@ const caseStudies: Record<string, {
       { label: 'Mobile Conversions', value: '65%' },
     ],
     tech: ['Next.js', 'Booking Engine', 'Vehicle Selection', 'Multi-language', 'Dark Theme'],
-    quote: '"Book Transfer. One-way or hourly. Airport pickups. Executive travel."',
-    author: 'Titan Transfers',
+    quote: '"The booking app transformed our business. Clients book limousines 24/7, we get instant notifications, and the whole flow is seamless."',
+    author: 'Grigor, Founder',
     challenge: 'Premium services need premium experiences. The booking flow had to feel executive-level while being simple enough for quick mobile bookings.',
     solution: 'A 4-step luxury booking experience: (1) Choose transfer type (one-way, round-trip, or hourly), (2) Enter journey details (pickup, dropoff, date, time), (3) Select vehicle (from sedan to stretch limo), (4) Confirm and pay. Full EN/NL language support, dark theme, fully mobile-optimized.',
     results: [
@@ -506,6 +507,7 @@ const caseStudies: Record<string, {
       'Vehicle selection with clear pricing',
     ],
     projectUrl: 'https://titantransfers.nl',
+    contactEmail: 'info@titantransfers.nl',
     weblyfeUrl: 'https://weblyfe.nl/projects/titan-transfers',
   },
   'appie-system': {
