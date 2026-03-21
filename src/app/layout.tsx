@@ -77,10 +77,7 @@ export const metadata: Metadata = {
     apple: '/favicon.svg',
   },
   verification: {
-    // TODO: Add actual verification codes after setting up Search Console
-    google: 'google-site-verification-code',
-    // yandex: 'yandex-verification-code',
-    // bing: 'msvalidate-code',
+    google: 'mOzmrISDHb-uo3ODrholfcvz_a1CyCfz4HfKh31UeY4',
   },
   alternates: {
     canonical: 'https://weblyfe.ai',
