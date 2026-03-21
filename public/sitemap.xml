@@ -21,9 +21,27 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- Case Studies EN -->
+  <!-- Primary Case Studies EN -->
   <url>
     <loc>https://weblyfe.ai/case-studies/openclaw</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://weblyfe.ai/case-studies/openclaw"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://weblyfe.ai/nl/case-studies/openclaw"/>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://weblyfe.ai/case-studies/super-assistant-employee</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://weblyfe.ai/case-studies/super-assistant-employee"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://weblyfe.ai/nl/case-studies/super-assistant-employee"/>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  
+  <!-- Other Case Studies EN -->
+  <url>
+    <loc>https://weblyfe.ai/case-studies/cza-ben-de-voorman</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://weblyfe.ai/case-studies/openclaw"/>
     <xhtml:link rel="alternate" hreflang="nl" href="https://weblyfe.ai/nl/case-studies/openclaw"/>
     <lastmod>2026-03-21</lastmod>
