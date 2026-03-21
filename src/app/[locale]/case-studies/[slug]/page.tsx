@@ -199,6 +199,7 @@ const caseStudies: Record<string, {
   solution: string;
   results: string[];
   projectUrl?: string;
+  contactEmail?: string;
   weblyfeUrl?: string;
 }> = {
   'openclaw': {
@@ -288,6 +289,8 @@ const caseStudies: Record<string, {
       'Lead quality scoring helps prioritize high-value projects',
       'Full conversation history synced to CRM automatically',
     ],
+    projectUrl: 'https://wa.me/31638490181',
+    contactEmail: 'info@czabouwbedrijf.nl',
     weblyfeUrl: 'https://weblyfe.nl/projects/cza-dashboard',
   },
   'safesite-security': {
@@ -407,6 +410,7 @@ const caseStudies: Record<string, {
     description: 'Full executive assistants with computer access.',
     fullDescription: 'Appie (for Seyed) and Garavito (for DV Institute) are AI assistants that go beyond chat. They have actual computer access: booking appointments, filling out forms, sending calendar invites, navigating websites, and executing complex multi-step tasks.',
     image: '/screenshots/team-dashboard.jpg',
+    secondaryImage: '/screenshots/appie-fleet-telegram.jpg',
     stats: [
       { label: 'Hours Saved Weekly', value: '15+' },
       { label: 'Admin Costs', value: '€0' },
@@ -431,6 +435,7 @@ const caseStudies: Record<string, {
     description: 'Months-long domain dispute resolved with one instruction.',
     fullDescription: 'A domain dispute had been dragging on for months. Multiple email threads, various parties involved, payment complications. At 10:49 PM, lying in bed, Seyed sent one voice instruction. The AI handled everything.',
     image: '/screenshots/email.jpg',
+    secondaryImage: '/screenshots/team-dashboard.jpg',
     stats: [
       { label: 'Time to Send', value: '1 min', before: '30+ min' },
       { label: 'Faster Process', value: '97%' },
@@ -455,6 +460,7 @@ const caseStudies: Record<string, {
     description: 'Complete booking system with multi-step configurator.',
     fullDescription: 'Boooth.me rents photo booths for events. Before, every booking required a phone call or email exchange to understand requirements and provide a quote. The new system lets customers configure and book their perfect setup online.',
     image: '/screenshots/boooth-home-fresh.jpg',
+    secondaryImage: '/images/clients/boooth-logo.jpg',
     stats: [
       { label: 'Conversion Lift', value: '40%' },
       { label: 'Quote Admin Saved', value: '90%' },
@@ -481,6 +487,7 @@ const caseStudies: Record<string, {
     description: 'Premium limousine service with sleek 4-step booking.',
     fullDescription: 'Titan Transfers provides premium limousine services for airport transfers and executive travel. They needed a booking system as sleek as their vehicles: dark theme, smooth flow, multilingual support.',
     image: '/screenshots/titantransfers-booking-fresh.jpg',
+    secondaryImage: '/images/clients/titan-logo.jpg',
     stats: [
       { label: 'Time to Book', value: '<2 min' },
       { label: 'Market Reach', value: '2x', before: 'NL only → EN + NL' },
@@ -507,6 +514,7 @@ const caseStudies: Record<string, {
     description: 'Multi-agent AI assistant handling everything.',
     fullDescription: 'The Appie System is the AI infrastructure behind everything on this page. Three specialized agents (Appie-1 the Orchestrator, Appie-2 for Marketing/Content, and Appie-3 for Engineering/Security) work 24/7 to handle operations.',
     image: '/screenshots/team-dashboard.jpg',
+    secondaryImage: '/screenshots/appie-fleet-telegram.jpg',
     stats: [
       { label: 'Always Working', value: '24/7' },
       { label: 'Deadlines Missed', value: '0' },
@@ -573,7 +581,15 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-3 bg-[#DFB771] text-[#031D16] rounded-full font-semibold hover:bg-[#FFD99A] transition-colors"
                   >
-                    View Live Project <ExternalLink className="w-4 h-4" />
+                    View live project <ExternalLink className="w-4 h-4" />
+                  </a>
+                )}
+                {study.contactEmail && (
+                  <a 
+                    href={`mailto:${study.contactEmail}`}
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-[#247459] text-[#F6FEFC] rounded-full font-semibold hover:bg-[#247459]/80 transition-colors"
+                  >
+                    Contact client <ExternalLink className="w-4 h-4" />
                   </a>
                 )}
                 {study.weblyfeUrl && (
@@ -659,17 +675,31 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       <section className="py-16 md:py-24 bg-[#0E3D31]/30">
         <div className="container mx-auto px-4 sm:px-6">
           <h2 className="text-3xl font-bold text-[#F6FEFC] mb-8 text-center">Results</h2>
-          <div className="max-w-3xl mx-auto">
-            <ul className="space-y-4">
-              {study.results.map((result, i) => (
-                <li key={i} className="flex items-start gap-4 text-lg">
-                  <span className="w-6 h-6 rounded-full bg-[#DFB771]/20 flex items-center justify-center flex-shrink-0 mt-1">
-                    <TrendingUp className="w-3 h-3 text-[#DFB771]" />
-                  </span>
-                  <span className="text-[#F6FEFC]/80">{result}</span>
-                </li>
-              ))}
-            </ul>
+          <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+            <div>
+              <ul className="space-y-4">
+                {study.results.map((result, i) => (
+                  <li key={i} className="flex items-start gap-4 text-lg">
+                    <span className="w-6 h-6 rounded-full bg-[#DFB771]/20 flex items-center justify-center flex-shrink-0 mt-1">
+                      <TrendingUp className="w-3 h-3 text-[#DFB771]" />
+                    </span>
+                    <span className="text-[#F6FEFC]/80">{result}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {study.secondaryImage && (
+              <div className="relative rounded-2xl overflow-hidden border border-[#247459]/20 shadow-xl">
+                <div className="relative aspect-video">
+                  <Image
+                    src={study.secondaryImage}
+                    alt={`${study.title} results`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>

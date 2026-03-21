@@ -52,13 +52,13 @@ const testimonials = [
     avatar: "/images/clients/67607185e920f466a0f743e3_Lost%20LeBlanc.avif"
   },
   {
-    name: "Kosso",
-    company: "BeyondSchool",
+    name: "Grigor",
+    company: "Titan Transfers",
     role: "Founder",
-    quote: "Weblyfe delivered a complete solution: bold branding, engaging web development, and smart automations.",
-    project: "Full Service",
+    quote: "The booking app transformed our business. Clients book limousines 24/7, we get instant notifications, and the whole flow is seamless.",
+    project: "Booking System",
     rating: 5,
-    avatar: "/images/clients/670b899e08151b0e8126c356_BeyondSchool.avif"
+    avatar: "/screenshots/titantransfers-booking-fresh.jpg"
   },
 ];
 
@@ -94,7 +94,7 @@ export default function GoogleReviews() {
             transition={{ delay: 0.1 }}
             className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#F6FEFC] mb-4"
           >
-            What Our Clients Say
+            What our clients say
           </motion.h2>
           
           <motion.p
