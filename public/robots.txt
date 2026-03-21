@@ -1,0 +1,10 @@
+# Robots.txt for weblyfe.ai
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://weblyfe.ai/sitemap.xml
+
+# Disallow admin/api routes
+Disallow: /api/
+Disallow: /_next/

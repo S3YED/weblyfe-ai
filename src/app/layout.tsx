@@ -4,7 +4,11 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'AI Automation for Creators & Agencies | Weblyfe.ai',
+  metadataBase: new URL('https://weblyfe.ai'),
+  title: {
+    default: 'AI Automation for Creators & Agencies | Weblyfe.ai',
+    template: '%s | Weblyfe.ai',
+  },
   description: 'We build AI systems that handle your leads, support, and operations 24/7. Custom chatbots, workflow automation, and digital employees. No coding needed.',
   keywords: [
     'AI automation',
@@ -17,16 +21,33 @@ export const metadata: Metadata = {
     'AI business automation',
     'Weblyfe',
     'no-code automation',
+    'OpenClaw',
+    'AI assistant',
+    'business automation',
+    'WhatsApp bot',
+    'Telegram bot',
+    'AI agency',
+    'Dutch AI company',
   ],
+  authors: [{ name: 'Weblyfe.ai', url: 'https://weblyfe.ai' }],
+  creator: 'Weblyfe.ai',
+  publisher: 'Weblyfe.ai',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
     title: 'AI Automation That Actually Works | Weblyfe.ai',
     description: 'Custom AI chatbots, workflow automation, and digital employees for creators, agencies, and service businesses.',
     type: 'website',
     url: 'https://weblyfe.ai',
     siteName: 'Weblyfe.ai',
+    locale: 'en_US',
+    alternateLocale: 'nl_NL',
     images: [
       {
-        url: 'https://weblyfe.ai/og-image.jpg',
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Weblyfe.ai - AI Automation Services',
@@ -37,16 +58,38 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'AI Automation That Actually Works | Weblyfe.ai',
     description: 'Custom AI chatbots, workflow automation, and digital employees.',
-    images: ['https://weblyfe.ai/og-image.jpg'],
+    images: ['/og-image.jpg'],
+    creator: '@seyedjpg',
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   icons: {
     icon: '/favicon.svg',
     apple: '/favicon.svg',
   },
+  verification: {
+    // TODO: Add actual verification codes after setting up Search Console
+    google: 'google-site-verification-code',
+    // yandex: 'yandex-verification-code',
+    // bing: 'msvalidate-code',
+  },
+  alternates: {
+    canonical: 'https://weblyfe.ai',
+    languages: {
+      'en': 'https://weblyfe.ai',
+      'nl': 'https://weblyfe.ai/nl',
+    },
+  },
+  category: 'technology',
 };
 
 export default function RootLayout({
