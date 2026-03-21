@@ -7,7 +7,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import Script from 'next/script';
 
 // Google Analytics Measurement ID
-const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // TODO: Replace with actual ID
+const GA_MEASUREMENT_ID = 'G-EN2ZLJGREJ';
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
