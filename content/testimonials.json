@@ -1,0 +1,83 @@
+{
+  "googleRating": "5.0",
+  "googleReviewsUrl": "https://maps.app.goo.gl/bEjMyLjaaiZweryN8",
+  "testimonials": [
+    {
+      "name": "Ben",
+      "company": "CZA Bouwbedrijf",
+      "role": "Owner",
+      "quote": "We used to lose jobs because we couldn't respond fast enough. Now leads get answers immediately.",
+      "project": "AI WhatsApp Lead Qualification",
+      "rating": 5,
+      "source": "case-study",
+      "avatar": "/images/clients/cza-avatar.jpg"
+    },
+    {
+      "name": "Shay",
+      "company": "SAFESITE Security",
+      "role": "Founder",
+      "quote": "I just talked about what I needed. Next morning, the website was live.",
+      "project": "Voice-to-Website",
+      "rating": 5,
+      "source": "case-study",
+      "avatar": "/screenshots/safesite-hero.jpg"
+    },
+    {
+      "name": "Hesam",
+      "company": "PrivaNotify",
+      "role": "Founder",
+      "quote": "The AI crafts messages that are caring and constructive. Exactly what we needed.",
+      "project": "AI Anonymous Messaging SaaS",
+      "rating": 5,
+      "source": "case-study",
+      "avatar": "/screenshots/privanotify-hero.jpg"
+    },
+    {
+      "name": "Dubai Property Team",
+      "company": "Dubai Property",
+      "role": "Team",
+      "quote": "Eva handles what used to take 3 people. Website updates, lead follow-ups, reporting: all automated.",
+      "project": "AI Operations Manager",
+      "rating": 5,
+      "source": "case-study",
+      "avatar": "/images/clients/67d557d164b93f2ad6f75ae3_Dubai%20Property.avif"
+    },
+    {
+      "name": "Christian LeBlanc",
+      "company": "Lost LeBlanc / YouTuber Pro",
+      "role": "Creator",
+      "quote": "Weblyfe crafted a bold and vibrant website for my Youtuber Pro course, designed to inspire creators to build lasting success.",
+      "project": "Full Service Website",
+      "rating": 5,
+      "source": "project",
+      "avatar": "/images/clients/67607185e920f466a0f743e3_Lost%20LeBlanc.avif"
+    },
+    {
+      "name": "Kosso",
+      "company": "BeyondSchool",
+      "role": "Founder",
+      "quote": "Weblyfe delivered a complete and seamless solution, combining bold branding, engaging web development, and smart automations.",
+      "project": "Full Service",
+      "rating": 5,
+      "source": "project",
+      "avatar": "/images/clients/670b899e08151b0e8126c356_BeyondSchool.avif"
+    },
+    {
+      "name": "Seyed",
+      "company": "Weblyfe",
+      "role": "CEO",
+      "quote": "Forward a message, send a voice note, or drop a screenshot. Appie handles the rest: bookings, refunds, invites, whatever.",
+      "project": "Executive Assistant",
+      "rating": 5,
+      "source": "internal",
+      "avatar": "/images/team/67a46d44541771441d3337d9_Seyed%20Hosseini%20Techwiz%20Lifestyle%20and%20results.avif"
+    }
+  ],
+  "stats": {
+    "totalProjects": "50+",
+    "averageRating": "5.0",
+    "yearsInBusiness": "3+",
+    "clientsServed": "40+"
+  },
+  "_instructions": "ADD YOUR GOOGLE REVIEWS HERE - Copy from https://maps.app.goo.gl/bEjMyLjaaiZweryN8"
+}

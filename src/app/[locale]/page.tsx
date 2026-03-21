@@ -8,6 +8,7 @@ import CaseStudies from '@/components/CaseStudies';
 import LeadMagnet from '@/components/LeadMagnet';
 import HowItWorks from '@/components/HowItWorks';
 import Testimonials from '@/components/Testimonials';
+import GoogleReviews from '@/components/GoogleReviews';
 import FAQ from '@/components/FAQ';
 import BookingEmbed from '@/components/BookingEmbed';
 import CTA from '@/components/CTA';
@@ -35,6 +36,7 @@ export default async function Home({
       <LeadMagnet />
       <HowItWorks />
       <Testimonials />
+      <GoogleReviews />
       <FAQ />
       <BookingEmbed />
       <CTA />
