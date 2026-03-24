@@ -8,131 +8,21 @@ import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import StickyCountdown from '@/components/StickyCountdown';
+import { FEATURES, TIERS, FAQS, CASE_STUDIES, TOOLS, TRUSTED_CLIENTS, THREE_PATHS } from './data/content';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// ─── DATA ──────────────────────────────────────────────────────────────────────
-
-const features = [
-  {
-    icon: Brain,
-    title: 'Persistent Memory',
-    description: 'Remembers context across every conversation. No more repeating yourself.',
-  },
-  {
-    icon: Bot,
-    title: 'Multi-Agent Teams',
-    description: 'Spawn specialized agents for complex tasks. One coordinates, others execute.',
-  },
-  {
-    icon: Zap,
-    title: 'Workflow Automation',
-    description: 'Connects to n8n, Zapier, and 500+ tools. Trigger flows from a chat message.',
-  },
-  {
-    icon: Calendar,
-    title: 'Calendar & Email',
-    description: 'Full Google Workspace integration. Schedule, triage, draft replies automatically.',
-  },
-  {
-    icon: Globe,
-    title: 'Web Intelligence',
-    description: 'Real-time research, competitor monitoring, content scraping. Always informed.',
-  },
-  {
-    icon: Shield,
-    title: 'Private & Secure',
-    description: 'Runs on your own server. Your data never trains a public model.',
-  },
-  {
-    icon: Mail,
-    title: 'Telegram & WhatsApp',
-    description: 'Chat with your AI on your favourite app. Available 24/7, responds in seconds.',
-  },
-  {
-    icon: BarChart3,
-    title: 'Command Center',
-    description: 'Real-time dashboard for tasks, agent activity, and business metrics.',
-  },
-];
-
-const tiers = [
-  {
-    icon: BookOpen,
-    tag: 'DIY',
-    title: 'Build It Yourself',
-    description: 'Everything you need to set up your own AI agent.',
-    items: [
-      'Step-by-step PDF guide',
-      'Video tutorials',
-      'OpenClaw setup walkthrough',
-      'Self-hosted on your server',
-      'Community Discord access',
-      'Template configs included',
-    ],
-    cta: 'Get the Guide',
-  },
-  {
-    icon: Server,
-    tag: 'Hosted',
-    title: 'Done With You',
-    description: 'We host and maintain your AI agent. You focus on your business.',
-    featured: true,
-    items: [
-      'Pre-configured OpenClaw instance',
-      'Telegram or WhatsApp connected',
-      'Email & calendar integration',
-      'Monthly subscription',
-      'Ongoing updates & support',
-      'Custom personality & memory',
-    ],
-    cta: 'Start Hosting',
-  },
-  {
-    icon: Wrench,
-    tag: 'Custom',
-    title: 'Done For You',
-    description: 'Full custom AI infrastructure built for your specific needs.',
-    items: [
-      'Everything in Hosted',
-      'Multi-agent architecture',
-      'Custom workflows & automations',
-      'Command center dashboard',
-      'CRM & pipeline integration',
-      'Dedicated support & strategy',
-    ],
-    cta: 'Book a Strategy Call',
-  },
-];
-
-const faqs = [
-  {
-    q: 'What is OpenClaw?',
-    a: 'OpenClaw is an AI agent runtime that powers Appie, your custom digital employee. It runs 24/7 on your own server, connects to your tools, and handles business operations autonomously.',
-  },
-  {
-    q: 'Do I need technical skills?',
-    a: 'For the DIY guide, basic terminal knowledge helps. For Hosted and Custom plans, we handle everything. You just chat with your AI on Telegram or WhatsApp.',
-  },
-  {
-    q: 'How is this different from ChatGPT?',
-    a: 'ChatGPT is a chat window. OpenClaw is an operating system for your AI: persistent memory, tool access, file management, multi-agent coordination, and real business integrations.',
-  },
-  {
-    q: 'Which tools does it connect to?',
-    a: 'Google Workspace, Notion, Airtable, Webflow, Stripe, n8n, Zapier, Slack, WhatsApp, Telegram, and hundreds more via API or webhook.',
-  },
-  {
-    q: 'Is my data private?',
-    a: 'Yes. Your instance runs on a private server. Your data never trains public models and never leaves your infrastructure.',
-  },
-  {
-    q: 'When do you launch?',
-    a: 'Very soon. Sign up to get notified first and lock in exclusive launch pricing. Early supporters get the best deal.',
-  },
-];
+// ─── ICON MAP (keeps data file free of React imports) ──────────────────────────
+const iconMap = { Brain, Bot, Zap, Calendar, Mail, Globe, Shield, BarChart3, BookOpen, Server, Wrench } as const;
+const features = FEATURES.map((f) => ({ ...f, icon: iconMap[f.iconKey as keyof typeof iconMap] }));
+const tiers = TIERS.map((t) => ({ ...t, icon: iconMap[t.iconKey as keyof typeof iconMap] }));
+const faqs = [...FAQS];
+const caseStudies = [...CASE_STUDIES];
+const tools = [...TOOLS];
+const trustedClients = [...TRUSTED_CLIENTS];
+const threePaths = THREE_PATHS.map((p) => ({ ...p, icon: iconMap[p.iconKey as keyof typeof iconMap] }));
 
 // ─── HELPERS ───────────────────────────────────────────────────────────────────
 
@@ -510,7 +400,7 @@ export default function OpenClawPage() {
             ].map((cs, i) => (
               <div key={cs.title} className="reveal group rounded-2xl overflow-hidden border border-[#0E3D31] hover:border-[#247459]/50 transition-all duration-300 flex flex-col">
                 <div className="relative h-44 sm:h-48 overflow-hidden">
-                  <Image src={cs.image} alt={cs.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <Image src={cs.image} alt={cs.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#031D16] via-[#031D16]/50 to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
                     <p className="text-[#DFB771] text-[10px] sm:text-xs font-semibold uppercase tracking-wider">{cs.subtitle}</p>
