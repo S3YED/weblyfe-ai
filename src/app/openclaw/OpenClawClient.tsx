@@ -347,26 +347,26 @@ export default function OpenClawPage() {
       </section>
 
       {/* ── FEATURES ── */}
-      <section id="features" className="py-20 sm:py-28">
+      <section id="features" className="py-20 sm:py-28 bg-[#F6FEFC] rounded-[2rem] sm:rounded-[3rem] mx-2 sm:mx-4">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="reveal text-center mb-12 sm:mb-16">
-            <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">Capabilities</p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4">
+            <p className="text-[#247459] text-sm font-semibold uppercase tracking-widest mb-3">Capabilities</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 text-[#031D16]">
               Everything your business needs,<br className="hidden md:block" /> handled by AI
             </h2>
-            <p className="text-[#F6FEFC]/60 text-base sm:text-lg max-w-2xl mx-auto">
+            <p className="text-[#031D16]/60 text-base sm:text-lg max-w-2xl mx-auto">
               Appie connects to your tools, learns your workflows, and executes tasks through a simple chat interface.
             </p>
           </div>
 
           <div className="reveal-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {features.map((f, i) => (
-              <div key={f.title} className="reveal-item bg-[#0E3D31]/30 border border-[#0E3D31] rounded-2xl p-5 sm:p-6 hover:border-[#247459] hover:bg-[#0E3D31]/50 transition-all duration-300 group">
-                <div className="w-10 h-10 sm:w-11 sm:h-11 bg-[#247459]/20 rounded-xl flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-[#247459]/30 transition-colors">
-                  <f.icon className="w-5 h-5 text-[#DFB771]" />
+              <div key={f.title} className="reveal-item bg-white border border-[#031D16]/10 rounded-2xl p-5 sm:p-6 hover:border-[#247459]/40 hover:shadow-lg hover:shadow-[#247459]/5 transition-all duration-300 group">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 bg-[#247459]/10 rounded-xl flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-[#247459]/15 transition-colors">
+                  <f.icon className="w-5 h-5 text-[#247459]" />
                 </div>
-                <h3 className="font-bold text-[#F6FEFC] mb-1.5 sm:mb-2 text-sm sm:text-base">{f.title}</h3>
-                <p className="text-[#F6FEFC]/55 text-xs sm:text-sm leading-relaxed">{f.description}</p>
+                <h3 className="font-bold text-[#031D16] mb-1.5 sm:mb-2 text-sm sm:text-base">{f.title}</h3>
+                <p className="text-[#031D16]/55 text-xs sm:text-sm leading-relaxed">{f.description}</p>
               </div>
             ))}
           </div>
