@@ -161,25 +161,48 @@ export default function OpenClawPage() {
     return () => clearInterval(id);
   }, [launchTime]);
 
-  // Clean GSAP scroll reveal — simple fade + slide up
+  // GSAP scroll animations — polished, no conflicts with Framer Motion hero
   useEffect(() => {
     if (typeof window === 'undefined' || !mainRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Single animation: all .reveal elements fade in + slide up on scroll
+
+      // ── Section reveals: fade up on scroll ──
       gsap.utils.toArray<HTMLElement>('.reveal').forEach((el) => {
         gsap.from(el, {
           opacity: 0,
-          y: 32,
-          duration: 0.8,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 90%',
-            toggleActions: 'play none none none',
-          },
+          y: 40,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
         });
       });
+
+      // ── Staggered grid items: cards appear one by one ──
+      gsap.utils.toArray<HTMLElement>('.reveal-grid').forEach((grid) => {
+        const items = grid.querySelectorAll('.reveal-item');
+        if (!items.length) return;
+        gsap.from(items, {
+          opacity: 0,
+          y: 30,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: grid, start: 'top 85%', toggleActions: 'play none none none' },
+        });
+      });
+
+      // ── Subtle scale-in for images ──
+      gsap.utils.toArray<HTMLElement>('.reveal-image').forEach((el) => {
+        gsap.from(el, {
+          opacity: 0,
+          scale: 0.95,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+        });
+      });
+
     }, mainRef);
 
     return () => ctx.revert();
@@ -346,9 +369,9 @@ export default function OpenClawPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          <div className="reveal-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {features.map((f, i) => (
-              <div key={f.title} className="reveal bg-[#0E3D31]/30 border border-[#0E3D31] rounded-2xl p-5 sm:p-6 hover:border-[#247459] hover:bg-[#0E3D31]/50 transition-all duration-300 group">
+              <div key={f.title} className="reveal-item bg-[#0E3D31]/30 border border-[#0E3D31] rounded-2xl p-5 sm:p-6 hover:border-[#247459] hover:bg-[#0E3D31]/50 transition-all duration-300 group">
                 <div className="w-10 h-10 sm:w-11 sm:h-11 bg-[#247459]/20 rounded-xl flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-[#247459]/30 transition-colors">
                   <f.icon className="w-5 h-5 text-[#DFB771]" />
                 </div>
@@ -371,7 +394,7 @@ export default function OpenClawPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+          <div className="reveal-grid grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
             {[
               {
                 title: 'Eva — Dubai Property',
@@ -398,8 +421,8 @@ export default function OpenClawPage() {
                 highlights: ['WhatsApp automation', 'Lead scoring (0-100)', 'Monday.com sync', '40% after-hours leads'],
               },
             ].map((cs, i) => (
-              <div key={cs.title} className="reveal group rounded-2xl overflow-hidden border border-[#0E3D31] hover:border-[#247459]/50 transition-all duration-300 flex flex-col">
-                <div className="relative h-44 sm:h-48 overflow-hidden">
+              <div key={cs.title} className="reveal-item group rounded-2xl overflow-hidden border border-[#0E3D31] hover:border-[#247459]/50 transition-all duration-300 flex flex-col">
+                <div className="reveal-image relative h-44 sm:h-48 overflow-hidden">
                   <Image src={cs.image} alt={cs.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#031D16] via-[#031D16]/50 to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
@@ -438,7 +461,7 @@ export default function OpenClawPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+          <div className="reveal-grid grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
             {[
               {
                 icon: BookOpen,
@@ -468,7 +491,7 @@ export default function OpenClawPage() {
             ].map((path, i) => (
               <div
                 key={path.title}
-                className={`reveal rounded-2xl p-6 sm:p-8 border relative ${
+                className={`reveal-item rounded-2xl p-6 sm:p-8 border relative ${
                   path.featured
                     ? 'border-[#DFB771]/60 bg-gradient-to-br from-[#DFB771]/15 to-[#247459]/15 shadow-lg shadow-[#DFB771]/10'
                     : 'border-[#247459]/40 bg-[#0E3D31]/40'
@@ -569,7 +592,7 @@ export default function OpenClawPage() {
           </div>
 
           {/* Tier labels below blur */}
-          <div className="grid grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto mt-8 sm:mt-10">
+          <div className="reveal-grid grid grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto mt-8 sm:mt-10">
             {tiers.map((tier) => (
               <div key={tier.title} className="reveal text-center">
                 <tier.icon className={`w-6 h-6 mx-auto mb-2 ${tier.featured ? 'text-[#DFB771]' : 'text-[#247459]'}`} />
@@ -589,9 +612,9 @@ export default function OpenClawPage() {
             <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">FAQ</p>
             <h2 className="text-3xl sm:text-4xl font-extrabold">Common questions</h2>
           </div>
-          <div className="space-y-3">
+          <div className="reveal-grid space-y-3">
             {faqs.map((faq, i) => (
-              <div key={i} className="reveal">
+              <div key={i} className="reveal-item">
                 <FAQItem q={faq.q} a={faq.a} />
               </div>
             ))}
