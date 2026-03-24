@@ -3,9 +3,15 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Check, Bot, Zap, Calendar, Mail, Globe, Shield, Brain, BarChart3, ChevronDown, Menu, X, Clock, Bell, Lock, Star, BookOpen, Server, Wrench } from 'lucide-react';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import StickyCountdown from '@/components/StickyCountdown';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 // ─── DATA ──────────────────────────────────────────────────────────────────────
 
@@ -258,14 +264,135 @@ export default function OpenClawPage() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [launchTime] = useState(getLaunchTime);
   const [time, setTime] = useState(getTimeLeft(launchTime));
+  const mainRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const id = setInterval(() => setTime(getTimeLeft(launchTime)), 1000);
     return () => clearInterval(id);
   }, [launchTime]);
 
+  // GSAP ScrollTrigger animations
+  useEffect(() => {
+    if (typeof window === 'undefined' || !mainRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // ── Stagger-reveal section headings ──
+      gsap.utils.toArray<HTMLElement>('.gsap-heading').forEach((el) => {
+        gsap.from(el, {
+          opacity: 0,
+          y: 60,
+          duration: 0.9,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        });
+      });
+
+      // ── Feature cards stagger in ──
+      gsap.utils.toArray<HTMLElement>('.gsap-card').forEach((el, i) => {
+        gsap.from(el, {
+          opacity: 0,
+          y: 50,
+          scale: 0.95,
+          duration: 0.7,
+          delay: i * 0.08,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 88%',
+            toggleActions: 'play none none none',
+          },
+        });
+      });
+
+      // ── Parallax floating elements ──
+      gsap.utils.toArray<HTMLElement>('.gsap-float').forEach((el) => {
+        gsap.to(el, {
+          y: -40,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.5,
+          },
+        });
+      });
+
+      // ── Number counter animations ──
+      gsap.utils.toArray<HTMLElement>('.gsap-counter').forEach((el) => {
+        const target = parseInt(el.dataset.target || '0', 10);
+        const suffix = el.dataset.suffix || '';
+        const prefix = el.dataset.prefix || '';
+        const obj = { val: 0 };
+        gsap.to(obj, {
+          val: target,
+          duration: 1.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+          onUpdate: () => {
+            el.textContent = prefix + Math.round(obj.val) + suffix;
+          },
+        });
+      });
+
+      // ── Text line reveal (split by word) ──
+      gsap.utils.toArray<HTMLElement>('.gsap-text-reveal').forEach((el) => {
+        const text = el.textContent || '';
+        const words = text.split(' ');
+        el.innerHTML = words.map((w) => `<span class="inline-block overflow-hidden"><span class="gsap-word inline-block">${w}</span></span>`).join(' ');
+
+        gsap.from(el.querySelectorAll('.gsap-word'), {
+          y: '110%',
+          opacity: 0,
+          duration: 0.6,
+          stagger: 0.04,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        });
+      });
+
+      // ── Horizontal line grow ──
+      gsap.utils.toArray<HTMLElement>('.gsap-line').forEach((el) => {
+        gsap.from(el, {
+          scaleX: 0,
+          duration: 1.2,
+          ease: 'power2.inOut',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        });
+      });
+
+      // ── Glow pulse on hero badge ──
+      gsap.to('.gsap-glow', {
+        boxShadow: '0 0 30px rgba(223,183,113,0.4), 0 0 60px rgba(223,183,113,0.15)',
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+      });
+
+    }, mainRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <main className="min-h-screen bg-[#031D16] text-[#F6FEFC]">
+    <main ref={mainRef} className="min-h-screen bg-[#031D16] text-[#F6FEFC]">
 
       {/* ── NAV ── */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#031D16]/90 backdrop-blur-md border-b border-[#0E3D31]/50">
@@ -318,7 +445,7 @@ export default function OpenClawPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
           {/* Countdown badge */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="flex flex-col items-center gap-3 mb-8">
-            <div className="inline-flex items-center gap-2 bg-[#DFB771]/10 border border-[#DFB771]/40 text-[#DFB771] text-xs sm:text-sm font-medium px-4 py-2 rounded-full">
+            <div className="inline-flex items-center gap-2 bg-[#DFB771]/10 border border-[#DFB771]/40 text-[#DFB771] text-xs sm:text-sm font-medium px-4 py-2 rounded-full gsap-glow">
               <Clock className="w-3.5 h-3.5" />
               Launch pricing drops in
             </div>
@@ -375,9 +502,12 @@ export default function OpenClawPage() {
         </div>
       </section>
 
+      {/* ── Gradient divider ── */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-[#DFB771]/30 to-transparent gsap-line" />
+
       {/* ── TOOL LOGO CAROUSEL ── */}
       <section className="py-8 sm:py-10 overflow-hidden">
-        <p className="text-center text-[#F6FEFC]/40 text-xs sm:text-sm font-medium uppercase tracking-widest mb-6">
+        <p className="text-center text-[#F6FEFC]/40 text-xs sm:text-sm font-medium uppercase tracking-widest mb-6 gsap-text-reveal">
           Seamlessly automate with
         </p>
         <div className="relative">
@@ -416,7 +546,7 @@ export default function OpenClawPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12 sm:mb-16">
             <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">Capabilities</p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 gsap-heading">
               Everything your business needs,<br className="hidden md:block" /> handled by AI
             </h2>
             <p className="text-[#F6FEFC]/60 text-base sm:text-lg max-w-2xl mx-auto">
@@ -426,7 +556,7 @@ export default function OpenClawPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {features.map((f, i) => (
-              <motion.div key={f.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.06 }} className="bg-[#0E3D31]/30 border border-[#0E3D31] rounded-2xl p-5 sm:p-6 hover:border-[#247459] hover:bg-[#0E3D31]/50 transition-all duration-300 group">
+              <motion.div key={f.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.06 }} className="bg-[#0E3D31]/30 border border-[#0E3D31] rounded-2xl p-5 sm:p-6 hover:border-[#247459] hover:bg-[#0E3D31]/50 transition-all duration-300 group gsap-card">
                 <div className="w-10 h-10 sm:w-11 sm:h-11 bg-[#247459]/20 rounded-xl flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-[#247459]/30 transition-colors">
                   <f.icon className="w-5 h-5 text-[#DFB771]" />
                 </div>
@@ -439,11 +569,11 @@ export default function OpenClawPage() {
       </section>
 
       {/* ── CASE STUDIES ── */}
-      <section className="py-20 sm:py-28 border-t border-[#0E3D31]/50">
+      <section className="py-20 sm:py-28 border-t border-[#0E3D31]/50 gsap-line">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12 sm:mb-16">
             <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">Built With OpenClaw</p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4">Real results, real businesses</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 gsap-heading">Real results, real businesses</h2>
             <p className="text-[#F6FEFC]/60 text-base sm:text-lg max-w-2xl mx-auto">
               See what Appie has built for founders and companies just like yours.
             </p>
@@ -476,7 +606,7 @@ export default function OpenClawPage() {
                 highlights: ['WhatsApp automation', 'Lead scoring (0-100)', 'Monday.com sync', '40% after-hours leads'],
               },
             ].map((cs, i) => (
-              <motion.div key={cs.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="group rounded-2xl overflow-hidden border border-[#0E3D31] hover:border-[#247459]/50 transition-all duration-300 flex flex-col">
+              <motion.div key={cs.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="group rounded-2xl overflow-hidden border border-[#0E3D31] hover:border-[#247459]/50 transition-all duration-300 flex flex-col gsap-card">
                 <div className="relative h-44 sm:h-48 overflow-hidden">
                   <Image src={cs.image} alt={cs.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#031D16] via-[#031D16]/50 to-transparent" />
@@ -510,7 +640,7 @@ export default function OpenClawPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12 sm:mb-16">
             <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">Choose Your Path</p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4">Three ways to get your AI employee</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 gsap-heading">Three ways to get your AI employee</h2>
             <p className="text-[#F6FEFC]/60 text-base sm:text-lg max-w-2xl mx-auto">
               Whether you&apos;re a builder, a business owner, or scaling an enterprise — there&apos;s a perfect fit.
             </p>
@@ -592,7 +722,7 @@ export default function OpenClawPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12 sm:mb-16">
             <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">Choose Your Path</p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4">Three ways to get started</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 gsap-heading">Three ways to get started</h2>
             <p className="text-[#F6FEFC]/60 text-base sm:text-lg max-w-xl mx-auto">
               Whether you&apos;re a builder, a business owner, or scaling an agency, there&apos;s a perfect fit.
             </p>
@@ -663,12 +793,15 @@ export default function OpenClawPage() {
         </div>
       </section>
 
+      {/* ── Gradient divider ── */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-[#247459]/40 to-transparent gsap-line" />
+
       {/* ── FAQ ── */}
       <section id="faq" className="py-20 sm:py-28">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10 sm:mb-12">
             <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">FAQ</p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold">Common questions</h2>
+            <h2 className="text-3xl sm:text-4xl font-extrabold gsap-heading">Common questions</h2>
           </motion.div>
           <div className="space-y-3">
             {faqs.map((faq, i) => (
@@ -684,7 +817,7 @@ export default function OpenClawPage() {
       <section className="py-16 sm:py-20 bg-gradient-to-br from-[#0E3D31] to-[#031D16]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 gsap-heading">
               Ready to meet your AI employee?
             </h2>
             <p className="text-[#F6FEFC]/60 text-base sm:text-lg mb-8 max-w-xl mx-auto">
@@ -709,7 +842,7 @@ export default function OpenClawPage() {
       </section>
 
       {/* ── FOOTER ── */}
-      <footer className="border-t border-[#0E3D31]/50 py-8 sm:py-10 pb-24">
+      <footer className="border-t border-[#0E3D31]/50 gsap-line py-8 sm:py-10 pb-24">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <Link href="/">
             <Image src="/logo-gold.svg" alt="Weblyfe.ai" width={100} height={30} className="h-5 sm:h-6 w-auto opacity-60 hover:opacity-100 transition-opacity" />
