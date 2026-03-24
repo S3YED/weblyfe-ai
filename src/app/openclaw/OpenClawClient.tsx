@@ -161,7 +161,7 @@ export default function OpenClawPage() {
     return () => clearInterval(id);
   }, [launchTime]);
 
-  // GSAP scroll animations — polished, no conflicts with Framer Motion hero
+  // GSAP scroll animations — CSS sets initial hidden state, GSAP animates to visible
   useEffect(() => {
     if (typeof window === 'undefined' || !mainRef.current) return;
 
@@ -169,12 +169,12 @@ export default function OpenClawPage() {
 
       // ── Section reveals: fade up on scroll ──
       gsap.utils.toArray<HTMLElement>('.reveal').forEach((el) => {
-        gsap.from(el, {
-          opacity: 0,
-          y: 40,
-          duration: 1,
+        gsap.to(el, {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
           ease: 'power3.out',
-          scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+          scrollTrigger: { trigger: el, start: 'top 92%', toggleActions: 'play none none none' },
         });
       });
 
@@ -182,24 +182,25 @@ export default function OpenClawPage() {
       gsap.utils.toArray<HTMLElement>('.reveal-grid').forEach((grid) => {
         const items = grid.querySelectorAll('.reveal-item');
         if (!items.length) return;
-        gsap.from(items, {
-          opacity: 0,
-          y: 30,
+        gsap.to(items, {
+          opacity: 1,
+          y: 0,
           duration: 0.6,
-          stagger: 0.1,
+          stagger: 0.08,
           ease: 'power2.out',
-          scrollTrigger: { trigger: grid, start: 'top 85%', toggleActions: 'play none none none' },
+          scrollTrigger: { trigger: grid, start: 'top 88%', toggleActions: 'play none none none' },
         });
       });
 
       // ── Subtle scale-in for images ──
       gsap.utils.toArray<HTMLElement>('.reveal-image').forEach((el) => {
-        gsap.from(el, {
-          opacity: 0,
-          scale: 0.95,
+        gsap.to(el, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
           duration: 0.8,
           ease: 'power2.out',
-          scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+          scrollTrigger: { trigger: el, start: 'top 92%', toggleActions: 'play none none none' },
         });
       });
 
@@ -289,6 +290,16 @@ export default function OpenClawPage() {
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.5 }} className="text-xs sm:text-sm text-[#F6FEFC]/40">
             Be first to access launch pricing · No spam, just the drop
           </motion.p>
+
+          {/* Trusted by */}
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.7 }} className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mt-8">
+            <div className="flex items-center gap-1">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-4 h-4 fill-[#DFB771] text-[#DFB771]" />
+              ))}
+            </div>
+            <span className="text-[#F6FEFC]/40 text-xs sm:text-sm">Trusted by leaders, founders & agencies</span>
+          </motion.div>
         </div>
 
         {/* Scroll hint */}
@@ -299,29 +310,8 @@ export default function OpenClawPage() {
         </motion.div>
       </section>
 
-      {/* ── 5-STAR SOCIAL PROOF ── */}
-      <section className="py-6 sm:py-8 border-y border-[#0E3D31]/50">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
-            {/* Stars */}
-            <div className="flex items-center gap-1">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 fill-[#DFB771] text-[#DFB771]" />
-              ))}
-            </div>
-            <span className="text-[#F6FEFC]/50 text-sm">Trusted by founders & agencies</span>
-            <div className="flex flex-wrap justify-center gap-x-6 gap-y-1">
-              {['Lost LeBlanc', 'BeyondSchool', 'Dubai Property', 'Stickx Arcade'].map((c) => (
-                <span key={c} className="text-[#F6FEFC]/30 font-semibold text-xs sm:text-sm">{c}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-
       {/* ── TOOL LOGO CAROUSEL ── */}
-      <section className="py-8 sm:py-10 overflow-hidden">
+      <section className="py-[30px] overflow-hidden">
         <p className="text-center text-[#F6FEFC]/40 text-xs sm:text-sm font-medium uppercase tracking-widest mb-6">
           Seamlessly automate with
         </p>
@@ -623,8 +613,13 @@ export default function OpenClawPage() {
       </section>
 
       {/* ── FINAL CTA ── */}
-      <section className="py-16 sm:py-20 bg-gradient-to-br from-[#0E3D31] to-[#031D16]">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+      <section className="py-16 sm:py-20 relative overflow-hidden">
+        {/* Background image + overlay */}
+        <div className="absolute inset-0">
+          <Image src="/screenshots/team-dashboard.jpg" alt="" fill sizes="100vw" className="object-cover opacity-10" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0E3D31]/95 to-[#031D16]/98" />
+        </div>
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center relative z-10">
           <div className="reveal">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4">
               Ready to meet your AI employee?

@@ -259,6 +259,30 @@ section {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+/* GSAP scroll reveal: start hidden, GSAP animates them in */
+.reveal,
+.reveal-item,
+.reveal-image {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.reveal.is-visible,
+.reveal-item.is-visible,
+.reveal-image.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fallback: if JS is slow or disabled, show content after 2s */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-item,
+  .reveal-image {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .animate-scroll {
   animation: scroll-logos 30s linear infinite;
 }
