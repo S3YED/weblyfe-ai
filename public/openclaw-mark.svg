@@ -1,0 +1,11 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="90" stroke="#DFB771" stroke-width="3"/>
+  <circle cx="100" cy="100" r="75" stroke="#247459" stroke-width="1.5" stroke-dasharray="4 6"/>
+  <!-- Claw mark -->
+  <path d="M65 70 Q75 120 85 145" stroke="#DFB771" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <path d="M85 65 Q92 115 100 145" stroke="#DFB771" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <path d="M105 65 Q110 115 115 145" stroke="#DFB771" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <path d="M125 70 Q120 120 130 145" stroke="#DFB771" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <!-- Eye dot -->
+  <circle cx="100" cy="52" r="5" fill="#DFB771"/>
+</svg>

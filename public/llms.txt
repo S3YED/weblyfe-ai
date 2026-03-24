@@ -1,0 +1,44 @@
+# Weblyfe.ai
+
+> Weblyfe builds custom AI agents, chatbots, and workflow automations for creators, agencies, and service businesses. Our flagship product is Appie — an autonomous AI employee powered by OpenClaw that handles emails, calendar, leads, and business operations 24/7.
+
+## What We Do
+
+Weblyfe is an AI automation agency based in the Netherlands (Techwiz LLC), serving clients worldwide. We design and deploy:
+
+- **Custom AI Agents (Appie)**: Autonomous digital employees that run on your own server, connect to all your tools, and handle operations 24/7 through Telegram or WhatsApp.
+- **Workflow Automation**: n8n and Zapier-based automations that connect 400+ apps including Notion, Gmail, HubSpot, Airtable, Webflow, and Stripe.
+- **AI Chatbots**: Custom-trained chatbots for lead qualification, customer support, and sales — trained on your brand voice.
+- **AI-Powered CRM**: Automated lead tracking, follow-up sequences, and pipeline management.
+- **Training Bots**: Internal AI assistants that answer employee and customer questions based on your documentation.
+
+## Technology
+
+- **OpenClaw**: Our core AI runtime — an agent operating system with persistent memory, multi-agent orchestration, and deep tool integrations.
+- **Stack**: Next.js, Vercel, Supabase, n8n, Claude (Anthropic), OpenRouter, Telegram/WhatsApp APIs.
+- **Infrastructure**: Private deployment on DigitalOcean or client's own cloud. Data never leaves your infrastructure.
+
+## Key Results
+
+- Clients save 20+ hours per week after AI deployment.
+- First AI agent (Appie) handles emails, calendar, research, CRM updates, and social monitoring autonomously.
+- Notable clients: Lost LeBlanc (YouTube creator), BeyondSchool, Dubai Property Group, Stickx Arcade, IOnlyBookVIP.
+
+## Services & Pricing
+
+- **OpenClaw Agent** (Starter): Custom AI agent + Telegram/WhatsApp + email/calendar + web research + basic automations. Setup included.
+- **AI Infrastructure** (Full Stack): Multi-agent architecture + command center dashboard + n8n workflows + CRM automation + ongoing support.
+- Custom pricing based on scope. Projects start at €2,500. Book a free strategy call at https://tidycal.com/weblyfe/hey.
+
+## Contact
+
+- Website: https://weblyfe.ai
+- Email: hello@weblyfe.ai
+- Instagram: https://instagram.com/seyed.jpg
+- YouTube: https://youtube.com/@weblyfenl
+- Company: Weblyfe by Techwiz LLC
+
+## Pages
+
+- [Home](https://weblyfe.ai): AI automation services overview
+- [OpenClaw](https://weblyfe.ai/openclaw): AI employee powered by OpenClaw technology
