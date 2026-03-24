@@ -36,6 +36,7 @@ async function addToAirtable(name: string, email: string, phone: string) {
               },
             },
           ],
+          typecast: true,
         }),
       }
     );
