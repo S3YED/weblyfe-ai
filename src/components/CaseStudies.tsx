@@ -23,7 +23,7 @@ const caseStudies = [
     title: 'SAFESITE Security',
     subtitle: 'Website Built Via Voice Notes',
     description: 'Former military bodyguard needed a corporate website. The entire site was built by talking to an AI agent via Telegram voice notes. Feedback from WhatsApp was auto-transcribed and implemented.',
-    image: '/screenshots/safesite-fresh.jpg',
+    image: '/screenshots/safesite.jpg',
     stats: [
       { label: 'Build Time', value: '1 day', before: '2 weeks' },
       { label: 'Voice Notes Used', value: '50+', icon: MessageSquare },

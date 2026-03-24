@@ -189,48 +189,65 @@ function InlineCountdown({ time }: { time: { d: number; h: number; m: number; s:
   );
 }
 
-function EmailCapture({ variant = 'dark' }: { variant?: 'dark' | 'light' }) {
+function LeadCapture({ variant = 'dark', compact = false }: { variant?: 'dark' | 'light'; compact?: boolean }) {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!email) return;
-    console.log('OpenClaw notify:', email);
+    if (!email || loading) return;
+    setLoading(true);
+    try {
+      await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone }),
+      });
+    } catch (err) {
+      console.error('Waitlist submit error:', err);
+    }
+    setLoading(false);
     setSubmitted(true);
   }
 
+  const inputClass = variant === 'dark'
+    ? 'bg-[#0E3D31] border border-[#247459]/30 text-[#F6FEFC] placeholder-[#F6FEFC]/30 focus:border-[#DFB771]/50 focus:ring-2 focus:ring-[#DFB771]/10'
+    : 'bg-[#F6FEFC] border border-[#031D16]/10 text-[#031D16] placeholder-[#031D16]/30 focus:border-[#247459] focus:ring-2 focus:ring-[#247459]/10';
+
   if (submitted) {
     return (
-      <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className={`flex items-center justify-center gap-3 px-5 py-3.5 rounded-xl ${variant === 'dark' ? 'bg-[#247459]/20 border border-[#247459]/30' : 'bg-[#247459]/10 border border-[#247459]/20'}`}>
+      <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className={`flex items-center justify-center gap-3 px-5 py-4 rounded-xl ${variant === 'dark' ? 'bg-[#247459]/20 border border-[#247459]/30' : 'bg-[#247459]/10 border border-[#247459]/20'}`}>
         <div className="w-7 h-7 rounded-full bg-[#247459] flex items-center justify-center flex-shrink-0">
           <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <span className={`font-medium text-sm ${variant === 'dark' ? 'text-[#F6FEFC]' : 'text-[#031D16]'}`}>You&apos;re on the list! We&apos;ll notify you at launch.</span>
+        <div>
+          <span className={`font-semibold text-sm block ${variant === 'dark' ? 'text-[#F6FEFC]' : 'text-[#031D16]'}`}>Your spot is saved! 🎉</span>
+          <span className={`text-xs ${variant === 'dark' ? 'text-[#F6FEFC]/60' : 'text-[#031D16]/60'}`}>You&apos;ll be notified at launch via email.</span>
+        </div>
       </motion.div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="your@email.com"
-        required
-        className={`flex-1 px-4 py-3.5 rounded-xl text-sm focus:outline-none transition-all ${
-          variant === 'dark'
-            ? 'bg-[#0E3D31] border border-[#247459]/30 text-[#F6FEFC] placeholder-[#F6FEFC]/30 focus:border-[#DFB771]/50 focus:ring-2 focus:ring-[#DFB771]/10'
-            : 'bg-[#F6FEFC] border border-[#031D16]/10 text-[#031D16] placeholder-[#031D16]/30 focus:border-[#247459] focus:ring-2 focus:ring-[#247459]/10'
-        }`}
-      />
-      <button type="submit" className="btn-primary text-sm whitespace-nowrap justify-center">
-        <Bell className="w-4 h-4" />
-        Notify Me
-      </button>
+    <form onSubmit={handleSubmit} className="space-y-3">
+      {!compact && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" className={`w-full px-4 py-3 rounded-xl text-sm focus:outline-none transition-all ${inputClass}`} />
+          <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone (WhatsApp)" className={`w-full px-4 py-3 rounded-xl text-sm focus:outline-none transition-all ${inputClass}`} />
+        </div>
+      )}
+      <div className="flex flex-col sm:flex-row gap-3">
+        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="your@email.com" required className={`flex-1 px-4 py-3.5 rounded-xl text-sm focus:outline-none transition-all ${inputClass}`} />
+        <button type="submit" disabled={loading} className="btn-primary text-sm whitespace-nowrap justify-center disabled:opacity-60">
+          <Bell className="w-4 h-4" />
+          {loading ? 'Saving...' : 'Save My Spot'}
+        </button>
+      </div>
     </form>
   );
 }
@@ -322,7 +339,7 @@ export default function OpenClawPage() {
 
           {/* Email capture */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="max-w-md mx-auto mb-4">
-            <EmailCapture variant="dark" />
+            <LeadCapture variant="dark" />
           </motion.div>
 
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.5 }} className="text-xs sm:text-sm text-[#F6FEFC]/40">
@@ -359,29 +376,32 @@ export default function OpenClawPage() {
       </section>
 
       {/* ── TOOL LOGO CAROUSEL ── */}
-      <section className="py-6 sm:py-8 overflow-hidden">
+      <section className="py-8 sm:py-10 overflow-hidden">
+        <p className="text-center text-[#F6FEFC]/40 text-xs sm:text-sm font-medium uppercase tracking-widest mb-6">
+          Seamlessly automate with
+        </p>
         <div className="relative">
-          <div className="flex animate-scroll gap-10 sm:gap-12 items-center w-max">
+          <div className="flex animate-scroll gap-10 sm:gap-14 items-center w-max">
             {[...Array(2)].map((_, setIdx) => (
-              <div key={setIdx} className="flex gap-10 sm:gap-12 items-center">
-                <div className="flex items-center gap-2 text-[#F6FEFC]/40 font-semibold text-xs sm:text-sm whitespace-nowrap">
-                  <Image src="/openclaw-mark.svg" alt="OpenClaw" width={24} height={24} className="opacity-60" />
+              <div key={setIdx} className="flex gap-10 sm:gap-14 items-center">
+                <div className="flex items-center gap-2.5 text-[#F6FEFC]/50 font-semibold text-xs sm:text-sm whitespace-nowrap">
+                  <Image src="/openclaw-mark.svg" alt="OpenClaw" width={22} height={22} className="opacity-70" />
                   OpenClaw
                 </div>
                 {[
-                  { name: 'Google Workspace', icon: '📧' },
-                  { name: 'Notion', icon: '📝' },
-                  { name: 'Telegram', icon: '✈️' },
-                  { name: 'WhatsApp', icon: '💬' },
-                  { name: 'Stripe', icon: '💳' },
-                  { name: 'n8n', icon: '⚡' },
-                  { name: 'Webflow', icon: '🌐' },
-                  { name: 'Slack', icon: '💼' },
-                  { name: 'HubSpot', icon: '🎯' },
-                  { name: 'Airtable', icon: '📊' },
+                  { name: 'Google', logo: '/logos/google.svg' },
+                  { name: 'Notion', logo: '/logos/notion.svg' },
+                  { name: 'Telegram', logo: '/logos/telegram.svg' },
+                  { name: 'WhatsApp', logo: '/logos/whatsapp.svg' },
+                  { name: 'Stripe', logo: '/logos/stripe.svg' },
+                  { name: 'n8n', logo: '/logos/n8n.svg' },
+                  { name: 'Webflow', logo: '/logos/webflow.svg' },
+                  { name: 'Slack', logo: '/logos/slack.svg' },
+                  { name: 'HubSpot', logo: '/logos/hubspot.svg' },
+                  { name: 'Airtable', logo: '/logos/airtable.svg' },
                 ].map((tool) => (
-                  <span key={`${setIdx}-${tool.name}`} className="flex items-center gap-1.5 text-[#F6FEFC]/30 font-semibold text-xs sm:text-sm whitespace-nowrap">
-                    <span className="text-base sm:text-lg">{tool.icon}</span>
+                  <span key={`${setIdx}-${tool.name}`} className="flex items-center gap-2 text-[#F6FEFC]/40 font-semibold text-xs sm:text-sm whitespace-nowrap">
+                    <Image src={tool.logo} alt={tool.name} width={20} height={20} className="opacity-50" />
                     {tool.name}
                   </span>
                 ))}
@@ -418,31 +438,149 @@ export default function OpenClawPage() {
         </div>
       </section>
 
-      {/* ── HOW IT WORKS ── */}
-      <section className="py-20 sm:py-24 bg-[#031D16]/80">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+      {/* ── CASE STUDIES ── */}
+      <section className="py-20 sm:py-28 border-t border-[#0E3D31]/50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12 sm:mb-16">
-            <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">The Process</p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4">Up and running in 2 weeks</h2>
-            <p className="text-[#F6FEFC]/60 text-base sm:text-lg max-w-xl mx-auto">
-              We handle everything. You focus on your business.
+            <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">Built With OpenClaw</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4">Real results, real businesses</h2>
+            <p className="text-[#F6FEFC]/60 text-base sm:text-lg max-w-2xl mx-auto">
+              See what Appie has built for founders and companies just like yours.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 relative">
-            <div className="hidden md:block absolute top-10 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-transparent via-[#247459] to-transparent" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
             {[
-              { num: '01', title: 'Strategy Call', desc: 'We map your operations and identify automation wins' },
-              { num: '02', title: 'Custom Build', desc: 'Your AI agent is configured and connected to your tools' },
-              { num: '03', title: 'Training', desc: 'We refine workflows until Appie works exactly right' },
-              { num: '04', title: 'Go Live', desc: 'Your AI runs 24/7, we monitor and optimise' },
-            ].map((step, i) => (
-              <motion.div key={step.num} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="text-center relative">
-                <div className="w-14 h-14 sm:w-20 sm:h-20 bg-gradient-to-br from-[#DFB771] to-[#FFD99A] rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 text-[#031D16] font-extrabold text-base sm:text-xl shadow-lg shadow-[#DFB771]/20">
-                  {step.num}
+              {
+                title: 'Eva — Dubai Property',
+                subtitle: 'AI Real Estate Assistant',
+                description: 'Dedicated AI employee for a real estate agency. Handles property inquiries, schedules viewings, qualifies buyers, and runs 24/7 on its own hardware.',
+                image: '/screenshots/cza-fresh.jpg',
+                stat: '24/7 lead response',
+                highlights: ['Property matching', 'Viewing scheduling', 'Buyer qualification', 'Own Mac Mini'],
+              },
+              {
+                title: 'Appie — Weblyfe',
+                subtitle: 'Multi-Agent AI System',
+                description: 'Three AI agents running across time zones. Orchestrator, Marketing Brain, and DevOps. Handles scheduling, content, CRM, code deployments, and operations.',
+                image: '/screenshots/team-dashboard.jpg',
+                stat: '3 agents, 50+ tasks/day',
+                highlights: ['Multi-agent orchestration', 'Content & marketing', 'DevOps & deploys', '99.9% uptime'],
+              },
+              {
+                title: 'CZA Ben de Voorman',
+                subtitle: 'AI WhatsApp Lead Qualification',
+                description: 'Dutch construction company handling dozens of inquiries weekly. AI scores leads 0-100, responds in under 2 minutes, and syncs with Monday CRM automatically.',
+                image: '/screenshots/cza-fresh.jpg',
+                stat: '<2 min response time',
+                highlights: ['WhatsApp automation', 'Lead scoring (0-100)', 'Monday.com sync', '40% after-hours leads'],
+              },
+            ].map((cs, i) => (
+              <motion.div key={cs.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="group rounded-2xl overflow-hidden border border-[#0E3D31] hover:border-[#247459]/50 transition-all duration-300 flex flex-col">
+                <div className="relative h-44 sm:h-48 overflow-hidden">
+                  <Image src={cs.image} alt={cs.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#031D16] via-[#031D16]/50 to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <p className="text-[#DFB771] text-[10px] sm:text-xs font-semibold uppercase tracking-wider">{cs.subtitle}</p>
+                    <h3 className="text-base sm:text-lg font-extrabold text-[#F6FEFC]">{cs.title}</h3>
+                  </div>
                 </div>
-                <h3 className="font-bold text-sm sm:text-lg mb-1 sm:mb-2">{step.title}</h3>
-                <p className="text-[#F6FEFC]/55 text-xs sm:text-sm leading-relaxed">{step.desc}</p>
+                <div className="p-4 sm:p-5 bg-[#0E3D31]/30 flex-1 flex flex-col">
+                  <p className="text-[#F6FEFC]/50 text-xs sm:text-sm leading-relaxed mb-4 flex-1">{cs.description}</p>
+                  <div className="space-y-2 mb-4">
+                    {cs.highlights.map((h) => (
+                      <div key={h} className="flex items-center gap-2 text-xs text-[#F6FEFC]/65">
+                        <Check className="w-3.5 h-3.5 text-[#247459] flex-shrink-0" />
+                        {h}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="pt-3 border-t border-[#247459]/20">
+                    <span className="text-[#DFB771] font-bold text-sm">{cs.stat}</span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── THREE PATHS EXPLAINER ── */}
+      <section className="py-20 sm:py-24 bg-[#031D16]/80">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12 sm:mb-16">
+            <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">Choose Your Path</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4">Three ways to get your AI employee</h2>
+            <p className="text-[#F6FEFC]/60 text-base sm:text-lg max-w-2xl mx-auto">
+              Whether you&apos;re a builder, a business owner, or scaling an enterprise — there&apos;s a perfect fit.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+            {[
+              {
+                icon: BookOpen,
+                num: '01',
+                tag: 'DIY',
+                title: 'Build It Yourself',
+                desc: 'Get the full setup guide, copy-paste config files, and sort the rest by yourself. Perfect for technical founders who want full control.',
+                highlights: ['Complete setup guide', 'Copy-paste config files', 'Community Discord access', 'Self-hosted on your server'],
+              },
+              {
+                icon: Server,
+                num: '02',
+                tag: 'Hosted',
+                title: 'Employ Appie',
+                desc: 'Rent your own dedicated and private Appie, spun up instantly for you. Personal guidance to link it with your devices.',
+                highlights: ['Your own private Appie', 'Instant setup', 'Connected to your tools', 'Personal onboarding'],
+                featured: true,
+              },
+              {
+                icon: Wrench,
+                num: '03',
+                tag: 'Enterprise',
+                title: 'Custom AI System',
+                desc: 'We build your own fully customised AI system for your company, on your hardware. Multi-agent, custom workflows, dedicated support.',
+                highlights: ['Fully custom build', 'Your own hardware', 'Multi-agent architecture', 'Dedicated support team'],
+              },
+            ].map((path, i) => (
+              <motion.div
+                key={path.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className={`rounded-2xl p-6 sm:p-8 border relative ${
+                  path.featured
+                    ? 'border-[#DFB771]/60 bg-gradient-to-br from-[#DFB771]/15 to-[#247459]/15 shadow-lg shadow-[#DFB771]/10'
+                    : 'border-[#247459]/40 bg-[#0E3D31]/40'
+                }`}
+              >
+                {path.featured && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <span className="bg-gradient-to-r from-[#DFB771] to-[#FFD99A] text-[#031D16] text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                      Most Popular
+                    </span>
+                  </div>
+                )}
+                <div className="flex items-center gap-3 mb-4">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${path.featured ? 'bg-[#DFB771]/20' : 'bg-[#247459]/20'}`}>
+                    <path.icon className={`w-6 h-6 ${path.featured ? 'text-[#DFB771]' : 'text-[#247459]'}`} />
+                  </div>
+                  <div>
+                    <span className={`text-[10px] sm:text-xs font-bold uppercase tracking-widest block ${path.featured ? 'text-[#DFB771]' : 'text-[#247459]'}`}>{path.tag}</span>
+                    <h3 className="font-extrabold text-lg sm:text-xl text-[#F6FEFC]">{path.title}</h3>
+                  </div>
+                </div>
+                <p className="text-[#F6FEFC]/55 text-sm leading-relaxed mb-5">{path.desc}</p>
+                <ul className="space-y-2.5">
+                  {path.highlights.map((h) => (
+                    <li key={h} className="flex items-center gap-2.5 text-sm text-[#F6FEFC]/75">
+                      <Check className={`w-4 h-4 flex-shrink-0 ${path.featured ? 'text-[#DFB771]' : 'text-[#247459]'}`} />
+                      {h}
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             ))}
           </div>
@@ -502,7 +640,7 @@ export default function OpenClawPage() {
                 </p>
 
                 <div className="max-w-sm mx-auto mb-4">
-                  <EmailCapture variant="dark" />
+                  <LeadCapture variant="dark" />
                 </div>
 
                 <div className="flex justify-center">
@@ -554,7 +692,7 @@ export default function OpenClawPage() {
             </p>
 
             <div className="max-w-md mx-auto mb-6">
-              <EmailCapture variant="dark" />
+              <LeadCapture variant="dark" />
             </div>
 
             <div className="flex items-center justify-center gap-3 text-sm text-[#F6FEFC]/40">
