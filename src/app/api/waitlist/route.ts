@@ -29,9 +29,9 @@ export async function POST(req: NextRequest) {
     const fields: Record<string, unknown> = {
       'First Name': firstName,
       'Email': email,
-      'Marketing Channel': { name: 'Waitlist Page' },
-      'Status': { name: 'Waitlist' },
-      'Lead Heat': { name: 'Warm' },
+      'Marketing Channel': 'Waitlist Page',
+      'Status': 'Waitlist',
+      'Lead Heat': 'Warm',
       'Lead notes': `OpenClaw Waitlist Signup\nPackage: ${packageNote}\nSource: weblyfe.ai/openclaw`,
     };
 
