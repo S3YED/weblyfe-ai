@@ -64,11 +64,11 @@ export const AGENTS = [
     image: '/agents/appie.svg',
   },
   {
-    name: 'Aifa',
+    name: 'Eva',
     tagline: 'The Property Agent',
     industry: 'Real Estate',
     description: 'Dubai real estate ops. Lead qualification, property matching, client comms, CRM.',
-    image: '/agents/aifa.svg',
+    image: '/agents/eva.svg',
   },
   {
     name: 'Ben de Voorman',

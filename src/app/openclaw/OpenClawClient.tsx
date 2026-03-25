@@ -99,27 +99,34 @@ export default function OpenClawPage() {
         <motion.div animate={{ y: [0, 25, 0], rotate: [0, -4, 0] }} transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }} className="absolute bottom-32 left-[8%] w-96 h-96 rounded-full bg-gradient-to-br from-[#247459]/25 to-[#0E3D31]/15 blur-3xl pointer-events-none" />
 
         <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+          {/* OpenClaw Logo */}
+          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} className="mb-4">
+            <Image src="/openclaw-mark.svg" alt="OpenClaw" width={60} height={60} className="mx-auto mb-3" />
+            <Image src="/openclaw-logo-text.svg" alt="OPENCLAW" width={320} height={48} className="mx-auto h-10 md:h-12 w-auto" />
+            <p className="text-[#247459] text-sm mt-2 tracking-wide">Powered by OpenClaw</p>
+          </motion.div>
+
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
             <CountdownBadge />
           </motion.div>
 
-          <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6 mt-8">
-            Your Business,{' '}<span className="text-gradient">Running on Autopilot</span>
+          <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6 mt-8">
+            Your AI Employee{' '}<br className="hidden md:block" /><span className="text-gradient">Ready in 24 Hours</span>
           </motion.h1>
 
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="text-xl md:text-2xl text-[#F6FEFC]/65 max-w-3xl mx-auto mb-10 leading-relaxed">
-            We deploy a custom AI agent that handles your emails, calendar, leads, and automations 24/7.{' '}
-            <span className="text-[#DFB771] font-medium">Clients save 20+ hours per week.</span>
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="text-xl md:text-2xl text-[#F6FEFC]/65 max-w-3xl mx-auto mb-10 leading-relaxed">
+            An intelligent AI assistant that runs your customer service, automates your operations, and works 24/7. On Telegram, WhatsApp, or Discord.{' '}
+            <span className="text-[#DFB771] font-medium">No coding required.</span>
           </motion.p>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="flex flex-col sm:flex-row gap-4 justify-center">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="#offers" className="btn-primary group text-base">
               Join the Waitlist <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
-            <a href="#features" className="btn-secondary text-base">See What It Does</a>
+            <a href="#features" className="btn-secondary text-base">✦ How It Works</a>
           </motion.div>
 
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.5 }} className="text-sm text-[#F6FEFC]/40 mt-6">
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.6 }} className="text-sm text-[#F6FEFC]/40 mt-6">
             No coding required · Fully managed setup · Runs 24/7
           </motion.p>
         </div>
