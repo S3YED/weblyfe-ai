@@ -101,9 +101,9 @@ export default function OpenClawPage() {
         <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
           {/* OpenClaw Logo */}
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} className="mb-4">
-            <Image src="/openclaw-mark.svg" alt="OpenClaw" width={60} height={60} className="mx-auto mb-3" />
-            <Image src="/openclaw-logo-text.svg" alt="OPENCLAW" width={320} height={48} className="mx-auto h-10 md:h-12 w-auto" />
-            <p className="text-[#247459] text-sm mt-2 tracking-wide">Powered by OpenClaw</p>
+            <Image src="/openclaw-lobster.svg" alt="OpenClaw" width={64} height={64} className="mx-auto mb-4" />
+            <Image src="/openclaw-logo-text.png" alt="OPENCLAW" width={420} height={86} className="mx-auto h-12 md:h-16 w-auto" />
+            <p className="text-[#F6FEFC]/40 text-sm mt-3 tracking-wide">Powered by OpenClaw</p>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
