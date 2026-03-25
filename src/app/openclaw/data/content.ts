@@ -61,7 +61,7 @@ export const AGENTS = [
     tagline: 'The Original',
     industry: 'Creative Agency',
     description: 'Three AI agents running Weblyfe across time zones. Handles emails, deployments, client projects, CRM, and content creation.',
-    image: '/agents/appie.svg',
+    image: '/agents/appie.jpg',
     stats: [
       { label: 'Tasks/day', value: '50+' },
       { label: 'Agents', value: '3' },
@@ -73,7 +73,7 @@ export const AGENTS = [
     tagline: 'The Property Agent',
     industry: 'Real Estate',
     description: 'Dedicated AI employee for a Dubai real estate agency. Property inquiries, viewing schedules, buyer qualification, running 24/7 on its own hardware.',
-    image: '/agents/eva.svg',
+    image: '/agents/eva.jpg',
     stats: [
       { label: 'Lead response', value: '24/7' },
       { label: 'Hardware', value: 'Own Mac Mini' },
@@ -85,7 +85,7 @@ export const AGENTS = [
     tagline: 'The Foreman',
     industry: 'Construction',
     description: 'Dutch construction company. AI scores leads 0-100 on WhatsApp, responds in under 2 minutes, syncs with Monday CRM automatically.',
-    image: '/agents/ben.svg',
+    image: '/agents/ben.jpg',
     stats: [
       { label: 'Response time', value: '<2 min' },
       { label: 'Time saved', value: '13+ hrs/wk' },
