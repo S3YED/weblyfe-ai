@@ -23,7 +23,7 @@ const caseStudies = [
     title: 'SAFESITE Security',
     subtitle: 'Website Built Via Voice Notes',
     description: 'Former military bodyguard needed a corporate website. The entire site was built by talking to an AI agent via Telegram voice notes. Feedback from WhatsApp was auto-transcribed and implemented.',
-    image: '/screenshots/safesite.jpg',
+    image: '/screenshots/safesite-fresh.jpg',
     stats: [
       { label: 'Build Time', value: '1 day', before: '2 weeks' },
       { label: 'Voice Notes Used', value: '50+', icon: MessageSquare },
@@ -93,7 +93,7 @@ const caseStudies = [
     title: 'Boooth.me',
     subtitle: 'Photo Booth Rental Booking System',
     description: 'Photo booth rental company needed a complete booking system. We built a multi-step configurator: choose booth type, customize options, add extras, see VAT breakdown, and complete booking. All integrated with their operations.',
-    image: '/screenshots/boooth.jpg',
+    image: '/screenshots/boooth-home-fresh.jpg',
     stats: [
       { label: 'Booth Options', value: '5+', icon: Camera },
       { label: 'Booking Steps', value: '5', icon: TrendingUp },

@@ -89,35 +89,27 @@ export default function CTA() {
             ))}
           </motion.div>
 
-          {/* CTA Buttons */}
+          {/* CTA Button */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <a 
-              href="/openclaw"
-              className="btn-primary text-lg group inline-flex justify-center"
-            >
-              Explore OpenClaw
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </a>
-            <a 
-              href="https://tidycal.com/weblyfe/hey" 
+              href="https://cal.com/weblyfe/strategy-call" 
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary text-lg group inline-flex justify-center"
+              className="btn-primary text-lg group inline-flex"
             >
-              Book a Free Call
+              Book Your Free Strategy Call
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
+            
+            <p className="flex items-center justify-center gap-2 text-[#F6FEFC]/50 text-sm mt-4">
+              <Clock className="w-4 h-4" />
+              Takes 30 seconds to book
+            </p>
           </motion.div>
-          
-          <p className="flex items-center justify-center gap-2 text-[#F6FEFC]/50 text-sm mt-4">
-            <Clock className="w-4 h-4" />
-            Takes 30 seconds to book
-          </p>
         </div>
       </div>
     </section>

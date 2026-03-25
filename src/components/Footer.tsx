@@ -34,7 +34,7 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#031D16] pt-20 pb-24 relative overflow-hidden">
+    <footer className="bg-[#031D16] pt-20 pb-8 relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#247459]/30 to-transparent" />
       <div className="absolute bottom-20 left-10 w-64 h-64 rounded-full bg-[#247459]/5 blur-3xl" />

@@ -9,7 +9,6 @@ import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
 import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
-import StickyCountdown from '@/components/StickyCountdown';
 
 export const metadata: Metadata = {
   title: 'AI Automation for Creators & Agencies',
@@ -167,7 +166,6 @@ export default function Home() {
         <FAQ />
         <CTA />
         <Footer />
-        <StickyCountdown />
       </main>
     </>
   );

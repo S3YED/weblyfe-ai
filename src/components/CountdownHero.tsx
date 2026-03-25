@@ -18,13 +18,14 @@ function getTimeLeft(target: number) {
 function CountdownUnit({ value, label }: { value: number; label: string }) {
   return (
     <div className="flex flex-col items-center">
-      <div className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-xl sm:rounded-2xl bg-gradient-to-b from-[#0E3D31] to-[#031D16] border border-[#247459]/30 flex items-center justify-center shadow-lg shadow-black/20">
-        <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#F6FEFC] tabular-nums">
+      <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-gradient-to-b from-[#0E3D31] to-[#031D16] border border-[#247459]/30 flex items-center justify-center shadow-lg shadow-black/20">
+        <span className="text-3xl md:text-4xl font-bold text-[#F6FEFC] tabular-nums">
           {String(value).padStart(2, '0')}
         </span>
+        {/* Shine line */}
         <div className="absolute top-1/2 left-2 right-2 h-px bg-gradient-to-r from-transparent via-[#247459]/20 to-transparent" />
       </div>
-      <span className="text-[10px] sm:text-xs md:text-sm text-[#F6FEFC]/40 mt-1.5 sm:mt-2 uppercase tracking-wider font-medium">{label}</span>
+      <span className="text-xs md:text-sm text-[#F6FEFC]/40 mt-2 uppercase tracking-wider font-medium">{label}</span>
     </div>
   );
 }
@@ -103,7 +104,7 @@ export default function CountdownHero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-[#F6FEFC] mb-6 leading-[1.1]"
+          className="text-5xl md:text-7xl lg:text-8xl font-bold text-[#F6FEFC] mb-6 leading-[1.1]"
         >
           We&apos;re Launching<br />
           <span className="text-gradient">Something New</span>
@@ -114,7 +115,7 @@ export default function CountdownHero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg sm:text-xl md:text-2xl text-[#F6FEFC]/70 max-w-3xl mx-auto mb-10 sm:mb-14 leading-relaxed px-2"
+          className="text-xl md:text-2xl text-[#F6FEFC]/70 max-w-3xl mx-auto mb-14 leading-relaxed"
         >
           AI automation packages built for creators, agencies, and service businesses.{' '}
           <span className="text-[#DFB771] font-medium">
@@ -127,7 +128,7 @@ export default function CountdownHero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex justify-center gap-2 sm:gap-4 md:gap-6 mb-14"
+          className="flex justify-center gap-4 md:gap-6 mb-14"
         >
           <CountdownUnit value={time.days} label="Days" />
           <div className="flex items-center text-[#DFB771]/40 text-2xl font-light mt-[-20px]">:</div>
@@ -146,18 +147,18 @@ export default function CountdownHero() {
           className="max-w-md mx-auto"
         >
           {!submitted ? (
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+            <form onSubmit={handleSubmit} className="flex gap-3">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your@email.com"
                 required
-                className="flex-1 px-5 py-3.5 sm:py-4 rounded-xl bg-[#0E3D31] border border-[#247459]/30 text-[#F6FEFC] placeholder-[#F6FEFC]/30 text-base focus:outline-none focus:border-[#DFB771]/50 focus:ring-2 focus:ring-[#DFB771]/10 transition-all"
+                className="flex-1 px-5 py-4 rounded-xl bg-[#0E3D31] border border-[#247459]/30 text-[#F6FEFC] placeholder-[#F6FEFC]/30 text-base focus:outline-none focus:border-[#DFB771]/50 focus:ring-2 focus:ring-[#DFB771]/10 transition-all"
               />
               <button
                 type="submit"
-                className="btn-primary group whitespace-nowrap justify-center"
+                className="btn-primary group whitespace-nowrap"
               >
                 <Bell className="w-4 h-4" />
                 Notify Me
