@@ -60,22 +60,37 @@ export const AGENTS = [
     name: 'Appie',
     tagline: 'The Original',
     industry: 'Creative Agency',
-    description: 'Runs Weblyfe operations 24/7. Emails, deployments, client projects, CRM, content.',
+    description: 'Three AI agents running Weblyfe across time zones. Handles emails, deployments, client projects, CRM, and content creation.',
     image: '/agents/appie.svg',
+    stats: [
+      { label: 'Tasks/day', value: '50+' },
+      { label: 'Agents', value: '3' },
+      { label: 'Uptime', value: '99.9%' },
+    ],
   },
   {
     name: 'Eva',
     tagline: 'The Property Agent',
     industry: 'Real Estate',
-    description: 'Dubai real estate ops. Lead qualification, property matching, client comms, CRM.',
+    description: 'Dedicated AI employee for a Dubai real estate agency. Property inquiries, viewing schedules, buyer qualification, running 24/7 on its own hardware.',
     image: '/agents/eva.svg',
+    stats: [
+      { label: 'Lead response', value: '24/7' },
+      { label: 'Hardware', value: 'Own Mac Mini' },
+      { label: 'Channels', value: 'Telegram + CRM' },
+    ],
   },
   {
     name: 'Ben de Voorman',
     tagline: 'The Foreman',
     industry: 'Construction',
-    description: 'WhatsApp lead qualification, scores leads 0-100, <2 min response, Monday.com sync.',
+    description: 'Dutch construction company. AI scores leads 0-100 on WhatsApp, responds in under 2 minutes, syncs with Monday CRM automatically.',
     image: '/agents/ben.svg',
+    stats: [
+      { label: 'Response time', value: '<2 min' },
+      { label: 'Time saved', value: '13+ hrs/wk' },
+      { label: 'After-hours leads', value: '40%' },
+    ],
   },
 ] as const;
 

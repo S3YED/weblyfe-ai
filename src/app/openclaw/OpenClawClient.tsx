@@ -243,9 +243,17 @@ export default function OpenClawPage() {
                   <Image src={agent.image} alt={agent.name} width={80} height={80} className="w-full h-full object-cover" />
                 </div>
                 <h3 className="text-xl font-extrabold mb-1">{agent.name}</h3>
-                <p className="text-[#DFB771] text-sm font-medium mb-3">{agent.tagline}</p>
-                <p className="text-[#F6FEFC]/55 text-sm leading-relaxed mb-4">{agent.description}</p>
-                <span className="text-xs font-medium text-[#247459] bg-[#247459]/10 px-3 py-1 rounded-full">{agent.industry}</span>
+                <p className="text-[#DFB771] text-sm font-medium mb-2">{agent.tagline}</p>
+                <span className="text-xs font-medium text-[#247459] bg-[#247459]/10 px-3 py-1 rounded-full mb-4 inline-block">{agent.industry}</span>
+                <p className="text-[#F6FEFC]/55 text-sm leading-relaxed mb-5">{agent.description}</p>
+                <div className="grid grid-cols-3 gap-2 pt-4 border-t border-[#0E3D31]">
+                  {agent.stats.map((stat) => (
+                    <div key={stat.label} className="text-center">
+                      <div className="text-[#DFB771] font-bold text-sm">{stat.value}</div>
+                      <div className="text-[#F6FEFC]/35 text-[10px] uppercase tracking-wider mt-0.5">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
               </motion.div>
             ))}
           </div>
