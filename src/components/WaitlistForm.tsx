@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { ArrowRight, CheckCircle, Loader2 } from 'lucide-react';
 
-export default function WaitlistForm() {
+export default function WaitlistForm({ package: pkg, variant = 'dark' }: { package?: string; variant?: 'dark' | 'light' } = {}) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -21,7 +21,7 @@ export default function WaitlistForm() {
       const res = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, phone }),
+        body: JSON.stringify({ name, email, phone, package: pkg }),
       });
 
       if (res.ok) {
@@ -55,7 +55,7 @@ export default function WaitlistForm() {
           placeholder="First name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="flex-1 px-4 py-3 rounded-lg bg-[#0E3D31]/60 border border-[#DFB771]/20 text-[#F6FEFC] placeholder-[#F6FEFC]/30 focus:outline-none focus:border-[#DFB771]/60 transition-colors text-sm"
+          className={`flex-1 px-4 py-3 rounded-lg border text-sm focus:outline-none transition-colors ${variant === 'light' ? 'bg-white border-[#031D16]/15 text-[#031D16] placeholder-[#031D16]/40 focus:border-[#247459]' : 'bg-[#0E3D31]/60 border-[#DFB771]/20 text-[#F6FEFC] placeholder-[#F6FEFC]/30 focus:border-[#DFB771]/60'}`}
         />
         <input
           type="email"
@@ -63,7 +63,7 @@ export default function WaitlistForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="flex-1 px-4 py-3 rounded-lg bg-[#0E3D31]/60 border border-[#DFB771]/20 text-[#F6FEFC] placeholder-[#F6FEFC]/30 focus:outline-none focus:border-[#DFB771]/60 transition-colors text-sm"
+          className={`flex-1 px-4 py-3 rounded-lg border text-sm focus:outline-none transition-colors ${variant === 'light' ? 'bg-white border-[#031D16]/15 text-[#031D16] placeholder-[#031D16]/40 focus:border-[#247459]' : 'bg-[#0E3D31]/60 border-[#DFB771]/20 text-[#F6FEFC] placeholder-[#F6FEFC]/30 focus:border-[#DFB771]/60'}`}
         />
       </div>
       <div className="flex flex-col sm:flex-row gap-3">

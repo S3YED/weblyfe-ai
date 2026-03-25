@@ -2,45 +2,26 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY!;
 const AIRTABLE_BASE_ID = process.env.AIRTABLE_WEBLYFE_BASE_ID!;
-const AIRTABLE_TABLE_ID = 'tblXjrB8K4Mc6U8Xu'; // 🧲 Leads (Weblyfe University)
-const BREVO_API_KEY = process.env.BREVO_API_KEY!;
-const BREVO_LIST_ID = 18; // Weblyfe.ai Appie Waitlist
+const AIRTABLE_TABLE_ID = 'tblXjrB8K4Mc6U8Xu'; // 🧲 Leads (WeblyfeUniversity)
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, phone, package: pkg } = await req.json();
+    const { name, email, phone } = await req.json();
 
     if (!email || !email.includes('@')) {
       return NextResponse.json({ error: 'Valid email required' }, { status: 400 });
     }
 
-    // Split name into first/last
-    const nameParts = (name || '').trim().split(/\s+/);
-    const firstName = nameParts[0] || '';
-    const lastName = nameParts.slice(1).join(' ') || '';
-
-    // Map package to a readable note
-    const packageLabels: Record<string, string> = {
-      diy: 'DIY - Build Your Own Appie (€59)',
-      managed: 'Managed Setup - We Deploy For You ($280)',
-      enterprise: 'Full AI Infrastructure (€2,000+/mo)',
-      general: 'General Waitlist Signup',
-    };
-    const packageNote = packageLabels[pkg] || packageLabels.general;
-
-    // --- 1. Airtable: Create lead ---
-    const airtableFields: Record<string, unknown> = {
-      'First Name': firstName,
+    const fields: Record<string, string> = {
+      'First Name': name || '',
       'Email': email,
-      'Marketing Channel': 'Appie Waitlist',
+      'Marketing Channel': 'Waitlist University',
       'Status': 'Waitlist',
-      'Lead Heat': 'Warm',
-      'Lead notes': `OpenClaw Waitlist Signup\nPackage: ${packageNote}\nSource: weblyfe.ai/openclaw`,
     };
-    if (lastName) airtableFields['Last Name'] = lastName;
-    if (phone) airtableFields['Phone'] = phone;
 
-    const airtableRes = await fetch(
+    if (phone) fields['Phone'] = phone;
+
+    const res = await fetch(
       `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_ID}`,
       {
         method: 'POST',
@@ -48,38 +29,14 @@ export async function POST(req: NextRequest) {
           Authorization: `Bearer ${AIRTABLE_API_KEY}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ fields: airtableFields, typecast: true }),
+        body: JSON.stringify({ fields }),
       }
     );
 
-    if (!airtableRes.ok) {
-      const err = await airtableRes.json();
+    if (!res.ok) {
+      const err = await res.json();
       console.error('Airtable error:', err);
       return NextResponse.json({ error: 'Failed to save' }, { status: 500 });
-    }
-
-    // --- 2. Brevo: Add to waitlist ---
-    try {
-      await fetch('https://api.brevo.com/v3/contacts', {
-        method: 'POST',
-        headers: {
-          'api-key': BREVO_API_KEY,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          attributes: {
-            FIRSTNAME: firstName,
-            LASTNAME: lastName,
-            ...(phone ? { SMS: phone } : {}),
-          },
-          listIds: [BREVO_LIST_ID],
-          updateEnabled: true, // Update existing contact if email already exists
-        }),
-      });
-    } catch (brevoErr) {
-      // Log but don't fail the request — Airtable is the primary store
-      console.error('Brevo error (non-blocking):', brevoErr);
     }
 
     return NextResponse.json({ success: true });

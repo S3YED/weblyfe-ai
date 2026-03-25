@@ -3,8 +3,6 @@
  * ─────────────────────────────
  * All copywriting and data for the /openclaw page lives here.
  * Edit this file to change text without touching component code.
- *
- * DO NOT import React components (icons) here — those stay in the component.
  */
 
 export const FEATURES = [
@@ -18,33 +16,125 @@ export const FEATURES = [
   { iconKey: 'BarChart3', title: 'Command Center', description: 'Real-time dashboard for tasks, agent activity, and business metrics.' },
 ] as const;
 
-export const TIERS: readonly { iconKey: string; tag: string; title: string; description: string; featured?: boolean; items: readonly string[]; cta: string }[] = [
+export const OUTCOMES = [
   {
-    iconKey: 'BookOpen',
-    tag: 'DIY',
-    title: 'Build It Yourself',
-    description: 'Everything you need to set up your own AI agent.',
-    items: ['Step-by-step PDF guide', 'Video tutorials', 'OpenClaw setup walkthrough', 'Self-hosted on your server', 'Community Discord access', 'Template configs included'],
-    cta: 'Get the Guide',
+    iconKey: 'Mail',
+    title: 'Your Inbox, Sorted',
+    description: 'AI reads, prioritizes, and drafts replies. You only handle what matters.',
+    persona: 'For Coaches',
   },
   {
-    iconKey: 'Server',
-    tag: 'Hosted',
-    title: 'Done With You',
+    iconKey: 'Zap',
+    title: 'Never Miss a Lead',
+    description: 'Instant response to every inquiry, 24/7. Qualify, book, follow up automatically.',
+    persona: 'For Real Estate & Agencies',
+  },
+  {
+    iconKey: 'Calendar',
+    title: 'Your Calendar, Managed',
+    description: 'Meetings scheduled, conflicts resolved, prep notes ready before every call.',
+    persona: 'For Executives',
+  },
+  {
+    iconKey: 'Globe',
+    title: 'Content on Autopilot',
+    description: 'Research, draft, schedule posts across platforms. Your voice, zero effort.',
+    persona: 'For Creators',
+  },
+  {
+    iconKey: 'BarChart3',
+    title: 'Operations That Scale',
+    description: 'CRM updates, invoice tracking, team coordination. No more spreadsheet chaos.',
+    persona: 'For Agencies',
+  },
+  {
+    iconKey: 'Shield',
+    title: 'Private & Secure',
+    description: 'Runs on YOUR server. Your data never leaves your infrastructure. Enterprise-grade.',
+    persona: 'For Everyone',
+  },
+] as const;
+
+export const AGENTS = [
+  {
+    name: 'Appie',
+    tagline: 'The Original',
+    industry: 'Creative Agency',
+    description: 'Runs Weblyfe operations 24/7. Emails, deployments, client projects, CRM, content.',
+    image: '/agents/appie.svg',
+  },
+  {
+    name: 'Aifa',
+    tagline: 'The Property Agent',
+    industry: 'Real Estate',
+    description: 'Dubai real estate ops. Lead qualification, property matching, client comms, CRM.',
+    image: '/agents/aifa.svg',
+  },
+  {
+    name: 'Ben de Voorman',
+    tagline: 'The Foreman',
+    industry: 'Construction',
+    description: 'WhatsApp lead qualification, scores leads 0-100, <2 min response, Monday.com sync.',
+    image: '/agents/ben.svg',
+  },
+] as const;
+
+export const TIERS = [
+  {
+    tag: 'SELF-SERVE',
+    title: 'Build Your Own Appie',
+    price: '€65',
+    priceNote: 'one-time',
+    description: 'Everything you need to set up your own AI agent.',
+    featured: false,
+    light: true,
+    items: [
+      '62-page PDF setup guide',
+      'Video tutorials',
+      'OpenClaw setup walkthrough',
+      'Template configs included',
+      'Community Discord access',
+      'Lifetime updates',
+    ],
+    package: 'diy',
+  },
+  {
+    tag: 'DONE WITH YOU',
+    title: 'Instant Appie',
+    price: '€250',
+    priceNote: '/month',
     description: 'We host and maintain your AI agent. You focus on your business.',
     featured: true,
-    items: ['Pre-configured OpenClaw instance', 'Telegram or WhatsApp connected', 'Email & calendar integration', 'Monthly subscription', 'Ongoing updates & support', 'Custom personality & memory'],
-    cta: 'Start Hosting',
+    light: false,
+    items: [
+      'Pre-configured OpenClaw instance',
+      'Telegram or WhatsApp connected',
+      'Email & calendar integration',
+      'Custom personality & memory',
+      'Ongoing updates & support',
+      '30-day onboarding',
+    ],
+    package: 'managed',
   },
   {
-    iconKey: 'Wrench',
-    tag: 'Custom',
-    title: 'Done For You',
+    tag: 'DONE FOR YOU',
+    title: 'Custom Solution',
+    price: '€2,000+',
+    priceNote: '',
     description: 'Full custom AI infrastructure built for your specific needs.',
-    items: ['Everything in Hosted', 'Multi-agent architecture', 'Custom workflows & automations', 'Command center dashboard', 'CRM & pipeline integration', 'Dedicated support & strategy'],
-    cta: 'Book a Strategy Call',
+    featured: false,
+    light: false,
+    items: [
+      'Everything in Instant Appie',
+      'Multi-agent architecture',
+      'Custom workflows & automations',
+      'Command center dashboard',
+      'CRM & pipeline integration',
+      'Dedicated support & strategy',
+    ],
+    package: 'enterprise',
   },
-];
+] as const;
 
 export const FAQS = [
   { q: 'What is OpenClaw?', a: 'OpenClaw is an AI agent runtime that powers Appie, your custom digital employee. It runs 24/7 on your own server, connects to your tools, and handles business operations autonomously.' },
@@ -53,33 +143,8 @@ export const FAQS = [
   { q: 'Which tools does it connect to?', a: 'Google Workspace, Notion, Airtable, Webflow, Stripe, n8n, Zapier, Slack, WhatsApp, Telegram, and hundreds more via API or webhook.' },
   { q: 'Is my data private?', a: 'Yes. Your instance runs on a private server. Your data never trains public models and never leaves your infrastructure.' },
   { q: 'When do you launch?', a: 'Very soon. Sign up to get notified first and lock in exclusive launch pricing. Early supporters get the best deal.' },
-] as const;
-
-export const CASE_STUDIES = [
-  {
-    title: 'Eva — Dubai Property',
-    subtitle: 'AI Real Estate Assistant',
-    description: 'Dedicated AI employee for a real estate agency. Handles property inquiries, schedules viewings, qualifies buyers, and runs 24/7 on its own hardware.',
-    image: '/screenshots/cza-fresh.jpg',
-    stat: '24/7 lead response',
-    highlights: ['Property matching', 'Viewing scheduling', 'Buyer qualification', 'Own Mac Mini'],
-  },
-  {
-    title: 'Appie — Weblyfe',
-    subtitle: 'Multi-Agent AI System',
-    description: 'Three AI agents running across time zones. Orchestrator, Marketing Brain, and DevOps. Handles scheduling, content, CRM, code deployments, and operations.',
-    image: '/screenshots/team-dashboard.jpg',
-    stat: '3 agents, 50+ tasks/day',
-    highlights: ['Multi-agent orchestration', 'Content & marketing', 'DevOps & deploys', '99.9% uptime'],
-  },
-  {
-    title: 'CZA Ben de Voorman',
-    subtitle: 'AI WhatsApp Lead Qualification',
-    description: 'Dutch construction company handling dozens of inquiries weekly. AI scores leads 0-100, responds in under 2 minutes, and syncs with Monday CRM automatically.',
-    image: '/screenshots/cza-fresh.jpg',
-    stat: '<2 min response time',
-    highlights: ['WhatsApp automation', 'Lead scoring (0-100)', 'Monday.com sync', '40% after-hours leads'],
-  },
+  { q: 'Why is there a waitlist?', a: 'Limited spots for managed setup to ensure quality for each client. We onboard in batches so every Appie gets the attention it deserves.' },
+  { q: 'What happens after I sign up?', a: 'You get a confirmation email with next steps. When we launch, waitlist members get first access and exclusive pricing before anyone else.' },
 ] as const;
 
 export const TOOLS = [
@@ -97,30 +162,9 @@ export const TOOLS = [
 
 export const TRUSTED_CLIENTS = ['Lost LeBlanc', 'BeyondSchool', 'Dubai Property', 'Stickx Arcade'] as const;
 
-export const THREE_PATHS: readonly { iconKey: string; num: string; tag: string; title: string; desc: string; highlights: readonly string[]; featured?: boolean }[] = [
-  {
-    iconKey: 'BookOpen',
-    num: '01',
-    tag: 'DIY',
-    title: 'Build It Yourself',
-    desc: 'Get the full setup guide, copy-paste config files, and sort the rest by yourself. Perfect for technical founders who want full control.',
-    highlights: ['Complete setup guide', 'Copy-paste config files', 'Community Discord access', 'Self-hosted on your server'],
-  },
-  {
-    iconKey: 'Server',
-    num: '02',
-    tag: 'Hosted',
-    title: 'Employ Appie',
-    desc: 'Rent your own dedicated and private Appie, spun up instantly for you. Personal guidance to link it with your devices.',
-    highlights: ['Your own private Appie', 'Instant setup', 'Connected to your tools', 'Personal onboarding'],
-    featured: true,
-  },
-  {
-    iconKey: 'Wrench',
-    num: '03',
-    tag: 'Enterprise',
-    title: 'Custom AI System',
-    desc: 'We build your own fully customised AI system for your company, on your hardware. Multi-agent, custom workflows, dedicated support.',
-    highlights: ['Fully custom build', 'Your own hardware', 'Multi-agent architecture', 'Dedicated support team'],
-  },
+export const STATS = [
+  { value: '20+', label: 'Hours saved weekly' },
+  { value: '24/7', label: 'Always running' },
+  { value: '2 weeks', label: 'Setup time' },
+  { value: '500+', label: 'Tool integrations' },
 ] as const;

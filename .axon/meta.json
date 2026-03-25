@@ -3,13 +3,13 @@
   "name": "weblyfe-ai",
   "path": "/Users/appie/clawd/projects/weblyfe-ai",
   "stats": {
-    "files": 22,
-    "symbols": 14,
-    "relationships": 36,
+    "files": 25,
+    "symbols": 16,
+    "relationships": 265,
     "clusters": 0,
     "flows": 0,
-    "dead_code": 10,
-    "coupled_pairs": 0
+    "dead_code": 11,
+    "coupled_pairs": 221
   },
-  "last_indexed_at": "2026-03-24T12:07:12.998503+00:00"
+  "last_indexed_at": "2026-03-25T18:42:51.985780+00:00"
 }
