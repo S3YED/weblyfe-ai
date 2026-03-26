@@ -227,7 +227,7 @@ export default function OpenClawPage() {
                 'Your Inbox, Sorted': '/screenshots/email.jpg',
                 'Never Miss a Lead': '/screenshots/cza-fresh.jpg',
                 'Your Calendar, Managed': '/outcomes/calendar-managed.jpg',
-                'Content on Autopilot': null,
+                'Content on Autopilot': '/outcomes/content-autopilot.jpg',
                 'Operations That Scale': '/screenshots/team-dashboard.jpg',
                 'Private & Secure': null,
               };
