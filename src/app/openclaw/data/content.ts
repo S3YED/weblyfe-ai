@@ -145,6 +145,7 @@ export const TIERS = [
       'Custom workflows & automations',
       'Command center dashboard',
       'CRM & pipeline integration',
+      'NemoClaw security: industry-grade sandboxing, 4-layer protection & policy enforcement',
       'Dedicated support & strategy',
     ],
     package: 'enterprise',
@@ -180,6 +181,6 @@ export const TRUSTED_CLIENTS = ['Lost LeBlanc', 'BeyondSchool', 'Dubai Property'
 export const STATS = [
   { value: '20+', label: 'Hours saved weekly' },
   { value: '24/7', label: 'Always running' },
-  { value: '2 weeks', label: 'Setup time' },
+  { value: '€10K+', label: 'Revenue generated' },
   { value: '500+', label: 'Tool integrations' },
 ] as const;

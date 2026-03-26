@@ -34,20 +34,15 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   );
 }
 
+// Fixed launch date: March 30, 2026 23:59 CET (Amsterdam)
+const LAUNCH_DATE = new Date('2026-03-30T23:59:00+01:00').getTime();
+
 function CountdownBadge() {
   const [time, setTime] = useState({ d: 0, h: 0, m: 0, s: 0 });
 
   useEffect(() => {
-    function getLaunch() {
-      const stored = localStorage.getItem('weblyfe_launch_ts');
-      if (stored) return parseInt(stored);
-      const ts = Date.now() + 72 * 60 * 60 * 1000;
-      localStorage.setItem('weblyfe_launch_ts', String(ts));
-      return ts;
-    }
-    const target = getLaunch();
     const tick = () => {
-      const diff = Math.max(0, target - Date.now());
+      const diff = Math.max(0, LAUNCH_DATE - Date.now());
       setTime({
         d: Math.floor(diff / 86400000),
         h: Math.floor((diff / 3600000) % 24),

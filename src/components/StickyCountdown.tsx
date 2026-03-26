@@ -15,13 +15,11 @@ function getTimeLeft(target: number) {
   };
 }
 
+// Fixed launch date: March 30, 2026 23:59 CET (Amsterdam)
+const LAUNCH_DATE = new Date('2026-03-30T23:59:00+01:00').getTime();
+
 function getLaunchTime() {
-  if (typeof window === 'undefined') return Date.now() + 72 * 60 * 60 * 1000;
-  const stored = localStorage.getItem('weblyfe_launch_ts');
-  if (stored) return parseInt(stored);
-  const ts = Date.now() + 72 * 60 * 60 * 1000;
-  localStorage.setItem('weblyfe_launch_ts', String(ts));
-  return ts;
+  return LAUNCH_DATE;
 }
 
 export default function StickyCountdown() {
