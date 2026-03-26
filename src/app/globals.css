@@ -258,9 +258,48 @@ section {
   animation: scroll 30s linear infinite;
 }
 
+/* ── Mobile & Touch Optimizations ── */
+
 /* Prevent iOS zoom on input focus (requires font-size >= 16px) */
 @media screen and (max-width: 768px) {
   input, select, textarea {
     font-size: 16px !important;
+  }
+}
+
+/* Improve touch targets (min 44px per Apple HIG) */
+button, a, [role="button"] {
+  min-height: 44px;
+}
+
+/* Remove tap highlight on mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Smooth momentum scrolling on iOS */
+html {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent text selection on interactive elements */
+button, [role="button"] {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Better focus ring for keyboard nav (not touch) */
+@media (hover: hover) {
+  :focus-visible {
+    outline: 2px solid var(--brand-gold);
+    outline-offset: 2px;
+  }
+}
+
+/* Touch-friendly spacing on mobile */
+@media screen and (max-width: 640px) {
+  section {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
