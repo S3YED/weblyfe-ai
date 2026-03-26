@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Rethink_Sans } from 'next/font/google';
 import './globals.css';
 
@@ -8,6 +8,13 @@ const rethinkSans = Rethink_Sans({
   display: 'swap',
   variable: '--font-rethink',
 });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://weblyfe.ai'),
