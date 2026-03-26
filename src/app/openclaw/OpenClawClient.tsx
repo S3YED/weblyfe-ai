@@ -365,7 +365,7 @@ export default function OpenClawPage() {
         
         <div className="max-w-2xl mx-auto px-6 text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-4">Don&apos;t miss launch pricing</h2>
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-4">Don&apos;t miss launch</h2>
             <p className="text-[#F6FEFC]/60 text-lg mb-8 max-w-xl mx-auto">
               Join founders who are already on the list. Get first access and exclusive pricing when we launch.
             </p>
