@@ -101,7 +101,7 @@ export default function OpenClawPage() {
           </motion.div>
 
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6 mt-8">
-            Your AI Employee{' '}<br className="hidden md:block" /><span className="text-gradient">Ready in 24 Hours</span>
+            Your Personal TechWiz{' '}<br className="hidden md:block" /><span className="text-gradient">Ready in 24 Hours</span>
           </motion.h1>
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="text-xl md:text-2xl text-[#F6FEFC]/65 max-w-3xl mx-auto mb-10 leading-relaxed">
