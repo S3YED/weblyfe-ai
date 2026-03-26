@@ -178,7 +178,7 @@ export default function OpenClawPage() {
               const Icon = iconMap[f.iconKey] || Brain;
               return (
                 <motion.div key={f.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.06 }} className="bg-[#F6FEFC]/95 border border-[#0E3D31]/20 rounded-2xl p-6 hover:border-[#247459] hover:shadow-lg transition-all duration-300 group">
-                  <div className="w-11 h-11 bg-[#247459]/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#247459]/30 transition-colors">
+                  <div className="w-11 h-11 bg-[#0E3D31] rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#247459] transition-colors">
                     <Icon className="w-5 h-5 text-[#DFB771]" />
                   </div>
                   <h3 className="font-bold text-[#031D16] mb-2">{f.title}</h3>
