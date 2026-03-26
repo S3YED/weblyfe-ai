@@ -112,6 +112,8 @@ export const TIERS = [
       'Lifetime updates',
     ],
     package: 'diy',
+    cta: 'Get the Guide',
+    ctaHref: '#waitlist',
   },
   {
     tag: 'DONE WITH YOU',
@@ -130,6 +132,8 @@ export const TIERS = [
       '30-day onboarding',
     ],
     package: 'managed',
+    cta: 'Join the Waitlist',
+    ctaHref: '#waitlist',
   },
   {
     tag: 'DONE FOR YOU',
@@ -149,6 +153,8 @@ export const TIERS = [
       'Dedicated support & strategy',
     ],
     package: 'enterprise',
+    cta: 'Book a Strategy Call',
+    ctaHref: 'https://cal.com/weblyfe/strategy-call',
   },
 ] as const;
 

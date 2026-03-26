@@ -184,6 +184,7 @@ export default function CaseStudies() {
                       src={study.image}
                       alt={study.title}
                       fill
+                      quality={90}
                       className="object-cover"
                     />
                     {/* Overlay gradient */}

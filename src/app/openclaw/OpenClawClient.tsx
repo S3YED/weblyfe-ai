@@ -20,15 +20,15 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border border-[#0E3D31] rounded-2xl overflow-hidden cursor-pointer" onClick={() => setOpen(!open)}>
-      <div className="flex items-center justify-between p-6 bg-[#031D16]/50">
-        <h3 className="font-semibold text-[#F6FEFC] text-lg pr-4">{q}</h3>
+    <div className="border border-[#0E3D31]/20 rounded-2xl overflow-hidden cursor-pointer bg-white" onClick={() => setOpen(!open)}>
+      <div className="flex items-center justify-between p-6">
+        <h3 className="font-semibold text-[#031D16] text-lg pr-4">{q}</h3>
         <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
           <ChevronDown className="w-5 h-5 text-[#DFB771] flex-shrink-0" />
         </motion.div>
       </div>
       <motion.div initial={false} animate={{ height: open ? 'auto' : 0 }} transition={{ duration: 0.25, ease: 'easeInOut' }} className="overflow-hidden">
-        <p className="px-6 pb-6 pt-2 text-[#F6FEFC]/70 leading-relaxed">{a}</p>
+        <p className="px-6 pb-6 pt-2 text-[#031D16]/70 leading-relaxed">{a}</p>
       </motion.div>
     </div>
   );
@@ -74,10 +74,8 @@ export default function OpenClawPage() {
       {/* ── NAV ── */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#031D16]/90 backdrop-blur-md border-b border-[#0E3D31]/50">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
+          <Link href="/">
             <Image src="/logo-gold.svg" alt="Weblyfe.ai" width={120} height={36} className="h-7 w-auto" />
-            <span className="text-[#F6FEFC]/20">×</span>
-            <Image src="/openclaw-mark.svg" alt="OpenClaw" width={28} height={28} className="h-7 w-7" />
           </Link>
           <div className="hidden md:flex items-center gap-6 text-sm">
             <a href="#features" className="text-[#F6FEFC]/70 hover:text-[#DFB771] transition-colors">Features</a>
@@ -96,9 +94,7 @@ export default function OpenClawPage() {
         <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
           {/* OpenClaw Logo */}
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} className="mb-4">
-            <Image src="/openclaw-lobster.svg" alt="OpenClaw" width={64} height={64} className="mx-auto mb-4" />
             <Image src="/openclaw-logo-text.png" alt="OPENCLAW" width={420} height={86} className="mx-auto h-12 md:h-16 w-auto" />
-            <p className="text-[#F6FEFC]/40 text-sm mt-3 tracking-wide">Powered by OpenClaw</p>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
@@ -121,9 +117,23 @@ export default function OpenClawPage() {
             <a href="#features" className="btn-secondary text-base">✦ How It Works</a>
           </motion.div>
 
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.6 }} className="text-sm text-[#F6FEFC]/40 mt-6">
-            No coding required · Fully managed setup · Runs 24/7
-          </motion.p>
+          {/* Authority Stats */}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }} className="flex flex-wrap items-center justify-center gap-6 mt-10 mb-4">
+            <span className="text-sm text-[#F6FEFC]/60">1,200+ Hours Saved</span>
+            <span className="text-[#F6FEFC]/20">|</span>
+            <span className="text-sm text-[#F6FEFC]/60">€50K+ Revenue Generated</span>
+            <span className="text-[#F6FEFC]/20">|</span>
+            <span className="text-sm text-[#F6FEFC]/60">3 Live Agents</span>
+            <span className="text-[#F6FEFC]/20">|</span>
+            <span className="text-sm text-[#F6FEFC]/60">99.9% Uptime</span>
+          </motion.div>
+
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.6 }} className="space-y-2">
+            <p className="text-sm text-[#F6FEFC]/40">
+              No coding required · Fully managed setup · Runs 24/7
+            </p>
+            <p className="text-[#F6FEFC]/40 text-sm tracking-wide">Powered by OpenClaw</p>
+          </motion.div>
         </div>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} className="absolute bottom-10 left-1/2 -translate-x-1/2">
@@ -157,23 +167,23 @@ export default function OpenClawPage() {
       </section>
 
       {/* ── FEATURES (INFLUENCE) ── */}
-      <section id="features" className="py-28">
+      <section id="features" className="py-28 bg-[#F6FEFC]">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">Capabilities</p>
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-4">Everything your business needs,<br className="hidden md:block" /> handled by AI</h2>
-            <p className="text-[#F6FEFC]/60 text-lg max-w-2xl mx-auto">Appie connects to your tools, learns your workflows, and executes tasks through a simple chat interface.</p>
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-[#031D16]">Everything your business needs,<br className="hidden md:block" /> handled by AI</h2>
+            <p className="text-[#031D16]/60 text-lg max-w-2xl mx-auto">Appie connects to your tools, learns your workflows, and executes tasks through a simple chat interface.</p>
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {FEATURES.map((f, i) => {
               const Icon = iconMap[f.iconKey] || Brain;
               return (
-                <motion.div key={f.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.06 }} className="bg-[#0E3D31]/30 border border-[#0E3D31] rounded-2xl p-6 hover:border-[#247459] hover:bg-[#0E3D31]/50 transition-all duration-300 group">
+                <motion.div key={f.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.06 }} className="bg-[#F6FEFC]/95 border border-[#0E3D31]/20 rounded-2xl p-6 hover:border-[#247459] hover:shadow-lg transition-all duration-300 group">
                   <div className="w-11 h-11 bg-[#247459]/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#247459]/30 transition-colors">
                     <Icon className="w-5 h-5 text-[#DFB771]" />
                   </div>
-                  <h3 className="font-bold text-[#F6FEFC] mb-2">{f.title}</h3>
-                  <p className="text-[#F6FEFC]/55 text-sm leading-relaxed">{f.description}</p>
+                  <h3 className="font-bold text-[#031D16] mb-2">{f.title}</h3>
+                  <p className="text-[#031D16]/70 text-sm leading-relaxed">{f.description}</p>
                 </motion.div>
               );
             })}
@@ -196,26 +206,49 @@ export default function OpenClawPage() {
       </section>
 
       {/* ── WHAT YOUR AI HANDLES (PERSUADE) ── */}
-      <section className="py-28 bg-[#031D16]/80">
+      <section className="py-28 bg-[#F6FEFC]">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">The Outcome</p>
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-4">What Your AI Handles</h2>
-            <p className="text-[#F6FEFC]/60 text-lg max-w-2xl mx-auto">Real outcomes for real businesses. Your AI doesn&apos;t just chat — it works.</p>
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-[#031D16]">What Your AI Handles</h2>
+            <p className="text-[#031D16]/60 text-lg max-w-2xl mx-auto">Real outcomes for real businesses. Your AI doesn&apos;t just chat — it works.</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {OUTCOMES.map((o, i) => {
               const Icon = iconMap[o.iconKey] || Zap;
+              const imageMap: Record<string, string | null> = {
+                'Your Inbox, Sorted': '/screenshots/email.jpg',
+                'Never Miss a Lead': '/screenshots/cza-fresh.jpg',
+                'Your Calendar, Managed': null,
+                'Content on Autopilot': null,
+                'Operations That Scale': '/screenshots/team-dashboard.jpg',
+                'Private & Secure': null,
+              };
+              const imageSrc = imageMap[o.title];
+              
               return (
-                <motion.div key={o.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="bg-[#0E3D31]/40 border border-[#0E3D31] rounded-2xl p-6 hover:border-[#247459] transition-all duration-300">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-10 h-10 bg-[#247459]/20 rounded-xl flex items-center justify-center">
-                      <Icon className="w-5 h-5 text-[#DFB771]" />
-                    </div>
-                    <span className="text-xs font-medium text-[#247459] bg-[#247459]/10 px-3 py-1 rounded-full">{o.persona}</span>
+                <motion.div key={o.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="bg-[#F6FEFC]/95 border border-[#0E3D31]/20 rounded-2xl overflow-hidden hover:border-[#247459] hover:shadow-lg transition-all duration-300 group">
+                  {/* Image or Gradient Placeholder */}
+                  <div className="relative h-40 w-full overflow-hidden">
+                    {imageSrc ? (
+                      <Image src={imageSrc} alt={o.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-[#247459]/30 to-[#DFB771]/20 flex items-center justify-center">
+                        <Icon className="w-12 h-12 text-[#247459]/40" />
+                      </div>
+                    )}
                   </div>
-                  <h3 className="font-bold text-[#F6FEFC] text-lg mb-2">{o.title}</h3>
-                  <p className="text-[#F6FEFC]/55 text-sm leading-relaxed">{o.description}</p>
+                  
+                  <div className="p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="w-10 h-10 bg-[#247459]/20 rounded-xl flex items-center justify-center">
+                        <Icon className="w-5 h-5 text-[#DFB771]" />
+                      </div>
+                      <span className="text-xs font-medium text-[#247459] bg-[#247459]/10 px-3 py-1 rounded-full">{o.persona}</span>
+                    </div>
+                    <h3 className="font-bold text-[#031D16] text-lg mb-2">{o.title}</h3>
+                    <p className="text-[#031D16]/70 text-sm leading-relaxed">{o.description}</p>
+                  </div>
                 </motion.div>
               );
             })}
@@ -233,22 +266,24 @@ export default function OpenClawPage() {
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {AGENTS.map((agent, i) => (
-              <motion.div key={agent.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-[#0E3D31]/30 border border-[#0E3D31] rounded-3xl p-8 text-center hover:border-[#247459] transition-all duration-300 group">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#DFB771]/20 to-[#247459]/20 mx-auto mb-5 flex items-center justify-center overflow-hidden border-2 border-[#247459]/30 group-hover:border-[#DFB771]/50 transition-colors">
-                  <Image src={agent.image} alt={agent.name} width={80} height={80} className="w-full h-full object-cover" />
-                </div>
-                <h3 className="text-xl font-extrabold mb-1">{agent.name}</h3>
-                <p className="text-[#DFB771] text-sm font-medium mb-2">{agent.tagline}</p>
-                <span className="text-xs font-medium text-[#247459] bg-[#247459]/10 px-3 py-1 rounded-full mb-4 inline-block">{agent.industry}</span>
-                <p className="text-[#F6FEFC]/55 text-sm leading-relaxed mb-5">{agent.description}</p>
-                <div className="grid grid-cols-3 gap-2 pt-4 border-t border-[#0E3D31]">
-                  {agent.stats.map((stat) => (
-                    <div key={stat.label} className="text-center">
-                      <div className="text-[#DFB771] font-bold text-sm">{stat.value}</div>
-                      <div className="text-[#F6FEFC]/35 text-[10px] uppercase tracking-wider mt-0.5">{stat.label}</div>
-                    </div>
-                  ))}
-                </div>
+              <motion.div key={agent.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+                <a href="/#case-studies" className="block bg-[#0E3D31]/30 border border-[#0E3D31] rounded-3xl p-8 text-center hover:border-[#247459] transition-all duration-300 group">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#DFB771]/20 to-[#247459]/20 mx-auto mb-5 flex items-center justify-center overflow-hidden border-2 border-[#247459]/30 group-hover:border-[#DFB771]/50 transition-colors">
+                    <Image src={agent.image} alt={agent.name} width={80} height={80} className="w-full h-full object-cover" />
+                  </div>
+                  <h3 className="text-xl font-extrabold mb-1">{agent.name}</h3>
+                  <p className="text-[#DFB771] text-sm font-medium mb-2">{agent.tagline}</p>
+                  <span className="text-xs font-medium text-[#247459] bg-[#247459]/10 px-3 py-1 rounded-full mb-4 inline-block">{agent.industry}</span>
+                  <p className="text-[#F6FEFC]/55 text-sm leading-relaxed mb-5">{agent.description}</p>
+                  <div className="grid grid-cols-3 gap-2 pt-4 border-t border-[#0E3D31]">
+                    {agent.stats.map((stat) => (
+                      <div key={stat.label} className="text-center">
+                        <div className="text-[#DFB771] font-bold text-sm">{stat.value}</div>
+                        <div className="text-[#F6FEFC]/35 text-[10px] uppercase tracking-wider mt-0.5">{stat.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </a>
               </motion.div>
             ))}
           </div>
@@ -301,24 +336,14 @@ export default function OpenClawPage() {
                     </li>
                   ))}
                 </ul>
-                <WaitlistForm package={tier.package} variant={tier.light ? 'light' : 'dark'} />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── FAQ (SELL) ── */}
-      <section id="faq" className="py-28">
-        <div className="max-w-3xl mx-auto px-6">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">FAQ</p>
-            <h2 className="text-4xl font-extrabold">Common questions</h2>
-          </motion.div>
-          <div className="space-y-3">
-            {FAQS.map((faq, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
-                <FAQItem q={faq.q} a={faq.a} />
+                <a 
+                  href={tier.ctaHref} 
+                  target={tier.ctaHref.startsWith('http') ? '_blank' : undefined}
+                  rel={tier.ctaHref.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="btn-primary w-full text-center block"
+                >
+                  {tier.cta}
+                </a>
               </motion.div>
             ))}
           </div>
@@ -326,8 +351,20 @@ export default function OpenClawPage() {
       </section>
 
       {/* ── FINAL CTA (SELL) ── */}
-      <section className="py-20 bg-gradient-to-br from-[#0E3D31] to-[#031D16]">
-        <div className="max-w-2xl mx-auto px-6 text-center">
+      <section id="waitlist" className="py-20 bg-gradient-to-br from-[#0E3D31] to-[#031D16] relative overflow-hidden">
+        {/* Decorative background elements */}
+        <motion.div 
+          animate={{ y: [0, -30, 0], rotate: [0, 5, 0] }} 
+          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }} 
+          className="absolute top-10 right-[10%] w-80 h-80 rounded-full bg-gradient-to-br from-[#DFB771]/15 to-[#FFD99A]/10 blur-3xl pointer-events-none" 
+        />
+        <motion.div 
+          animate={{ y: [0, 25, 0], rotate: [0, -4, 0] }} 
+          transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }} 
+          className="absolute bottom-10 left-[10%] w-96 h-96 rounded-full bg-gradient-to-br from-[#247459]/20 to-[#0E3D31]/10 blur-3xl pointer-events-none" 
+        />
+        
+        <div className="max-w-2xl mx-auto px-6 text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="text-4xl md:text-5xl font-extrabold mb-4">Don&apos;t miss launch pricing</h2>
             <p className="text-[#F6FEFC]/60 text-lg mb-8 max-w-xl mx-auto">
@@ -339,8 +376,25 @@ export default function OpenClawPage() {
         </div>
       </section>
 
+      {/* ── FAQ (SELL) ── */}
+      <section id="faq" className="py-28 bg-[#F6FEFC]">
+        <div className="max-w-3xl mx-auto px-6">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+            <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">FAQ</p>
+            <h2 className="text-4xl font-extrabold text-[#031D16]">Common questions</h2>
+          </motion.div>
+          <div className="space-y-3">
+            {FAQS.map((faq, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
+                <FAQItem q={faq.q} a={faq.a} />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── FOOTER ── */}
-      <footer className="border-t border-[#0E3D31]/50 py-10">
+      <footer className="border-t border-[#0E3D31]/50 py-10 pb-20">
         <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <Link href="/">
             <Image src="/logo-gold.svg" alt="Weblyfe.ai" width={100} height={30} className="h-6 w-auto opacity-60 hover:opacity-100 transition-opacity" />

@@ -69,7 +69,7 @@ export default function StickyCountdown() {
 
             {/* CTA */}
             <a
-              href="#pricing"
+              href="#waitlist"
               className="flex items-center gap-1.5 bg-gradient-to-r from-[#DFB771] to-[#FFD99A] text-[#031D16] text-xs font-bold px-4 py-2.5 rounded-full whitespace-nowrap shadow-lg shadow-[#DFB771]/15 hover:scale-105 transition-transform"
             >
               <Bell className="w-3.5 h-3.5" />
