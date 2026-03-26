@@ -94,7 +94,6 @@ export default function OpenClawPage() {
         <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
           {/* OpenClaw Logo */}
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} className="mb-4">
-            <Image src="/openclaw-logo-text.png" alt="OPENCLAW" width={420} height={86} className="mx-auto h-12 md:h-16 w-auto" />
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
