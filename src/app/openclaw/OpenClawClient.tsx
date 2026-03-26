@@ -194,12 +194,16 @@ export default function OpenClawPage() {
       <section className="py-16 border-y border-[#0E3D31]/50 bg-[#0E3D31]/20">
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {STATS.map((stat) => (
-              <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center">
+            {STATS.map((stat) => {
+              const Icon = iconMap[stat.icon];
+              return (
+              <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center flex flex-col items-center">
+                {Icon && <div className="w-10 h-10 bg-[#247459]/30 rounded-xl flex items-center justify-center mb-3"><Icon className="w-5 h-5 text-[#DFB771]" /></div>}
                 <div className="text-4xl md:text-5xl font-extrabold text-[#DFB771] mb-2">{stat.value}</div>
                 <div className="text-[#F6FEFC]/50 text-sm">{stat.label}</div>
               </motion.div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

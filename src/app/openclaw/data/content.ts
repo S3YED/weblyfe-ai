@@ -185,8 +185,8 @@ export const TOOLS = [
 export const TRUSTED_CLIENTS = ['Lost LeBlanc', 'BeyondSchool', 'Dubai Property', 'Stickx Arcade'] as const;
 
 export const STATS = [
-  { value: '20+', label: 'Hours saved weekly' },
-  { value: '24/7', label: 'Always running' },
-  { value: '€10K+', label: 'Revenue generated' },
-  { value: '500+', label: 'Tool integrations' },
+  { value: '20+', label: 'Hours saved weekly', icon: 'Clock' },
+  { value: '24/7', label: 'Always running', icon: 'Zap' },
+  { value: '€10K+', label: 'Revenue generated', icon: 'BarChart3' },
+  { value: '500+', label: 'Tool integrations', icon: 'Wrench' },
 ] as const;
