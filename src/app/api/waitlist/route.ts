@@ -43,6 +43,7 @@ export async function POST(req: NextRequest) {
       'Marketing Channel': 'Appie Waitlist',
       'Status': 'Waitlist',
       'Lead Heat': 'Warm',
+      'Sign-up Date': new Date().toISOString().split('T')[0],
       'Lead notes': `OpenClaw Waitlist Signup\nPackage: ${packageNote}\nSource: weblyfe.ai/openclaw`,
     };
     if (lastName) airtableFields['Last Name'] = lastName;
