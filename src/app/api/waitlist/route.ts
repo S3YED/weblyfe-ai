@@ -75,7 +75,7 @@ export async function POST(req: NextRequest) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          normalizedEmail,
+          email: normalizedEmail,
           attributes: {
             FIRSTNAME: firstName,
             LASTNAME: lastName,
