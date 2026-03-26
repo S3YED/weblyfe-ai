@@ -154,7 +154,7 @@ export const TIERS = [
     ],
     package: 'enterprise',
     cta: 'Book a Strategy Call',
-    ctaHref: 'https://cal.com/weblyfe/strategy-call',
+    ctaHref: 'https://tidycal.com/weblyfe/discovery',
   },
 ] as const;
 
