@@ -116,10 +116,11 @@ export const TIERS = [
     light: true,
     items: [
       '62-page PDF setup guide',
-      'Video tutorials',
+      'GitHub quickstart repo',
       'OpenClaw setup walkthrough',
       'Template configs included',
-      'Community Discord access',
+      'Weblyfe College community access',
+      'Video tutorials library',
       'Lifetime updates',
     ],
     package: 'diy',

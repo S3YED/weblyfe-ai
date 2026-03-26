@@ -60,7 +60,7 @@ function CountdownBadge() {
   return (
     <div className="inline-flex items-center gap-2 bg-[#247459]/20 border border-[#247459]/40 text-[#DFB771] text-sm font-medium px-4 py-2 rounded-full">
       <span className="w-2 h-2 bg-[#DFB771] rounded-full animate-pulse" />
-      🔥 Launch pricing closes in {pad(time.d)}d {pad(time.h)}h {pad(time.m)}m {pad(time.s)}s
+      🔥 Join the waitlist — exclusive launch pricing for early supporters
     </div>
   );
 }
@@ -301,9 +301,9 @@ export default function OpenClawPage() {
       <section id="offers" className="py-28 bg-[#031D16]/80">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">Launch Pricing</p>
+            <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">Three Ways to Get Started</p>
             <h2 className="text-4xl md:text-5xl font-extrabold mb-4">Choose Your AI Setup</h2>
-            <p className="text-[#F6FEFC]/60 text-lg max-w-xl mx-auto">Lock in exclusive pricing before we launch. Limited spots available.</p>
+            <p className="text-[#F6FEFC]/60 text-lg max-w-xl mx-auto">Join the waitlist to lock in exclusive launch pricing. Limited spots available.</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {TIERS.map((tier, i) => (
@@ -331,8 +331,7 @@ export default function OpenClawPage() {
                 </span>
                 <h3 className={`text-2xl font-extrabold mb-2 ${tier.light ? 'text-[#031D16]' : ''}`}>{tier.title}</h3>
                 <div className="mb-4">
-                  <span className={`text-4xl font-extrabold ${tier.featured ? 'text-[#DFB771]' : tier.light ? 'text-[#031D16]' : 'text-[#DFB771]'}`}>{tier.price}</span>
-                  {tier.priceNote && <span className={`text-sm ml-1 ${tier.light ? 'text-[#031D16]/50' : 'text-[#F6FEFC]/40'}`}>{tier.priceNote}</span>}
+                  <span className={`text-lg font-semibold ${tier.featured ? 'text-[#DFB771]' : tier.light ? 'text-[#247459]' : 'text-[#DFB771]/80'}`}>Pricing at launch</span>
                 </div>
                 <p className={`text-sm mb-6 ${tier.light ? 'text-[#031D16]/60' : 'text-[#F6FEFC]/55'}`}>{tier.description}</p>
                 <ul className="space-y-3 mb-8">
@@ -408,6 +407,7 @@ export default function OpenClawPage() {
           </Link>
           <p className="text-[#F6FEFC]/30 text-sm text-center">© 2026 Weblyfe.ai · A Weblyfe by Techwiz LLC company</p>
           <div className="flex gap-6 text-sm text-[#F6FEFC]/40">
+            <a href="https://weblyfeuniversity.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#DFB771] transition-colors">Weblyfe University</a>
             <a href="mailto:hello@weblyfe.ai" className="hover:text-[#DFB771] transition-colors">hello@weblyfe.ai</a>
             <Link href="/" className="hover:text-[#DFB771] transition-colors">← Back to Home</Link>
           </div>
