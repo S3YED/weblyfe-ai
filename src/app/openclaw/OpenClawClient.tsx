@@ -244,10 +244,10 @@ export default function OpenClawPage() {
                   
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-4">
-                      <div className="w-10 h-10 bg-[#247459]/20 rounded-xl flex items-center justify-center">
+                      <div className="w-10 h-10 bg-[#0E3D31] rounded-xl flex items-center justify-center">
                         <Icon className="w-5 h-5 text-[#DFB771]" />
                       </div>
-                      <span className="text-xs font-medium text-[#247459] bg-[#247459]/10 px-3 py-1 rounded-full">{o.persona}</span>
+                      <span className="text-xs font-medium text-[#F6FEFC] bg-[#0E3D31] px-3 py-1 rounded-full">{o.persona}</span>
                     </div>
                     <h3 className="font-bold text-[#031D16] text-lg mb-2">{o.title}</h3>
                     <p className="text-[#031D16]/70 text-sm leading-relaxed">{o.description}</p>
@@ -276,7 +276,7 @@ export default function OpenClawPage() {
                   </div>
                   <h3 className="text-xl font-extrabold mb-1">{agent.name}</h3>
                   <p className="text-[#DFB771] text-sm font-medium mb-2">{agent.tagline}</p>
-                  <span className="text-xs font-medium text-[#247459] bg-[#247459]/10 px-3 py-1 rounded-full mb-4 inline-block">{agent.industry}</span>
+                  <span className="text-xs font-medium text-[#F6FEFC] bg-[#0E3D31] px-3 py-1 rounded-full mb-4 inline-block">{agent.industry}</span>
                   <p className="text-[#F6FEFC]/55 text-sm leading-relaxed mb-5">{agent.description}</p>
                   <div className="grid grid-cols-3 gap-2 pt-4 border-t border-[#0E3D31]">
                     {agent.stats.map((stat) => (
