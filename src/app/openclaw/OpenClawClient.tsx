@@ -226,7 +226,7 @@ export default function OpenClawPage() {
               const imageMap: Record<string, string | null> = {
                 'Your Inbox, Sorted': '/screenshots/email.jpg',
                 'Never Miss a Lead': '/screenshots/cza-fresh.jpg',
-                'Your Calendar, Managed': null,
+                'Your Calendar, Managed': '/outcomes/calendar-managed.jpg',
                 'Content on Autopilot': null,
                 'Operations That Scale': '/screenshots/team-dashboard.jpg',
                 'Private & Secure': null,

@@ -10,8 +10,16 @@ export async function POST(req: NextRequest) {
   try {
     const { name, email, phone, package: pkg } = await req.json();
 
-    if (!email || !email.includes('@')) {
+    // Normalize email
+    const normalizedEmail = (email || '').toLowerCase().trim();
+    if (!normalizedEmail || !normalizedEmail.includes('@')) {
       return NextResponse.json({ error: 'Valid email required' }, { status: 400 });
+    }
+
+    // Normalize phone (strip spaces, ensure + prefix)
+    let normalizedPhone = (phone || '').replace(/[\s\-\(\)]/g, '').trim();
+    if (normalizedPhone && !normalizedPhone.startsWith('+')) {
+      normalizedPhone = '+' + normalizedPhone;
     }
 
     // Split name into first/last
@@ -31,7 +39,7 @@ export async function POST(req: NextRequest) {
     // --- 1. Airtable: Create lead ---
     const airtableFields: Record<string, unknown> = {
       'First Name': firstName,
-      'Email': email,
+      'Email': normalizedEmail,
       'Marketing Channel': 'Appie Waitlist',
       'Status': 'Waitlist',
       'Lead Heat': 'Warm',
@@ -67,11 +75,11 @@ export async function POST(req: NextRequest) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email,
+          normalizedEmail,
           attributes: {
             FIRSTNAME: firstName,
             LASTNAME: lastName,
-            ...(phone ? { SMS: phone } : {}),
+            ...(phone ? { SMS: normalizedPhone } : {}),
           },
           listIds: [BREVO_LIST_ID],
           updateEnabled: true,
