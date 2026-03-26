@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import WaitlistForm from '@/components/WaitlistForm';
 import StickyCountdown from '@/components/StickyCountdown';
-import { FEATURES, OUTCOMES, AGENTS, TIERS, FAQS, TOOLS, TRUSTED_CLIENTS, STATS } from './data/content';
+import { PAINPOINTS, FEATURES, OUTCOMES, AGENTS, TIERS, FAQS, TOOLS, TRUSTED_CLIENTS, STATS } from './data/content';
 
 // ─── ICON MAP ──────────────────────────────────────────────────────────────────
 
@@ -166,27 +166,31 @@ export default function OpenClawPage() {
       </section>
 
       {/* ── FEATURES (INFLUENCE) ── */}
+            {/* ── PAIN POINTS (TEMPT) ── */}
       <section id="features" className="py-28 bg-[#F6FEFC]">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">Capabilities</p>
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-[#031D16]">Everything your business needs,<br className="hidden md:block" /> handled by AI</h2>
-            <p className="text-[#031D16]/60 text-lg max-w-2xl mx-auto">Appie connects to your tools, learns your workflows, and executes tasks through a simple chat interface.</p>
+            <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">Sound Familiar?</p>
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-[#031D16]">Running a business shouldn&apos;t<br className="hidden md:block" /> feel like this</h2>
+            <p className="text-[#031D16]/60 text-lg max-w-2xl mx-auto">You want agency-quality results without the agency price tag. But doing it all yourself? That&apos;s burning you out.</p>
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {FEATURES.map((f, i) => {
-              const Icon = iconMap[f.iconKey] || Brain;
+            {PAINPOINTS.map((p, i) => {
+              const Icon = iconMap[p.iconKey] || Brain;
               return (
-                <motion.div key={f.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.06 }} className="bg-[#F6FEFC]/95 border border-[#0E3D31]/20 rounded-2xl p-6 hover:border-[#247459] hover:shadow-lg transition-all duration-300 group">
-                  <div className="w-11 h-11 bg-[#0E3D31] rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#247459] transition-colors">
-                    <Icon className="w-5 h-5 text-[#DFB771]" />
+                <motion.div key={p.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.06 }} className="bg-[#F6FEFC]/95 border border-[#0E3D31]/15 rounded-2xl p-6 hover:border-[#c0392b]/30 hover:shadow-lg transition-all duration-300 group">
+                  <div className="w-11 h-11 bg-[#0E3D31] rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#c0392b] transition-colors">
+                    <Icon className="w-5 h-5 text-[#DFB771] group-hover:text-white transition-colors" />
                   </div>
-                  <h3 className="font-bold text-[#031D16] mb-2">{f.title}</h3>
-                  <p className="text-[#031D16]/70 text-sm leading-relaxed">{f.description}</p>
+                  <h3 className="font-bold text-[#031D16] mb-2">{p.title}</h3>
+                  <p className="text-[#031D16]/70 text-sm leading-relaxed">{p.description}</p>
                 </motion.div>
               );
             })}
           </div>
+          <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.5 }} className="text-center mt-12 text-[#031D16]/50 text-lg italic">
+            What if one AI employee could handle all of this?
+          </motion.p>
         </div>
       </section>
 

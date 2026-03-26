@@ -5,6 +5,17 @@
  * Edit this file to change text without touching component code.
  */
 
+export const PAINPOINTS = [
+  { iconKey: 'Clock', title: 'Everything Takes Forever', description: 'A simple website update takes 3 emails, 2 meetings, and a week of waiting. Your freelancer has "other clients" too.' },
+  { iconKey: 'Wrench', title: 'Too Many Tools, Zero Flow', description: 'Your CRM doesn\'t talk to your email. Your calendar doesn\'t sync with your tasks. You\'re the human glue holding it all together.' },
+  { iconKey: 'Bot', title: 'You Need a Team (But Can\'t Afford One)', description: 'A designer, a developer, a marketer, a VA. That\'s €5K+/month before anyone even starts working.' },
+  { iconKey: 'Mail', title: 'Leads Slip Through the Cracks', description: 'Someone filled out your contact form at 2 AM. You saw it at noon. They already hired your competitor.' },
+  { iconKey: 'Calendar', title: 'Your Calendar Runs You', description: 'Back-to-back meetings, double bookings, no prep time. You spend more time scheduling than actually doing the work.' },
+  { iconKey: 'Globe', title: 'Marketing? What Marketing?', description: 'You know you should post content, send newsletters, follow up with leads. But who has time when you\'re doing everything else?' },
+  { iconKey: 'BarChart3', title: 'No Visibility on Your Business', description: 'How many leads came in this week? What\'s your close rate? You\'d need to check 4 different tools to find out.' },
+  { iconKey: 'Shield', title: 'Your Data Is Everywhere', description: 'Client info in Google Docs, financials in a spreadsheet, passwords in your notes app. Nothing is centralized or secure.' },
+] as const;
+
 export const FEATURES = [
   { iconKey: 'Brain', title: 'Persistent Memory', description: 'Remembers context across every conversation. No more repeating yourself.' },
   { iconKey: 'Bot', title: 'Multi-Agent Teams', description: 'Spawn specialized agents for complex tasks. One coordinates, others execute.' },
