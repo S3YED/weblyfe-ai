@@ -90,6 +90,27 @@ export async function POST(req: NextRequest) {
       console.error('Brevo error (non-blocking):', brevoErr);
     }
 
+    // --- 3. Brevo: Send confirmation email (template #21) ---
+    try {
+      await fetch('https://api.brevo.com/v3/smtp/email', {
+        method: 'POST',
+        headers: {
+          'api-key': BREVO_API_KEY,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          templateId: 21,
+          to: [{ email: normalizedEmail, name: firstName || 'there' }],
+          params: {
+            FIRSTNAME: firstName || 'there',
+            PACKAGE: packageNote,
+          },
+        }),
+      });
+    } catch (emailErr) {
+      console.error('Confirmation email error (non-blocking):', emailErr);
+    }
+
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error('Waitlist error:', err);
