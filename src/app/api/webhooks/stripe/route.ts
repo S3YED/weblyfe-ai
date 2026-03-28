@@ -5,6 +5,10 @@ const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET!;
 const BREVO_API_KEY = process.env.BREVO_API_KEY!;
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY!;
 const PDF_SIGNING_SECRET = process.env.PDF_SIGNING_SECRET || 'weblyfe-appie-pdf-2026';
+const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY!;
+const AIRTABLE_BASE_ID = process.env.AIRTABLE_WEBLYFE_BASE_ID!;
+const AIRTABLE_LEADS_TABLE = 'tblXjrB8K4Mc6U8Xu';
+const AIRTABLE_SALES_TABLE = 'tbl4ghEabTQzC84hV';
 
 // ─── Stripe Signature Verification ─────────────────────────────────────────────
 
@@ -64,6 +68,176 @@ async function getCustomerEmail(session: {
     } catch { /* fall through */ }
   }
   return null;
+}
+
+// ─── Airtable: Find or Create Lead, Create Sale ────────────────────────────────
+
+async function airtableFetch(table: string, options: { method?: string; body?: unknown; params?: string } = {}) {
+  const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${table}${options.params ? `?${options.params}` : ''}`;
+  const res = await fetch(url, {
+    method: options.method || 'GET',
+    headers: {
+      Authorization: `Bearer ${AIRTABLE_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    ...(options.body ? { body: JSON.stringify(options.body) } : {}),
+  });
+  return res.json();
+}
+
+async function findLeadByEmail(email: string): Promise<{ id: string; fields: Record<string, unknown> } | null> {
+  const formula = encodeURIComponent(`LOWER({Email}) = "${email.toLowerCase().trim()}"`);
+  const data = await airtableFetch(AIRTABLE_LEADS_TABLE, { params: `filterByFormula=${formula}&maxRecords=1` });
+  const records = data.records || [];
+  return records.length > 0 ? records[0] : null;
+}
+
+async function createLead(email: string, fullName: string, phone?: string): Promise<string> {
+  const nameParts = (fullName || '').trim().split(/\s+/);
+  const firstName = nameParts[0] || '';
+  const lastName = nameParts.slice(1).join(' ') || '';
+
+  const fields: Record<string, unknown> = {
+    'First Name': firstName,
+    'Email': email.toLowerCase().trim(),
+    'Marketing Channel': 'Stripe',
+    'Status': 'Close',
+    'Lead Heat': 'Hot',
+    'Sign-up Date': new Date().toISOString(),
+    'Lead notes': 'Auto-created from Stripe PDF purchase (Build Your Own Appie v4.1)',
+  };
+  if (lastName) fields['Last Name'] = lastName;
+  if (phone) fields['Phone'] = phone;
+
+  const data = await airtableFetch(AIRTABLE_LEADS_TABLE, {
+    method: 'POST',
+    body: { fields, typecast: true },
+  });
+  return data.id;
+}
+
+async function createSale(
+  leadId: string,
+  email: string,
+  fullName: string,
+  amount: number,
+  currency: string,
+  discountCode?: string,
+  invoiceId?: string,
+  receiptUrl?: string,
+  stripeFee?: number,
+): Promise<string> {
+  const fields: Record<string, unknown> = {
+    'Full Name': fullName,
+    'Email': email.toLowerCase().trim(),
+    'Payment Date': new Date().toISOString(),
+    'Lead': [leadId],
+    'Currency': currency,
+    'Amount': amount,
+    'Product': 'UPI PDF',
+    'Payment Status': 'complete',
+    'Link Stripe': true,
+  };
+  if (discountCode) fields['Discount Code'] = discountCode;
+  if (invoiceId) fields['Invoice'] = invoiceId;
+  if (receiptUrl) fields['Receipt URL'] = receiptUrl;
+  if (stripeFee) fields['Stripe Fee'] = stripeFee;
+
+  const data = await airtableFetch(AIRTABLE_SALES_TABLE, {
+    method: 'POST',
+    body: { fields, typecast: true },
+  });
+  return data.id;
+}
+
+async function recordSaleInAirtable(session: {
+  customer_details?: { email?: string; name?: string; phone?: string };
+  customer_email?: string;
+  amount_total?: number;
+  currency?: string;
+  total_details?: { amount_discount?: number };
+  invoice?: string;
+  payment_intent?: string;
+  id: string;
+}): Promise<void> {
+  const email = (session.customer_details?.email || session.customer_email || '').toLowerCase().trim();
+  const fullName = session.customer_details?.name || '';
+  const phone = session.customer_details?.phone || undefined;
+  const amount = (session.amount_total || 0) / 100;
+  const currency = (session.currency || 'eur').toLowerCase();
+
+  if (!email) {
+    console.error('Airtable: no email, skipping sale recording');
+    return;
+  }
+
+  // 1. Find existing lead or create new one
+  let leadId: string;
+  const existingLead = await findLeadByEmail(email);
+
+  if (existingLead) {
+    leadId = existingLead.id;
+    console.log(`Airtable: found existing lead ${leadId} for ${email}`);
+  } else {
+    leadId = await createLead(email, fullName, phone);
+    console.log(`Airtable: created new lead ${leadId} for ${email}`);
+  }
+
+  // 2. Get discount code if any (from Stripe line items)
+  let discountCode: string | undefined;
+  try {
+    const lineItems = await fetch(
+      `https://api.stripe.com/v1/checkout/sessions/${session.id}/line_items?expand[]=data.discounts`,
+      { headers: { Authorization: `Bearer ${STRIPE_SECRET_KEY}` } }
+    );
+    const items = await lineItems.json();
+    const discount = items.data?.[0]?.discounts?.[0];
+    if (discount?.discount?.promotion_code) {
+      // Fetch the promo code to get the human-readable code
+      const promoRes = await fetch(
+        `https://api.stripe.com/v1/promotion_codes/${discount.discount.promotion_code}`,
+        { headers: { Authorization: `Bearer ${STRIPE_SECRET_KEY}` } }
+      );
+      const promo = await promoRes.json();
+      discountCode = promo.code || undefined;
+    }
+  } catch (err) {
+    console.error('Airtable: error fetching discount code:', err);
+  }
+
+  // 3. Get Stripe fee from balance transaction
+  let stripeFee: number | undefined;
+  let receiptUrl: string | undefined;
+  try {
+    if (session.payment_intent) {
+      const piRes = await fetch(
+        `https://api.stripe.com/v1/payment_intents/${session.payment_intent}?expand[]=latest_charge`,
+        { headers: { Authorization: `Bearer ${STRIPE_SECRET_KEY}` } }
+      );
+      const pi = await piRes.json();
+      const charge = pi.latest_charge;
+      if (charge) {
+        receiptUrl = charge.receipt_url || undefined;
+        if (charge.balance_transaction && typeof charge.balance_transaction === 'string') {
+          const btRes = await fetch(
+            `https://api.stripe.com/v1/balance_transactions/${charge.balance_transaction}`,
+            { headers: { Authorization: `Bearer ${STRIPE_SECRET_KEY}` } }
+          );
+          const bt = await btRes.json();
+          stripeFee = (bt.fee || 0) / 100;
+        }
+      }
+    }
+  } catch (err) {
+    console.error('Airtable: error fetching Stripe fee:', err);
+  }
+
+  // 4. Create the sale record
+  const saleId = await createSale(
+    leadId, email, fullName, amount, currency,
+    discountCode, session.invoice || undefined, receiptUrl, stripeFee
+  );
+  console.log(`Airtable: created sale ${saleId} for ${email} (€${amount}, ${discountCode || 'no discount'})`);
 }
 
 // ─── Email HTML Template ───────────────────────────────────────────────────────
@@ -283,6 +457,15 @@ export async function POST(req: NextRequest) {
       const firstName = fullName.split(/\s+/)[0] || '';
 
       console.log(`Webhook: delivering PDF to ${email} (${firstName})`);
+
+      // Record sale in Airtable (find/create lead + create sale)
+      try {
+        await recordSaleInAirtable(session);
+      } catch (airtableErr) {
+        console.error('Webhook: Airtable error (non-blocking):', airtableErr);
+      }
+
+      // Send delivery email
       await sendPDFDeliveryEmail(email.toLowerCase().trim(), firstName);
       console.log(`Webhook: delivery email sent to ${email}`);
     }
