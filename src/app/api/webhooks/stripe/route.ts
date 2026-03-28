@@ -134,7 +134,7 @@ async function createSale(
     'Lead': [leadId],
     'Currency': currency,
     'Amount': amount,
-    'Product': 'UPI PDF',
+    'Product': 'Appie PDF',
     'Payment Status': 'complete',
     'Link Stripe': true,
   };
