@@ -202,9 +202,14 @@ export default function OpenClawPage() {
             {OUTCOMES.map((o, i) => {
               const Icon = iconMap[o.iconKey] || Zap;
               const imageMap: Record<string, string | null> = {
+                'Your Inbox, Sorted': '/screenshots/email.jpg',
                 'Never Miss a Lead': '/screenshots/cza-fresh.jpg',
+                'Your Calendar, Managed': '/outcomes/calendar-managed.jpg',
+                'Content on Autopilot': '/outcomes/content-autopilot.jpg',
+                'Operations That Scale': '/screenshots/team-dashboard.jpg',
+                'Private & Secure': null,
               };
-              const imageSrc = imageMap[o.title] || null;
+              const imageSrc = imageMap[o.title];
               
               return (
                 <motion.div key={o.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="bg-[#F6FEFC]/95 border border-[#0E3D31]/20 rounded-2xl overflow-hidden hover:border-[#247459] hover:shadow-lg transition-all duration-300 group">
@@ -248,8 +253,8 @@ export default function OpenClawPage() {
             {AGENTS.map((agent, i) => (
               <motion.div key={agent.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
                 <a href="/#case-studies" className="block bg-[#0E3D31]/30 border border-[#0E3D31] rounded-3xl p-8 text-center hover:border-[#247459] transition-all duration-300 group">
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#DFB771]/30 to-[#247459]/30 mx-auto mb-5 flex items-center justify-center overflow-hidden border-2 border-[#247459]/30 group-hover:border-[#DFB771]/50 transition-colors">
-                    <span className="text-3xl">{agent.emoji}</span>
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#DFB771]/20 to-[#247459]/20 mx-auto mb-5 flex items-center justify-center overflow-hidden border-2 border-[#247459]/30 group-hover:border-[#DFB771]/50 transition-colors">
+                    <Image src={agent.image} alt={agent.name} width={80} height={80} className="w-full h-full object-cover" />
                   </div>
                   <h3 className="text-xl font-extrabold mb-1">{agent.name}</h3>
                   <p className="text-[#DFB771] text-sm font-medium mb-2">{agent.tagline}</p>
