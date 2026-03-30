@@ -1,1 +1,4 @@
-# Deploy
+# Deploy — exclude non-essential files from Vercel builds
+docs/
+.axon/
+README.md
