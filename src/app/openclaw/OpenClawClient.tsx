@@ -3,10 +3,10 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Check, Bot, Zap, Calendar, Mail, Globe, Shield, Brain, BarChart3, ChevronDown, BookOpen, Server, Wrench, Clock } from 'lucide-react';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import WaitlistForm from '@/components/WaitlistForm';
-import StickyCountdown from '@/components/StickyCountdown';
+// StickyCountdown removed - PDF is live, no countdown needed
 import { PAINPOINTS, FEATURES, OUTCOMES, AGENTS, TIERS, FAQS, TOOLS, TRUSTED_CLIENTS, STATS } from './data/content';
 
 // ─── ICON MAP ──────────────────────────────────────────────────────────────────
@@ -34,33 +34,11 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-// Fixed launch date: March 30, 2026 23:59 CET (Amsterdam)
-const LAUNCH_DATE = new Date('2026-03-30T23:59:00+01:00').getTime();
-
-function CountdownBadge() {
-  const [time, setTime] = useState({ d: 0, h: 0, m: 0, s: 0 });
-
-  useEffect(() => {
-    const tick = () => {
-      const diff = Math.max(0, LAUNCH_DATE - Date.now());
-      setTime({
-        d: Math.floor(diff / 86400000),
-        h: Math.floor((diff / 3600000) % 24),
-        m: Math.floor((diff / 60000) % 60),
-        s: Math.floor((diff / 1000) % 60),
-      });
-    };
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, []);
-
-  const pad = (n: number) => String(n).padStart(2, '0');
-
+function LiveBadge() {
   return (
     <div className="inline-flex items-center gap-2 bg-[#247459]/20 border border-[#247459]/40 text-[#DFB771] text-sm font-medium px-4 py-2 rounded-full">
       <span className="w-2 h-2 bg-[#DFB771] rounded-full animate-pulse" />
-      🔥 Join the waitlist — exclusive launch pricing for early supporters
+      🔥 The Build Your Own Appie guide is LIVE — get yours for €65
     </div>
   );
 }
@@ -81,7 +59,7 @@ export default function OpenClawPage() {
             <a href="#features" className="text-[#F6FEFC]/70 hover:text-[#DFB771] transition-colors">Features</a>
             <a href="#offers" className="text-[#F6FEFC]/70 hover:text-[#DFB771] transition-colors">Packages</a>
             <a href="#faq" className="text-[#F6FEFC]/70 hover:text-[#DFB771] transition-colors">FAQ</a>
-            <a href="#offers" className="btn-primary text-sm py-2.5 px-5">Join the Waitlist</a>
+            <a href="#offers" className="btn-primary text-sm py-2.5 px-5">Get Started</a>
           </div>
         </div>
       </nav>
@@ -97,7 +75,7 @@ export default function OpenClawPage() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
-            <CountdownBadge />
+            <LiveBadge />
           </motion.div>
 
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6 mt-8">
@@ -111,7 +89,7 @@ export default function OpenClawPage() {
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="#offers" className="btn-primary group text-base">
-              Join the Waitlist <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              Start Now <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
             <a href="#features" className="btn-secondary text-base">✦ How It Works</a>
           </motion.div>
@@ -224,14 +202,9 @@ export default function OpenClawPage() {
             {OUTCOMES.map((o, i) => {
               const Icon = iconMap[o.iconKey] || Zap;
               const imageMap: Record<string, string | null> = {
-                'Your Inbox, Sorted': '/screenshots/email.jpg',
                 'Never Miss a Lead': '/screenshots/cza-fresh.jpg',
-                'Your Calendar, Managed': '/outcomes/calendar-managed.jpg',
-                'Content on Autopilot': '/outcomes/content-autopilot.jpg',
-                'Operations That Scale': '/screenshots/team-dashboard.jpg',
-                'Private & Secure': null,
               };
-              const imageSrc = imageMap[o.title];
+              const imageSrc = imageMap[o.title] || null;
               
               return (
                 <motion.div key={o.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="bg-[#F6FEFC]/95 border border-[#0E3D31]/20 rounded-2xl overflow-hidden hover:border-[#247459] hover:shadow-lg transition-all duration-300 group">
@@ -275,8 +248,8 @@ export default function OpenClawPage() {
             {AGENTS.map((agent, i) => (
               <motion.div key={agent.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
                 <a href="/#case-studies" className="block bg-[#0E3D31]/30 border border-[#0E3D31] rounded-3xl p-8 text-center hover:border-[#247459] transition-all duration-300 group">
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#DFB771]/20 to-[#247459]/20 mx-auto mb-5 flex items-center justify-center overflow-hidden border-2 border-[#247459]/30 group-hover:border-[#DFB771]/50 transition-colors">
-                    <Image src={agent.image} alt={agent.name} width={80} height={80} className="w-full h-full object-cover" />
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#DFB771]/30 to-[#247459]/30 mx-auto mb-5 flex items-center justify-center overflow-hidden border-2 border-[#247459]/30 group-hover:border-[#DFB771]/50 transition-colors">
+                    <span className="text-3xl">{agent.emoji}</span>
                   </div>
                   <h3 className="text-xl font-extrabold mb-1">{agent.name}</h3>
                   <p className="text-[#DFB771] text-sm font-medium mb-2">{agent.tagline}</p>
@@ -301,9 +274,9 @@ export default function OpenClawPage() {
       <section id="offers" className="py-28 bg-[#031D16]/80">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">Three Ways to Get Started</p>
+            <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">Get Started Today</p>
             <h2 className="text-4xl md:text-5xl font-extrabold mb-4">Choose Your AI Setup</h2>
-            <p className="text-[#F6FEFC]/60 text-lg max-w-xl mx-auto">Join the waitlist to lock in exclusive launch pricing. Limited spots available.</p>
+            <p className="text-[#F6FEFC]/60 text-lg max-w-xl mx-auto">The playbook is live. Start building your AI employee today.</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {TIERS.map((tier, i) => (
@@ -314,16 +287,23 @@ export default function OpenClawPage() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 className={`rounded-3xl p-8 border relative ${
-                  tier.featured
+                  tier.featured && tier.light
+                    ? 'border-[#DFB771] bg-[#F6FEFC] text-[#031D16]'
+                    : tier.featured
                     ? 'border-[#DFB771] bg-gradient-to-br from-[#DFB771]/10 to-[#247459]/10'
                     : tier.light
                     ? 'border-[#F6FEFC]/20 bg-[#F6FEFC] text-[#031D16]'
                     : 'border-[#0E3D31] bg-[#0E3D31]/30'
                 }`}
               >
-                {tier.featured && (
+                {tier.featured && !('comingSoon' in tier && (tier as any).comingSoon) && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="bg-gradient-to-r from-[#DFB771] to-[#FFD99A] text-[#031D16] text-xs font-bold px-4 py-1.5 rounded-full">MOST POPULAR</span>
+                    <span className="bg-gradient-to-r from-[#DFB771] to-[#FFD99A] text-[#031D16] text-xs font-bold px-4 py-1.5 rounded-full">AVAILABLE NOW</span>
+                  </div>
+                )}
+                {('comingSoon' in tier && (tier as any).comingSoon) && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <span className="bg-[#0E3D31] border border-[#247459]/50 text-[#F6FEFC]/60 text-xs font-bold px-4 py-1.5 rounded-full">COMING SOON</span>
                   </div>
                 )}
                 <span className={`text-xs font-bold uppercase tracking-widest mb-3 block ${tier.featured ? 'text-[#DFB771]' : tier.light ? 'text-[#247459]' : 'text-[#247459]'}`}>
@@ -331,7 +311,8 @@ export default function OpenClawPage() {
                 </span>
                 <h3 className={`text-2xl font-extrabold mb-2 ${tier.light ? 'text-[#031D16]' : ''}`}>{tier.title}</h3>
                 <div className="mb-4">
-                  <span className={`text-lg font-semibold ${tier.featured ? 'text-[#DFB771]' : tier.light ? 'text-[#247459]' : 'text-[#DFB771]/80'}`}>Pricing at launch</span>
+                  <span className={`text-3xl font-extrabold ${tier.featured && tier.light ? 'text-[#247459]' : tier.featured ? 'text-[#DFB771]' : tier.light ? 'text-[#247459]' : 'text-[#DFB771]/80'}`}>{tier.price}</span>
+                  {tier.priceNote && <span className={`text-sm ml-1 ${tier.light ? 'text-[#031D16]/50' : 'text-[#F6FEFC]/40'}`}>{tier.priceNote}</span>}
                 </div>
                 <p className={`text-sm mb-6 ${tier.light ? 'text-[#031D16]/60' : 'text-[#F6FEFC]/55'}`}>{tier.description}</p>
                 <ul className="space-y-3 mb-8">
@@ -342,14 +323,20 @@ export default function OpenClawPage() {
                     </li>
                   ))}
                 </ul>
-                <a 
-                  href={tier.ctaHref} 
-                  target={tier.ctaHref.startsWith('http') ? '_blank' : undefined}
-                  rel={tier.ctaHref.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="btn-primary w-full text-center block"
-                >
-                  {tier.cta}
-                </a>
+                {('comingSoon' in tier && (tier as any).comingSoon) ? (
+                  <span className="w-full text-center block py-3.5 px-6 rounded-xl bg-[#0E3D31]/50 text-[#F6FEFC]/40 font-semibold cursor-not-allowed border border-[#247459]/20">
+                    Coming Soon
+                  </span>
+                ) : (
+                  <a 
+                    href={tier.ctaHref} 
+                    target={tier.ctaHref.startsWith('http') ? '_blank' : undefined}
+                    rel={tier.ctaHref.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className="btn-primary w-full text-center block"
+                  >
+                    {tier.cta}
+                  </a>
+                )}
               </motion.div>
             ))}
           </div>
@@ -372,12 +359,18 @@ export default function OpenClawPage() {
         
         <div className="max-w-2xl mx-auto px-6 text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-4">Don&apos;t miss launch</h2>
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-4">Ready to build your AI employee?</h2>
             <p className="text-[#F6FEFC]/60 text-lg mb-8 max-w-xl mx-auto">
-              Join founders who are already on the list. Get first access and exclusive pricing when we launch.
+              The complete playbook is live. 62 pages. Real code. Real prompts. Everything you need to get started.
             </p>
-            <WaitlistForm package="general" />
-            <p className="text-[#F6FEFC]/35 text-sm mt-6">No commitment. No spam. Just early access.</p>
+            <a href="https://buy.stripe.com/7sYaEYfAn30C8BncwJ3Je2I" target="_blank" rel="noopener noreferrer" className="btn-primary group text-lg inline-flex items-center gap-2">
+              Get the Guide Now <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </a>
+            <p className="text-[#F6FEFC]/35 text-sm mt-6">€65 one-time. Lifetime updates. Instant delivery.</p>
+            <div className="mt-8 pt-8 border-t border-[#F6FEFC]/10">
+              <p className="text-[#F6FEFC]/40 text-sm mb-4">Want us to build it for you instead? Managed plans coming soon.</p>
+              <WaitlistForm package="general" />
+            </div>
           </motion.div>
         </div>
       </section>
@@ -414,8 +407,7 @@ export default function OpenClawPage() {
         </div>
       </footer>
 
-      {/* ── STICKY COUNTDOWN ── */}
-      <StickyCountdown />
+      {/* Sticky countdown removed - PDF is live */}
     </main>
   );
 }
