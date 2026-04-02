@@ -11,6 +11,14 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: 'voice-agents-to-ai-employees',
+    title: 'From Voice Agents to AI Employees: Everything We've Built at Weblyfe',
+    excerpt:
+      'How we built AI employees that handle sales qualification, construction inquiries, GDPR compliance, and internal operations 24/7 for €45/month. The full story, tech stack, and real results.',
+    date: 'April 2, 2026',
+    tag: 'Case Study',
+  },
+  {
     slug: 'build-your-own-ai-employee',
     title: 'I Built 3 AI Employees for $146/Month. Here\'s Everything.',
     excerpt:
