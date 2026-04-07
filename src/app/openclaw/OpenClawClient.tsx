@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Check, Bot, Zap, Calendar, Mail, Globe, Shield, Brain, BarChart3, ChevronDown, BookOpen, Server, Wrench, Clock } from 'lucide-react';
 import Image from 'next/image';
+import CaseStudies from '@/components/CaseStudies';
 import { useState } from 'react';
 import Link from 'next/link';
 import WaitlistForm from '@/components/WaitlistForm';
@@ -274,6 +275,9 @@ export default function OpenClawPage() {
           </div>
         </div>
       </section>
+
+      {/* ── CASE STUDIES SLIDER ── */}
+      <CaseStudies />
 
       {/* ── PRICING (SELL) ── */}
       <section id="offers" className="py-28 bg-[#031D16]/80">

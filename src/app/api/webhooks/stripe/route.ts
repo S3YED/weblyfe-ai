@@ -104,7 +104,7 @@ async function createLead(email: string, fullName: string, phone?: string): Prom
     'Status': 'Close',
     'Lead Heat': 'Hot',
     'Sign-up Date': new Date().toISOString(),
-    'Lead notes': 'Auto-created from Stripe PDF purchase (Build Your Own Appie v4.1)',
+    'Lead notes': 'Auto-created from Stripe PDF purchase (Build Your Own Appie v4.4)',
   };
   if (lastName) fields['Last Name'] = lastName;
   if (phone) fields['Phone'] = phone;
@@ -134,7 +134,7 @@ async function createSale(
     'Lead': [leadId],
     'Currency': currency,
     'Amount': amount,
-    'Product': 'Appie PDF',
+    'Product': 'Appie PDF v4.4',
     'Payment Status': 'complete',
     'Link Stripe': true,
   };
@@ -295,7 +295,7 @@ function generateEmailHTML(firstName: string, password: string, downloadUrl: str
             Hey ${firstName}, welcome!
           </h1>
           <p class="text-mid" style="color:#4a5568;font-size:15px;margin:0;">
-            Your copy of <strong>Build Your Own Appie v4.1</strong> is ready to download.
+            Your copy of <strong>Build Your Own Appie v4.4</strong> is ready to download.
           </p>
         </div>
 
@@ -337,7 +337,7 @@ function generateEmailHTML(firstName: string, password: string, downloadUrl: str
                   </td>
                   <td>
                     <p class="text-dark" style="color:#031D16;margin:0;font-size:14px;font-weight:600;">Open the PDF and start reading</p>
-                    <p class="text-mid" style="color:#718096;margin:3px 0 0;font-size:13px;">62 pages of step-by-step instructions to build your AI employee.</p>
+                    <p class="text-mid" style="color:#718096;margin:3px 0 0;font-size:13px;">56 pages of step-by-step instructions to build your AI employee.</p>
                   </td>
                 </tr>
               </table>
@@ -411,6 +411,10 @@ async function sendPDFDeliveryEmail(email: string, firstName: string): Promise<v
       replyTo: { email: 'hello@weblyfe.ai', name: 'Weblyfe' },
       subject: 'Your Appie Guide is here! 🎉',
       htmlContent: generateEmailHTML(firstName || 'there', password, downloadUrl),
+      tags: ['appie-pdf', 'appie-pdf-v4.4'],
+      headers: {
+        'X-Mailin-custom': 'prefix=appie-v44;',
+      },
     }),
   });
 

@@ -57,14 +57,14 @@ export async function GET(req: NextRequest) {
 
   try {
     // Serve the pre-protected PDF
-    const pdfPath = join(process.cwd(), 'assets', 'appie-guide-v4.1.pdf');
+    const pdfPath = join(process.cwd(), 'assets', 'appie-guide-v4.pdf');
     const pdfBuffer = await readFile(pdfPath);
 
     return new NextResponse(pdfBuffer, {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': 'attachment; filename="Build_Your_Own_Appie_v4.pdf"',
+        'Content-Disposition': 'attachment; filename="Build_Your_Own_Appie_v4.4.pdf"',
         'Content-Length': pdfBuffer.length.toString(),
         'Cache-Control': 'private, no-cache, no-store',
         'X-Robots-Tag': 'noindex',
