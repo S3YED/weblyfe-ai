@@ -93,7 +93,7 @@ async function triggerProvisioning(
     // 5. Start hermes gateway service
     // 6. Mark instance as 'ready'
 
-    const region = 'fsn1'; // Falkenstein, Germany (closest to EU customers)
+    const region = 'nbg1'; // Nuremberg, Germany
     const serverType = 'cx32'; // 4 vCPU, 8GB RAM
 
     const serverRes = await fetch('https://api.hetzner.cloud/v1/servers', {
@@ -103,12 +103,11 @@ async function triggerProvisioning(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: `appie-${customerEmail.split('@')[0].slice(0, 20)}`,
+        name: `appie-${customerEmail.split('@')[0].replace(/[^a-z0-9]/gi, '-').slice(0, 20)}-${Date.now().toString(36)}`,
         server_type: serverType,
         location: region,
         image: 'ubuntu-24.04',
-        ssh_keys: [process.env.HETZNER_SSH_KEY_NAME || 'appie-fleet'],
-        user_data: buildCloudInit(customerEmail, customerName, businessName, businessType),
+        ssh_keys: [process.env.HETZNER_SSH_KEY_NAME || 'appie-1-mac-mini'],
       }),
     });
 
@@ -223,20 +222,18 @@ async function installHermesOnServer(serverIp: string): Promise<void> {
       `ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=30 -i "${actualPath}" root@${serverIp} ` +
       `'bash -s' << \'ENDOFFILE\'\n` +
       [
-        'apt-get update && apt-get install -y curl git python3 python3-pip && pip3 install cryptography pyyaml playwright httpx google-api-python-client 2>/dev/null',
-        'curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash',
-        // Create Appie directory structure
+        // Create Appie directory structure (if not exists from image)
         'mkdir -p ~/.appie/{credentials,browser/states,logs}',
-        'chmod 700 ~/.appie && chmod 700 ~/.appie/credentials',
-        // Generate master encryption key
-        'openssl rand -hex 32 > ~/.appie/master.key && chmod 600 ~/.appie/master.key',
-        'echo "# Appie Credential Index" > ~/.appie/credentials/_index.yaml',
-        'echo "platforms: []" >> ~/.appie/credentials/_index.yaml',
-        // Skills directory
+        'chmod 700 ~/.appie && chmod 700 ~/.appie/credentials 2>/dev/null || true',
+        // Generate master encryption key (if not exists)
+        'test -f ~/.appie/master.key || openssl rand -hex 32 > ~/.appie/master.key && chmod 600 ~/.appie/master.key',
+        // Create credential index if missing
+        'test -f ~/.appie/credentials/_index.yaml || echo "platforms: []" > ~/.appie/credentials/_index.yaml',
+        // Ensure hermes skills dir exists
         'mkdir -p ~/.hermes/skills',
       ].join(' && ') +
       `\nENDOFFILE`,
-      { timeout: 120000 }
+      { timeout: 60000 }
     );
   } finally {
     try { unlinkSync(actualPath); } catch { /* ignore */ }
