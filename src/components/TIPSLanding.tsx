@@ -38,10 +38,39 @@ const PROCESS_STEPS = [
   { n: '03', title: 'It runs, you scale', desc: 'Email triage, lead capture, scheduling, follow-ups — all handled. You focus on decisions only a human can make.' },
 ];
 
-const SOCIAL_PROOFS = [
-  { name: 'BeyondSchool', role: 'Education Platform', quote: 'It handles 200+ student inquiries per day. Our team went from drowning to organized overnight.' },
-  { name: 'Stasher Capital', role: 'Fintech Startup', quote: 'Our Appie manages our entire onboarding workflow. What used to take 3 hours now takes 20 minutes.' },
-  { name: 'Lost LeBlanc', role: 'Travel Creator', quote: 'I went from 14 hours of email per week to 2. My Appie is my first hire that actually showed up.' },
+const DEPLOYED_AIS = [
+  {
+    name: 'Appie',
+    role: 'Operations & Client Onboarding',
+    tagline: 'Handles every client from first email to signed contract',
+    metric: '200+ inquiries/day',
+    icon: '🤖',
+    color: '#10B981',
+  },
+  {
+    name: 'Wolfie',
+    role: 'E-commerce & Content Creation',
+    tagline: 'Manages Shopify store, creates product photos, runs DMs',
+    metric: '40+ products/week',
+    icon: '🐺',
+    color: '#F59E0B',
+  },
+  {
+    name: 'Hera',
+    role: 'Scheduling & Booking',
+    tagline: 'Calendars, reschedules, sends reminders — automatically',
+    metric: '100% missed calls recovered',
+    icon: '📅',
+    color: '#6366F1',
+  },
+  {
+    name: 'Nemo',
+    role: 'Finance & Billing',
+    tagline: 'Invoicing, Stripe disputes, MRR tracking — no spreadsheets needed',
+    metric: '€0 reconciliation errors',
+    icon: '💳',
+    color: '#EC4899',
+  },
 ];
 
 const TOOLS = ['Google Workspace', 'Notion', 'Telegram', 'WhatsApp', 'Stripe', 'n8n', 'Slack', 'HubSpot', 'Airtable', 'Webflow'];
@@ -157,32 +186,41 @@ export default function TIPSLanding() {
         </div>
       </section>
 
-      {/* ── S = SOCIAL PROOF ── */}
+      {/* ── S = DEPLOYED AIs ── */}
       <section className="py-24 bg-[#031D16]">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <p className="text-[#247459] text-sm font-semibold uppercase tracking-widest mb-3">Results</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#F6FEFC]">What our clients say</h2>
+            <p className="text-[#247459] text-sm font-semibold uppercase tracking-widest mb-3">Proof</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#F6FEFC]">Meet our deployed AI employees</h2>
+            <p className="text-[#F6FEFC]/50 text-base mt-4 max-w-2xl mx-auto">Four AI employees already running. Yours is next.</p>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {SOCIAL_PROOFS.map((sp, i) => (
-              <motion.div key={sp.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="p-8 bg-[#1a2e27]/50 rounded-2xl border border-[#247459]/20">
-                <div className="flex gap-1 mb-4">
-                  {[1,2,3,4,5].map(s => <Star key={s} className="w-4 h-4 text-[#DFB771] fill-[#DFB771]" />)}
-                </div>
-                <p className="text-[#F6FEFC]/70 text-sm leading-relaxed mb-6">"{sp.quote}"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#247459]/20 flex items-center justify-center">
-                    <span className="text-[#247459] font-bold text-sm">{sp.name[0]}</span>
-                  </div>
-                  <div>
-                    <p className="text-[#F6FEFC] font-semibold text-sm">{sp.name}</p>
-                    <p className="text-[#F6FEFC]/40 text-xs">{sp.role}</p>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {DEPLOYED_AIS.map((ai, i) => (
+              <motion.div
+                key={ai.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="p-6 bg-[#1a2e27]/50 rounded-2xl border border-[#247459]/20 hover:border-[#247459]/50 transition-all relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-20 h-20 rounded-full opacity-10 blur-xl" style={{ backgroundColor: ai.color }} />
+                <div className="text-3xl mb-4">{ai.icon}</div>
+                <h3 className="text-[#F6FEFC] font-bold text-lg mb-0.5">{ai.name}</h3>
+                <p className="text-xs font-medium mb-3" style={{ color: ai.color }}>{ai.role}</p>
+                <p className="text-[#F6FEFC]/50 text-xs leading-relaxed mb-4">{ai.tagline}</p>
+                <div className="flex items-center gap-2 pt-3 border-t border-[#247459]/20">
+                  <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: ai.color }} />
+                  <span className="text-[#F6FEFC]/70 text-xs font-semibold">{ai.metric}</span>
                 </div>
               </motion.div>
             ))}
           </div>
+          <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mt-10">
+            <Link href="/openclaw#waitlist" className="inline-flex items-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-8 py-4 rounded-xl transition-colors">
+              Deploy your AI employee <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
         </div>
       </section>
 

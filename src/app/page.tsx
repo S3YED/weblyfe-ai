@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import TIPSLanding from '@/components/TIPSLanding';
+import CaseStudies from '@/components/CaseStudies';
 import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
 import CTA from '@/components/CTA';
@@ -154,6 +155,7 @@ export default function Home() {
       <main className="min-h-screen">
         <Navbar />
         <TIPSLanding />
+        <CaseStudies />
         
         
         
