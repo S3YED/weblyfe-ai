@@ -206,7 +206,14 @@ async function installHermesOnServer(serverIp: string): Promise<void> {
   const { execSync } = await import('child_process');
   const { writeFileSync, unlinkSync } = await import('fs');
   const { tmpdir } = await import('os');
-  const key = (process.env.APPIE_SSH_PRIVATE_KEY || '').replace(/\\n/g, '\n');
+  // Decode base64 SSH private key
+  const keyB64 = process.env.APPIE_SSH_PRIVATE_KEY_B64 || '';
+  let key = '';
+  if (keyB64) {
+    try { key = Buffer.from(keyB64, 'base64').toString('utf-8'); } catch { key = ''; }
+  } else {
+    key = (process.env.APPIE_SSH_PRIVATE_KEY || '').replace(/\\n/g, '\n');
+  }
   const actualPath = `${tmpdir()}/apie-key-${Date.now()}`;
 
   try {
@@ -245,7 +252,13 @@ async function configureAppie(
 ): Promise<void> {
   // Creates SOUL.md and USER.md on the VPS via SSH
   const { execSync } = await import('child_process');
-  const key = process.env.APPIE_SSH_PRIVATE_KEY?.replace(/\\n/g, '\n');
+  const keyB64 = process.env.APPIE_SSH_PRIVATE_KEY_B64 || '';
+  let key = '';
+  if (keyB64) {
+    try { key = Buffer.from(keyB64, 'base64').toString('utf-8'); } catch { key = ''; }
+  } else {
+    key = (process.env.APPIE_SSH_PRIVATE_KEY || '').replace(/\\n/g, '\n');
+  }
   const { writeFileSync, unlinkSync } = await import('fs');
   const { tmpdir } = await import('os');
 

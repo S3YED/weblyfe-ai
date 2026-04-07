@@ -41,3 +41,8 @@ yarn-error.log*
 next-env.d.ts
 
 # Private assets (PDFs, keys)
+
+# Environment (secrets)
+.env.local
+.env.production
+.env.*.local
