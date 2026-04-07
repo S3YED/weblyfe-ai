@@ -3,11 +3,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: 'From Voice Agents to AI Employees: Everything We've Built at Weblyfe',
+  title: "From Voice Agents to AI Employees: Everything We've Built at Weblyfe",
   description: 'How we built AI employees that handle sales qualification, construction inquiries, GDPR compliance, and internal operations 24/7 for €45/month. The full story, tech stack, and real results.',
   alternates: { canonical: 'https://weblyfe.ai/blog/voice-agents-to-ai-employees' },
   openGraph: {
-    title: 'From Voice Agents to AI Employees: Everything We've Built at Weblyfe',
+    title: "From Voice Agents to AI Employees: Everything We've Built at Weblyfe",
     description: 'How we built AI employees that handle sales qualification, construction inquiries, GDPR compliance, and internal operations 24/7 for €45/month.',
     images: ['/blog/voice-agents-cover.jpg'],
   },
