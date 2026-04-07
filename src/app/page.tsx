@@ -1,19 +1,15 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
-import CountdownHero from '@/components/CountdownHero';
-import Services from '@/components/Services';
-import CaseStudies from '@/components/CaseStudies';
-import HowItWorks from '@/components/HowItWorks';
-import PricingBlur from '@/components/PricingBlur';
+import TIPSLanding from '@/components/TIPSLanding';
 import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
 import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'AI Automation for Creators & Agencies',
+  title: 'Your AI Employee That Works 24/7 | Instant Appie — Weblyfe',
   description:
-    'Weblyfe builds custom AI agents, chatbots, and workflow automations that handle your leads, support, and operations 24/7. Save 20+ hours per week. No coding needed.',
+    'Meet Appie — your own AI employee that handles emails, leads, scheduling, and research 24/7. Built on your private server. From €250/mo.',
   alternates: {
     canonical: 'https://weblyfe.ai',
   },
@@ -157,11 +153,11 @@ export default function Home() {
       />
       <main className="min-h-screen">
         <Navbar />
-        <CountdownHero />
-        <Services />
-        <CaseStudies />
-        <HowItWorks />
-        <PricingBlur />
+        <TIPSLanding />
+        
+        
+        
+        
         <Testimonials />
         <FAQ />
         <CTA />
