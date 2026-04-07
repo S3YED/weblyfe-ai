@@ -6,10 +6,10 @@ import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 
 const navLinks = [
-  { label: 'Services', href: '#services' },
-  { label: 'Case Studies', href: '#case-studies' },
+  { label: 'Instant Appie', href: '#t' },
   { label: 'How It Works', href: '#how-it-works' },
-  { label: 'Blog', href: '/blog' },
+  { label: 'Pricing', href: '#tiers' },
+  { label: 'Free Guide', href: '/guide/Build-Your-Own-Appie-v4.pdf' },
   { label: 'FAQ', href: '#faq' },
 ];
 
