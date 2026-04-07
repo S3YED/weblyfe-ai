@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
-import CountdownHero from '@/components/CountdownHero';
-import Services from '@/components/Services';
+import ThreePathsHero from '@/components/ThreePathsHero';
+import GuideDownload from '@/components/GuideDownload';
+import InstantAppiePricing from '@/components/InstantAppiePricing';
 import CaseStudies from '@/components/CaseStudies';
 import HowItWorks from '@/components/HowItWorks';
-import PricingBlur from '@/components/PricingBlur';
 import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
 import CTA from '@/components/CTA';
@@ -157,11 +157,10 @@ export default function Home() {
       />
       <main className="min-h-screen">
         <Navbar />
-        <CountdownHero />
-        <Services />
-        <CaseStudies />
+        <ThreePathsHero />
+        <GuideDownload />
+        <InstantAppiePricing />
         <HowItWorks />
-        <PricingBlur />
         <Testimonials />
         <FAQ />
         <CTA />
