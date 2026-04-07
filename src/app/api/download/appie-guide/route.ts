@@ -64,7 +64,7 @@ export async function GET(req: NextRequest) {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': 'attachment; filename="Build_Your_Own_Appie_v4.1.pdf"',
+        'Content-Disposition': 'attachment; filename="Build_Your_Own_Appie_v4.pdf"',
         'Content-Length': pdfBuffer.length.toString(),
         'Cache-Control': 'private, no-cache, no-store',
         'X-Robots-Tag': 'noindex',
