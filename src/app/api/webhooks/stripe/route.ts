@@ -399,6 +399,7 @@ async function sendPDFDeliveryEmail(email: string, firstName: string): Promise<v
   const token = generateDownloadToken(email);
   const downloadUrl = `https://weblyfe.ai/api/download/appie-guide?token=${token}`;
 
+  // Attach the PDF directly via URL (Brevo fetches and attaches it)
   const res = await fetch('https://api.brevo.com/v3/smtp/email', {
     method: 'POST',
     headers: {
@@ -411,6 +412,12 @@ async function sendPDFDeliveryEmail(email: string, firstName: string): Promise<v
       replyTo: { email: 'hello@weblyfe.ai', name: 'Weblyfe' },
       subject: 'Your Appie Guide is here! 🎉',
       htmlContent: generateEmailHTML(firstName || 'there', password, downloadUrl),
+      attachment: [
+        {
+          url: 'https://weblyfe.ai/guide/Build-Your-Own-Appie-v4.pdf',
+          name: 'Build-Your-Own-Appie-v4.4.pdf',
+        },
+      ],
       tags: ['appie-pdf', 'appie-pdf-v4.4'],
       headers: {
         'X-Mailin-custom': 'prefix=appie-v44;',
