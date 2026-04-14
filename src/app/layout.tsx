@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Rethink_Sans } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 const rethinkSans = Rethink_Sans({
@@ -156,7 +157,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
-      <body className={`antialiased ${rethinkSans.className}`}>{children}</body>
+      <body className={`antialiased ${rethinkSans.className}`}>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
