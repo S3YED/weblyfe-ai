@@ -3,22 +3,18 @@ import { createHmac } from 'crypto';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
 
-const PDF_SIGNING_SECRET = process.env.PDF_SIGNING_SECRET || 'weblyfe-appie-pdf-2026';
+const PDF_SIGNING_SECRET = process.env.PDF_SIGNING_SECRET;
 
 /**
  * Verified PDF download endpoint.
- * 
- * Accepts ?token=<payload>.<signature> where payload is base64url(email).
+ *
+ * Accepts ?token=<payload>.<signature> where payload is base64url(email:expiryTimestamp).
  * Signature is HMAC-SHA256 of payload, truncated to 16 chars.
- * 
- * The PDF served is password-protected. The password shown in the
- * delivery email is the customer's email address, but the actual
- * PDF password is universal (since Vercel can't run qpdf).
- * The "your email is the password" framing works because each customer
- * sees their own email in their delivery email.
+ * Tokens expire after 30 days (set in webhook).
  */
 
 function verifyToken(token: string): string | null {
+  if (!PDF_SIGNING_SECRET) return null;
   const parts = token.split('.');
   if (parts.length !== 2) return null;
 
@@ -31,7 +27,12 @@ function verifyToken(token: string): string | null {
   if (sig !== expectedSig) return null;
 
   try {
-    return Buffer.from(payload, 'base64url').toString('utf-8');
+    const decoded = Buffer.from(payload, 'base64url').toString('utf-8');
+    const [email, expiryStr] = decoded.split(':');
+    if (!email || !expiryStr) return null;
+    const expiry = parseInt(expiryStr, 10);
+    if (isNaN(expiry) || Math.floor(Date.now() / 1000) > expiry) return null;
+    return email;
   } catch {
     return null;
   }
@@ -56,7 +57,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    // Serve the pre-protected PDF
+    // Serve the PDF
     const pdfPath = join(process.cwd(), 'assets', 'appie-guide-v4.1.pdf');
     const pdfBuffer = await readFile(pdfPath);
 

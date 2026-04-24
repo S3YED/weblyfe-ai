@@ -4,7 +4,7 @@ import { createHmac, timingSafeEqual } from 'crypto';
 const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET!;
 const BREVO_API_KEY = process.env.BREVO_API_KEY!;
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY!;
-const PDF_SIGNING_SECRET = process.env.PDF_SIGNING_SECRET || 'weblyfe-appie-pdf-2026';
+const PDF_SIGNING_SECRET = process.env.PDF_SIGNING_SECRET;
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY!;
 const AIRTABLE_BASE_ID = process.env.AIRTABLE_WEBLYFE_BASE_ID!;
 const AIRTABLE_LEADS_TABLE = 'tblXjrB8K4Mc6U8Xu';
@@ -37,8 +37,12 @@ function verifyStripeSignature(payload: string, signature: string): boolean {
 
 // ─── Generate Signed Download URL ──────────────────────────────────────────────
 
+const TOKEN_EXPIRY_DAYS = 30;
+
 function generateDownloadToken(email: string): string {
-  const payload = Buffer.from(email.toLowerCase().trim()).toString('base64url');
+  if (!PDF_SIGNING_SECRET) throw new Error('PDF_SIGNING_SECRET env var is required');
+  const expiry = Math.floor(Date.now() / 1000) + TOKEN_EXPIRY_DAYS * 24 * 60 * 60;
+  const payload = Buffer.from(`${email.toLowerCase().trim()}:${expiry}`).toString('base64url');
   const sig = createHmac('sha256', PDF_SIGNING_SECRET)
     .update(payload)
     .digest('hex')
