@@ -19,44 +19,45 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://weblyfe.ai'),
   title: {
-    default: 'AI Automation for Creators & Agencies | Weblyfe.ai',
+    default: 'Appie — Jouw persoonlijke Techwiz | Weblyfe.ai',
     template: '%s | Weblyfe.ai',
   },
   description:
-    'We build custom AI agents, chatbots, and workflow automations that handle your leads, support, and operations 24/7. Clients save 20+ hours per week. No coding needed.',
+    'Hoi, ik ben Appie. Jouw persoonlijke Techwiz. Een geniale werknemer met de laagste kosten — ik doe het werk dat je week opvreet. Inbox, intake, agenda, admin. Vanaf €65.',
   keywords: [
-    'AI automation agency',
-    'custom AI agent',
-    'AI chatbot for business',
-    'workflow automation',
-    'AI lead qualification',
-    'n8n automation',
-    'digital employee',
-    'AI business automation Netherlands',
-    'Weblyfe',
+    'Appie',
+    'Techwiz',
+    'AI medewerker',
+    'AI employee',
+    'AI agent Nederland',
+    'persoonlijke AI assistent',
+    'inbox automation',
+    'lead intake',
+    'WhatsApp AI agent',
     'OpenClaw',
-    'no-code automation',
-    'AI for agencies',
-    'AI for creators',
+    'Weblyfe',
+    'Build Your Own Appie',
+    'Instant Appie',
   ],
   authors: [{ name: 'Weblyfe', url: 'https://weblyfe.ai' }],
-  creator: 'Weblyfe by Techwiz LLC',
-  publisher: 'Weblyfe by Techwiz LLC',
+  creator: 'Weblyfe',
+  publisher: 'Weblyfe',
   category: 'Technology',
   openGraph: {
-    title: 'AI Automation That Actually Works | Weblyfe.ai',
+    title: 'Appie — Jouw persoonlijke Techwiz | Weblyfe.ai',
     description:
-      'Custom AI chatbots, workflow automation, and digital employees for creators, agencies, and service businesses. Clients save 20+ hours per week.',
+      'Een geniale werknemer met de laagste kosten. Inbox, intake, agenda, admin — Appie doet het werk dat je week opvreet, jij bouwt verder.',
     type: 'website',
     url: 'https://weblyfe.ai',
     siteName: 'Weblyfe.ai',
-    locale: 'en_US',
+    locale: 'nl_NL',
+    alternateLocale: ['en_US'],
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Weblyfe.ai — AI Automation for Creators & Agencies',
+        alt: 'Appie — Jouw persoonlijke Techwiz | Weblyfe.ai',
         type: 'image/jpeg',
       },
     ],
@@ -64,10 +65,10 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@weblyfenl',
-    creator: '@weblyfenl',
-    title: 'AI Automation That Actually Works | Weblyfe.ai',
+    creator: '@seyed_txt',
+    title: 'Appie — Jouw persoonlijke Techwiz',
     description:
-      'Custom AI agents, chatbots, and workflow automation. Save 20+ hours per week.',
+      'Een geniale werknemer met de laagste kosten. Vanaf €65 zelf bouwen, of €250/mnd volledig managed.',
     images: ['/og-image.jpg'],
   },
   robots: {
@@ -98,7 +99,7 @@ const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   '@id': 'https://weblyfe.ai/#organization',
-  name: 'Weblyfe.ai',
+  name: 'Weblyfe',
   url: 'https://weblyfe.ai',
   logo: {
     '@type': 'ImageObject',
@@ -107,19 +108,20 @@ const organizationSchema = {
     height: 60,
   },
   description:
-    'Weblyfe builds custom AI agents, chatbots, and workflow automations for creators, agencies, and service businesses.',
-  foundingDate: '2022',
+    'Weblyfe builds Appie — a personal Techwiz that handles your inbox, intake, scheduling and admin. Built and run by Weblyfe in the Netherlands.',
+  foundingDate: '2019',
   areaServed: 'Worldwide',
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'Customer Support',
     email: 'hello@weblyfe.ai',
-    availableLanguage: ['English', 'Dutch'],
+    availableLanguage: ['Dutch', 'English'],
   },
   sameAs: [
     'https://instagram.com/seyed.jpg',
+    'https://www.linkedin.com/in/seyed-hosseini-1a077289/',
+    'https://x.com/seyed_txt',
     'https://youtube.com/@weblyfenl',
-    'https://linkedin.com/company/weblyfe',
     'https://weblyfe.nl',
   ],
 };
@@ -130,7 +132,7 @@ const websiteSchema = {
   '@id': 'https://weblyfe.ai/#website',
   url: 'https://weblyfe.ai',
   name: 'Weblyfe.ai',
-  description: 'AI Automation for Creators & Agencies',
+  description: 'Appie — Jouw persoonlijke Techwiz',
   publisher: { '@id': 'https://weblyfe.ai/#organization' },
   potentialAction: {
     '@type': 'SearchAction',
@@ -144,7 +146,7 @@ const websiteSchema = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`scroll-smooth ${rethinkSans.variable}`}>
+    <html lang="nl" className={`scroll-smooth ${rethinkSans.variable}`}>
       <head>
         <meta name="theme-color" content="#031D16" />
         <script

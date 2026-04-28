@@ -1,143 +1,133 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import TIPSLanding from '@/components/TIPSLanding';
-import Testimonials from '@/components/Testimonials';
-import FAQ from '@/components/FAQ';
-import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Your AI Employee That Works 24/7 | Instant Appie — Weblyfe',
+  title: 'Appie — Jouw persoonlijke Techwiz | Weblyfe.ai',
   description:
-    'Meet Appie — your own AI employee that handles emails, leads, scheduling, and research 24/7. Built on your private server. From €250/mo.',
+    'Hoi, ik ben Appie. Een geniale werknemer met de laagste kosten. Ik doe het werk dat je week opvreet — inbox, intake, agenda, admin. Vanaf €65 zelf bouwen, of €250/mnd volledig managed.',
   alternates: {
     canonical: 'https://weblyfe.ai',
   },
 };
 
-// FAQ structured data — mirrors FAQ component content for Google rich snippets
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'How long does it take to build an AI automation?',
+      name: 'Hoe verschilt Appie van ChatGPT?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Most projects take 2-4 weeks from kickoff to launch. Simple chatbots can be ready in 1-2 weeks, while complex multi-agent systems may take 4-6 weeks. We give you a clear timeline during the strategy call.',
+        text: 'ChatGPT is een chatvenster zonder geheugen. Appie heeft persistent geheugen, draait op je eigen server, en doet werk uit zichzelf — zonder dat je elke keer een prompt hoeft in te tikken.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Do I need technical knowledge to use these systems?',
+      name: 'Wat als ik een mens in de keten wil?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Not at all. We build everything for you and create simple dashboards so you can monitor performance. Training is included, and we provide ongoing support to make sure you\'re comfortable.',
+        text: 'Altijd jij. Appie handelt nooit zelf een betaling, contract of nieuwe hire af zonder jou. Alles wat risicovol is laat ik eerst in Telegram zien. Je kunt elk onderwerp markeren als "eerst vragen".',
       },
     },
     {
       '@type': 'Question',
-      name: "What's the cost of AI automation services?",
+      name: 'Hoe veilig is mijn data?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'We\'re finalizing our launch packages. Sign up to get notified when pricing goes live — early supporters get exclusive launch pricing.',
+        text: 'Appie draait op een dedicated private server. Je gesprekken en data trainen geen publieke modellen. Encrypted connecties, secure API handling, geen onnodige opslag.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Will the AI sound like a robot?',
+      name: 'Hoe lang duurt de setup?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'No. We train AI on your brand voice, tone, and communication style. Most customers can\'t tell they\'re talking to AI. We fine-tune until it sounds exactly like your team would respond.',
+        text: 'Instant Appie staat binnen 24 uur live — wij regelen alles. Build Your Own Appie kost je een paar uur eigen tijd met de PDF.',
       },
     },
     {
       '@type': 'Question',
-      name: 'What if something goes wrong?',
+      name: 'Met welke tools werkt Appie samen?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'We build with failsafes. Complex queries route to humans, and you always have override controls. Plus, we include 30 days of support after launch, and offer ongoing maintenance packages.',
+        text: 'Google Workspace, Notion, Telegram, WhatsApp, Stripe, Brevo, Moneybird, Monday, HubSpot, Airtable, n8n, Webflow. Heeft een tool een API? Dan praat Appie ermee.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Can you integrate with my existing tools?',
+      name: 'Wat als Appie iets verkeerd doet?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. We work with 400+ apps including Notion, Slack, Gmail, HubSpot, Salesforce, Airtable, WhatsApp, and custom APIs. If it has an API, we can connect it.',
+        text: 'Failsafes ingebouwd. Risico-acties pingen jou eerst, complexe edge cases routen naar mens, en je hebt altijd override controls. Plus 30 dagen support na launch.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Is my data secure?',
+      name: 'Kan ik na maand 1 stoppen?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Absolutely. We follow industry best practices: encrypted connections, secure API handling, and we never store your data beyond what\'s needed. For sensitive industries, we can discuss additional security measures.',
+        text: 'Ja. Maandelijks opzegbaar, geen contract. En als de tevreden-of-geld-terug garantie geldt, krijg je je €250 retour zonder gedoe.',
       },
     },
     {
       '@type': 'Question',
-      name: 'What if I need changes after launch?',
+      name: 'Wat als ik al tools heb staan?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Changes are normal! We include a revision period after launch. For ongoing tweaks, we offer support packages or you can make simple changes yourself through the dashboards we provide.',
+        text: 'Appie wordt de laag die alles verbindt. Geen vervanging — een orchestrator die jouw bestaande stack opslokt en bedient.',
       },
     },
   ],
 };
 
-const serviceSchema = {
+const productSchema = {
   '@context': 'https://schema.org',
-  '@type': 'Service',
-  serviceType: 'AI Automation Services',
-  provider: { '@id': 'https://weblyfe.ai/#organization' },
-  name: 'AI Automation for Creators & Agencies',
+  '@type': 'Product',
+  name: 'Appie — Jouw persoonlijke Techwiz',
   description:
-    'Custom AI agents, chatbots, workflow automation, and digital employees built for creators, agencies, and service businesses.',
-  url: 'https://weblyfe.ai',
-  areaServed: {
-    '@type': 'Place',
-    name: 'Worldwide',
-  },
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'AI Automation Services',
-    itemListElement: [
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Workflow Automation',
-          description: 'Connect your tools and automate repetitive tasks using n8n and Zapier integrations.',
-        },
+    'Een AI Techwiz / geniale werknemer die je inbox, intake, agenda en admin overneemt. Beschikbaar als €65 DIY-gids, €250/maand managed Instant Appie, of vanaf €2.000/maand custom-built.',
+  brand: { '@type': 'Brand', name: 'Weblyfe' },
+  offers: [
+    {
+      '@type': 'Offer',
+      name: 'Build Your Own Appie',
+      price: '65',
+      priceCurrency: 'EUR',
+      availability: 'https://schema.org/InStock',
+      url: 'https://weblyfe.ai/buy/pdf',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Instant Appie',
+      price: '250',
+      priceCurrency: 'EUR',
+      priceSpecification: {
+        '@type': 'UnitPriceSpecification',
+        price: '250',
+        priceCurrency: 'EUR',
+        unitText: 'MONTH',
       },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'AI Chatbots',
-          description: 'Custom AI chatbots trained on your brand voice for lead qualification and customer support.',
-        },
+      availability: 'https://schema.org/InStock',
+      url: 'https://weblyfe.ai/buy/instant',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Custom Appie',
+      price: '2000',
+      priceCurrency: 'EUR',
+      priceSpecification: {
+        '@type': 'UnitPriceSpecification',
+        price: '2000',
+        priceCurrency: 'EUR',
+        unitText: 'MONTH',
       },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Digital Employee (Appie)',
-          description: 'A fully autonomous AI agent powered by OpenClaw that handles emails, calendar, research, and operations 24/7.',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'AI-Powered CRM',
-          description: 'Automated lead tracking, follow-ups, and pipeline management integrated with your existing CRM.',
-        },
-      },
-    ],
-  },
+      availability: 'https://schema.org/InStock',
+      url: 'https://tidycal.com/weblyfe/discovery',
+    },
+  ],
 };
 
 export default function Home() {
@@ -149,18 +139,11 @@ export default function Home() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
       />
       <main className="min-h-screen">
         <Navbar />
         <TIPSLanding />
-        
-        
-        
-        
-        <Testimonials />
-        <FAQ />
-        <CTA />
         <Footer />
       </main>
     </>
