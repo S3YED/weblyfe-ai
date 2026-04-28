@@ -135,18 +135,25 @@ export const CREDIT_ADDONS = {
   },
 } as const;
 
-// ─── GUARANTEE (Q5 lock — Hormozi-style, no 14-day) ──────────────────────────
-// Active variant ships in §8.9 of homepage. Other variants in
-// 2026-04-28-guarantees.md (TBD). Until Seyed picks one, use this placeholder.
+// ─── GUARANTEE (Q5 lock — Hormozi Variant A "Time-Saved Promise") ────────────
+// Picked by Seyed 2026-04-28 from 3 options in 2026-04-28-guarantees.md.
+// Pattern: specific outcome (10 hours saved) + measurable threshold (month 1)
+// + recourse with extra (€250 refund + €100 bonus). Hormozi "more than money back" lever.
 
 export const GUARANTEE = {
-  active: 'satisfaction-or-money-back',
-  copy: {
-    nl: 'Tevreden of geld terug. Als ik je niet meer tijd bespaar dan ik kost, betaal je niets.',
-    en: "Satisfied or money back. If I don't save you more time than I cost, you don't pay.",
+  active: 'time-saved-promise',
+  headline: {
+    nl: 'Bespaart Appie je geen 10 uur in je eerste maand? Geld terug, plus €100 bovenop.',
+    en: "If Appie doesn't save you 10 hours in your first month, you get your €250 back plus an extra €100.",
   },
-  // TODO: replace with the chosen Hormozi-style variant from
-  // /Users/appie/clawd/projects/weblyfe-ai-landing/2026-04-28-guarantees.md
+  copy: {
+    nl: 'Een Techwiz hoort werk uit je week te halen. Niet uit je portemonnee. Bewijst je urenlog na 30 dagen geen 10 uur winst? €250 terug + €100 bovenop. Eén bericht aan ons en het staat in gang.',
+    en: "A Techwiz is supposed to take work out of your week. Not money out of your wallet. If your time log after 30 days doesn't show 10 hours saved, your €250 back plus €100 for your time. One message and it moves.",
+  },
+  mechanic: {
+    nl: 'Vereist: minimaal 1 aangesloten kanaal + 5 wekelijkse taken via Appie. Triggervenster dag 25-35. Refund + bonus binnen 5 werkdagen.',
+    en: 'Requires: ≥1 connected channel + 5 weekly tasks dispatched. Trigger window day 25-35. Refund + bonus within 5 business days.',
+  },
 };
 
 // ─── SOCIAL ──────────────────────────────────────────────────────────────────

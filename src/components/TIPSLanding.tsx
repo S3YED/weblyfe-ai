@@ -687,7 +687,9 @@ export default function TIPSLanding() {
             <p className="text-[#DFB771] text-xs font-semibold uppercase tracking-widest mb-2">
               Garantie
             </p>
-            <p className="text-[#F6FEFC]/85 text-base">{GUARANTEE.copy.nl}</p>
+            <p className="text-[#F6FEFC] text-lg font-semibold mb-3">{GUARANTEE.headline.nl}</p>
+            <p className="text-[#F6FEFC]/70 text-sm">{GUARANTEE.copy.nl}</p>
+            <p className="text-[#F6FEFC]/40 text-xs mt-3">{GUARANTEE.mechanic.nl}</p>
           </motion.div>
         </div>
       </section>
