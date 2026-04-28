@@ -57,7 +57,7 @@ const TOP_CASES = [
     headline: 'WhatsApp-intake die niet meer slaapt.',
     body: 'Aanvragen via WhatsApp werden vroeger pas na 4-6 uur beantwoord. Sjaak , een Custom Appie , pakt ze nu in seconden op, kwalificeert binnen ±50 km service-radius, en schrijft de lead direct weg naar Brevo, Monday en Moneybird tegelijk.',
     outcome: '+23% conversie',
-    image: '/cases/cza-bouwbedrijf.png',
+    image: '/cases/cza-bouwbedrijf.jpg',
     large: true,
   },
   {
@@ -76,17 +76,17 @@ const TOP_CASES = [
     headline: 'Hele site gebouwd in één dag, via voicenotes.',
     body: 'Shay vertelde Appie wat zijn business deed via Telegram-voicenotes. Een dag later stond er een complete bedrijfssite live. Geen designer-handoff, geen meetings , alleen brief, build, ship.',
     outcome: '1 dag → live',
-    image: '/screenshots/safesite-fresh.jpg',
+    image: '/screenshots/safesite.jpg',
   },
 ];
 
 const CUSTOM_APPIES = [
   { name: 'Sjaak', client: 'CZA Bouwbedrijf', role: 'WhatsApp-intake voor de bouw', avatar: '/agents/ben.jpg', hue: '#D97706' },
   { name: 'Eva', client: 'Dubai-Property.nl', role: 'Lead-kwalificatie vastgoed', avatar: '/agents/eva.jpg', hue: '#0EA5E9' },
-  { name: "Shay's Appie", client: 'SafeSite Security', role: 'Voice-to-website builder', avatar: '/agents/appie.jpg', hue: '#DFB771' },
-  { name: 'Appie-2', client: 'Weblyfe (intern)', role: 'Marketing & comms herald', avatar: '/agents/appie.jpg', hue: '#EC4899' },
-  { name: 'Appie-3', client: 'Weblyfe (intern)', role: 'CTO / DevOps', avatar: '/agents/appie.jpg', hue: '#A78BFA' },
-  { name: 'Wolfie', client: 'WolfieDiddy', role: 'Eerste externe OpenClaw deploy', avatar: '/agents/appie.jpg', hue: '#94A3B8' },
+  { name: "Shay's Appie", client: 'SafeSite Security', role: 'Voice-to-website builder', avatar: '/agents/appie_v1.jpg', hue: '#DFB771' },
+  { name: 'Appie-2', client: 'Weblyfe (intern)', role: 'Marketing & comms herald', avatar: '/agents/appie_v3.jpg', hue: '#EC4899' },
+  { name: 'Appie-3', client: 'Weblyfe (intern)', role: 'CTO / DevOps', avatar: '/agents/appie_v4.jpg', hue: '#A78BFA' },
+  { name: 'Wolfie', client: 'WolfieDiddy', role: 'Eerste externe OpenClaw deploy', avatar: '/agents/appie-elder.jpg', hue: '#94A3B8' },
 ];
 
 const PORTFOLIO = [
@@ -312,10 +312,10 @@ function CaseCard({ c, index }: { c: typeof TOP_CASES[number]; index: number }) 
 
         <div className="p-6 flex flex-col flex-1" style={{ transform: 'translateZ(20px)' }}>
           <h3 className="text-xl font-bold mb-1">{c.client}</h3>
-          <p className="text-[#F6FEFC]/40 text-xs mb-3">Appie: {c.appieName}</p>
+          <p className="text-[#F6FEFC]/55 text-xs mb-3">Appie: {c.appieName}</p>
           <p className="text-[#F6FEFC]/85 text-base font-semibold mb-3">{c.headline}</p>
           <p className="text-[#F6FEFC]/55 text-sm leading-relaxed flex-1">{c.body}</p>
-          <p className="text-[#F6FEFC]/30 text-xs mt-4 font-mono">Volledige cijfers op de case page →</p>
+          <p className="text-[#F6FEFC]/55 text-xs mt-4 font-mono">Volledige cijfers op de case page →</p>
         </div>
       </motion.div>
     </motion.article>
@@ -536,7 +536,7 @@ export default function TIPSLanding() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 1.7 }}
-              className="text-[#F6FEFC]/40 text-xs mt-5 text-center lg:text-left max-w-md mx-auto lg:mx-0"
+              className="text-[#F6FEFC]/55 text-xs mt-5 text-center lg:text-left max-w-md mx-auto lg:mx-0"
             >
               {GUARANTEE.headline.nl}
             </motion.p>
@@ -729,7 +729,7 @@ export default function TIPSLanding() {
       {/* ── PORTFOLIO STRIP ─────────────────────────────────────────── */}
       <section className="py-16 bg-[#031D16] border-y border-[#247459]/15 overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 mb-8 text-center">
-          <p className="text-[#F6FEFC]/30 text-xs uppercase tracking-widest font-semibold">
+          <p className="text-[#F6FEFC]/55 text-xs uppercase tracking-widest font-semibold">
             We bouwen al jaren websites die werken
           </p>
         </div>
@@ -811,8 +811,8 @@ export default function TIPSLanding() {
             className="relative aspect-video rounded-2xl overflow-hidden border border-[#247459]/30 group cursor-pointer"
           >
             <Image
-              src="/screenshots/titantransfers-booking-fresh.jpg"
-              alt="Demo poster"
+              src="/cases/cza-bouwbedrijf.jpg"
+              alt="Demo poster — Appie bij CZA Bouwbedrijf"
               fill
               sizes="(min-width: 768px) 768px, 100vw"
               className="object-cover opacity-60 group-hover:opacity-80 transition-opacity"
@@ -851,9 +851,9 @@ export default function TIPSLanding() {
               whileHover={{ y: -4 }}
               className="bg-[#1a2e27]/50 rounded-2xl border border-[#247459]/20 hover:border-[#DFB771]/40 transition-colors p-7 flex flex-col"
             >
-              <p className="text-[#247459] text-xs font-bold uppercase tracking-wide mb-3">Build it yourself</p>
+              <p className="text-[#DFB771] text-xs font-bold uppercase tracking-wide mb-3">Build it yourself</p>
               <h3 className="font-bold text-xl mb-1">{PRICING.pdfGuide.name}</h3>
-              <p className="text-[#F6FEFC]/40 text-xs mb-5">PDF guide v4.4 , 75 pagina's</p>
+              <p className="text-[#F6FEFC]/55 text-xs mb-5">PDF guide v4.4 , 75 pagina's</p>
               <div className="mb-5">
                 <span className="font-bold text-3xl">{PRICING.pdfGuide.priceLabel}</span>
                 <span className="text-[#F6FEFC]/40 text-sm ml-1">eenmalig</span>
@@ -897,7 +897,7 @@ export default function TIPSLanding() {
                 Managed flagship
               </p>
               <h3 className="font-bold text-xl mb-1">{PRICING.instantAppie.name}</h3>
-              <p className="text-[#F6FEFC]/40 text-xs mb-5">Wij bouwen + draaien</p>
+              <p className="text-[#F6FEFC]/55 text-xs mb-5">Wij bouwen + draaien</p>
               <div className="mb-5">
                 <span className="font-bold text-3xl">€250</span>
                 <span className="text-[#F6FEFC]/40 text-sm ml-1">/ maand</span>
@@ -935,9 +935,9 @@ export default function TIPSLanding() {
               whileHover={{ y: -4 }}
               className="bg-[#1a2e27]/50 rounded-2xl border border-[#247459]/20 hover:border-[#DFB771]/40 transition-colors p-7 flex flex-col"
             >
-              <p className="text-[#F6FEFC]/40 text-xs font-bold uppercase tracking-wide mb-3">Custom-built</p>
+              <p className="text-[#F6FEFC]/55 text-xs font-bold uppercase tracking-wide mb-3">Custom-built</p>
               <h3 className="font-bold text-xl mb-1">{PRICING.customAppie.name}</h3>
-              <p className="text-[#F6FEFC]/40 text-xs mb-5">Eva, Sjaak, Shay's Appie , wij bouwen jouw versie</p>
+              <p className="text-[#F6FEFC]/55 text-xs mb-5">Eva, Sjaak, Shay's Appie , wij bouwen jouw versie</p>
               <div className="mb-5">
                 <span className="font-bold text-3xl">start €2k</span>
                 <span className="text-[#F6FEFC]/40 text-sm ml-1">/ mnd · op maat</span>
@@ -982,7 +982,7 @@ export default function TIPSLanding() {
             </div>
             <p className="text-[#F6FEFC] text-lg md:text-xl font-bold mb-3">{GUARANTEE.headline.nl}</p>
             <p className="text-[#F6FEFC]/70 text-sm md:text-base">{GUARANTEE.copy.nl}</p>
-            <p className="text-[#F6FEFC]/40 text-xs mt-3 font-mono">{GUARANTEE.mechanic.nl}</p>
+            <p className="text-[#F6FEFC]/55 text-xs mt-3 font-mono">{GUARANTEE.mechanic.nl}</p>
           </motion.div>
         </div>
       </section>
