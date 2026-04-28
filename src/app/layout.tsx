@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Rethink_Sans, Geist } from 'next/font/google';
+import { NextIntlClientProvider } from 'next-intl';
+import { getLocale, getMessages } from 'next-intl/server';
 import './globals.css';
 import { cn } from "@/lib/utils";
 
@@ -147,9 +149,12 @@ const websiteSchema = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="nl" className={cn("scroll-smooth", rethinkSans.variable, "font-sans", geist.variable)}>
+    <html lang={locale} className={cn("scroll-smooth", rethinkSans.variable, "font-sans", geist.variable)}>
       <head>
         <meta name="theme-color" content="#031D16" />
         <script
@@ -161,7 +166,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
-      <body className={`antialiased ${rethinkSans.className}`}>{children}</body>
+      <body className={`antialiased ${rethinkSans.className}`}>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          {children}
+        </NextIntlClientProvider>
+      </body>
     </html>
   );
 }

@@ -4,18 +4,21 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
-
-const navLinks = [
-  { label: 'Instant Appie', href: '#t' },
-  { label: 'How It Works', href: '#how-it-works' },
-  { label: 'Pricing', href: '#tiers' },
-  { label: 'Free Guide', href: '/guide/Build-Your-Own-Appie-v4.pdf' },
-  { label: 'FAQ', href: '#faq' },
-];
+import { useTranslations } from 'next-intl';
+import LanguageToggle from './LanguageToggle';
 
 export default function Navbar() {
+  const t = useTranslations('nav');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const navLinks = [
+    { label: t('instantAppie'), href: '#t' },
+    { label: t('howItWorks'), href: '#how-it-works' },
+    { label: t('pricing'), href: '#tiers' },
+    { label: t('freeGuide'), href: '/guide/Build-Your-Own-Appie-v4.pdf' },
+    { label: t('faq'), href: '#faq' },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,11 +63,12 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
+            <LanguageToggle />
             <a
               href="#book"
               className="btn-primary text-sm py-3 px-6"
             >
-              Book a Call
+              {t('bookACall')}
             </a>
           </div>
 
@@ -105,8 +109,11 @@ export default function Navbar() {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="btn-primary text-center mt-4"
               >
-                Book a Call
+                {t('bookACall')}
               </a>
+              <div className="mt-2 flex justify-center">
+                <LanguageToggle />
+              </div>
             </div>
 
             {/* Decorative Elements */}

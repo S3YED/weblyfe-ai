@@ -1,0 +1,238 @@
+{
+  "metadata": {
+    "title": "Appie — Your personal Techwiz | Weblyfe.ai",
+    "description": "Hi, I'm Appie. Your personal Techwiz. A genius employee at the lowest cost — I handle the work eating your week. Inbox, intake, scheduling, admin. From €65."
+  },
+  "nav": {
+    "instantAppie": "Instant Appie",
+    "howItWorks": "How it works",
+    "pricing": "Pricing",
+    "freeGuide": "Free guide",
+    "faq": "FAQ",
+    "bookACall": "Book a call"
+  },
+  "hero": {
+    "greeting": "Hi, I'm Appie.",
+    "tagline": "Your personal Techwiz.",
+    "subline": "A genius employee at the lowest cost. I handle the work eating your week. Inbox. Intake. Scheduling. Admin.",
+    "kicker": "You build. I keep the lights on.",
+    "ctaPrimary": "Start with your Techwiz",
+    "ctaSecondary": "Download the guide — €65",
+    "microcopy": "A Techwiz is supposed to take work out of your week. Not money out of your wallet. If your time log after 30 days doesn't show 10 hours saved, your €250 back plus €100 for your time. One message and it moves."
+  },
+  "bridge": {
+    "line1": "It's 5:30. You still have 47 unread emails.",
+    "line2": "The office closes. The week doesn't.",
+    "line3": "That's what Appie was built for."
+  },
+  "meetAppie": {
+    "title": "What a day with Appie sounds like",
+    "subtitle": "Four real messages from a customer Telegram. Nothing scripted.",
+    "bubbles": [
+      {
+        "when": "08:00",
+        "text": "Morning. Cleared 23 emails overnight (drafts in Sent). 4 need you: 2 quote requests, 1 partnership, 1 invoice dispute."
+      },
+      {
+        "when": "11:14",
+        "text": "Sandra wants to move Thursday. No conflict — shifted to 14:00, asked her to confirm."
+      },
+      {
+        "when": "14:30",
+        "text": "WhatsApp from Mark, kitchen renovation in Rotterdam, budget 25k. Within service radius. Lead pushed to Brevo + Monday, intake questions sent."
+      },
+      {
+        "when": "16:48",
+        "text": "Reconciled 6 invoices in Moneybird. No discrepancies. Reply \"show me\" + topic if you want context."
+      }
+    ]
+  },
+  "founder": {
+    "label": "Who built Appie",
+    "name": "Seyed Hosseini",
+    "linkedin": "LinkedIn",
+    "instagram": "Instagram",
+    "youtube": "YouTube",
+    "p1": "I started in medicine. Then I built an agency — Weblyfe — to tell the right stories for growing brands. Three years later our entire agency runs on a fleet of AI teammates we built ourselves.",
+    "p2": "Appie is the spin-off. The version I sell to clients. What you see here? The same thing that runs our own inbox, intake, and admin."
+  },
+  "cases": {
+    "title": "Appie at customers",
+    "subtitle": "Three stories already running.",
+    "cza": {
+      "client": "CZA Bouwbedrijf",
+      "sector": "Construction",
+      "appieName": "Sjaak",
+      "headline": "WhatsApp intake that doesn't sleep.",
+      "body": "Inbound WhatsApp leads used to wait 4-6 hours. Sjaak — a Custom Appie — picks them up in seconds, qualifies within a ±50 km service radius, and writes the lead straight into Brevo, Monday and Moneybird simultaneously.",
+      "metricsNote": "Numbers being confirmed with Hesam — landing on the full case page."
+    },
+    "dubaiProperty": {
+      "client": "Dubai-Property.nl",
+      "sector": "Real estate",
+      "appieName": "Eva",
+      "headline": "Lead qualification across 752 inbound leads.",
+      "body": "Eva is the Custom Appie for Dubai-Property. She scores new inbound leads, qualifies against the ICP, and routes hot leads to the sales team — first reply within minutes, day or night.",
+      "metricsNote": "Customer quote and hard numbers being confirmed by Sandjai and Priscilla."
+    },
+    "safesite": {
+      "client": "SafeSite Security",
+      "sector": "Security / B2B",
+      "appieName": "Shay's Appie",
+      "headline": "Whole site built in one day, via voice notes.",
+      "body": "Shay told Appie what his business does over Telegram voice notes. A day later a full company site was live. No designer handoff, no meetings — just brief, build, ship.",
+      "metricsNote": "Quote being confirmed with Shay."
+    },
+    "appieLabel": "Appie:"
+  },
+  "customAppies": {
+    "label": "Custom-built Appies",
+    "title": "For specific setups, we build it bespoke",
+    "subtitle": "Six examples of Custom Appies already running for customers and internally. From €2,000/month. What would your Techwiz do?",
+    "cta": "Book a call",
+    "items": {
+      "sjaak": { "name": "Sjaak", "client": "CZA Bouwbedrijf", "role": "WhatsApp intake for construction" },
+      "eva": { "name": "Eva", "client": "Dubai-Property.nl", "role": "Real estate lead qualification" },
+      "shay": { "name": "Shay's Appie", "client": "SafeSite Security", "role": "Voice-to-website builder" },
+      "appie2": { "name": "Appie-2", "client": "Weblyfe (internal)", "role": "Marketing & comms herald" },
+      "appie3": { "name": "Appie-3", "client": "Weblyfe (internal)", "role": "CTO / DevOps" },
+      "wolfie": { "name": "Wolfie", "client": "WolfieDiddy", "role": "First external OpenClaw deploy" }
+    }
+  },
+  "portfolio": {
+    "label": "We also built these"
+  },
+  "outcomes": {
+    "title": "What Appie does for you",
+    "subtitle": "Five areas where your Techwiz runs on her own.",
+    "inbox": {
+      "label": "Inbox",
+      "desc": "Triage, drafts, replies on low-risk mail. Risky stuff pings you in Telegram first."
+    },
+    "intake": {
+      "label": "Intake",
+      "desc": "Qualify WhatsApp / form / email leads and push them straight into your CRM."
+    },
+    "scheduling": {
+      "label": "Scheduling",
+      "desc": "Find slots, send invites, reschedule, decline politely."
+    },
+    "admin": {
+      "label": "Admin",
+      "desc": "Reconcile invoices in Moneybird, log expenses, daily summary."
+    },
+    "memory": {
+      "label": "Memory",
+      "desc": "Remembers customer preferences, your tone, prior decisions — across sessions."
+    }
+  },
+  "demo": {
+    "title": "Two minutes with a real customer",
+    "subtitle": "Not a demo. Not a scripted prospect. A Loom recording of a live workflow.",
+    "placeholder": "Loom embed lands here — Phase 1.5",
+    "voiceNote": "Voice clip placeholder · local OSS TTS (Coqui XTTS-v2) being wired"
+  },
+  "aanbod": {
+    "title": "Three ways to get Appie",
+    "pdf": {
+      "kicker": "Build it yourself",
+      "name": "Build Your Own Appie",
+      "subtitle": "PDF guide v4.4 — 75 pages",
+      "priceLabel": "€65",
+      "cadence": "one-time",
+      "cta": "Download the guide",
+      "features": [
+        "Full 75-page blueprint",
+        "50+ copy-paste code snippets",
+        "Your own server, your own Appie",
+        "3 branded diagrams + cheatsheet",
+        "Works on Mac or VPS"
+      ]
+    },
+    "instant": {
+      "badge": "Most popular",
+      "kicker": "Managed flagship",
+      "name": "Instant Appie",
+      "subtitle": "We build + run it",
+      "priceLabel": "€250",
+      "cadence": "/ month",
+      "cta": "Start with your Techwiz",
+      "features": [
+        "Fully managed setup within 24h",
+        "Your own private server (Hetzner CX33)",
+        "$50/mo AI budget included",
+        "Telegram + WhatsApp connected",
+        "Persistent memory + recall",
+        "55+ skills library"
+      ]
+    },
+    "custom": {
+      "kicker": "Custom-built",
+      "name": "Custom Appie",
+      "subtitle": "Eva, Sjaak, Shay's Appie — we build your version",
+      "priceLabel": "from €2,000",
+      "cadence": "/ month",
+      "cta": "Book a call",
+      "features": [
+        "Everything in Instant Appie",
+        "Bespoke workflows + integrations",
+        "Industry-specific qualification",
+        "Multi-agent architecture",
+        "30 days dedicated support"
+      ]
+    }
+  },
+  "garantie": {
+    "label": "Guarantee",
+    "headline": "If Appie doesn't save you 10 hours in your first month, you get your €250 back plus an extra €100.",
+    "copy": "A Techwiz is supposed to take work out of your week. Not money out of your wallet. If your time log after 30 days doesn't show 10 hours saved, your €250 back plus €100 for your time. One message and it moves.",
+    "mechanic": "Requires: ≥1 connected channel + 5 weekly tasks dispatched. Trigger window day 25-35. Refund + bonus within 5 business days."
+  },
+  "faq": {
+    "title": "Questions",
+    "items": [
+      {
+        "q": "How is Appie different from ChatGPT?",
+        "a": "ChatGPT is a chat window with no memory. Appie has persistent memory, runs on your own server, and does work on her own — without you having to type a prompt every time."
+      },
+      {
+        "q": "What if I want a human in the loop?",
+        "a": "Always you. Appie never settles a payment, contract or new hire on her own without you. Anything risky goes to Telegram for your sign-off first. You can flag any topic as \"ask first\"."
+      },
+      {
+        "q": "How safe is my data?",
+        "a": "Appie runs on a dedicated private server. Your conversations and data don't train public models. Encrypted connections, secure API handling, no unnecessary storage."
+      },
+      {
+        "q": "How long does setup take?",
+        "a": "Instant Appie is live within 24 hours — we handle everything. Build Your Own Appie takes a few hours of your own time with the PDF."
+      },
+      {
+        "q": "What tools does Appie work with?",
+        "a": "Google Workspace, Notion, Telegram, WhatsApp, Stripe, Brevo, Moneybird, Monday, HubSpot, Airtable, n8n, Webflow. If a tool has an API, Appie talks to it."
+      },
+      {
+        "q": "What if Appie does something wrong?",
+        "a": "Failsafes built in. Risky actions ping you first, complex edge cases route to a human, and you always have override controls. Plus 30 days of support after launch."
+      },
+      {
+        "q": "Can I cancel after month 1?",
+        "a": "Yes. Monthly cancellation, no contract. And if the satisfied-or-money-back guarantee applies, you get your €250 back without a fight."
+      },
+      {
+        "q": "What if I already have tools in place?",
+        "a": "Appie becomes the layer that connects everything. Not a replacement — an orchestrator that absorbs and operates your existing stack."
+      }
+    ]
+  },
+  "closing": {
+    "title": "Start with your Techwiz.",
+    "ctaPrimary": "Start with your Techwiz → €250/mo",
+    "ctaSecondary": "Download the guide — €65"
+  },
+  "common": {
+    "languageToggle": "Language",
+    "switchToDutch": "Nederlands",
+    "switchToEnglish": "English"
+  }
+}

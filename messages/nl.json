@@ -1,0 +1,238 @@
+{
+  "metadata": {
+    "title": "Appie — Jouw persoonlijke Techwiz | Weblyfe.ai",
+    "description": "Hoi, ik ben Appie. Jouw persoonlijke Techwiz. Een geniale werknemer met de laagste kosten — ik doe het werk dat je week opvreet. Inbox, intake, agenda, admin. Vanaf €65."
+  },
+  "nav": {
+    "instantAppie": "Instant Appie",
+    "howItWorks": "Hoe het werkt",
+    "pricing": "Prijzen",
+    "freeGuide": "Gratis gids",
+    "faq": "FAQ",
+    "bookACall": "Plan een gesprek"
+  },
+  "hero": {
+    "greeting": "Hoi, ik ben Appie.",
+    "tagline": "Jouw persoonlijke Techwiz.",
+    "subline": "Een geniale werknemer met de laagste kosten. Ik doe het werk dat je week opvreet. Inbox. Intake. Agenda. Admin.",
+    "kicker": "Jij bouwt. Ik houd de boel draaiend.",
+    "ctaPrimary": "Begin met je Techwiz",
+    "ctaSecondary": "Download de gids — €65",
+    "microcopy": "Een Techwiz hoort werk uit je week te halen. Niet uit je portemonnee. Bewijst je urenlog na 30 dagen geen 10 uur winst? €250 terug + €100 bovenop. Eén bericht aan ons en het staat in gang."
+  },
+  "bridge": {
+    "line1": "Het is half zes. Je hebt nog 47 ongelezen mails.",
+    "line2": "Het kantoor sluit. De week niet.",
+    "line3": "Daar kwam Appie voor."
+  },
+  "meetAppie": {
+    "title": "Zo klinkt een dag met Appie",
+    "subtitle": "Vier echte berichten uit een klant-Telegram. Niets gescript.",
+    "bubbles": [
+      {
+        "when": "08:00",
+        "text": "Goedemorgen. 23 mails afgehandeld vannacht (drafts in Verzonden). 4 hebben jou nodig: 2 prijsvragen, 1 partnership, 1 factuurgeschil."
+      },
+      {
+        "when": "11:14",
+        "text": "Sandra wil donderdag verzetten. Geen conflict — verschoven naar 14:00, om bevestiging gevraagd."
+      },
+      {
+        "when": "14:30",
+        "text": "WhatsApp van Mark over een keukenrenovatie in Rotterdam, budget 25k. Binnen service-radius. Lead in Brevo + Monday gezet, intake-vragen op afstand."
+      },
+      {
+        "when": "16:48",
+        "text": "6 facturen in Moneybird verwerkt. Geen verschillen. Reageer met \"laat zien\" + onderwerp als je context wil."
+      }
+    ]
+  },
+  "founder": {
+    "label": "Wie heeft Appie gebouwd",
+    "name": "Seyed Hosseini",
+    "linkedin": "LinkedIn",
+    "instagram": "Instagram",
+    "youtube": "YouTube",
+    "p1": "Ik begon in de medische wereld. Daarna een bureau gestart — Weblyfe — om de juiste verhalen te bouwen voor groeiende merken. Drie jaar later draait ons hele bureau op een eigen vloot AI medewerkers.",
+    "p2": "Appie is de afgeleide. De versie die ik aan klanten verkoop. Wat hier staat? Hetzelfde dat onze eigen inbox, intake en admin draait."
+  },
+  "cases": {
+    "title": "Appie bij klanten",
+    "subtitle": "Drie verhalen die al draaien.",
+    "cza": {
+      "client": "CZA Bouwbedrijf",
+      "sector": "Bouw",
+      "appieName": "Sjaak",
+      "headline": "WhatsApp-intake die niet meer slaapt.",
+      "body": "Aanvragen via WhatsApp werden vroeger pas na 4-6 uur beantwoord. Sjaak — een Custom Appie — pakt ze nu in seconden op, kwalificeert binnen ±50 km service-radius, en schrijft de lead direct weg naar Brevo, Monday en Moneybird tegelijk.",
+      "metricsNote": "Resultaten in opvraag bij Hesam — komen op de definitieve case page."
+    },
+    "dubaiProperty": {
+      "client": "Dubai-Property.nl",
+      "sector": "Vastgoed",
+      "appieName": "Eva",
+      "headline": "Lead-kwalificatie voor 752 inkomende leads.",
+      "body": "Eva is de Custom Appie voor Dubai-Property. Ze beoordeelt nieuwe inkomende leads, kwalificeert tegen de ICP en routeert hot leads naar het sales team — eerste reactie binnen minuten, dag en nacht.",
+      "metricsNote": "Klant-quote en harde cijfers worden bevestigd door Sandjai en Priscilla."
+    },
+    "safesite": {
+      "client": "SafeSite Security",
+      "sector": "Security / B2B",
+      "appieName": "Shay's Appie",
+      "headline": "Hele site gebouwd in één dag, via voicenotes.",
+      "body": "Shay vertelde Appie wat zijn business deed via Telegram-voicenotes. Een dag later stond er een complete bedrijfssite live. Geen designer-handoff, geen meetings — alleen brief, build, ship.",
+      "metricsNote": "Quote in opvraag bij Shay."
+    },
+    "appieLabel": "Appie:"
+  },
+  "customAppies": {
+    "label": "Custom-built Appies",
+    "title": "Voor specifieke setups bouwen we 'm op maat",
+    "subtitle": "Zes voorbeelden van Custom Appies die nu draaien voor klanten en intern. Vanaf €2.000/mnd. Wat zou jouw Techwiz doen?",
+    "cta": "Plan een gesprek",
+    "items": {
+      "sjaak": { "name": "Sjaak", "client": "CZA Bouwbedrijf", "role": "WhatsApp-intake voor de bouw" },
+      "eva": { "name": "Eva", "client": "Dubai-Property.nl", "role": "Lead-kwalificatie vastgoed" },
+      "shay": { "name": "Shay's Appie", "client": "SafeSite Security", "role": "Voice-to-website builder" },
+      "appie2": { "name": "Appie-2", "client": "Weblyfe (intern)", "role": "Marketing & comms herald" },
+      "appie3": { "name": "Appie-3", "client": "Weblyfe (intern)", "role": "CTO / DevOps" },
+      "wolfie": { "name": "Wolfie", "client": "WolfieDiddy", "role": "Eerste externe OpenClaw deploy" }
+    }
+  },
+  "portfolio": {
+    "label": "We bouwden ook deze"
+  },
+  "outcomes": {
+    "title": "Wat Appie voor je doet",
+    "subtitle": "Vijf gebieden waar je Techwiz zelfstandig draait.",
+    "inbox": {
+      "label": "Inbox",
+      "desc": "Triage, drafts, antwoorden op laag-risico mails. Risico's pingen jou eerst in Telegram."
+    },
+    "intake": {
+      "label": "Intake",
+      "desc": "WhatsApp / formulieren / mail leads kwalificeren en wegschrijven naar je CRM."
+    },
+    "scheduling": {
+      "label": "Agenda",
+      "desc": "Slots vinden, uitnodigingen sturen, verplaatsen, beleefd afhouden."
+    },
+    "admin": {
+      "label": "Admin",
+      "desc": "Facturen reconciliëren in Moneybird, uitgaven loggen, dagelijkse samenvatting."
+    },
+    "memory": {
+      "label": "Memory",
+      "desc": "Onthoudt klant-voorkeuren, jouw toon, eerdere beslissingen — dwars door sessies heen."
+    }
+  },
+  "demo": {
+    "title": "Twee minuten met een echte klant",
+    "subtitle": "Geen demo. Geen scripted prospect. Loom-opname van een live workflow.",
+    "placeholder": "Loom embed komt hier — Phase 1.5",
+    "voiceNote": "Voice clip placeholder · lokale OSS TTS (Coqui XTTS-v2) wordt gewired"
+  },
+  "aanbod": {
+    "title": "Drie manieren om Appie te krijgen",
+    "pdf": {
+      "kicker": "Build it yourself",
+      "name": "Build Your Own Appie",
+      "subtitle": "PDF guide v4.4 — 75 pagina's",
+      "priceLabel": "€65",
+      "cadence": "eenmalig",
+      "cta": "Download de gids",
+      "features": [
+        "Compleet 75-pagina blueprint",
+        "50+ copy-paste code snippets",
+        "Eigen server, eigen Appie",
+        "3 branded diagrams + cheatsheet",
+        "Werkt met Mac of VPS"
+      ]
+    },
+    "instant": {
+      "badge": "Most popular",
+      "kicker": "Managed flagship",
+      "name": "Instant Appie",
+      "subtitle": "Wij bouwen + draaien",
+      "priceLabel": "€250",
+      "cadence": "/ maand",
+      "cta": "Begin met je Techwiz",
+      "features": [
+        "Volledig managed setup binnen 24u",
+        "Eigen private server (Hetzner CX33)",
+        "$50/mnd AI-budget inbegrepen",
+        "Telegram + WhatsApp aangesloten",
+        "Persistent geheugen + memory",
+        "55+ skills library"
+      ]
+    },
+    "custom": {
+      "kicker": "Custom-built",
+      "name": "Custom Appie",
+      "subtitle": "Eva, Sjaak, Shay's Appie — wij bouwen jouw versie",
+      "priceLabel": "vanaf €2.000",
+      "cadence": "/ maand",
+      "cta": "Plan een gesprek",
+      "features": [
+        "Alles uit Instant Appie",
+        "Maatwerk workflows + integraties",
+        "Industrie-specifieke kwalificatie",
+        "Multi-agent architectuur",
+        "30 dagen dedicated support"
+      ]
+    }
+  },
+  "garantie": {
+    "label": "Garantie",
+    "headline": "Bespaart Appie je geen 10 uur in je eerste maand? Geld terug, plus €100 bovenop.",
+    "copy": "Een Techwiz hoort werk uit je week te halen. Niet uit je portemonnee. Bewijst je urenlog na 30 dagen geen 10 uur winst? €250 terug + €100 bovenop. Eén bericht aan ons en het staat in gang.",
+    "mechanic": "Vereist: minimaal 1 aangesloten kanaal + 5 wekelijkse taken via Appie. Triggervenster dag 25-35. Refund + bonus binnen 5 werkdagen."
+  },
+  "faq": {
+    "title": "Vragen",
+    "items": [
+      {
+        "q": "Hoe verschilt Appie van ChatGPT?",
+        "a": "ChatGPT is een chatvenster zonder geheugen. Appie heeft persistent geheugen, draait op je eigen server, en doet werk uit zichzelf — zonder dat je elke keer een prompt hoeft in te tikken."
+      },
+      {
+        "q": "Wat als ik een mens in de keten wil?",
+        "a": "Altijd jij. Appie handelt nooit zelf een betaling, contract of nieuwe hire af zonder jou. Alles wat risicovol is laat ik eerst in Telegram zien. Je kunt elk onderwerp markeren als \"eerst vragen\"."
+      },
+      {
+        "q": "Hoe veilig is mijn data?",
+        "a": "Appie draait op een dedicated private server. Je gesprekken en data trainen geen publieke modellen. Encrypted connecties, secure API handling, geen onnodige opslag."
+      },
+      {
+        "q": "Hoe lang duurt de setup?",
+        "a": "Instant Appie staat binnen 24 uur live — wij regelen alles. Build Your Own Appie kost je een paar uur eigen tijd met de PDF."
+      },
+      {
+        "q": "Met welke tools werkt Appie samen?",
+        "a": "Google Workspace, Notion, Telegram, WhatsApp, Stripe, Brevo, Moneybird, Monday, HubSpot, Airtable, n8n, Webflow. Heeft een tool een API? Dan praat Appie ermee."
+      },
+      {
+        "q": "Wat als Appie iets verkeerd doet?",
+        "a": "Failsafes ingebouwd. Risico-acties pingen jou eerst, complexe edge cases routen naar mens, en je hebt altijd override controls. Plus 30 dagen support na launch."
+      },
+      {
+        "q": "Kan ik na maand 1 stoppen?",
+        "a": "Ja. Maandelijks opzegbaar, geen contract. En als de tevreden-of-geld-terug garantie geldt, krijg je je €250 retour zonder gedoe."
+      },
+      {
+        "q": "Wat als ik al tools heb staan?",
+        "a": "Appie wordt de laag die alles verbindt. Geen vervanging — een orchestrator die jouw bestaande stack opslokt en bedient."
+      }
+    ]
+  },
+  "closing": {
+    "title": "Begin met je Techwiz.",
+    "ctaPrimary": "Begin met je Techwiz → €250/mnd",
+    "ctaSecondary": "Download de gids — €65"
+  },
+  "common": {
+    "languageToggle": "Taal",
+    "switchToDutch": "Nederlands",
+    "switchToEnglish": "English"
+  }
+}
