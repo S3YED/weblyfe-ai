@@ -29,24 +29,48 @@ import { cn } from '@/lib/utils';
 // Phase labels are NEVER rendered. Section names describe content.
 // Polish: Awwwards-tier per 2026-04-29-design-polish-plan.md.
 
-// Custom cubic-bezier , reads premium, not bouncy.
+// Custom cubic-bezier,reads premium, not bouncy.
 const SMOOTH = [0.16, 1, 0.3, 1] as const;
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
 const APPIE_BUBBLES = [
   { when: '08:00', text: 'Goedemorgen. 23 mails afgehandeld vannacht (drafts in Verzonden). 4 hebben jou nodig: 2 prijsvragen, 1 partnership, 1 factuurgeschil.' },
-  { when: '11:14', text: 'Sandra wil donderdag verzetten. Geen conflict , verschoven naar 14:00, om bevestiging gevraagd.' },
+  { when: '11:14', text: 'Sandra wil donderdag verzetten. Geen conflict,verschoven naar 14:00, om bevestiging gevraagd.' },
   { when: '14:30', text: 'WhatsApp van Mark over een keukenrenovatie in Rotterdam, budget 25k. Binnen service-radius. Lead in Brevo + Monday gezet, intake-vragen op afstand.' },
   { when: '16:48', text: '6 facturen in Moneybird verwerkt. Geen verschillen. Reageer met "laat zien" + onderwerp als je context wil.' },
 ];
 
+// Outcome-led, not feature-led (TIPS PDF p.3 block 8 + neuro p.20).
 const CUSTOMER_OUTCOMES = [
-  { icon: Inbox, label: 'Inbox', desc: 'Triage, drafts, antwoorden op laag-risico mails. Risico\'s pingen jou eerst in Telegram.' },
-  { icon: Phone, label: 'Intake', desc: 'WhatsApp / formulieren / mail leads kwalificeren en wegschrijven naar je CRM.' },
-  { icon: Calendar, label: 'Agenda', desc: 'Slots vinden, uitnodigingen sturen, verplaatsen, beleefd afhouden.' },
-  { icon: FileText, label: 'Admin', desc: 'Facturen reconciliëren in Moneybird, uitgaven loggen, dagelijkse samenvatting.' },
-  { icon: BrainCircuit, label: 'Memory', desc: 'Onthoudt klant-voorkeuren, jouw toon, eerdere beslissingen , dwars door sessies heen.' },
+  { icon: Inbox, label: 'Een lege inbox bij ontbijt', desc: '23 mails afgehandeld terwijl jij sliep. Drafts staan klaar in Verzonden. Jij scant, accordeert, gaat door.' },
+  { icon: Phone, label: 'Een lead binnen 30 seconden gekwalificeerd', desc: 'WhatsApp komt binnen om 22:14. Appie kwalificeert, vraagt door, schrijft de lead in CRM. Jij ziet het bij je koffie.' },
+  { icon: Calendar, label: 'Een agenda zonder gedoe', desc: 'Slots vinden, voorstellen, verzetten, vriendelijk afzeggen. Niemand belt met "even kijken in mijn agenda".' },
+  { icon: FileText, label: 'Geen openstaande facturen meer', desc: 'Moneybird reconciled. Verschillen geflagd. Dagelijkse samenvatting in Telegram. Jij hoeft niet meer te tellen.' },
+  { icon: BrainCircuit, label: 'Een collega die alles onthoudt', desc: 'Klantvoorkeuren, jouw toon, eerdere beslissingen. Vraag het Appie en hij weet het.' },
+];
+
+// Real Google reviews (5.0 avg from 59 ratings; 12 retrieved 2026-04-28).
+const GOOGLE_REVIEWS = [
+  { name: 'Asya Liddell', when: 'okt 2025', quote: "The most incredible agency I've ever come across. Creative, does way more than just web sites and branding and does it well." },
+  { name: 'Flora Chantik · Baliwithflow', when: 'jun 2025', quote: 'Seyed brought not only technical expertise but also a clear design vision that perfectly captured the essence of our brand. Detail-oriented, solution-focused, truly collaborative.' },
+  { name: 'Liedeke Martha', when: 'feb 2026', quote: 'Met Seyed samenwerken is echt een verschil die gemaakt is. Zijn kennis is zo uitgebreid en hij delivert echt meer dan zijn promise.' },
+  { name: 'Maricio Jongma', when: 'feb 2026', quote: "Top tier level coaching and branding. Seyed is an out of the box thinker with knowledge of the special sauce." },
+];
+
+const COMPARISON_ROWS = [
+  { axis: 'Kosten', chatgpt: '€20 / mnd', va: '€2.500+ / mnd', appie: '€250 / mnd' },
+  { axis: 'Persistent geheugen', chatgpt: '✗', va: 'Beperkt', appie: '✓' },
+  { axis: 'Werkt terwijl jij slaapt', chatgpt: '✗', va: '✗', appie: '✓' },
+  { axis: 'WhatsApp + Telegram', chatgpt: '✗', va: 'Handmatig', appie: '✓' },
+  { axis: 'Eigen server, jouw data', chatgpt: '✗', va: 'Gedeeld', appie: '✓' },
+  { axis: 'Schaalt naar meer werk', chatgpt: '✗', va: 'Hire opnieuw', appie: '✓' },
+];
+
+const USP_CARDS = [
+  { icon: '⚡', title: 'Wakker 24/7', body: 'Werkt door terwijl jij slaapt. Inbox triage om 04:00, lead-intake om 22:14.' },
+  { icon: '🔒', title: 'Eigen privé-server', body: 'Hetzner CX33. Jouw data, jouw geheugen, jouw spullen. Geen public model.' },
+  { icon: '⏱️', title: '10 uur bespaard, of geld terug', body: 'Bewijs het in maand 1. Niet gehaald? €250 terug + €100 bovenop.' },
 ];
 
 const TOP_CASES = [
@@ -55,7 +79,7 @@ const TOP_CASES = [
     sector: 'Bouw',
     appieName: 'Sjaak',
     headline: 'WhatsApp-intake die niet meer slaapt.',
-    body: 'Aanvragen via WhatsApp werden vroeger pas na 4-6 uur beantwoord. Sjaak , een Custom Appie , pakt ze nu in seconden op, kwalificeert binnen ±50 km service-radius, en schrijft de lead direct weg naar Brevo, Monday en Moneybird tegelijk.',
+    body: 'Aanvragen via WhatsApp werden vroeger pas na 4-6 uur beantwoord. Sjaak,een Custom Appie,pakt ze nu in seconden op, kwalificeert binnen ±50 km service-radius, en schrijft de lead direct weg naar Brevo, Monday en Moneybird tegelijk.',
     outcome: '+23% conversie',
     image: '/cases/cza-bouwbedrijf.jpg',
     large: true,
@@ -65,7 +89,7 @@ const TOP_CASES = [
     sector: 'Vastgoed',
     appieName: 'Eva',
     headline: 'Lead-kwalificatie voor 752 inkomende leads.',
-    body: 'Eva is de Custom Appie voor Dubai-Property. Ze beoordeelt nieuwe inkomende leads, kwalificeert tegen de ICP en routeert hot leads naar het sales team , eerste reactie binnen minuten, dag en nacht.',
+    body: 'Eva is de Custom Appie voor Dubai-Property. Ze beoordeelt nieuwe inkomende leads, kwalificeert tegen de ICP en routeert hot leads naar het sales team,eerste reactie binnen minuten, dag en nacht.',
     outcome: '<2 min response',
     image: '/cases/dubai-property.avif',
   },
@@ -74,7 +98,7 @@ const TOP_CASES = [
     sector: 'Security · B2B',
     appieName: "Shay's Appie",
     headline: 'Hele site gebouwd in één dag, via voicenotes.',
-    body: 'Shay vertelde Appie wat zijn business deed via Telegram-voicenotes. Een dag later stond er een complete bedrijfssite live. Geen designer-handoff, geen meetings , alleen brief, build, ship.',
+    body: 'Shay vertelde Appie wat zijn business deed via Telegram-voicenotes. Een dag later stond er een complete bedrijfssite live. Geen designer-handoff, geen meetings,alleen brief, build, ship.',
     outcome: '1 dag → live',
     image: '/screenshots/safesite.jpg',
   },
@@ -92,7 +116,7 @@ const CUSTOM_APPIES = [
 const PORTFOLIO = [
   { name: 'TitanTransfers', img: '/cases/titan-transfers.avif' },
   { name: 'Boooth', img: '/cases/boooth.avif' },
-  { name: 'CZA Bouwbedrijf', img: '/cases/cza-bouwbedrijf.png' },
+  { name: 'CZA Bouwbedrijf', img: '/cases/cza-bouwbedrijf.jpg' },
   { name: 'Dubai-Property', img: '/cases/dubai-property.avif' },
   { name: 'Beyondschool', img: '/cases/beyondschool.avif' },
   { name: 'Bali with Flow', img: '/cases/bali-with-flow.avif' },
@@ -102,14 +126,14 @@ const PORTFOLIO = [
 ];
 
 const FAQS = [
-  { q: 'Hoe verschilt Appie van ChatGPT?', a: 'ChatGPT is een chatvenster zonder geheugen. Appie heeft persistent geheugen, draait op je eigen server, en doet werk uit zichzelf , zonder dat je elke keer een prompt hoeft in te tikken.' },
+  { q: 'Hoe verschilt Appie van ChatGPT?', a: 'ChatGPT is een chatvenster zonder geheugen. Appie heeft persistent geheugen, draait op je eigen server, en doet werk uit zichzelf,zonder dat je elke keer een prompt hoeft in te tikken.' },
   { q: 'Hoe veilig is mijn data?', a: 'Appie draait op een dedicated private server. Je gesprekken en data trainen geen publieke modellen. Encrypted connecties, secure API handling, geen onnodige opslag.' },
   { q: 'Wat als ik een mens in de keten wil?', a: 'Altijd jij. Appie handelt nooit zelf een betaling, contract of nieuwe hire af zonder jou. Alles wat risicovol is laat ik eerst in Telegram zien. Je kunt elk onderwerp markeren als "eerst vragen".' },
   { q: 'Kan ik na maand 1 stoppen?', a: 'Ja. Maandelijks opzegbaar, geen contract. En als de tevreden-of-geld-terug garantie geldt, krijg je je €250 retour zonder gedoe.' },
-  { q: 'Hoe lang duurt de setup?', a: 'Instant Appie staat binnen 24 uur live , wij regelen alles. Build Your Own Appie kost je een paar uur eigen tijd met de PDF.' },
+  { q: 'Hoe lang duurt de setup?', a: 'Instant Appie staat binnen 24 uur live,wij regelen alles. Build Your Own Appie kost je een paar uur eigen tijd met de PDF.' },
   { q: 'Met welke tools werkt Appie samen?', a: 'Google Workspace, Notion, Telegram, WhatsApp, Stripe, Brevo, Moneybird, Monday, HubSpot, Airtable, n8n, Webflow. Heeft een tool een API? Dan praat Appie ermee.' },
   { q: 'Wat als Appie iets verkeerd doet?', a: 'Failsafes ingebouwd. Risico-acties pingen jou eerst, complexe edge cases routen naar mens, en je hebt altijd override controls. Plus 30 dagen support na launch.' },
-  { q: 'Wat als ik al tools heb staan?', a: 'Appie wordt de laag die alles verbindt. Geen vervanging , een orchestrator die jouw bestaande stack opslokt en bedient.' },
+  { q: 'Wat als ik al tools heb staan?', a: 'Appie wordt de laag die alles verbindt. Geen vervanging,een orchestrator die jouw bestaande stack opslokt en bedient.' },
 ];
 
 // ─── HERO PORTRAIT (3D tilt + magic dust) ────────────────────────────────────
@@ -139,7 +163,7 @@ function MagicDustPortrait() {
     mouseY.set(0);
   }
 
-  // Magic dust particles , different damping per particle for comet-tail feel
+  // Magic dust particles,different damping per particle for comet-tail feel
   const dustConfig = useMemo(
     () => Array.from({ length: 8 }, (_, i) => ({
       damping: 20 + i * 5,
@@ -176,7 +200,7 @@ function MagicDustPortrait() {
         <BorderBeam size={120} duration={10} colorFrom="#DFB771" colorTo="#247459" />
       </motion.div>
 
-      {/* Magic dust particles , float around portrait following cursor */}
+      {/* Magic dust particles,float around portrait following cursor */}
       {!reduced && dustConfig.map((cfg, i) => (
         <DustParticle key={i} mouseX={springX} mouseY={springY} {...cfg} />
       ))}
@@ -470,12 +494,15 @@ export default function TIPSLanding() {
           <MagicDustPortrait />
 
           <div className="text-center lg:text-left">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-5 tracking-tight">
-              <StaggerWords text="Hoi, ik ben Appie." />
-              <span className="block mt-3">
-                <StaggerWords text="Jouw persoonlijke" delay={0.4} />{' '}
+            {/* FIX-3: visitor-egocentric headline (neuro PDF p.5) */}
+            <p className="text-[#DFB771]/80 text-xs font-mono uppercase tracking-widest mb-4">
+              Maak kennis met Appie. Jouw persoonlijke Techwiz.
+            </p>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.02] mb-5 tracking-tight">
+              <StaggerWords text="Jouw werkweek" />
+              <span className="block mt-2">
                 <AnimatedGradientText className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-                  Techwiz.
+                  runt zichzelf.
                 </AnimatedGradientText>
               </span>
             </h1>
@@ -486,7 +513,7 @@ export default function TIPSLanding() {
               transition={{ duration: 0.7, delay: 0.9, ease: SMOOTH }}
               className="text-[#F6FEFC]/75 text-lg md:text-xl mb-3 leading-relaxed max-w-2xl mx-auto lg:mx-0"
             >
-              Een geniale werknemer met de laagste kosten. Ik doe het werk dat je week opvreet.
+              Een geniale werknemer met de laagste kosten, die werkt terwijl jij slaapt. Inbox, intake, agenda, admin. Jij bouwt verder.
             </motion.p>
 
             <motion.div
@@ -517,9 +544,16 @@ export default function TIPSLanding() {
               <motion.div whileHover={{ scale: 1.02, y: -1 }} whileTap={{ scale: 0.98 }} transition={{ type: 'spring', stiffness: 400, damping: 25 }}>
                 <Link
                   href="#aanbod"
-                  className="flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/95 text-[#031D16] font-bold px-7 py-4 rounded-xl transition-colors"
+                  className="group flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#FFD99A] text-[#031D16] font-bold px-7 py-4 rounded-xl transition-colors"
                 >
-                  {PRICING.instantAppie.cta.nl} <ArrowRight className="w-4 h-4" />
+                  {PRICING.instantAppie.cta.nl}
+                  <motion.span
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+                    className="inline-flex"
+                  >
+                    <ArrowRight className="w-4 h-4" />
+                  </motion.span>
                 </Link>
               </motion.div>
               <motion.div whileHover={{ scale: 1.02, y: -1 }} whileTap={{ scale: 0.98 }}>
@@ -527,7 +561,7 @@ export default function TIPSLanding() {
                   href="#aanbod"
                   className="flex items-center justify-center gap-2 bg-[#247459]/15 hover:bg-[#247459]/25 border border-[#247459]/40 hover:border-[#DFB771]/50 text-[#F6FEFC] font-semibold px-7 py-4 rounded-xl transition-colors"
                 >
-                  Bouw zelf , €65
+                  Bouw zelf,€65
                 </Link>
               </motion.div>
             </motion.div>
@@ -543,6 +577,29 @@ export default function TIPSLanding() {
           </div>
         </div>
       </motion.section>
+
+      {/* ── USP CARDS (T) — TIPS PDF p.3 block 4 ─────────────────────── */}
+      <section className="py-14 bg-[#031D16] border-y border-[#247459]/20">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid sm:grid-cols-3 gap-4">
+            {USP_CARDS.map((u, i) => (
+              <motion.div
+                key={u.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.5, delay: i * 0.1, ease: SMOOTH }}
+                whileHover={{ y: -4 }}
+                className="p-6 bg-[#0E3D31]/40 rounded-2xl border border-[#247459]/30 hover:border-[#DFB771]/40 transition-colors"
+              >
+                <div className="text-3xl mb-3">{u.icon}</div>
+                <h3 className="font-bold text-lg mb-2">{u.title}</h3>
+                <p className="text-[#F6FEFC]/65 text-sm leading-relaxed">{u.body}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ── BRIDGE (T → I) ───────────────────────────────────────────── */}
       <section className="py-20 bg-[#0E3D31]/40 border-y border-[#247459]/20">
@@ -586,7 +643,7 @@ export default function TIPSLanding() {
         </div>
       </section>
 
-      {/* ── MEET APPIE , Telegram bubbles (I) ─────────────────────────── */}
+      {/* ── MEET APPIE,Telegram bubbles (I) ─────────────────────────── */}
       <section className="py-24 bg-[#031D16]">
         <div className="max-w-3xl mx-auto px-4">
           <motion.div
@@ -637,7 +694,7 @@ export default function TIPSLanding() {
               </p>
               <h3 className="text-2xl md:text-3xl font-bold mb-4">Seyed Hosseini</h3>
               <TextGenerateEffect
-                words="Ik begon in de medische wereld. Daarna een bureau gestart , Weblyfe , om de juiste verhalen te bouwen voor groeiende merken. Drie jaar later draait ons hele bureau op een eigen vloot Techwizes. Appie is wat overblijft als je dat aan klanten verkoopt , dezelfde flow die onze eigen inbox, intake en admin draait."
+                words="Ik begon in de medische wereld. Daarna een bureau gestart,Weblyfe,om de juiste verhalen te bouwen voor groeiende merken. Drie jaar later draait ons hele bureau op een eigen vloot Techwizes. Appie is wat overblijft als je dat aan klanten verkoopt,dezelfde flow die onze eigen inbox, intake en admin draait."
                 className="text-[#F6FEFC]/75 text-base md:text-lg leading-relaxed mb-5"
               />
               <div className="flex flex-wrap gap-3 text-sm">
@@ -664,7 +721,68 @@ export default function TIPSLanding() {
         </div>
       </section>
 
-      {/* ── CUSTOMER CASES , Bento (I → P) ────────────────────────────── */}
+      {/* ── GOOGLE REVIEWS (I) — TIPS PDF p.3 block 6 ───────────────── */}
+      <section className="py-20 bg-[#031D16]">
+        <div className="max-w-6xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-10"
+          >
+            <div className="inline-flex items-center gap-2 mb-3 text-[#DFB771]">
+              <span className="text-base">★★★★★</span>
+              <span className="text-sm font-semibold">5.0</span>
+              <span className="text-[#F6FEFC]/50 text-sm">· 59 reviews op Google</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold">Wat klanten over Weblyfe zeggen</h2>
+          </motion.div>
+          <div className="grid md:grid-cols-2 gap-5">
+            {GOOGLE_REVIEWS.map((r, i) => (
+              <motion.blockquote
+                key={r.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.5, delay: i * 0.08, ease: SMOOTH }}
+                className="p-6 bg-[#1a2e27]/50 rounded-2xl border border-[#247459]/20"
+              >
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-[#DFB771] text-sm">★★★★★</span>
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#F6FEFC]/40">Google review</span>
+                </div>
+                <p className="text-[#F6FEFC]/85 text-sm leading-relaxed mb-4">&ldquo;{r.quote}&rdquo;</p>
+                <footer className="text-[#F6FEFC]/55 text-xs">
+                  <span className="font-semibold text-[#F6FEFC]/75">{r.name}</span>
+                  <span className="mx-2">·</span>
+                  <span>{r.when}</span>
+                </footer>
+              </motion.blockquote>
+            ))}
+          </div>
+          <div className="text-center mt-6">
+            <a
+              href="https://maps.google.com/?cid=10762748664937035144"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#DFB771]/80 hover:text-[#DFB771] text-sm underline-offset-4 hover:underline"
+            >
+              Bekijk alle 59 reviews op Google Maps →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── INTERRUPTION BAND (I → P) — TIPS PDF p.3 block 7 ────────── */}
+      <section className="py-8 bg-[#0E3D31] border-y border-[#DFB771]/30">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <p className="text-[#DFB771] text-base md:text-lg font-semibold tracking-wide">
+            Tijd om te zien wat je écht krijgt →
+          </p>
+        </div>
+      </section>
+
+      {/* ── CUSTOMER CASES,Bento (I → P) ────────────────────────────── */}
       <section className="py-24 bg-[#031D16]">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div
@@ -685,7 +803,7 @@ export default function TIPSLanding() {
         </div>
       </section>
 
-      {/* ── CUSTOM APPIES , Marquee (€2k tier) ────────────────────────── */}
+      {/* ── CUSTOM APPIES,Marquee (€2k tier) ────────────────────────── */}
       <section id="custom-appies" className="py-20 bg-[#0E3D31] overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 mb-10">
           <motion.div
@@ -799,7 +917,7 @@ export default function TIPSLanding() {
               Twee minuten. Eén klant. Geen acteurs.
             </h2>
             <p className="text-[#F6FEFC]/50 mb-8 max-w-xl mx-auto">
-              Loom-opname van een live workflow , komt binnen Phase 1.5.
+              Loom-opname van een live workflow,komt binnen Phase 1.5.
             </p>
           </motion.div>
 
@@ -830,6 +948,21 @@ export default function TIPSLanding() {
         </div>
       </section>
 
+      {/* ── SCARCITY BAND (S) — TIPS PDF p.3 block 10 ───────────────── */}
+      <section className="py-12 bg-gradient-to-r from-[#031D16] via-[#0E3D31] to-[#031D16] border-y border-[#DFB771]/40">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-3">
+            Limited launch · mei 2026
+          </p>
+          <p className="text-[#F6FEFC] text-xl md:text-2xl font-bold mb-2">
+            Eerste 10 Instant Appies krijgen gratis Telegram-onboarding sessie van 60 min.
+          </p>
+          <p className="text-[#F6FEFC]/55 text-sm">
+            Persoonlijk afgestemd. T.w.v. €250. Inbegrepen tot 10 plekken vol.
+          </p>
+        </div>
+      </section>
+
       {/* ── AANBOD (S) ──────────────────────────────────────────────── */}
       <section id="aanbod" className="py-24 bg-[#0E3D31]">
         <div className="max-w-6xl mx-auto px-4">
@@ -853,7 +986,7 @@ export default function TIPSLanding() {
             >
               <p className="text-[#DFB771] text-xs font-bold uppercase tracking-wide mb-3">Build it yourself</p>
               <h3 className="font-bold text-xl mb-1">{PRICING.pdfGuide.name}</h3>
-              <p className="text-[#F6FEFC]/55 text-xs mb-5">PDF guide v4.4 , 75 pagina's</p>
+              <p className="text-[#F6FEFC]/55 text-xs mb-5">PDF guide v4.4,75 pagina's</p>
               <div className="mb-5">
                 <span className="font-bold text-3xl">{PRICING.pdfGuide.priceLabel}</span>
                 <span className="text-[#F6FEFC]/40 text-sm ml-1">eenmalig</span>
@@ -880,7 +1013,7 @@ export default function TIPSLanding() {
               </Link>
             </motion.div>
 
-            {/* Instant Appie , flagship with always-on border-beam */}
+            {/* Instant Appie,flagship with always-on border-beam */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -937,7 +1070,7 @@ export default function TIPSLanding() {
             >
               <p className="text-[#F6FEFC]/55 text-xs font-bold uppercase tracking-wide mb-3">Custom-built</p>
               <h3 className="font-bold text-xl mb-1">{PRICING.customAppie.name}</h3>
-              <p className="text-[#F6FEFC]/55 text-xs mb-5">Eva, Sjaak, Shay's Appie , wij bouwen jouw versie</p>
+              <p className="text-[#F6FEFC]/55 text-xs mb-5">Eva, Sjaak, Shay's Appie,wij bouwen jouw versie</p>
               <div className="mb-5">
                 <span className="font-bold text-3xl">start €2k</span>
                 <span className="text-[#F6FEFC]/40 text-sm ml-1">/ mnd · op maat</span>
@@ -984,6 +1117,50 @@ export default function TIPSLanding() {
             <p className="text-[#F6FEFC]/70 text-sm md:text-base">{GUARANTEE.copy.nl}</p>
             <p className="text-[#F6FEFC]/55 text-xs mt-3 font-mono">{GUARANTEE.mechanic.nl}</p>
           </motion.div>
+        </div>
+      </section>
+
+      {/* ── COMPARISON TABLE (S) — neuro PDF p.15 ────────────────────── */}
+      <section className="py-20 bg-[#031D16]">
+        <div className="max-w-5xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">Waarom Appie en niet iets anders?</h2>
+            <p className="text-[#F6FEFC]/55 text-base">Alle drie kunnen helpen. Maar slechts één werkt 24/7 voor €250 / mnd.</p>
+          </motion.div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-[#247459]/30">
+                  <th className="text-left p-4 text-[#F6FEFC]/55 font-mono text-xs uppercase tracking-widest">Aspect</th>
+                  <th className="p-4 text-[#F6FEFC]/55 font-semibold">ChatGPT Plus</th>
+                  <th className="p-4 text-[#F6FEFC]/55 font-semibold">Iemand inhuren</th>
+                  <th className="p-4 text-[#DFB771] font-bold">Appie</th>
+                </tr>
+              </thead>
+              <tbody>
+                {COMPARISON_ROWS.map((row, i) => (
+                  <motion.tr
+                    key={row.axis}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ delay: i * 0.06, duration: 0.4 }}
+                    className="border-b border-[#247459]/15"
+                  >
+                    <td className="p-4 text-[#F6FEFC]/85 font-semibold">{row.axis}</td>
+                    <td className="p-4 text-center text-[#F6FEFC]/55">{row.chatgpt}</td>
+                    <td className="p-4 text-center text-[#F6FEFC]/55">{row.va}</td>
+                    <td className="p-4 text-center text-[#DFB771] font-bold bg-[#DFB771]/5">{row.appie}</td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
@@ -1043,12 +1220,80 @@ export default function TIPSLanding() {
                 href="/buy/pdf"
                 className="flex items-center justify-center gap-2 bg-[#247459]/15 hover:bg-[#247459]/25 border border-[#247459]/40 hover:border-[#DFB771]/50 text-[#F6FEFC] font-semibold px-8 py-4 rounded-xl transition-colors"
               >
-                {PRICING.pdfGuide.cta.nl} , €65
+                {PRICING.pdfGuide.cta.nl},€65
               </Link>
             </motion.div>
           </div>
         </div>
       </section>
+
+      {/* ── STICKY CTA BAR (mobile + desktop) — conversion PDF p.16 ─── */}
+      <StickyCtaBar />
     </div>
+  );
+}
+
+// Sticky bottom CTA: appears after 600px scroll, hides when #aanbod is in view.
+function StickyCtaBar() {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    let frame = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const past = window.scrollY > 600;
+        const aanbod = document.getElementById('aanbod');
+        const aanbodVisible = aanbod
+          ? (() => {
+              const r = aanbod.getBoundingClientRect();
+              return r.top < window.innerHeight && r.bottom > 0;
+            })()
+          : false;
+        setShow(past && !aanbodVisible);
+      });
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 100, opacity: 0 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          className="fixed bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 z-50 max-w-3xl mx-auto"
+        >
+          <div className="bg-[#0E3D31] backdrop-blur-md border border-[#DFB771]/40 rounded-2xl shadow-2xl shadow-[#031D16] p-3 flex items-center justify-between gap-3">
+            <div className="hidden sm:block flex-shrink-0 text-2xl">🧙🏽‍♂️</div>
+            <div className="flex-1 min-w-0">
+              <p className="text-[#F6FEFC] text-sm font-bold leading-tight">Wakker je Appie. €250 / mnd.</p>
+              <p className="text-[#F6FEFC]/55 text-xs">10 uur bespaard of geld terug.</p>
+            </div>
+            <Link
+              href="#aanbod"
+              className="group flex-shrink-0 flex items-center gap-1.5 bg-[#DFB771] hover:bg-[#FFD99A] text-[#031D16] font-bold px-4 py-2.5 rounded-xl text-sm transition-colors whitespace-nowrap"
+            >
+              <span className="hidden sm:inline">Begin nu</span>
+              <span className="sm:hidden">Start</span>
+              <motion.span
+                animate={{ x: [0, 3, 0] }}
+                transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+                className="inline-flex"
+              >
+                <ArrowRight className="w-4 h-4" />
+              </motion.span>
+            </Link>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
