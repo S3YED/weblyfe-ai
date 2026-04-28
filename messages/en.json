@@ -7,9 +7,9 @@
     "instantAppie": "Instant Appie",
     "howItWorks": "How it works",
     "pricing": "Pricing",
-    "freeGuide": "Free guide",
     "faq": "FAQ",
-    "bookACall": "Book a call"
+    "bookACall": "Book a call",
+    "pdfGuide": "PDF guide · €65"
   },
   "hero": {
     "greeting": "Hi, I'm Appie.",
@@ -91,12 +91,36 @@
     "subtitle": "Six examples of Custom Appies already running for customers and internally. From €2,000/month. What would your Techwiz do?",
     "cta": "Book a call",
     "items": {
-      "sjaak": { "name": "Sjaak", "client": "CZA Bouwbedrijf", "role": "WhatsApp intake for construction" },
-      "eva": { "name": "Eva", "client": "Dubai-Property.nl", "role": "Real estate lead qualification" },
-      "shay": { "name": "Shay's Appie", "client": "SafeSite Security", "role": "Voice-to-website builder" },
-      "appie2": { "name": "Appie-2", "client": "Weblyfe (internal)", "role": "Marketing & comms herald" },
-      "appie3": { "name": "Appie-3", "client": "Weblyfe (internal)", "role": "CTO / DevOps" },
-      "wolfie": { "name": "Wolfie", "client": "WolfieDiddy", "role": "First external OpenClaw deploy" }
+      "sjaak": {
+        "name": "Sjaak",
+        "client": "CZA Bouwbedrijf",
+        "role": "WhatsApp intake for construction"
+      },
+      "eva": {
+        "name": "Eva",
+        "client": "Dubai-Property.nl",
+        "role": "Real estate lead qualification"
+      },
+      "shay": {
+        "name": "Shay's Appie",
+        "client": "SafeSite Security",
+        "role": "Voice-to-website builder"
+      },
+      "appie2": {
+        "name": "Appie-2",
+        "client": "Weblyfe (internal)",
+        "role": "Marketing & comms herald"
+      },
+      "appie3": {
+        "name": "Appie-3",
+        "client": "Weblyfe (internal)",
+        "role": "CTO / DevOps"
+      },
+      "wolfie": {
+        "name": "Wolfie",
+        "client": "WolfieDiddy",
+        "role": "First external OpenClaw deploy"
+      }
     }
   },
   "portfolio": {

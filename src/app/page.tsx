@@ -4,9 +4,9 @@ import TIPSLanding from '@/components/TIPSLanding';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Appie — Jouw persoonlijke Techwiz | Weblyfe.ai',
+  title: 'Appie , Jouw persoonlijke Techwiz | Weblyfe.ai',
   description:
-    'Hoi, ik ben Appie. Een geniale werknemer met de laagste kosten. Ik doe het werk dat je week opvreet — inbox, intake, agenda, admin. Vanaf €65 zelf bouwen, of €250/mnd volledig managed.',
+    'Hoi, ik ben Appie. Een geniale werknemer met de laagste kosten. Ik doe het werk dat je week opvreet , inbox, intake, agenda, admin. Vanaf €65 zelf bouwen, of €250/mnd volledig managed.',
   alternates: {
     canonical: 'https://weblyfe.ai',
   },
@@ -21,7 +21,7 @@ const faqSchema = {
       name: 'Hoe verschilt Appie van ChatGPT?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'ChatGPT is een chatvenster zonder geheugen. Appie heeft persistent geheugen, draait op je eigen server, en doet werk uit zichzelf — zonder dat je elke keer een prompt hoeft in te tikken.',
+        text: 'ChatGPT is een chatvenster zonder geheugen. Appie heeft persistent geheugen, draait op je eigen server, en doet werk uit zichzelf , zonder dat je elke keer een prompt hoeft in te tikken.',
       },
     },
     {
@@ -45,7 +45,7 @@ const faqSchema = {
       name: 'Hoe lang duurt de setup?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Instant Appie staat binnen 24 uur live — wij regelen alles. Build Your Own Appie kost je een paar uur eigen tijd met de PDF.',
+        text: 'Instant Appie staat binnen 24 uur live , wij regelen alles. Build Your Own Appie kost je een paar uur eigen tijd met de PDF.',
       },
     },
     {
@@ -77,7 +77,7 @@ const faqSchema = {
       name: 'Wat als ik al tools heb staan?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Appie wordt de laag die alles verbindt. Geen vervanging — een orchestrator die jouw bestaande stack opslokt en bedient.',
+        text: 'Appie wordt de laag die alles verbindt. Geen vervanging , een orchestrator die jouw bestaande stack opslokt en bedient.',
       },
     },
   ],
@@ -86,7 +86,7 @@ const faqSchema = {
 const productSchema = {
   '@context': 'https://schema.org',
   '@type': 'Product',
-  name: 'Appie — Jouw persoonlijke Techwiz',
+  name: 'Appie , Jouw persoonlijke Techwiz',
   description:
     'Een AI Techwiz / geniale werknemer die je inbox, intake, agenda en admin overneemt. Beschikbaar als €65 DIY-gids, €250/maand managed Instant Appie, of vanaf €2.000/maand custom-built.',
   brand: { '@type': 'Brand', name: 'Weblyfe' },

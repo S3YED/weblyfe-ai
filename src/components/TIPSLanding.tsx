@@ -29,14 +29,14 @@ import { cn } from '@/lib/utils';
 // Phase labels are NEVER rendered. Section names describe content.
 // Polish: Awwwards-tier per 2026-04-29-design-polish-plan.md.
 
-// Custom cubic-bezier — reads premium, not bouncy.
+// Custom cubic-bezier , reads premium, not bouncy.
 const SMOOTH = [0.16, 1, 0.3, 1] as const;
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
 const APPIE_BUBBLES = [
   { when: '08:00', text: 'Goedemorgen. 23 mails afgehandeld vannacht (drafts in Verzonden). 4 hebben jou nodig: 2 prijsvragen, 1 partnership, 1 factuurgeschil.' },
-  { when: '11:14', text: 'Sandra wil donderdag verzetten. Geen conflict — verschoven naar 14:00, om bevestiging gevraagd.' },
+  { when: '11:14', text: 'Sandra wil donderdag verzetten. Geen conflict , verschoven naar 14:00, om bevestiging gevraagd.' },
   { when: '14:30', text: 'WhatsApp van Mark over een keukenrenovatie in Rotterdam, budget 25k. Binnen service-radius. Lead in Brevo + Monday gezet, intake-vragen op afstand.' },
   { when: '16:48', text: '6 facturen in Moneybird verwerkt. Geen verschillen. Reageer met "laat zien" + onderwerp als je context wil.' },
 ];
@@ -46,7 +46,7 @@ const CUSTOMER_OUTCOMES = [
   { icon: Phone, label: 'Intake', desc: 'WhatsApp / formulieren / mail leads kwalificeren en wegschrijven naar je CRM.' },
   { icon: Calendar, label: 'Agenda', desc: 'Slots vinden, uitnodigingen sturen, verplaatsen, beleefd afhouden.' },
   { icon: FileText, label: 'Admin', desc: 'Facturen reconciliëren in Moneybird, uitgaven loggen, dagelijkse samenvatting.' },
-  { icon: BrainCircuit, label: 'Memory', desc: 'Onthoudt klant-voorkeuren, jouw toon, eerdere beslissingen — dwars door sessies heen.' },
+  { icon: BrainCircuit, label: 'Memory', desc: 'Onthoudt klant-voorkeuren, jouw toon, eerdere beslissingen , dwars door sessies heen.' },
 ];
 
 const TOP_CASES = [
@@ -55,7 +55,7 @@ const TOP_CASES = [
     sector: 'Bouw',
     appieName: 'Sjaak',
     headline: 'WhatsApp-intake die niet meer slaapt.',
-    body: 'Aanvragen via WhatsApp werden vroeger pas na 4-6 uur beantwoord. Sjaak — een Custom Appie — pakt ze nu in seconden op, kwalificeert binnen ±50 km service-radius, en schrijft de lead direct weg naar Brevo, Monday en Moneybird tegelijk.',
+    body: 'Aanvragen via WhatsApp werden vroeger pas na 4-6 uur beantwoord. Sjaak , een Custom Appie , pakt ze nu in seconden op, kwalificeert binnen ±50 km service-radius, en schrijft de lead direct weg naar Brevo, Monday en Moneybird tegelijk.',
     outcome: '+23% conversie',
     image: '/cases/cza-bouwbedrijf.png',
     large: true,
@@ -65,7 +65,7 @@ const TOP_CASES = [
     sector: 'Vastgoed',
     appieName: 'Eva',
     headline: 'Lead-kwalificatie voor 752 inkomende leads.',
-    body: 'Eva is de Custom Appie voor Dubai-Property. Ze beoordeelt nieuwe inkomende leads, kwalificeert tegen de ICP en routeert hot leads naar het sales team — eerste reactie binnen minuten, dag en nacht.',
+    body: 'Eva is de Custom Appie voor Dubai-Property. Ze beoordeelt nieuwe inkomende leads, kwalificeert tegen de ICP en routeert hot leads naar het sales team , eerste reactie binnen minuten, dag en nacht.',
     outcome: '<2 min response',
     image: '/cases/dubai-property.avif',
   },
@@ -74,7 +74,7 @@ const TOP_CASES = [
     sector: 'Security · B2B',
     appieName: "Shay's Appie",
     headline: 'Hele site gebouwd in één dag, via voicenotes.',
-    body: 'Shay vertelde Appie wat zijn business deed via Telegram-voicenotes. Een dag later stond er een complete bedrijfssite live. Geen designer-handoff, geen meetings — alleen brief, build, ship.',
+    body: 'Shay vertelde Appie wat zijn business deed via Telegram-voicenotes. Een dag later stond er een complete bedrijfssite live. Geen designer-handoff, geen meetings , alleen brief, build, ship.',
     outcome: '1 dag → live',
     image: '/screenshots/safesite-fresh.jpg',
   },
@@ -102,14 +102,14 @@ const PORTFOLIO = [
 ];
 
 const FAQS = [
-  { q: 'Hoe verschilt Appie van ChatGPT?', a: 'ChatGPT is een chatvenster zonder geheugen. Appie heeft persistent geheugen, draait op je eigen server, en doet werk uit zichzelf — zonder dat je elke keer een prompt hoeft in te tikken.' },
+  { q: 'Hoe verschilt Appie van ChatGPT?', a: 'ChatGPT is een chatvenster zonder geheugen. Appie heeft persistent geheugen, draait op je eigen server, en doet werk uit zichzelf , zonder dat je elke keer een prompt hoeft in te tikken.' },
   { q: 'Hoe veilig is mijn data?', a: 'Appie draait op een dedicated private server. Je gesprekken en data trainen geen publieke modellen. Encrypted connecties, secure API handling, geen onnodige opslag.' },
   { q: 'Wat als ik een mens in de keten wil?', a: 'Altijd jij. Appie handelt nooit zelf een betaling, contract of nieuwe hire af zonder jou. Alles wat risicovol is laat ik eerst in Telegram zien. Je kunt elk onderwerp markeren als "eerst vragen".' },
   { q: 'Kan ik na maand 1 stoppen?', a: 'Ja. Maandelijks opzegbaar, geen contract. En als de tevreden-of-geld-terug garantie geldt, krijg je je €250 retour zonder gedoe.' },
-  { q: 'Hoe lang duurt de setup?', a: 'Instant Appie staat binnen 24 uur live — wij regelen alles. Build Your Own Appie kost je een paar uur eigen tijd met de PDF.' },
+  { q: 'Hoe lang duurt de setup?', a: 'Instant Appie staat binnen 24 uur live , wij regelen alles. Build Your Own Appie kost je een paar uur eigen tijd met de PDF.' },
   { q: 'Met welke tools werkt Appie samen?', a: 'Google Workspace, Notion, Telegram, WhatsApp, Stripe, Brevo, Moneybird, Monday, HubSpot, Airtable, n8n, Webflow. Heeft een tool een API? Dan praat Appie ermee.' },
   { q: 'Wat als Appie iets verkeerd doet?', a: 'Failsafes ingebouwd. Risico-acties pingen jou eerst, complexe edge cases routen naar mens, en je hebt altijd override controls. Plus 30 dagen support na launch.' },
-  { q: 'Wat als ik al tools heb staan?', a: 'Appie wordt de laag die alles verbindt. Geen vervanging — een orchestrator die jouw bestaande stack opslokt en bedient.' },
+  { q: 'Wat als ik al tools heb staan?', a: 'Appie wordt de laag die alles verbindt. Geen vervanging , een orchestrator die jouw bestaande stack opslokt en bedient.' },
 ];
 
 // ─── HERO PORTRAIT (3D tilt + magic dust) ────────────────────────────────────
@@ -139,7 +139,7 @@ function MagicDustPortrait() {
     mouseY.set(0);
   }
 
-  // Magic dust particles — different damping per particle for comet-tail feel
+  // Magic dust particles , different damping per particle for comet-tail feel
   const dustConfig = useMemo(
     () => Array.from({ length: 8 }, (_, i) => ({
       damping: 20 + i * 5,
@@ -166,7 +166,7 @@ function MagicDustPortrait() {
         className="relative w-full h-full rounded-3xl overflow-hidden border-2 border-[#DFB771]/40 shadow-[0_0_60px_-15px_rgba(223,183,113,0.5)]"
       >
         <Image
-          src="/agents/appie.jpg"
+          src="/agents/appie-3d.jpg"
           alt={APPIE.name}
           fill
           sizes="(min-width: 1024px) 320px, 288px"
@@ -176,7 +176,7 @@ function MagicDustPortrait() {
         <BorderBeam size={120} duration={10} colorFrom="#DFB771" colorTo="#247459" />
       </motion.div>
 
-      {/* Magic dust particles — float around portrait following cursor */}
+      {/* Magic dust particles , float around portrait following cursor */}
       {!reduced && dustConfig.map((cfg, i) => (
         <DustParticle key={i} mouseX={springX} mouseY={springY} {...cfg} />
       ))}
@@ -527,7 +527,7 @@ export default function TIPSLanding() {
                   href="#aanbod"
                   className="flex items-center justify-center gap-2 bg-[#247459]/15 hover:bg-[#247459]/25 border border-[#247459]/40 hover:border-[#DFB771]/50 text-[#F6FEFC] font-semibold px-7 py-4 rounded-xl transition-colors"
                 >
-                  Bouw zelf — €65
+                  Bouw zelf , €65
                 </Link>
               </motion.div>
             </motion.div>
@@ -586,7 +586,7 @@ export default function TIPSLanding() {
         </div>
       </section>
 
-      {/* ── MEET APPIE — Telegram bubbles (I) ─────────────────────────── */}
+      {/* ── MEET APPIE , Telegram bubbles (I) ─────────────────────────── */}
       <section className="py-24 bg-[#031D16]">
         <div className="max-w-3xl mx-auto px-4">
           <motion.div
@@ -637,7 +637,7 @@ export default function TIPSLanding() {
               </p>
               <h3 className="text-2xl md:text-3xl font-bold mb-4">Seyed Hosseini</h3>
               <TextGenerateEffect
-                words="Ik begon in de medische wereld. Daarna een bureau gestart — Weblyfe — om de juiste verhalen te bouwen voor groeiende merken. Drie jaar later draait ons hele bureau op een eigen vloot Techwizes. Appie is wat overblijft als je dat aan klanten verkoopt — dezelfde flow die onze eigen inbox, intake en admin draait."
+                words="Ik begon in de medische wereld. Daarna een bureau gestart , Weblyfe , om de juiste verhalen te bouwen voor groeiende merken. Drie jaar later draait ons hele bureau op een eigen vloot Techwizes. Appie is wat overblijft als je dat aan klanten verkoopt , dezelfde flow die onze eigen inbox, intake en admin draait."
                 className="text-[#F6FEFC]/75 text-base md:text-lg leading-relaxed mb-5"
               />
               <div className="flex flex-wrap gap-3 text-sm">
@@ -664,7 +664,7 @@ export default function TIPSLanding() {
         </div>
       </section>
 
-      {/* ── CUSTOMER CASES — Bento (I → P) ────────────────────────────── */}
+      {/* ── CUSTOMER CASES , Bento (I → P) ────────────────────────────── */}
       <section className="py-24 bg-[#031D16]">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div
@@ -685,7 +685,7 @@ export default function TIPSLanding() {
         </div>
       </section>
 
-      {/* ── CUSTOM APPIES — Marquee (€2k tier) ────────────────────────── */}
+      {/* ── CUSTOM APPIES , Marquee (€2k tier) ────────────────────────── */}
       <section id="custom-appies" className="py-20 bg-[#0E3D31] overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 mb-10">
           <motion.div
@@ -799,7 +799,7 @@ export default function TIPSLanding() {
               Twee minuten. Eén klant. Geen acteurs.
             </h2>
             <p className="text-[#F6FEFC]/50 mb-8 max-w-xl mx-auto">
-              Loom-opname van een live workflow — komt binnen Phase 1.5.
+              Loom-opname van een live workflow , komt binnen Phase 1.5.
             </p>
           </motion.div>
 
@@ -853,7 +853,7 @@ export default function TIPSLanding() {
             >
               <p className="text-[#247459] text-xs font-bold uppercase tracking-wide mb-3">Build it yourself</p>
               <h3 className="font-bold text-xl mb-1">{PRICING.pdfGuide.name}</h3>
-              <p className="text-[#F6FEFC]/40 text-xs mb-5">PDF guide v4.4 — 75 pagina's</p>
+              <p className="text-[#F6FEFC]/40 text-xs mb-5">PDF guide v4.4 , 75 pagina's</p>
               <div className="mb-5">
                 <span className="font-bold text-3xl">{PRICING.pdfGuide.priceLabel}</span>
                 <span className="text-[#F6FEFC]/40 text-sm ml-1">eenmalig</span>
@@ -880,7 +880,7 @@ export default function TIPSLanding() {
               </Link>
             </motion.div>
 
-            {/* Instant Appie — flagship with always-on border-beam */}
+            {/* Instant Appie , flagship with always-on border-beam */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -937,7 +937,7 @@ export default function TIPSLanding() {
             >
               <p className="text-[#F6FEFC]/40 text-xs font-bold uppercase tracking-wide mb-3">Custom-built</p>
               <h3 className="font-bold text-xl mb-1">{PRICING.customAppie.name}</h3>
-              <p className="text-[#F6FEFC]/40 text-xs mb-5">Eva, Sjaak, Shay's Appie — wij bouwen jouw versie</p>
+              <p className="text-[#F6FEFC]/40 text-xs mb-5">Eva, Sjaak, Shay's Appie , wij bouwen jouw versie</p>
               <div className="mb-5">
                 <span className="font-bold text-3xl">start €2k</span>
                 <span className="text-[#F6FEFC]/40 text-sm ml-1">/ mnd · op maat</span>
@@ -1043,7 +1043,7 @@ export default function TIPSLanding() {
                 href="/buy/pdf"
                 className="flex items-center justify-center gap-2 bg-[#247459]/15 hover:bg-[#247459]/25 border border-[#247459]/40 hover:border-[#DFB771]/50 text-[#F6FEFC] font-semibold px-8 py-4 rounded-xl transition-colors"
               >
-                {PRICING.pdfGuide.cta.nl} — €65
+                {PRICING.pdfGuide.cta.nl} , €65
               </Link>
             </motion.div>
           </div>

@@ -24,11 +24,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://weblyfe.ai'),
   title: {
-    default: 'Appie — Jouw persoonlijke Techwiz | Weblyfe.ai',
+    default: 'Appie , Jouw persoonlijke Techwiz | Weblyfe.ai',
     template: '%s | Weblyfe.ai',
   },
   description:
-    'Hoi, ik ben Appie. Jouw persoonlijke Techwiz. Een geniale werknemer met de laagste kosten — ik doe het werk dat je week opvreet. Inbox, intake, agenda, admin. Vanaf €65.',
+    'Hoi, ik ben Appie. Jouw persoonlijke Techwiz. Een geniale werknemer met de laagste kosten , ik doe het werk dat je week opvreet. Inbox, intake, agenda, admin. Vanaf €65.',
   keywords: [
     'Appie',
     'Techwiz',
@@ -49,9 +49,9 @@ export const metadata: Metadata = {
   publisher: 'Weblyfe',
   category: 'Technology',
   openGraph: {
-    title: 'Appie — Jouw persoonlijke Techwiz | Weblyfe.ai',
+    title: 'Appie , Jouw persoonlijke Techwiz | Weblyfe.ai',
     description:
-      'Een geniale werknemer met de laagste kosten. Inbox, intake, agenda, admin — Appie doet het werk dat je week opvreet, jij bouwt verder.',
+      'Een geniale werknemer met de laagste kosten. Inbox, intake, agenda, admin , Appie doet het werk dat je week opvreet, jij bouwt verder.',
     type: 'website',
     url: 'https://weblyfe.ai',
     siteName: 'Weblyfe.ai',
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Appie — Jouw persoonlijke Techwiz | Weblyfe.ai',
+        alt: 'Appie , Jouw persoonlijke Techwiz | Weblyfe.ai',
         type: 'image/jpeg',
       },
     ],
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@weblyfenl',
     creator: '@seyed_txt',
-    title: 'Appie — Jouw persoonlijke Techwiz',
+    title: 'Appie , Jouw persoonlijke Techwiz',
     description:
       'Een geniale werknemer met de laagste kosten. Vanaf €65 zelf bouwen, of €250/mnd volledig managed.',
     images: ['/og-image.jpg'],
@@ -113,7 +113,7 @@ const organizationSchema = {
     height: 60,
   },
   description:
-    'Weblyfe builds Appie — a personal Techwiz that handles your inbox, intake, scheduling and admin. Built and run by Weblyfe in the Netherlands.',
+    'Weblyfe builds Appie , a personal Techwiz that handles your inbox, intake, scheduling and admin. Built and run by Weblyfe in the Netherlands.',
   foundingDate: '2019',
   areaServed: 'Worldwide',
   contactPoint: {
@@ -137,7 +137,7 @@ const websiteSchema = {
   '@id': 'https://weblyfe.ai/#website',
   url: 'https://weblyfe.ai',
   name: 'Weblyfe.ai',
-  description: 'Appie — Jouw persoonlijke Techwiz',
+  description: 'Appie , Jouw persoonlijke Techwiz',
   publisher: { '@id': 'https://weblyfe.ai/#organization' },
   potentialAction: {
     '@type': 'SearchAction',

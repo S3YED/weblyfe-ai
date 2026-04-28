@@ -1,5 +1,5 @@
 /**
- * BRAND-CONSTANTS.ts — Single source of truth for weblyfe.ai
+ * BRAND-CONSTANTS.ts , Single source of truth for weblyfe.ai
  *
  * Every customer-facing surface (homepage, /appie, emails, FAQ, dashboard,
  * thank-you page, success states, Stripe metadata, social meta) reads from
@@ -116,26 +116,26 @@ export const PRICING = {
   },
 } as const;
 
-// Add-on credits (Phase 2 — Instant Appie subscribers can top up usage).
+// Add-on credits (Phase 2 , Instant Appie subscribers can top up usage).
 export const CREDIT_ADDONS = {
   starter: {
-    label: '€12 — Starter top-up',
+    label: '€12 , Starter top-up',
     amountEur: 12,
     stripePriceId: 'price_1TJuL2LNHXmj2NAsWm6nIIzG',
   },
   professional: {
-    label: '€29 — Professional top-up',
+    label: '€29 , Professional top-up',
     amountEur: 29,
     stripePriceId: 'price_1TJuL2LNHXmj2NAsGYrCe9xG',
   },
   powerUser: {
-    label: '€56 — Power User top-up',
+    label: '€56 , Power User top-up',
     amountEur: 56,
     stripePriceId: 'price_1TJuL3LNHXmj2NAsMeUnVsDT',
   },
 } as const;
 
-// ─── GUARANTEE (Q5 lock — Hormozi Variant A "Time-Saved Promise") ────────────
+// ─── GUARANTEE (Q5 lock , Hormozi Variant A "Time-Saved Promise") ────────────
 // Picked by Seyed 2026-04-28 from 3 options in 2026-04-28-guarantees.md.
 // Pattern: specific outcome (10 hours saved) + measurable threshold (month 1)
 // + recourse with extra (€250 refund + €100 bonus). Hormozi "more than money back" lever.
@@ -188,7 +188,7 @@ export const CASES = {
       { label: 'response time', before: '4-6 uur', after: '<30 sec' },
       { label: 'inquiry → site visit conversion', delta: '+23%' },
     ],
-    source: 'Notion delivery doc — CZA project page',
+    source: 'Notion delivery doc , CZA project page',
   },
   dubaiProperty: {
     client: 'Dubai-Property.nl',
@@ -199,7 +199,7 @@ export const CASES = {
       { label: 'hot leads auto-qualified', value: 160 },
       { label: 'first response', value: '<2 minutes' },
     ],
-    source: 'Notion delivery doc — Dubai-Property project page',
+    source: 'Notion delivery doc , Dubai-Property project page',
   },
   // Third case: Seyed picks. Candidates: Anders Ecommerce, iOnlyBookVIP,
   // LPS Pilates. See 2026-04-28-case-studies.md.
@@ -218,7 +218,7 @@ export const KPI_90D = {
   pageToCheckoutPct: 3,
 } as const;
 
-// ─── INTEGRATIONS — DO NOT BREAK ─────────────────────────────────────────────
+// ─── INTEGRATIONS , DO NOT BREAK ─────────────────────────────────────────────
 // All confirmed LIVE 2026-04-28. Phase-1 work is additive only.
 
 export const INTEGRATIONS = {
