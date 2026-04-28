@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from 'next';
-import { Rethink_Sans } from 'next/font/google';
+import { Rethink_Sans, Geist } from 'next/font/google';
 import './globals.css';
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const rethinkSans = Rethink_Sans({
   subsets: ['latin'],
@@ -146,7 +149,7 @@ const websiteSchema = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="nl" className={`scroll-smooth ${rethinkSans.variable}`}>
+    <html lang="nl" className={cn("scroll-smooth", rethinkSans.variable, "font-sans", geist.variable)}>
       <head>
         <meta name="theme-color" content="#031D16" />
         <script
