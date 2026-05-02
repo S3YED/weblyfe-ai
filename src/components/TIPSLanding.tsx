@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Check, Star, Zap, Bot, Shield, Brain, Calendar, Mail, Users, Clock, Wrench } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 // IMU TIPS framework structures the page (Tempt → Influence → Persuade → Sell);
 // labels never render. Per PRD-WEBLYFE-AI v1.3 §7.2 hard rule: visitor sees content,
@@ -60,18 +61,20 @@ const PROCESS_STEPS = [
 // Real client cases per PRD-WEBLYFE-AI v1.3 §8.5 — only audit-able metrics ship.
 // Older claims (BeyondSchool 200/dag, Stasher 3u→20min, Lost LeBlanc 14u→2u) are
 // retired pending verification per PRD §2 risk register.
-const SOCIAL_PROOFS = [
+const SOCIAL_PROOFS: { name: string; role: string; quote: string; portrait?: string }[] = [
   {
     name: 'CZA Bouwbedrijf',
     role: 'WhatsApp intake (Sjaak)',
     quote:
       'Sjaak runt onze WhatsApp intake. Reactietijd van 4-6 uur naar onder de 30 seconden. Inquiry-naar-bezoek conversie +23%.',
+    portrait: '/custom-appies/sjaak.png',
   },
   {
     name: 'Dubai-Property.nl',
     role: 'Lead qualification (Eva)',
     quote:
       'Eva qualificeert 160+ hot leads en stuurt de eerste reactie binnen 2 minuten. Niemand meer wakker bellen voor een terugbelnotitie.',
+    portrait: '/custom-appies/eva.png',
   },
   {
     name: 'Weblyfe zelf',
@@ -146,26 +149,44 @@ export default function TIPSLanding() {
       </section>
 
       {/* ── HERO: APPIE PROTAGONIST ── */}
-      <section id="t" className="relative py-24 bg-[#0E3D31]">
+      <section id="t" className="relative py-24 bg-[#0E3D31] overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#DFB771 1px, transparent 1px), linear-gradient(90deg, #DFB771 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+        <motion.div animate={{ opacity: [0.10, 0.22, 0.10] }} transition={{ duration: 8, repeat: Infinity }} className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-[#DFB771]/30 blur-[120px]" />
         <div className="relative z-10 max-w-6xl mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
             <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">Maak kennis met Appie</p>
           </motion.div>
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-3xl mx-auto text-center">
-            <p className="text-[#F6FEFC] text-3xl md:text-5xl font-bold leading-[1.1] mb-3">{TRANSFORMATION.title}</p>
-            <p className="text-[#DFB771] text-3xl md:text-5xl font-bold leading-[1.1] mb-8">{TRANSFORMATION.titleAccent}</p>
-            <p className="text-[#F6FEFC]/70 text-lg md:text-xl leading-relaxed">
-              {TRANSFORMATION.subtitle}
-            </p>
-          </motion.div>
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/openclaw#waitlist" className="flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-8 py-4 rounded-xl transition-colors">
-              Begin met je Techwiz <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link href="/openclaw" className="flex items-center justify-center gap-2 border border-[#247459]/40 hover:border-[#247459] text-[#F6FEFC]/70 px-8 py-4 rounded-xl transition-colors text-sm">
-              Bouw zelf je Techwiz · €65 PDF
-            </Link>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Pixar Appie hero render */}
+            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="order-2 lg:order-1 flex justify-center lg:justify-end">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-tr from-[#DFB771]/20 to-[#247459]/30 blur-3xl rounded-full" />
+                <Image
+                  src="/appie/hero.png"
+                  alt="Appie — jouw persoonlijke Techwiz"
+                  width={560}
+                  height={560}
+                  priority
+                  className="relative rounded-3xl shadow-2xl shadow-[#031D16]/60"
+                />
+              </div>
+            </motion.div>
+            {/* Copy block */}
+            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }} className="order-1 lg:order-2 text-center lg:text-left">
+              <p className="text-[#F6FEFC] text-3xl md:text-5xl font-bold leading-[1.1] mb-3">{TRANSFORMATION.title}</p>
+              <p className="text-[#DFB771] text-3xl md:text-5xl font-bold leading-[1.1] mb-8">{TRANSFORMATION.titleAccent}</p>
+              <p className="text-[#F6FEFC]/70 text-lg md:text-xl leading-relaxed mb-8">
+                {TRANSFORMATION.subtitle}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Link href="/openclaw#waitlist" className="flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-8 py-4 rounded-xl transition-colors">
+                  Begin met je Techwiz <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link href="/openclaw" className="flex items-center justify-center gap-2 border border-[#247459]/40 hover:border-[#247459] text-[#F6FEFC]/70 hover:text-[#F6FEFC] px-8 py-4 rounded-xl transition-colors text-sm">
+                  Bouw zelf · €65 PDF
+                </Link>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -227,11 +248,21 @@ export default function TIPSLanding() {
                 <div className="flex gap-1 mb-4">
                   {[1,2,3,4,5].map(s => <Star key={s} className="w-4 h-4 text-[#DFB771] fill-[#DFB771]" />)}
                 </div>
-                <p className="text-[#F6FEFC]/70 text-sm leading-relaxed mb-6">"{sp.quote}"</p>
+                <p className="text-[#F6FEFC]/70 text-sm leading-relaxed mb-6">&quot;{sp.quote}&quot;</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#247459]/20 flex items-center justify-center">
-                    <span className="text-[#247459] font-bold text-sm">{sp.name[0]}</span>
-                  </div>
+                  {sp.portrait ? (
+                    <Image
+                      src={sp.portrait}
+                      alt={`${sp.name} portret`}
+                      width={48}
+                      height={48}
+                      className="w-12 h-12 rounded-full object-cover ring-2 ring-[#DFB771]/40"
+                    />
+                  ) : (
+                    <div className="w-12 h-12 rounded-full bg-[#247459]/20 flex items-center justify-center">
+                      <span className="text-[#247459] font-bold text-sm">{sp.name[0]}</span>
+                    </div>
+                  )}
                   <div>
                     <p className="text-[#F6FEFC] font-semibold text-sm">{sp.name}</p>
                     <p className="text-[#F6FEFC]/40 text-xs">{sp.role}</p>
