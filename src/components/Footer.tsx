@@ -149,23 +149,23 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
               <h3 className="text-xl font-bold text-[#F6FEFC] mb-2">
-                Get AI insights delivered weekly
+                Wekelijkse Techwiz-tips in je inbox
               </h3>
               <p className="text-[#F6FEFC]/60 text-sm">
-                Practical tips on automation, AI tools, and scaling your business. No spam.
+                Praktische tips over automation, AI en hoe je je werkweek terugwint. Geen spam.
               </p>
             </div>
-            <form className="flex w-full md:w-auto gap-3">
+            <form className="flex flex-col sm:flex-row w-full md:w-auto gap-3">
               <input
                 type="email"
-                placeholder="Enter your email"
-                className="flex-1 md:w-64 px-4 py-3 rounded-xl bg-[#031D16] border border-[#247459]/30 text-[#F6FEFC] placeholder-[#F6FEFC]/40 focus:outline-none focus:border-[#DFB771] transition-colors"
+                placeholder="jouw@email.nl"
+                className="w-full sm:w-64 px-4 py-3 rounded-xl bg-[#031D16] border border-[#247459]/30 text-[#F6FEFC] placeholder-[#F6FEFC]/40 focus:outline-none focus:border-[#DFB771] transition-colors"
               />
-              <button 
+              <button
                 type="submit"
-                className="btn-primary whitespace-nowrap py-3"
+                className="btn-primary whitespace-nowrap py-3 w-full sm:w-auto"
               >
-                Subscribe
+                Aanmelden
               </button>
             </form>
           </div>
@@ -174,7 +174,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="pt-8 border-t border-[#247459]/20 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-[#F6FEFC]/40 text-sm">
-            © {new Date().getFullYear()} Weblyfe.ai — A Weblyfe by Techwiz LLC company
+            © {new Date().getFullYear()} Weblyfe.ai · onderdeel van Weblyfe by Techwiz LLC
           </p>
           <div className="flex gap-6">
             <a href="#" className="text-[#F6FEFC]/40 hover:text-[#F6FEFC]/60 text-sm transition-colors">

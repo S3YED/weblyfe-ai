@@ -9,6 +9,8 @@ import Image from 'next/image';
 // labels never render. Per PRD-WEBLYFE-AI v1.3 §7.2 hard rule: visitor sees content,
 // not framework jargon. Voice locked in APPIE-PERSONA v1.2.
 
+const PDF_CHECKOUT_URL = 'https://buy.stripe.com/7sYaEYfAn30C8BncwJ3Je2I';
+
 const TRANSFORMATION = {
   title: 'Hoi, ik ben Appie.',
   titleAccent: 'Jouw persoonlijke Techwiz.',
@@ -143,9 +145,9 @@ export default function TIPSLanding() {
             <Link href="#t" className="flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-8 py-4 rounded-xl transition-colors">
               Maak kennis met je Techwiz <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link href="/openclaw" className="flex items-center justify-center gap-2 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/40 text-[#F6FEFC] font-semibold px-8 py-4 rounded-xl transition-colors">
+            <a href={PDF_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/40 text-[#F6FEFC] font-semibold px-8 py-4 rounded-xl transition-colors">
               Bouw zelf je Techwiz · €65
-            </Link>
+            </a>
           </motion.div>
         </div>
       </section>
@@ -184,9 +186,9 @@ export default function TIPSLanding() {
                 <Link href="/openclaw#waitlist" className="flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-8 py-4 rounded-xl transition-colors">
                   Begin met je Techwiz <ArrowRight className="w-4 h-4" />
                 </Link>
-                <Link href="/openclaw" className="flex items-center justify-center gap-2 border border-[#247459]/40 hover:border-[#247459] text-[#F6FEFC]/70 hover:text-[#F6FEFC] px-8 py-4 rounded-xl transition-colors text-sm">
+                <a href={PDF_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 border border-[#247459]/40 hover:border-[#247459] text-[#F6FEFC]/70 hover:text-[#F6FEFC] px-8 py-4 rounded-xl transition-colors text-sm">
                   Bouw zelf · €65 PDF
-                </Link>
+                </a>
               </div>
             </motion.div>
           </div>
@@ -286,9 +288,9 @@ export default function TIPSLanding() {
               <p className="text-[#F6FEFC]/50 text-base mb-6 leading-relaxed">
                 10 hoofdstukken, 56 pagina&apos;s, echte code. Het complete blueprint van nul tot je eigen Techwiz. Lifetime updates. Eenmalig €65.
               </p>
-              <Link href="/openclaw#waitlist" className="inline-flex items-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-6 py-3.5 rounded-xl transition-colors">
+              <a href={PDF_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-6 py-3.5 rounded-xl transition-colors">
                 Koop de gids · €65 <ArrowRight className="w-4 h-4" />
-              </Link>
+              </a>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex-shrink-0">
               <div className="bg-[#F6FEFC] rounded-2xl p-5 w-64">
@@ -327,7 +329,7 @@ export default function TIPSLanding() {
                   <li key={f} className="flex items-center gap-2 text-[#F6FEFC]/60 text-sm"><Check className="w-4 h-4 text-[#247459] flex-shrink-0" />{f}</li>
                 ))}
               </ul>
-              <Link href="/openclaw#waitlist" className="block text-center w-full py-3 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/30 text-[#F6FEFC] font-semibold text-sm rounded-xl transition-colors">Koop de gids · €65</Link>
+              <a href={PDF_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="block text-center w-full py-3 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/30 text-[#F6FEFC] font-semibold text-sm rounded-xl transition-colors">Koop de gids · €65</a>
             </motion.div>
 
             {/* Instant Appie — €250/mo */}
@@ -399,9 +401,9 @@ export default function TIPSLanding() {
             <Link href="/openclaw#waitlist" className="bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-6 py-3 rounded-xl transition-colors">
               Begin met je Techwiz →
             </Link>
-            <Link href="/openclaw" className="border border-[#247459]/40 hover:border-[#247459] text-[#F6FEFC]/70 hover:text-[#F6FEFC] px-6 py-3 rounded-xl transition-colors text-sm font-semibold">
+            <a href={PDF_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="border border-[#247459]/40 hover:border-[#247459] text-[#F6FEFC]/70 hover:text-[#F6FEFC] px-6 py-3 rounded-xl transition-colors text-sm font-semibold">
               Bouw zelf je Techwiz · €65 PDF
-            </Link>
+            </a>
           </div>
         </div>
       </section>

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import TIPSLanding from '@/components/TIPSLanding';
 import Footer from '@/components/Footer';
+import ScrollProgress from '@/components/ScrollProgress';
 // Removed v2026-05-02 (Phase-1 rewrite): Testimonials, FAQ, and CTA were duplicating
 // content that already lives inside TIPSLanding (real cases, FAQ, closing CTA).
 // Keeping them rendered after TIPSLanding produced a duplicate FAQ section and
@@ -153,6 +154,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
       <main className="min-h-screen">
+        <ScrollProgress />
         <Navbar />
         <TIPSLanding />
         <Footer />
