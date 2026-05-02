@@ -4,53 +4,110 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Check, Star, Zap, Bot, Shield, Brain, Calendar, Mail, Users, Clock, Wrench } from 'lucide-react';
 import Link from 'next/link';
 
-// TIPS Framework for High-End Landing Pages
-// T = Transformation | I = Ingredients | P = Process | S = Social Proof
-// + Section Zero (The Bridge = acknowledge the OLD way)
+// IMU TIPS framework structures the page (Tempt → Influence → Persuade → Sell);
+// labels never render. Per PRD-WEBLYFE-AI v1.3 §7.2 hard rule: visitor sees content,
+// not framework jargon. Voice locked in APPIE-PERSONA v1.2.
 
 const TRANSFORMATION = {
-  title: 'Imagine your AI',
-  titleAccent: 'handling everything.',
-  subtitle: 'An AI that remembers everything, handles the chaos, and tells you what matters — every single morning.',
+  title: 'Hoi, ik ben Appie.',
+  titleAccent: 'Jouw persoonlijke Techwiz.',
+  subtitle:
+    'Een geniale werknemer met de laagste kosten. Ik doe het werk dat je week opvreet — inbox, intake, agenda, admin. Jij bouwt. Ik houd de boel draaiend.',
 };
 
 const INGREDIENTS = [
   {
     icon: Bot,
-    name: 'OpenClaw Agent',
-    detail: 'Your own AI employee, running 24/7 on a private server. Not a chatbot — a persistent, memory-equipped digital colleague.',
+    name: 'Een Techwiz, geen tool',
+    detail:
+      'Software automatiseert taken; een Techwiz neemt verantwoordelijkheid voor uitkomsten. Geen chatbot — een persistente, herinnerende digitale collega die op een eigen private server draait.',
   },
   {
     icon: Brain,
-    name: 'MiniMax M2.7 Intelligence',
-    detail: 'Powered by one of the most capable models available. Connects to Google Workspace, Notion, Stripe, Telegram — all at once.',
+    name: 'Werkt in jouw week',
+    detail:
+      '08:00 een briefing van wat ik gisteren afhandelde en wat vandaag jouw aandacht nodig heeft. Verbonden met Google Workspace, Notion, Stripe, Telegram, WhatsApp — alles tegelijk.',
   },
   {
     icon: Shield,
-    name: 'Fully Private & Secure',
-    detail: 'Runs on your own private server. Your data never touches a public model. Enterprise-grade security, personal attention.',
+    name: 'Werkt zichtbaar',
+    detail:
+      'Geen black box, geen "trust the AI". Reversibele taken: doen. Onomkeerbare taken: vragen. Je weet in de ochtend wat ik gisteren deed, je weet in de avond wat ik vandaag deed.',
   },
 ];
 
 const PROCESS_STEPS = [
-  { n: '01', title: 'We configure your Appie', desc: 'We set up your server, connect your channels, and tune the AI for your business.' },
-  { n: '02', title: 'Your AI learns your business', desc: 'It reads your docs, learns your voice, connects your tools. Within 24 hours it knows how you work.' },
-  { n: '03', title: 'It runs, you scale', desc: 'Email triage, lead capture, scheduling, follow-ups — all handled. You focus on decisions only a human can make.' },
+  {
+    n: '01',
+    title: 'Ik kom je workspace binnen',
+    desc:
+      'We zetten je private server op, koppelen je kanalen en stemmen mij af op jouw bedrijf. Binnen 24 uur draai ik mee.',
+  },
+  {
+    n: '02',
+    title: 'Ik leer hoe jij werkt',
+    desc:
+      'Ik lees je docs, leer je stem, connect je tools. Eerste week onthoud ik wat klanten willen, hoe je antwoordt, en welke beslissingen jou wakker houden.',
+  },
+  {
+    n: '03',
+    title: 'Jij bouwt, ik draai',
+    desc:
+      'Inbox triage, intake, scheduling, follow-ups, admin — afgehandeld. Jij houdt over wat alleen jij kan: bouwen, verkopen, beslissen.',
+  },
 ];
 
+// Real client cases per PRD-WEBLYFE-AI v1.3 §8.5 — only audit-able metrics ship.
+// Older claims (BeyondSchool 200/dag, Stasher 3u→20min, Lost LeBlanc 14u→2u) are
+// retired pending verification per PRD §2 risk register.
 const SOCIAL_PROOFS = [
-  { name: 'BeyondSchool', role: 'Education Platform', quote: 'It handles 200+ student inquiries per day. Our team went from drowning to organized overnight.' },
-  { name: 'Stasher Capital', role: 'Fintech Startup', quote: 'Our Appie manages our entire onboarding workflow. What used to take 3 hours now takes 20 minutes.' },
-  { name: 'Lost LeBlanc', role: 'Travel Creator', quote: 'I went from 14 hours of email per week to 2. My Appie is my first hire that actually showed up.' },
+  {
+    name: 'CZA Bouwbedrijf',
+    role: 'WhatsApp intake (Sjaak)',
+    quote:
+      'Sjaak runt onze WhatsApp intake. Reactietijd van 4-6 uur naar onder de 30 seconden. Inquiry-naar-bezoek conversie +23%.',
+  },
+  {
+    name: 'Dubai-Property.nl',
+    role: 'Lead qualification (Eva)',
+    quote:
+      'Eva qualificeert 160+ hot leads en stuurt de eerste reactie binnen 2 minuten. Niemand meer wakker bellen voor een terugbelnotitie.',
+  },
+  {
+    name: 'Weblyfe zelf',
+    role: 'Eigen fleet (Appie-2/3/4)',
+    quote:
+      'Onze eigen marketing, ops en R&D draaien 24/7 op de Appie fleet. We schrijven over wat al maanden bij ons werkt — niet over wat we hopen te bouwen.',
+  },
 ];
 
 const TOOLS = ['Google Workspace', 'Notion', 'Telegram', 'WhatsApp', 'Stripe', 'n8n', 'Slack', 'HubSpot', 'Airtable', 'Webflow'];
 
 const FAQS = [
-  { q: "How is this different from ChatGPT?", a: "ChatGPT is stateless — it forgets everything after each conversation. Your Appie has persistent memory, connects to your tools, and acts on your behalf 24/7 without you prompting it." },
-  { q: "How long does setup take?", a: "With our managed Instant Appie service: 24 hours. We handle everything. With the DIY guide: a few hours of your time." },
-  { q: "Is my data private?", a: "Completely. Your Appie runs on a dedicated private server. Your conversations and data never train any public model." },
-  { q: "What if I already have tools set up?", a: "We integrate with your existing stack. Google Workspace, Notion, Stripe, Slack — your Appie becomes the layer that connects everything." },
+  {
+    q: 'Wat als ik een mens in de keten wil?',
+    a: 'Altijd jij. Een Techwiz pakt het volume aan; jij neemt de besluiten. Ik handel nooit zelf een betaling, contract of nieuwe hire af zonder jou. Alles wat risicovol is laat ik eerst in Telegram zien. Je kunt elk onderwerp markeren als "eerst vragen", dan beslis ik daar nooit zelfstandig over.',
+  },
+  {
+    q: 'Hoe is dit anders dan ChatGPT?',
+    a: 'ChatGPT vergeet alles na elk gesprek. Een Techwiz heeft persistent geheugen, connect met jouw tools en acteert namens jou 24/7 — zonder dat je hem hoeft te prompten. Hij start de dag met een briefing en sluit af met een wrap-up.',
+  },
+  {
+    q: 'Hoe lang duurt setup?',
+    a: 'Instant Appie: 24 uur, wij doen het. Bouw zelf je Techwiz (€65 PDF gids): paar uur eigen werk.',
+  },
+  {
+    q: 'Hoe veilig is mijn data?',
+    a: 'Volledig. Je Techwiz draait op een dedicated private server. Je gesprekken en data trainen nooit een publiek model. Enterprise-grade security, persoonlijke aandacht.',
+  },
+  {
+    q: 'Wat als Appie iets verkeerd doet?',
+    a: 'Dan zegt-ie het. Eerlijk, kort, met wat-ik-nu-doe. Reversibele dingen lost ik zelf op; bij iets onomkeerbaars vraag ik vooraf. En ik leer ervan: dezelfde fout een tweede keer is een bug, niet een mens.',
+  },
+  {
+    q: 'Kan ik na maand 1 stoppen?',
+    a: 'Ja. Geen lock-in. Ik draai op jouw private server, jouw data blijft van jou. Tevreden of geld terug — als ik je niet meer tijd bespaar dan ik kost, betaal je niets.',
+  },
 ];
 
 export default function TIPSLanding() {
@@ -63,62 +120,62 @@ export default function TIPSLanding() {
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#DFB771 1px, transparent 1px), linear-gradient(90deg, #DFB771 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
         <motion.div animate={{ opacity: [0.12, 0.25, 0.12] }} transition={{ duration: 6, repeat: Infinity }} className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full bg-[#247459] blur-[100px]" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-6">Before we begin</motion.p>
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-6">De week die je opvreet</motion.p>
           <motion.h1 initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }} className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#F6FEFC] leading-tight mb-8">
-            You know this feeling.
+            Het is half zes.
           </motion.h1>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="space-y-4 max-w-2xl mx-auto mb-10">
             {[
-              'One task becomes five. Five become fifty.',
-              'You hired contractors who don\'t know your business.',
-              'You built systems that only you understand.',
-              'You\'re the hub. The hub always fails.',
+              'Je hebt nog 47 ongelezen mails.',
+              'Drie WhatsApp intakes wachten op een reactie.',
+              'De agenda heeft een conflict, niemand zegt het.',
+              'Het kantoor sluit, de week niet.',
             ].map(line => (
               <p key={line} className="text-[#F6FEFC]/50 text-lg md:text-xl leading-relaxed">{line}</p>
             ))}
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="#t" className="flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-8 py-4 rounded-xl transition-colors">
-              See the transformation <ArrowRight className="w-4 h-4" />
+              Maak kennis met je Techwiz <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link href="/guide/Build-Your-Own-Appie-v4.pdf" download className="flex items-center justify-center gap-2 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/40 text-[#F6FEFC] font-semibold px-8 py-4 rounded-xl transition-colors">
-              Get free PDF guide
+            <Link href="/openclaw" className="flex items-center justify-center gap-2 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/40 text-[#F6FEFC] font-semibold px-8 py-4 rounded-xl transition-colors">
+              Bouw zelf je Techwiz · €65
             </Link>
           </motion.div>
         </div>
       </section>
 
-      {/* ── T = TRANSFORMATION ── */}
+      {/* ── HERO: APPIE PROTAGONIST ── */}
       <section id="t" className="relative py-24 bg-[#0E3D31]">
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#DFB771 1px, transparent 1px), linear-gradient(90deg, #DFB771 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
         <div className="relative z-10 max-w-6xl mx-auto px-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">The transformation</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#F6FEFC]">What changes when your AI works</h2>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+            <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">Maak kennis met Appie</p>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-3xl mx-auto text-center">
-            <p className="text-[#F6FEFC] text-3xl md:text-4xl font-bold leading-tight mb-6">Appie — your AI employee that works while you sleep.</p>
-            <p className="text-[#F6FEFC]/60 text-lg md:text-xl leading-relaxed">
+            <p className="text-[#F6FEFC] text-3xl md:text-5xl font-bold leading-[1.1] mb-3">{TRANSFORMATION.title}</p>
+            <p className="text-[#DFB771] text-3xl md:text-5xl font-bold leading-[1.1] mb-8">{TRANSFORMATION.titleAccent}</p>
+            <p className="text-[#F6FEFC]/70 text-lg md:text-xl leading-relaxed">
               {TRANSFORMATION.subtitle}
             </p>
           </motion.div>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/openclaw#waitlist" className="flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-8 py-4 rounded-xl transition-colors">
-              Get Instant Appie <ArrowRight className="w-4 h-4" />
+              Begin met je Techwiz <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link href="/guide/Build-Your-Own-Appie-v4.pdf" download className="flex items-center justify-center gap-2 border border-[#247459]/40 hover:border-[#247459] text-[#F6FEFC]/70 px-8 py-4 rounded-xl transition-colors text-sm">
-              Download free PDF
+            <Link href="/openclaw" className="flex items-center justify-center gap-2 border border-[#247459]/40 hover:border-[#247459] text-[#F6FEFC]/70 px-8 py-4 rounded-xl transition-colors text-sm">
+              Bouw zelf je Techwiz · €65 PDF
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── I = INGREDIENTS ── */}
+      {/* ── WHAT APPIE IS ── (was: "I = INGREDIENTS") */}
       <section className="py-24 bg-[#031D16]">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <p className="text-[#247459] text-sm font-semibold uppercase tracking-widest mb-3">What makes it work</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#F6FEFC]">What makes it work</h2>
+            <p className="text-[#247459] text-sm font-semibold uppercase tracking-widest mb-3">Drie principes</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#F6FEFC]">Wat een Techwiz onderscheidt</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {INGREDIENTS.map((ing, i) => (
@@ -134,12 +191,12 @@ export default function TIPSLanding() {
         </div>
       </section>
 
-      {/* ── P = PROCESS ── */}
+      {/* ── HOE HET WERKT ── (was: "P = PROCESS") */}
       <section className="py-24 bg-[#0E3D31]">
         <div className="max-w-5xl mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">How it works</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#F6FEFC]">How the transformation happens</h2>
+            <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">Drie stappen</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#F6FEFC]">Van eerste handshake naar 24 uur draaien</h2>
           </motion.div>
           <div className="space-y-0">
             {PROCESS_STEPS.map((step, i) => (
@@ -157,12 +214,12 @@ export default function TIPSLanding() {
         </div>
       </section>
 
-      {/* ── S = SOCIAL PROOF ── */}
+      {/* ── ECHTE KLANTEN ── (was: "S = SOCIAL PROOF") */}
       <section className="py-24 bg-[#031D16]">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <p className="text-[#247459] text-sm font-semibold uppercase tracking-widest mb-3">Results</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#F6FEFC]">What our clients say</h2>
+            <p className="text-[#247459] text-sm font-semibold uppercase tracking-widest mb-3">Echt aan het werk</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#F6FEFC]">Wat klanten zien — en wat we zelf doen</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {SOCIAL_PROOFS.map((sp, i) => (
@@ -186,18 +243,18 @@ export default function TIPSLanding() {
         </div>
       </section>
 
-      {/* ── FREE PDF GUIDE ── */}
+      {/* ── PDF GUIDE PROMO ── */}
       <section className="py-20 bg-[#0E3D31] border-y border-[#247459]/20">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-10">
             <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex-1">
-              <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-wider mb-3">Free Guide · v4.4</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#F6FEFC] mb-4">Build Your Own 24/7 AI Employee</h2>
+              <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-wider mb-3">PDF Gids · v4.4 · €65</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#F6FEFC] mb-4">Bouw zelf je 24/7 Techwiz</h2>
               <p className="text-[#F6FEFC]/50 text-base mb-6 leading-relaxed">
-                10 chapters, 56 pages, real code. The complete blueprint from zero to your own AI employee. Updated April 2026.
+                10 hoofdstukken, 56 pagina&apos;s, echte code. Het complete blueprint van nul tot je eigen Techwiz. Lifetime updates. Eenmalig €65.
               </p>
-              <Link href="/guide/Build-Your-Own-Appie-v4.pdf" download className="inline-flex items-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-6 py-3.5 rounded-xl transition-colors">
-                Download free PDF <ArrowRight className="w-4 h-4" />
+              <Link href="/openclaw#waitlist" className="inline-flex items-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-6 py-3.5 rounded-xl transition-colors">
+                Koop de gids · €65 <ArrowRight className="w-4 h-4" />
               </Link>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex-shrink-0">
@@ -207,9 +264,9 @@ export default function TIPSLanding() {
                     <Star className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="text-[#031D16] font-bold text-xs">Build Your Own</p>
-                    <p className="text-[#031D16]/60 text-xs">24/7 AI Employee v4.4</p>
-                    <p className="text-[#031D16]/40 text-xs mt-1">56 pages · April 2026</p>
+                    <p className="text-[#031D16] font-bold text-xs">Bouw zelf je Techwiz</p>
+                    <p className="text-[#031D16]/60 text-xs">Build Your Own Appie v4.4</p>
+                    <p className="text-[#031D16]/40 text-xs mt-1">56 pagina&apos;s · €65 · April 2026</p>
                   </div>
                 </div>
               </div>
@@ -218,54 +275,55 @@ export default function TIPSLanding() {
         </div>
       </section>
 
-      {/* ── THREE TIERS ── */}
+      {/* ── DRIE MANIEREN ── */}
       <section id="tiers" className="py-24 bg-[#031D16]">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#F6FEFC]">Three ways to get your Appie</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#F6FEFC]">Drie manieren om je Techwiz te krijgen</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-            {/* DIY */}
+            {/* Bouw Zelf — €65 PDF */}
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-[#1a2e27]/50 rounded-2xl border border-[#247459]/20 p-8">
-              <p className="text-[#247459] text-xs font-bold uppercase tracking-wide mb-4">DIY</p>
-              <h3 className="text-[#F6FEFC] font-bold text-xl mb-1">Build it yourself</h3>
-              <p className="text-[#F6FEFC]/40 text-xs mb-6">Free</p>
+              <p className="text-[#247459] text-xs font-bold uppercase tracking-wide mb-4">Bouw zelf</p>
+              <h3 className="text-[#F6FEFC] font-bold text-xl mb-1">Bouw je eigen Techwiz</h3>
+              <p className="text-[#F6FEFC]/40 text-xs mb-6">Voor builders en no-coders</p>
+              <div className="mb-4"><span className="text-[#F6FEFC] font-bold text-3xl">€65</span><span className="text-[#F6FEFC]/40 text-sm ml-1">eenmalig</span></div>
               <ul className="space-y-2 mb-8">
-                {['Free 56-page PDF guide', 'Copy/paste templates', 'Your own server', '55+ skills library', 'Advanced AI models'].map(f => (
+                {['56-pagina PDF gids', 'Copy/paste templates', 'Eigen private server', '55+ skills library', 'Lifetime updates'].map(f => (
                   <li key={f} className="flex items-center gap-2 text-[#F6FEFC]/60 text-sm"><Check className="w-4 h-4 text-[#247459] flex-shrink-0" />{f}</li>
                 ))}
               </ul>
-              <Link href="/guide/Build-Your-Own-Appie-v4.pdf" download className="block text-center w-full py-3 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/30 text-[#F6FEFC] font-semibold text-sm rounded-xl transition-colors">Download free guide</Link>
+              <Link href="/openclaw#waitlist" className="block text-center w-full py-3 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/30 text-[#F6FEFC] font-semibold text-sm rounded-xl transition-colors">Koop de gids · €65</Link>
             </motion.div>
 
-            {/* Instant Appie */}
+            {/* Instant Appie — €250/mo */}
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="relative bg-gradient-to-b from-[#247459]/20 to-[#1a2e27]/50 rounded-2xl border-2 border-[#DFB771]/50 p-8 shadow-lg shadow-[#DFB771]/5">
-              <div className="absolute -top-3 left-6 bg-[#DFB771] text-[#031D16] text-xs font-bold uppercase px-3 py-1 rounded-full">Most popular</div>
+              <div className="absolute -top-3 left-6 bg-[#DFB771] text-[#031D16] text-xs font-bold uppercase px-3 py-1 rounded-full">Meest populair</div>
               <p className="text-[#DFB771] text-xs font-bold uppercase tracking-wide mb-4">Managed</p>
               <h3 className="text-[#F6FEFC] font-bold text-xl mb-1">Instant Appie</h3>
-              <p className="text-[#F6FEFC]/40 text-xs mb-6">We build + manage everything</p>
-              <div className="mb-4"><span className="text-[#F6FEFC] font-bold text-3xl">€250</span><span className="text-[#F6FEFC]/40 text-sm ml-1">/month</span></div>
+              <p className="text-[#F6FEFC]/40 text-xs mb-6">Wij bouwen, wij draaien</p>
+              <div className="mb-4"><span className="text-[#F6FEFC] font-bold text-3xl">€250</span><span className="text-[#F6FEFC]/40 text-sm ml-1">/maand</span></div>
               <ul className="space-y-2 mb-8">
-                {['Everything in the DIY guide', 'Dedicated private server', '$50/mo AI budget', 'Telegram + WhatsApp connected', 'Persistent memory & context', '55+ skills library', 'Community access'].map(f => (
+                {['Alles uit de Bouw-zelf gids', 'Dedicated private server', 'Telegram + WhatsApp aangesloten', 'Persistent geheugen', '55+ skills library', '14 dagen tevreden of geld terug'].map(f => (
                   <li key={f} className="flex items-center gap-2 text-[#F6FEFC]/60 text-sm"><Check className="w-4 h-4 text-[#DFB771] flex-shrink-0" />{f}</li>
                 ))}
               </ul>
-              <Link href="https://weblyfe.ai/openclaw#waitlist" className="block text-center w-full py-3 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold text-sm rounded-xl transition-colors">Get your Appie →</Link>
+              <Link href="/openclaw#waitlist" className="block text-center w-full py-3 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold text-sm rounded-xl transition-colors">Begin met je Techwiz →</Link>
             </motion.div>
 
-            {/* Custom */}
+            {/* Custom — €2,000+ */}
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="bg-[#1a2e27]/50 rounded-2xl border border-[#247459]/20 p-8">
               <p className="text-[#F6FEFC]/40 text-xs font-bold uppercase tracking-wide mb-4">Custom</p>
-              <h3 className="text-[#F6FEFC] font-bold text-xl mb-1">Custom build</h3>
-              <p className="text-[#F6FEFC]/40 text-xs mb-6">Full agency partnership</p>
-              <div className="mb-4"><span className="text-[#F6FEFC] font-bold text-3xl">From €2,500</span></div>
+              <h3 className="text-[#F6FEFC] font-bold text-xl mb-1">Custom Appie</h3>
+              <p className="text-[#F6FEFC]/40 text-xs mb-6">Bespoke voor jouw bedrijf</p>
+              <div className="mb-4"><span className="text-[#F6FEFC] font-bold text-3xl">vanaf €2.000</span><span className="text-[#F6FEFC]/40 text-sm ml-1">/maand</span></div>
               <ul className="space-y-2 mb-8">
-                {['Everything in Instant Appie', 'Multi-agent architecture', 'Custom automations & workflows', 'Google Workspace + CRM integration', 'Enterprise-grade security', '30-day dedicated support'].map(f => (
+                {['Alles uit Instant Appie', 'Multi-agent architectuur', 'Custom automations & workflows', 'CRM integraties (Brevo, Moneybird, Monday)', 'Doorlopende optimalisatie', 'Zoals Eva, Sjaak, Ben'].map(f => (
                   <li key={f} className="flex items-center gap-2 text-[#F6FEFC]/60 text-sm"><Check className="w-4 h-4 text-[#247459] flex-shrink-0" />{f}</li>
                 ))}
               </ul>
-              <Link href="https://weblyfe.ai/openclaw#contact" className="block text-center w-full py-3 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/30 text-[#F6FEFC] font-semibold text-sm rounded-xl transition-colors">Book a call</Link>
+              <Link href="/openclaw#waitlist" className="block text-center w-full py-3 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/30 text-[#F6FEFC] font-semibold text-sm rounded-xl transition-colors">Plan een gesprek</Link>
             </motion.div>
 
           </div>
@@ -275,7 +333,7 @@ export default function TIPSLanding() {
       {/* ── TOOLS STRIP ── */}
       <section className="py-12 bg-[#0E3D31] border-y border-[#247459]/20">
         <div className="max-w-6xl mx-auto px-4 text-center">
-          <p className="text-[#F6FEFC]/20 text-xs uppercase tracking-widest mb-6 font-semibold">Works with your stack</p>
+          <p className="text-[#F6FEFC]/20 text-xs uppercase tracking-widest mb-6 font-semibold">Werkt met je stack</p>
           <div className="flex flex-wrap justify-center gap-3">
             {TOOLS.map(tool => <span key={tool} className="px-4 py-2 bg-[#031D16]/50 border border-[#247459]/20 rounded-full text-[#F6FEFC]/60 text-xs font-medium">{tool}</span>)}
           </div>
@@ -286,7 +344,7 @@ export default function TIPSLanding() {
       <section id="faq" className="py-20 bg-[#031D16]">
         <div className="max-w-2xl mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#F6FEFC]">Questions</h2>
+            <h2 className="text-3xl font-bold text-[#F6FEFC]">Vragen die je nu hebt</h2>
           </motion.div>
           <div className="space-y-4">
             {FAQS.map((faq, i) => (
@@ -299,17 +357,17 @@ export default function TIPSLanding() {
         </div>
       </section>
 
-      {/* ── FOOTER CTA ── */}
+      {/* ── CLOSING CTA ── */}
       <section className="py-16 bg-[#0E3D31] border-t border-[#247459]/20">
         <div className="max-w-6xl mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#F6FEFC] mb-4">Ready to meet your Appie?</h2>
-          <p className="text-[#F6FEFC]/50 text-sm mb-8">The transformation starts with one decision.</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#F6FEFC] mb-4">Klaar om je Techwiz te ontmoeten?</h2>
+          <p className="text-[#F6FEFC]/50 text-sm mb-8">Tevreden of geld terug — als ik je niet meer tijd bespaar dan ik kost, betaal je niets.</p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/guide/Build-Your-Own-Appie-v4.pdf" download className="bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-6 py-3 rounded-xl transition-colors">
-              Download free guide ↓
+            <Link href="/openclaw#waitlist" className="bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-6 py-3 rounded-xl transition-colors">
+              Begin met je Techwiz →
             </Link>
-            <Link href="https://weblyfe.ai/openclaw#waitlist" className="border border-[#247459]/40 hover:border-[#247459] text-[#F6FEFC]/70 hover:text-[#F6FEFC] px-6 py-3 rounded-xl transition-colors text-sm font-semibold">
-              Get Instant Appie →
+            <Link href="/openclaw" className="border border-[#247459]/40 hover:border-[#247459] text-[#F6FEFC]/70 hover:text-[#F6FEFC] px-6 py-3 rounded-xl transition-colors text-sm font-semibold">
+              Bouw zelf je Techwiz · €65 PDF
             </Link>
           </div>
         </div>

@@ -1,15 +1,16 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import TIPSLanding from '@/components/TIPSLanding';
-import Testimonials from '@/components/Testimonials';
-import FAQ from '@/components/FAQ';
-import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
+// Removed v2026-05-02 (Phase-1 rewrite): Testimonials, FAQ, and CTA were duplicating
+// content that already lives inside TIPSLanding (real cases, FAQ, closing CTA).
+// Keeping them rendered after TIPSLanding produced a duplicate FAQ section and
+// stale testimonial copy on the same page. They remain in /components for reuse.
 
 export const metadata: Metadata = {
-  title: 'Your AI Employee That Works 24/7 | Instant Appie — Weblyfe',
+  title: 'Appie — Jouw persoonlijke Techwiz | Weblyfe',
   description:
-    'Meet Appie — your own AI employee that handles emails, leads, scheduling, and research 24/7. Built on your private server. From €250/mo.',
+    'Hoi, ik ben Appie. Jouw persoonlijke Techwiz. Een geniale werknemer met de laagste kosten, die het werk doet dat je week opvreet. Bouw zelf vanaf €65 of kies Instant Appie vanaf €250/mo.',
   alternates: {
     canonical: 'https://weblyfe.ai',
   },
@@ -154,13 +155,6 @@ export default function Home() {
       <main className="min-h-screen">
         <Navbar />
         <TIPSLanding />
-        
-        
-        
-        
-        <Testimonials />
-        <FAQ />
-        <CTA />
         <Footer />
       </main>
     </>
