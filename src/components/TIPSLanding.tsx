@@ -61,26 +61,28 @@ const PROCESS_STEPS = [
 // Real client cases per PRD-WEBLYFE-AI v1.3 §8.5 — only audit-able metrics ship.
 // Older claims (BeyondSchool 200/dag, Stasher 3u→20min, Lost LeBlanc 14u→2u) are
 // retired pending verification per PRD §2 risk register.
+// Portraits = canonical /agents/*.jpg files already used by /openclaw (Seyed lock 2026-05-02).
 const SOCIAL_PROOFS: { name: string; role: string; quote: string; portrait?: string }[] = [
   {
     name: 'CZA Bouwbedrijf',
-    role: 'WhatsApp intake (Sjaak)',
+    role: 'WhatsApp intake (Ben de Voorman)',
     quote:
-      'Sjaak runt onze WhatsApp intake. Reactietijd van 4-6 uur naar onder de 30 seconden. Inquiry-naar-bezoek conversie +23%.',
-    portrait: '/custom-appies/sjaak.png',
+      'Ben scoort leads 0-100 op WhatsApp en reageert binnen 2 minuten. Vroeger duurde een eerste reactie 4-6 uur, nu onder de 30 seconden. 40% van de leads komt buiten kantooruren binnen — die haakten voorheen af.',
+    portrait: '/agents/ben.jpg',
   },
   {
     name: 'Dubai-Property.nl',
     role: 'Lead qualification (Eva)',
     quote:
-      'Eva qualificeert 160+ hot leads en stuurt de eerste reactie binnen 2 minuten. Niemand meer wakker bellen voor een terugbelnotitie.',
-    portrait: '/custom-appies/eva.png',
+      'Eva qualificeert property inquiries, plant viewings, en kwalificeert kopers. 24/7 op een eigen Mac Mini, Telegram en CRM aangesloten. Niemand meer wakker bellen voor een terugbelnotitie.',
+    portrait: '/agents/eva.jpg',
   },
   {
     name: 'Weblyfe zelf',
-    role: 'Eigen fleet (Appie-2/3/4)',
+    role: 'Eigen fleet (Appie-1/2/3)',
     quote:
-      'Onze eigen marketing, ops en R&D draaien 24/7 op de Appie fleet. We schrijven over wat al maanden bij ons werkt — niet over wat we hopen te bouwen.',
+      'Drie AI agents runnen Weblyfe over tijdzones. Ze handelen mails, deploys, client projects, CRM en content creation af. 50+ tasks per dag, 99,9% uptime. We schrijven over wat al maanden bij ons werkt — niet over wat we hopen te bouwen.',
+    portrait: '/agents/appie.jpg',
   },
 ];
 
@@ -162,12 +164,12 @@ export default function TIPSLanding() {
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#DFB771]/20 to-[#247459]/30 blur-3xl rounded-full" />
                 <Image
-                  src="/appie/hero.png"
+                  src="/agents/appie-iconic.png"
                   alt="Appie — jouw persoonlijke Techwiz"
-                  width={560}
-                  height={560}
+                  width={704}
+                  height={384}
                   priority
-                  className="relative rounded-3xl shadow-2xl shadow-[#031D16]/60"
+                  className="relative rounded-3xl shadow-2xl shadow-[#031D16]/60 ring-2 ring-[#DFB771]/30"
                 />
               </div>
             </motion.div>
