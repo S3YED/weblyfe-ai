@@ -201,13 +201,16 @@ export default function TIPSLanding() {
               className="lg:col-span-7 text-center lg:text-left"
             >
               <h1 className="text-[#F6FEFC] text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.02] mb-6 tracking-tight">
-                <HeroReveal text="Jouw werkweek" delay={0.1} />
-                <span className="block text-[#DFB771]">
-                  <HeroReveal text="runt zichzelf." delay={0.45} />
+                <HeroReveal text="Runt je agenda" delay={0.1} />
+                <span className="block">
+                  <HeroReveal text="je werkweek?" delay={0.4} />
+                </span>
+                <span className="block text-[#DFB771] mt-2">
+                  <HeroReveal text="Vanaf nu niet meer." delay={0.85} />
                 </span>
               </h1>
               <p className="text-[#F6FEFC]/75 text-lg md:text-xl leading-relaxed max-w-xl mx-auto lg:mx-0 mb-10">
-                Appie is jouw persoonlijke Techwiz. Hij beheert je inbox, intake en agenda terwijl jij slaapt. Geen chatbot, geen tool. Een digitale collega die verantwoordelijkheid neemt voor uitkomsten.
+                Ontmoet Appie, jouw 24/7 Techwiz. Hij beheert je inbox, intake en agenda terwijl jij slaapt. Geen chatbot, geen tool. Een digitale collega die verantwoordelijkheid neemt voor uitkomsten.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 items-center justify-center lg:justify-start mb-6">
                 <MagneticButton href="#tiers" className="inline-flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-8 py-4 rounded-xl transition-colors will-change-transform shadow-lg shadow-[#DFB771]/20">
@@ -487,9 +490,9 @@ export default function TIPSLanding() {
               <a href={PDF_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="block text-center w-full py-3 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/30 text-[#F6FEFC] font-semibold text-sm rounded-xl transition-colors">Koop de gids · €65</a>
             </motion.div>
 
-            {/* Instant Appie - €250/mo */}
+            {/* Instant Appie - €250/mo - COMING SOON */}
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="relative bg-gradient-to-b from-[#247459]/20 to-[#1a2e27]/50 rounded-2xl border-2 border-[#DFB771]/50 p-8 shadow-lg shadow-[#DFB771]/5">
-              <div className="absolute -top-3 left-6 bg-[#DFB771] text-[#031D16] text-xs font-bold uppercase px-3 py-1 rounded-full">Meest populair</div>
+              <div className="absolute -top-3 left-6 bg-[#DFB771] text-[#031D16] text-xs font-bold uppercase px-3 py-1 rounded-full">Coming soon</div>
               <p className="text-[#DFB771] text-xs font-bold uppercase tracking-wide mb-4">Managed</p>
               <h3 className="text-[#F6FEFC] font-bold text-xl mb-1">Instant Appie</h3>
               <p className="text-[#F6FEFC]/40 text-xs mb-6">Wij bouwen, wij draaien</p>
@@ -499,7 +502,7 @@ export default function TIPSLanding() {
                   <li key={f} className="flex items-center gap-2 text-[#F6FEFC]/60 text-sm"><Check className="w-4 h-4 text-[#DFB771] flex-shrink-0" />{f}</li>
                 ))}
               </ul>
-              <Link href="/openclaw#waitlist" className="block text-center w-full py-3 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold text-sm rounded-xl transition-colors">Begin met je Techwiz →</Link>
+              <button disabled className="block text-center w-full py-3 bg-[#DFB771]/30 text-[#031D16]/60 font-bold text-sm rounded-xl cursor-not-allowed">Coming soon</button>
             </motion.div>
 
             {/* Custom - €2,000+ */}
@@ -513,7 +516,7 @@ export default function TIPSLanding() {
                   <li key={f} className="flex items-center gap-2 text-[#F6FEFC]/60 text-sm"><Check className="w-4 h-4 text-[#247459] flex-shrink-0" />{f}</li>
                 ))}
               </ul>
-              <Link href="/openclaw#waitlist" className="block text-center w-full py-3 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/30 text-[#F6FEFC] font-semibold text-sm rounded-xl transition-colors">Plan een gesprek</Link>
+              <Link href="/discovery-call" className="block text-center w-full py-3 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/30 text-[#F6FEFC] font-semibold text-sm rounded-xl transition-colors">Plan een gesprek</Link>
             </motion.div>
 
           </div>
@@ -589,8 +592,8 @@ export default function TIPSLanding() {
           <h2 className="text-2xl md:text-3xl font-bold text-[#F6FEFC] mb-4">Klaar om je Techwiz te ontmoeten?</h2>
           <p className="text-[#F6FEFC]/50 text-sm mb-8">Tevreden of geld terug. Als ik je niet meer tijd bespaar dan ik kost, betaal je niets.</p>
           <div className="flex flex-wrap justify-center gap-4">
-            <MagneticButton href="/openclaw#waitlist" className="bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-6 py-3 rounded-xl transition-colors will-change-transform">
-              Begin met je Techwiz →
+            <MagneticButton href="/discovery-call" className="bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-6 py-3 rounded-xl transition-colors will-change-transform">
+              Plan een gesprek →
             </MagneticButton>
             <MagneticButton href={PDF_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="border border-[#247459]/40 hover:border-[#247459] text-[#F6FEFC]/70 hover:text-[#F6FEFC] px-6 py-3 rounded-xl transition-colors text-sm font-semibold will-change-transform">
               Bouw zelf je Techwiz · €65 PDF

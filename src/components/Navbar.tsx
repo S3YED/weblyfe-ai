@@ -11,6 +11,7 @@ const navLinks = [
   { label: 'Pricing', href: '/#tiers' },
   { label: 'Blog', href: '/blog' },
   { label: 'FAQ', href: '/#faq' },
+  { label: 'Plan gesprek', href: '/discovery-call' },
 ];
 
 export default function Navbar() {
@@ -61,7 +62,7 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="/openclaw#waitlist"
+              href="/#tiers"
               className="btn-primary text-sm py-3 px-6"
             >
               Begin met je Techwiz
@@ -101,7 +102,7 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href="/openclaw#waitlist"
+                href="/#tiers"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="btn-primary text-center mt-4"
               >
