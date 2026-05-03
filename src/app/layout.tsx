@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from 'next';
 import { Rethink_Sans } from 'next/font/google';
+import { cookies } from 'next/headers';
 import './globals.css';
+import { I18nProvider } from '@/i18n/I18nProvider';
+import { LOCALES, DEFAULT_LOCALE, type Locale } from '@/i18n/messages';
 
 const rethinkSans = Rethink_Sans({
   subsets: ['latin'],
@@ -145,9 +148,14 @@ const websiteSchema = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const cookieStore = await cookies();
+  const cookieLocale = cookieStore.get('locale')?.value;
+  const locale: Locale = (LOCALES as readonly string[]).includes(cookieLocale ?? '')
+    ? (cookieLocale as Locale)
+    : DEFAULT_LOCALE;
   return (
-    <html lang="nl" className={`scroll-smooth ${rethinkSans.variable}`}>
+    <html lang={locale} className={`scroll-smooth ${rethinkSans.variable}`}>
       <head>
         <script
           type="application/ld+json"
@@ -158,7 +166,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
-      <body className={`antialiased ${rethinkSans.className}`}>{children}</body>
+      <body className={`antialiased ${rethinkSans.className}`}>
+        <I18nProvider initialLocale={locale}>{children}</I18nProvider>
+      </body>
     </html>
   );
 }
