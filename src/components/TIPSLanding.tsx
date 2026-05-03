@@ -138,7 +138,7 @@ const PROJECTS: Project[] = [
   },
   {
     name: 'Safesite',
-    url: 'https://safesitestaff.com',
+    url: 'https://safesite-security.vercel.app/',
     image: '/screenshots/safesite-fresh.jpg',
     industry: 'Construction Safety',
     scope: 'Site-management platform voor bouwprojecten: incident reporting, staff scheduling, compliance docs.',
