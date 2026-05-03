@@ -101,7 +101,7 @@ const SOCIAL_PROOFS: CaseStudy[] = [
 const PROJECTS: Project[] = [
   {
     name: 'CZA Bouwbedrijf',
-    url: 'https://cza.nl',
+    url: 'https://czabouwbedrijf.nl/',
     image: '/screenshots/cza-fresh.jpg',
     industry: 'Bouw',
     scope: 'Volledige website-bouw + WhatsApp lead intake door Ben de Voorman. Eerste reactie binnen 30 seconden, 24/7.',
