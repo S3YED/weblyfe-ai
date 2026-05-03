@@ -7,7 +7,7 @@ import ScrollProgress from '@/components/ScrollProgress';
 export const metadata: Metadata = {
   title: 'Plan een discovery call | Weblyfe',
   description:
-    'Plan een gratis 30 minuten discovery call met Seyed. We bespreken jouw bedrijf, je werkweek, en of een Custom Appie de juiste keuze is.',
+    'Plan een gratis 45 minuten discovery call met Seyed. We bespreken jouw bedrijf, je werkweek, en of een Custom Appie de juiste keuze is.',
   alternates: { canonical: 'https://weblyfe.ai/discovery-call' },
   robots: { index: true, follow: true },
 };
@@ -32,7 +32,7 @@ export default function DiscoveryCallPage() {
             Plan een gesprek
           </p>
           <h1 className="text-4xl md:text-5xl font-bold mb-5 leading-tight">
-            30 minuten, geen verkooppraat.
+            45 minuten, geen verkooppraat.
           </h1>
           <p className="text-[#F6FEFC]/65 text-lg leading-relaxed max-w-2xl mx-auto">
             Vertel mij over je bedrijf, je werkweek en wat je dwarszit. Ik kijk of een Custom Appie de juiste keuze is, en zo niet zeg ik dat ook gewoon. Geen verkoop-script, geen gedoe.
@@ -45,7 +45,7 @@ export default function DiscoveryCallPage() {
           <div className="bg-[#1a2e27]/50 rounded-3xl border border-[#247459]/25 p-2 md:p-4">
             <div
               className="tidycal-embed rounded-2xl overflow-hidden bg-white"
-              data-path="weblyfe/hey"
+              data-path="weblyfe/discovery-ai"
               style={{ minHeight: '720px' }}
             />
           </div>
@@ -60,7 +60,7 @@ export default function DiscoveryCallPage() {
             <div className="text-center md:text-left">
               <p className="text-[#DFB771] text-sm font-semibold mb-2">Wat het kost</p>
               <p className="text-[#F6FEFC]/60 text-sm leading-relaxed">
-                Niets. 30 minuten van mijn tijd. Geen verplichtingen, geen verborgen sales-trechter.
+                Niets. 45 minuten van mijn tijd. Geen verplichtingen, geen verborgen sales-trechter.
               </p>
             </div>
             <div className="text-center md:text-left">
