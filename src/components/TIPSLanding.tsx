@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Check, Star, Zap, Bot, Shield, Brain, Calendar, Mail, Users, Clock, Wrench } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import CaseStudySlider, { type CaseStudy } from './CaseStudySlider';
 
 // IMU TIPS framework structures the page (Tempt → Influence → Persuade → Sell);
 // labels never render. Per PRD-WEBLYFE-AI v1.3 §7.2 hard rule: visitor sees content,
@@ -64,27 +65,32 @@ const PROCESS_STEPS = [
 // Older claims (BeyondSchool 200/dag, Stasher 3u→20min, Lost LeBlanc 14u→2u) are
 // retired pending verification per PRD §2 risk register.
 // Portraits = canonical /agents/*.jpg files already used by /openclaw (Seyed lock 2026-05-02).
-const SOCIAL_PROOFS: { name: string; role: string; quote: string; portrait?: string }[] = [
+const SOCIAL_PROOFS: CaseStudy[] = [
   {
     name: 'CZA Bouwbedrijf',
-    role: 'WhatsApp intake (Ben de Voorman)',
+    role: 'WhatsApp intake — Ben de Voorman',
     quote:
       'Ben scoort leads 0-100 op WhatsApp en reageert binnen 2 minuten. Vroeger duurde een eerste reactie 4-6 uur, nu onder de 30 seconden. 40% van de leads komt buiten kantooruren binnen — die haakten voorheen af.',
     portrait: '/agents/ben.jpg',
+    metric: { value: '<30s', label: 'eerste reactie' },
+    audioSrc: '/audio/ben-intro.mp3',
   },
   {
     name: 'Dubai-Property.nl',
-    role: 'Lead qualification (Eva)',
+    role: 'Lead qualification — Eva',
     quote:
-      'Eva qualificeert property inquiries, plant viewings, en kwalificeert kopers. 24/7 op een eigen Mac Mini, Telegram en CRM aangesloten. Niemand meer wakker bellen voor een terugbelnotitie.',
+      'Eva kwalificeert property inquiries, plant viewings, en kwalificeert kopers. 24/7 op een eigen Mac Mini, Telegram en CRM aangesloten. Niemand meer wakker bellen voor een terugbelnotitie.',
     portrait: '/agents/eva.jpg',
+    metric: { value: '24/7', label: 'altijd aan' },
   },
   {
     name: 'Weblyfe zelf',
-    role: 'Eigen fleet (Appie-1/2/3)',
+    role: 'Eigen fleet — Appie 1/2/3',
     quote:
       'Drie AI agents runnen Weblyfe over tijdzones. Ze handelen mails, deploys, client projects, CRM en content creation af. 50+ tasks per dag, 99,9% uptime. We schrijven over wat al maanden bij ons werkt — niet over wat we hopen te bouwen.',
     portrait: '/agents/appie.jpg',
+    metric: { value: '99,9%', label: 'uptime' },
+    audioSrc: '/audio/appie-intro.mp3',
   },
 ];
 
@@ -240,41 +246,13 @@ export default function TIPSLanding() {
       </section>
 
       {/* ── ECHTE KLANTEN ── (was: "S = SOCIAL PROOF") */}
-      <section className="py-24 bg-[#031D16]">
+      <section id="case-studies" className="py-24 bg-[#031D16]">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <p className="text-[#247459] text-sm font-semibold uppercase tracking-widest mb-3">Echt aan het werk</p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#F6FEFC]">Wat klanten zien — en wat we zelf doen</h2>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {SOCIAL_PROOFS.map((sp, i) => (
-              <motion.div key={sp.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="p-8 bg-[#1a2e27]/50 rounded-2xl border border-[#247459]/20">
-                <div className="flex gap-1 mb-4">
-                  {[1,2,3,4,5].map(s => <Star key={s} className="w-4 h-4 text-[#DFB771] fill-[#DFB771]" />)}
-                </div>
-                <p className="text-[#F6FEFC]/70 text-sm leading-relaxed mb-6">&quot;{sp.quote}&quot;</p>
-                <div className="flex items-center gap-3">
-                  {sp.portrait ? (
-                    <Image
-                      src={sp.portrait}
-                      alt={`${sp.name} portret`}
-                      width={48}
-                      height={48}
-                      className="w-12 h-12 rounded-full object-cover ring-2 ring-[#DFB771]/40"
-                    />
-                  ) : (
-                    <div className="w-12 h-12 rounded-full bg-[#247459]/20 flex items-center justify-center">
-                      <span className="text-[#247459] font-bold text-sm">{sp.name[0]}</span>
-                    </div>
-                  )}
-                  <div>
-                    <p className="text-[#F6FEFC] font-semibold text-sm">{sp.name}</p>
-                    <p className="text-[#F6FEFC]/40 text-xs">{sp.role}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <CaseStudySlider studies={SOCIAL_PROOFS} />
         </div>
       </section>
 
