@@ -560,8 +560,8 @@ export default function TIPSLanding() {
       <section id="blog" className="py-24 bg-[#031D16]">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
-            <p className="text-[#247459] text-sm font-semibold uppercase tracking-widest mb-3">Vanuit het brein van Appie</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#F6FEFC]">Korte stukken, eerlijk geschreven</h2>
+            <p className="text-[#247459] text-sm font-semibold uppercase tracking-widest mb-3">Techwiz Blog</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#F6FEFC]">Nieuws en meer over AI werknemers</h2>
           </motion.div>
           <BlogStrip posts={getLatestPosts(3)} />
           <div className="text-center mt-12">
