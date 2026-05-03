@@ -39,7 +39,7 @@ export default function Navbar() {
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
+          <a href="/" className="flex items-center gap-2" aria-label="Weblyfe.ai homepage">
             <Image
               src="/logo-gold.svg"
               alt="Weblyfe.ai"

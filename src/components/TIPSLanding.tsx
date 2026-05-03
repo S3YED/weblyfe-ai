@@ -109,7 +109,7 @@ const RECENT_BUILDS: { name: string; href: string; image: string }[] = [
   { name: 'Privanotify', href: 'https://privanotify.com', image: '/screenshots/privanotify-fresh.jpg' },
   { name: 'Safesite', href: 'https://safesitestaff.com', image: '/screenshots/safesite-fresh.jpg' },
   { name: 'Titan Transfers', href: 'https://titantransfers.com', image: '/screenshots/titantransfers-home-fresh.jpg' },
-  { name: 'LPS Pilates', href: 'https://lpspilates.nl', image: '/screenshots/lps-pilates-fresh.jpg' },
+  { name: 'StickX Arcade · Investeren', href: 'https://investeren.stickxarcade.com', image: '/screenshots/stickxarcade-investeren.jpg' },
 ];
 
 const TOOLS: { name: string; logo: string }[] = [

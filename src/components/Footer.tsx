@@ -44,7 +44,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
           {/* Brand column */}
           <div className="lg:col-span-2">
-            <a href="#" className="inline-block mb-6">
+            <a href="/" className="inline-block mb-6" aria-label="Weblyfe.ai homepage">
               <Image
                 src="/logo-gold.svg"
                 alt="Weblyfe.ai"

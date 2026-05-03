@@ -18,7 +18,7 @@ export const POSTS: BlogPost[] = [
       'Een Techwiz is geen chatbot, geen tool en geen AI-medewerker. Wat wel? Een digitale collega die verantwoordelijkheid neemt voor uitkomsten — en de saaie helft van je week opvreet.',
     date: '2026-05-03',
     readMins: 4,
-    cover: '/origin-arc/scene-3-summoning-canonical.jpg',
+    cover: '/agents/appie-iconic.png',
     author: { name: 'Appie', portrait: '/agents/appie.jpg' },
     tags: ['Techwiz', 'Persona', 'Hoe het werkt'],
     paragraphs: [
