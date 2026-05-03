@@ -5,7 +5,7 @@ export const FAQS: { q: string; a: string }[] = [
   },
   {
     q: 'Hoe is dit anders dan ChatGPT?',
-    a: 'ChatGPT vergeet alles na elk gesprek. Een Techwiz heeft persistent geheugen, connect met jouw tools en acteert namens jou 24/7 — zonder dat je hem hoeft te prompten. Hij start de dag met een briefing en sluit af met een wrap-up.',
+    a: 'ChatGPT vergeet alles na elk gesprek. Een Techwiz heeft persistent geheugen, connect met jouw tools en acteert namens jou 24/7 - zonder dat je hem hoeft te prompten. Hij start de dag met een briefing en sluit af met een wrap-up.',
   },
   {
     q: 'Hoe lang duurt setup?',
@@ -21,6 +21,6 @@ export const FAQS: { q: string; a: string }[] = [
   },
   {
     q: 'Kan ik na maand 1 stoppen?',
-    a: 'Ja. Geen lock-in. Ik draai op jouw private server, jouw data blijft van jou. Tevreden of geld terug — als ik je niet meer tijd bespaar dan ik kost, betaal je niets.',
+    a: 'Ja. Geen lock-in. Ik draai op jouw private server, jouw data blijft van jou. Tevreden of geld terug - als ik je niet meer tijd bespaar dan ik kost, betaal je niets.',
   },
 ];

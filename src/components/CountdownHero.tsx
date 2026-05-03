@@ -31,7 +31,7 @@ function CountdownUnit({ value, label }: { value: number; label: string }) {
 }
 
 export default function CountdownHero() {
-  // 72 hours from a fixed launch time — set this to your actual launch timestamp
+  // 72 hours from a fixed launch time - set this to your actual launch timestamp
   const [launchTime] = useState(() => {
     if (typeof window !== 'undefined') {
       const stored = localStorage.getItem('weblyfe_launch_ts');

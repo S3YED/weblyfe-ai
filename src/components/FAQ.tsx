@@ -15,7 +15,7 @@ const faqs = [
   },
   {
     question: 'What\'s the cost of AI automation services?',
-    answer: 'We\'re finalizing our launch packages right now. Sign up above to get notified when pricing goes live — early supporters will get exclusive launch pricing.',
+    answer: 'We\'re finalizing our launch packages right now. Sign up above to get notified when pricing goes live - early supporters will get exclusive launch pricing.',
   },
   {
     question: 'Will the AI sound like a robot?',
@@ -66,7 +66,7 @@ export default function FAQ() {
           </h2>
           <p className="text-[#031D16]/60 max-w-2xl mx-auto text-lg">
             Everything you need to know about working with us. Can&apos;t find what you&apos;re looking for? 
-            Just ask — we&apos;re here to help.
+            Just ask - we&apos;re here to help.
           </p>
         </motion.div>
 

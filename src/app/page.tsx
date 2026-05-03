@@ -10,7 +10,7 @@ import { FAQS } from '@/content/faqs';
 // stale testimonial copy on the same page. They remain in /components for reuse.
 
 export const metadata: Metadata = {
-  title: 'Appie — Jouw persoonlijke Techwiz | Weblyfe',
+  title: 'Appie - Jouw persoonlijke Techwiz | Weblyfe',
   description:
     'Hoi, ik ben Appie. Jouw persoonlijke Techwiz. Een geniale werknemer met de laagste kosten, die het werk doet dat je week opvreet. Bouw zelf vanaf €65 of kies Instant Appie vanaf €250/mo.',
   alternates: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
 };
 
-// FAQ structured data — single-source from src/content/faqs.ts so the
+// FAQ structured data - single-source from src/content/faqs.ts so the
 // rich-snippet schema and the visible FAQ section never drift apart.
 const faqSchema = {
   '@context': 'https://schema.org',

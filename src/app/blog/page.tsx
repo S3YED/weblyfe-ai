@@ -8,7 +8,7 @@ import ScrollProgress from '@/components/ScrollProgress';
 import { POSTS } from '@/content/blog/posts';
 
 export const metadata: Metadata = {
-  title: 'Blog — Vanuit het brein van Appie | Weblyfe',
+  title: 'Blog - Vanuit het brein van Appie | Weblyfe',
   description:
     'Praktische verhalen over Techwizes, automation en hoe je je werkweek terugwint. Geschreven door Appie en het Weblyfe team.',
   alternates: { canonical: 'https://weblyfe.ai/blog' },
@@ -44,7 +44,7 @@ export default function BlogIndex() {
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Blog</h1>
           <p className="text-[#F6FEFC]/60 text-lg max-w-2xl leading-relaxed">
             Korte stukken over Techwizes, automation, en de saaie helft van je werkweek.
-            Eerlijk geschreven — geen marketingtaal.
+            Eerlijk geschreven - geen marketingtaal.
           </p>
         </div>
       </section>

@@ -26,13 +26,13 @@ const INGREDIENTS = [
     icon: Bot,
     name: 'Een Techwiz, geen tool',
     detail:
-      'Software automatiseert taken; een Techwiz neemt verantwoordelijkheid voor uitkomsten. Geen chatbot — een persistente, herinnerende digitale collega die op een eigen private server draait.',
+      'Software automatiseert taken; een Techwiz neemt verantwoordelijkheid voor uitkomsten. Geen chatbot. Een persistente, herinnerende digitale collega die op een eigen private server draait.',
   },
   {
     icon: Brain,
     name: 'Werkt in jouw week',
     detail:
-      '08:00 een briefing van wat ik gisteren afhandelde en wat vandaag jouw aandacht nodig heeft. Verbonden met Google Workspace, Notion, Stripe, Telegram, WhatsApp — alles tegelijk.',
+      '08:00 een briefing van wat ik gisteren afhandelde en wat vandaag jouw aandacht nodig heeft. Verbonden met Google Workspace, Notion, Stripe, Telegram, WhatsApp. Alles tegelijk.',
   },
   {
     icon: Shield,
@@ -59,27 +59,27 @@ const PROCESS_STEPS = [
     n: '03',
     title: 'Jij bouwt, ik draai',
     desc:
-      'Inbox triage, intake, scheduling, follow-ups, admin — afgehandeld. Jij houdt over wat alleen jij kan: bouwen, verkopen, beslissen.',
+      'Inbox triage, intake, scheduling, follow-ups, admin: afgehandeld. Jij houdt over wat alleen jij kan: bouwen, verkopen, beslissen.',
   },
 ];
 
-// Real client cases per PRD-WEBLYFE-AI v1.3 §8.5 — only audit-able metrics ship.
+// Real client cases per PRD-WEBLYFE-AI v1.3 §8.5 - only audit-able metrics ship.
 // Older claims (BeyondSchool 200/dag, Stasher 3u→20min, Lost LeBlanc 14u→2u) are
 // retired pending verification per PRD §2 risk register.
 // Portraits = canonical /agents/*.jpg files already used by /openclaw (Seyed lock 2026-05-02).
 const SOCIAL_PROOFS: CaseStudy[] = [
   {
     name: 'CZA Bouwbedrijf',
-    role: 'WhatsApp intake — Ben de Voorman',
+    role: 'WhatsApp intake · Ben de Voorman',
     quote:
-      'Ben scoort leads 0-100 op WhatsApp en reageert binnen 2 minuten. Vroeger duurde een eerste reactie 4-6 uur, nu onder de 30 seconden. 40% van de leads komt buiten kantooruren binnen — die haakten voorheen af.',
+      'Ben scoort leads 0-100 op WhatsApp en reageert binnen 2 minuten. Vroeger duurde een eerste reactie 4-6 uur, nu onder de 30 seconden. 40% van de leads komt buiten kantooruren binnen. Die haakten voorheen af.',
     portrait: '/agents/ben.jpg',
     metric: { value: '<30s', label: 'eerste reactie' },
     audioSrc: '/audio/ben-intro.mp3',
   },
   {
     name: 'Dubai-Property.nl',
-    role: 'Lead qualification — Eva',
+    role: 'Lead qualification · Eva',
     quote:
       'Eva kwalificeert property inquiries, plant viewings, en kwalificeert kopers. 24/7 op een eigen Mac Mini, Telegram en CRM aangesloten. Niemand meer wakker bellen voor een terugbelnotitie.',
     portrait: '/agents/eva.jpg',
@@ -88,9 +88,9 @@ const SOCIAL_PROOFS: CaseStudy[] = [
   },
   {
     name: 'Weblyfe zelf',
-    role: 'Eigen fleet — Appie 1/2/3',
+    role: 'Eigen fleet · Appie 1/2/3',
     quote:
-      'Drie AI agents runnen Weblyfe over tijdzones. Ze handelen mails, deploys, client projects, CRM en content creation af. 50+ tasks per dag, 99,9% uptime. We schrijven over wat al maanden bij ons werkt — niet over wat we hopen te bouwen.',
+      'Drie AI agents runnen Weblyfe over tijdzones. Ze handelen mails, deploys, client projects, CRM en content creation af. 50+ tasks per dag, 99,9% uptime. We schrijven over wat al maanden bij ons werkt, niet over wat we hopen te bouwen.',
     portrait: '/agents/appie.jpg',
     metric: { value: '99,9%', label: 'uptime' },
     audioSrc: '/audio/appie-intro.mp3',
@@ -140,7 +140,7 @@ const PROJECTS: Project[] = [
     url: 'https://safesitestaff.com',
     image: '/screenshots/safesite-fresh.jpg',
     industry: 'Construction Safety',
-    scope: 'Site-management platform voor bouwprojecten — incident reporting, staff scheduling, compliance docs.',
+    scope: 'Site-management platform voor bouwprojecten: incident reporting, staff scheduling, compliance docs.',
   },
   {
     name: 'Titan Transfers',
@@ -177,7 +177,7 @@ export default function TIPSLanding() {
           className="absolute -top-40 -right-40 w-[640px] h-[640px] rounded-full bg-[#DFB771]/25 blur-[140px] pointer-events-none"
         />
         <div className="relative z-10 max-w-6xl mx-auto px-4">
-          {/* Stat strip — TIPS authority block, lifted above headline per Dropship-Academy / Lost-LeBlanc pattern */}
+          {/* Stat strip - TIPS authority block, lifted above headline per Dropship-Academy / Lost-LeBlanc pattern */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -192,7 +192,7 @@ export default function TIPSLanding() {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            {/* Copy block — left 7 cols on desktop, full on mobile */}
+            {/* Copy block - left 7 cols on desktop, full on mobile */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -206,7 +206,7 @@ export default function TIPSLanding() {
                 </span>
               </h1>
               <p className="text-[#F6FEFC]/75 text-lg md:text-xl leading-relaxed max-w-xl mx-auto lg:mx-0 mb-10">
-                Appie is jouw persoonlijke Techwiz — hij beheert je inbox, intake en agenda terwijl jij slaapt. Geen chatbot, geen tool. Een digitale collega die verantwoordelijkheid neemt voor uitkomsten.
+                Appie is jouw persoonlijke Techwiz. Hij beheert je inbox, intake en agenda terwijl jij slaapt. Geen chatbot, geen tool. Een digitale collega die verantwoordelijkheid neemt voor uitkomsten.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 items-center justify-center lg:justify-start mb-6">
                 <MagneticButton href="#tiers" className="inline-flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-8 py-4 rounded-xl transition-colors will-change-transform shadow-lg shadow-[#DFB771]/20">
@@ -224,7 +224,7 @@ export default function TIPSLanding() {
               </p>
             </motion.div>
 
-            {/* Pixar Appie hero render — right 5 cols on desktop, above on mobile */}
+            {/* Pixar Appie hero render - right 5 cols on desktop, above on mobile */}
             <motion.div
               initial={{ opacity: 0, scale: 0.92 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -235,7 +235,7 @@ export default function TIPSLanding() {
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#DFB771]/30 to-[#247459]/40 blur-3xl rounded-full" />
                 <Image
                   src="/agents/appie-iconic.png"
-                  alt="Appie — jouw persoonlijke Techwiz"
+                  alt="Appie · jouw persoonlijke Techwiz"
                   width={704}
                   height={384}
                   priority
@@ -284,10 +284,10 @@ export default function TIPSLanding() {
             >
               <p className="text-[#DFB771] text-xs font-semibold uppercase tracking-widest mb-3">Wie bouwt dit</p>
               <p className="text-[#F6FEFC] text-xl md:text-2xl font-semibold leading-snug mb-3">
-                Door Seyed Hosseini — oprichter van Weblyfe en Weblyfe University. 80+ websites en Appies gebouwd voor ondernemers.
+                Door Seyed Hosseini, oprichter van Weblyfe en Weblyfe University. 80+ websites en Appies gebouwd voor ondernemers.
               </p>
               <p className="text-[#F6FEFC]/60 text-sm md:text-base leading-relaxed">
-                Wij bouwen voor onszelf wat we voor jou bouwen. Drie eigen Appies runnen Weblyfe over tijdzones — wat hier op de site staat draait al maanden bij ons.
+                Wij bouwen voor onszelf wat we voor jou bouwen. Drie eigen Appies runnen Weblyfe over tijdzones. Wat hier op de site staat draait al maanden bij ons.
               </p>
             </motion.div>
           </div>
@@ -349,15 +349,15 @@ export default function TIPSLanding() {
         <div className="max-w-6xl mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <p className="text-[#247459] text-sm font-semibold uppercase tracking-widest mb-3">Echt aan het werk</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#F6FEFC]">Wat klanten zien — en wat we zelf doen</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#F6FEFC]">Wat klanten zien. En wat we zelf doen.</h2>
           </motion.div>
           <CaseStudySlider studies={SOCIAL_PROOFS} />
 
-          {/* Projects slider — live websites built by Weblyfe (separate from the case-study quote slider) */}
+          {/* Projects slider - live websites built by Weblyfe (separate from the case-study quote slider) */}
           <div id="projects" className="mt-20 pt-12 border-t border-[#247459]/15">
             <div className="text-center mb-10">
               <p className="text-[#247459] text-xs font-semibold uppercase tracking-widest mb-2">Projecten</p>
-              <h3 className="text-2xl md:text-3xl font-bold text-[#F6FEFC]">Sites die live staan — met een Techwiz erachter</h3>
+              <h3 className="text-2xl md:text-3xl font-bold text-[#F6FEFC]">Sites die live staan, met een Techwiz erachter</h3>
             </div>
             <ProjectsSlider projects={PROJECTS} />
           </div>
@@ -404,7 +404,7 @@ export default function TIPSLanding() {
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-            {/* Bouw Zelf — €65 PDF */}
+            {/* Bouw Zelf - €65 PDF */}
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-[#1a2e27]/50 rounded-2xl border border-[#247459]/20 p-8">
               <p className="text-[#247459] text-xs font-bold uppercase tracking-wide mb-4">Bouw zelf</p>
               <h3 className="text-[#F6FEFC] font-bold text-xl mb-1">Bouw je eigen Techwiz</h3>
@@ -418,7 +418,7 @@ export default function TIPSLanding() {
               <a href={PDF_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="block text-center w-full py-3 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/30 text-[#F6FEFC] font-semibold text-sm rounded-xl transition-colors">Koop de gids · €65</a>
             </motion.div>
 
-            {/* Instant Appie — €250/mo */}
+            {/* Instant Appie - €250/mo */}
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="relative bg-gradient-to-b from-[#247459]/20 to-[#1a2e27]/50 rounded-2xl border-2 border-[#DFB771]/50 p-8 shadow-lg shadow-[#DFB771]/5">
               <div className="absolute -top-3 left-6 bg-[#DFB771] text-[#031D16] text-xs font-bold uppercase px-3 py-1 rounded-full">Meest populair</div>
               <p className="text-[#DFB771] text-xs font-bold uppercase tracking-wide mb-4">Managed</p>
@@ -433,7 +433,7 @@ export default function TIPSLanding() {
               <Link href="/openclaw#waitlist" className="block text-center w-full py-3 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold text-sm rounded-xl transition-colors">Begin met je Techwiz →</Link>
             </motion.div>
 
-            {/* Custom — €2,000+ */}
+            {/* Custom - €2,000+ */}
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="bg-[#1a2e27]/50 rounded-2xl border border-[#247459]/20 p-8">
               <p className="text-[#F6FEFC]/40 text-xs font-bold uppercase tracking-wide mb-4">Custom</p>
               <h3 className="text-[#F6FEFC] font-bold text-xl mb-1">Custom Appie</h3>
@@ -484,7 +484,7 @@ export default function TIPSLanding() {
         </div>
       </section>
 
-      {/* ── BLOG STRIP — Vanuit het brein van Appie ── */}
+      {/* ── BLOG STRIP - Vanuit het brein van Appie ── */}
       <section id="blog" className="py-24 bg-[#031D16]">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
@@ -524,7 +524,7 @@ export default function TIPSLanding() {
       <section className="py-16 bg-[#0E3D31] border-t border-[#247459]/20">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-[#F6FEFC] mb-4">Klaar om je Techwiz te ontmoeten?</h2>
-          <p className="text-[#F6FEFC]/50 text-sm mb-8">Tevreden of geld terug — als ik je niet meer tijd bespaar dan ik kost, betaal je niets.</p>
+          <p className="text-[#F6FEFC]/50 text-sm mb-8">Tevreden of geld terug. Als ik je niet meer tijd bespaar dan ik kost, betaal je niets.</p>
           <div className="flex flex-wrap justify-center gap-4">
             <MagneticButton href="/openclaw#waitlist" className="bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-6 py-3 rounded-xl transition-colors will-change-transform">
               Begin met je Techwiz →

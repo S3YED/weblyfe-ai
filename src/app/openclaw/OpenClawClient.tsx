@@ -38,7 +38,7 @@ function LiveBadge() {
   return (
     <div className="inline-flex items-center gap-2 bg-[#247459]/20 border border-[#247459]/40 text-[#DFB771] text-sm font-medium px-4 py-2 rounded-full">
       <span className="w-2 h-2 bg-[#DFB771] rounded-full animate-pulse" />
-      🔥 The Build Your Own Appie guide is LIVE — get yours for €65
+      🔥 The Build Your Own Appie guide is LIVE - get yours for €65
     </div>
   );
 }
@@ -196,7 +196,7 @@ export default function OpenClawPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">The Outcome</p>
             <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-[#031D16]">What Your AI Handles</h2>
-            <p className="text-[#031D16]/60 text-lg max-w-2xl mx-auto">Real outcomes for real businesses. Your AI doesn&apos;t just chat — it works.</p>
+            <p className="text-[#031D16]/60 text-lg max-w-2xl mx-auto">Real outcomes for real businesses. Your AI doesn&apos;t just chat - it works.</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {OUTCOMES.map((o, i) => {

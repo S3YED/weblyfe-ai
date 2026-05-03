@@ -81,7 +81,7 @@ export default function ProjectsSlider({ projects }: Props) {
               <div className="relative aspect-[16/10] overflow-hidden">
                 <Image
                   src={project.image}
-                  alt={`${project.name} — live website`}
+                  alt={`${project.name} - live website`}
                   fill
                   sizes="(max-width: 768px) 88vw, 46vw"
                   className="object-cover object-top group-hover:scale-105 transition-transform duration-700"

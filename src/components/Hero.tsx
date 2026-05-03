@@ -69,7 +69,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-xl md:text-2xl text-[#F6FEFC]/70 max-w-3xl mx-auto mb-12 leading-relaxed"
         >
-          We build AI systems that handle your leads, support, and operations 24/7 — 
+          We build AI systems that handle your leads, support, and operations 24/7 - 
           so you can focus on the work that actually matters.{' '}
           <span className="text-[#DFB771] font-medium">
             Clients save 20+ hours per week.

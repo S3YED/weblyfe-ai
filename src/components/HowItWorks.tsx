@@ -8,7 +8,7 @@ const steps = [
     number: '01',
     icon: MessageSquare,
     title: 'Discovery Call',
-    description: 'We learn about your business, pain points, and goals. No pitch — just understanding what you actually need.',
+    description: 'We learn about your business, pain points, and goals. No pitch - just understanding what you actually need.',
     duration: '30 min call',
   },
   {
@@ -58,7 +58,7 @@ export default function HowItWorks() {
             From Idea to <span className="text-[#247459]">Automation</span>
           </h2>
           <p className="text-[#031D16]/60 max-w-2xl mx-auto text-lg">
-            A clear, proven process that takes you from overwhelmed to automated in weeks — not months.
+            A clear, proven process that takes you from overwhelmed to automated in weeks - not months.
           </p>
         </motion.div>
 

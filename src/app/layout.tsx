@@ -20,11 +20,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://weblyfe.ai'),
   title: {
-    default: 'Appie — Jouw persoonlijke Techwiz | Weblyfe.ai',
+    default: 'Appie - Jouw persoonlijke Techwiz | Weblyfe.ai',
     template: '%s | Weblyfe.ai',
   },
   description:
-    'Hoi, ik ben Appie. Jouw persoonlijke Techwiz — een geniale werknemer met de laagste kosten. Ik doe het werk dat je week opvreet: inbox, intake, agenda, admin. Bouw zelf vanaf €65 of kies Instant Appie vanaf €250/mo.',
+    'Hoi, ik ben Appie. Jouw persoonlijke Techwiz - een geniale werknemer met de laagste kosten. Ik doe het werk dat je week opvreet: inbox, intake, agenda, admin. Bouw zelf vanaf €65 of kies Instant Appie vanaf €250/mo.',
   keywords: [
     'Techwiz',
     'persoonlijke AI',
@@ -46,9 +46,9 @@ export const metadata: Metadata = {
   publisher: 'Weblyfe by Techwiz LLC',
   category: 'Technology',
   openGraph: {
-    title: 'Appie — Jouw persoonlijke Techwiz | Weblyfe.ai',
+    title: 'Appie - Jouw persoonlijke Techwiz | Weblyfe.ai',
     description:
-      'Een geniale werknemer met de laagste kosten — die het werk doet dat je week opvreet. Bouw zelf vanaf €65 of kies Instant Appie vanaf €250/mo.',
+      'Een geniale werknemer met de laagste kosten - die het werk doet dat je week opvreet. Bouw zelf vanaf €65 of kies Instant Appie vanaf €250/mo.',
     type: 'website',
     url: 'https://weblyfe.ai',
     siteName: 'Weblyfe.ai',
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
         url: '/agents/appie-iconic.png',
         width: 1408,
         height: 768,
-        alt: 'Appie — jouw persoonlijke Techwiz',
+        alt: 'Appie - jouw persoonlijke Techwiz',
         type: 'image/png',
       },
     ],
@@ -68,9 +68,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@weblyfenl',
     creator: '@weblyfenl',
-    title: 'Appie — Jouw persoonlijke Techwiz | Weblyfe.ai',
+    title: 'Appie - Jouw persoonlijke Techwiz | Weblyfe.ai',
     description:
-      'Een geniale werknemer met de laagste kosten. Inbox, intake, agenda, admin — Appie pakt het op.',
+      'Een geniale werknemer met de laagste kosten. Inbox, intake, agenda, admin - Appie pakt het op.',
     images: ['/agents/appie-iconic.png'],
   },
   robots: {
@@ -110,7 +110,7 @@ const organizationSchema = {
     height: 60,
   },
   description:
-    'Weblyfe bouwt persoonlijke Techwizes — geniale digitale werknemers met de laagste kosten — voor creators, agencies en service businesses.',
+    'Weblyfe bouwt persoonlijke Techwizes - geniale digitale werknemers met de laagste kosten - voor creators, agencies en service businesses.',
   foundingDate: '2022',
   areaServed: 'Worldwide',
   contactPoint: {
