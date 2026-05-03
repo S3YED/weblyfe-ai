@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Instagram, Youtube, Linkedin, Mail, ArrowUpRight } from 'lucide-react';
+import { useI18n } from '@/i18n/I18nProvider';
 
 const footerLinks = {
   services: [
@@ -33,6 +34,7 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const { t } = useI18n();
   return (
     <footer className="bg-[#031D16] pt-20 pb-8 relative overflow-hidden">
       {/* Decorative elements */}
@@ -54,8 +56,7 @@ export default function Footer() {
               />
             </a>
             <p className="text-[#F6FEFC]/60 mb-6 max-w-sm leading-relaxed">
-              AI automation services for creators, agencies, and service businesses. 
-              We build systems that save you time and help you scale.
+              {t('footer.tagline')}
             </p>
             
             {/* Social links */}
@@ -77,7 +78,7 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="text-[#F6FEFC] font-semibold mb-4">Services</h3>
+            <h3 className="text-[#F6FEFC] font-semibold mb-4">{t('footer.col.services')}</h3>
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
                 <li key={link.label}>
@@ -94,7 +95,7 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="text-[#F6FEFC] font-semibold mb-4">Company</h3>
+            <h3 className="text-[#F6FEFC] font-semibold mb-4">{t('footer.col.company')}</h3>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
@@ -111,7 +112,7 @@ export default function Footer() {
 
           {/* Resources */}
           <div>
-            <h3 className="text-[#F6FEFC] font-semibold mb-4">Resources</h3>
+            <h3 className="text-[#F6FEFC] font-semibold mb-4">{t('footer.col.resources')}</h3>
             <ul className="space-y-3">
               {footerLinks.resources.map((link) => (
                 <li key={link.label}>
@@ -149,23 +150,23 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
               <h3 className="text-xl font-bold text-[#F6FEFC] mb-2">
-                Wekelijkse Techwiz-tips in je inbox
+                {t('footer.newsletter.h3')}
               </h3>
               <p className="text-[#F6FEFC]/60 text-sm">
-                Praktische tips over automation, AI en hoe je je werkweek terugwint. Geen spam.
+                {t('footer.newsletter.body')}
               </p>
             </div>
             <form className="flex flex-col sm:flex-row w-full md:w-auto gap-3">
               <input
                 type="email"
-                placeholder="jouw@email.nl"
+                placeholder={t('footer.newsletter.placeholder')}
                 className="w-full sm:w-64 px-4 py-3 rounded-xl bg-[#031D16] border border-[#247459]/30 text-[#F6FEFC] placeholder-[#F6FEFC]/40 focus:outline-none focus:border-[#DFB771] focus:ring-2 focus:ring-[#DFB771]/30 focus:shadow-[0_0_0_4px_rgba(223,183,113,0.12)] transition-all duration-300"
               />
               <button
                 type="submit"
                 className="btn-primary whitespace-nowrap py-3 w-full sm:w-auto"
               >
-                Aanmelden
+                {t('footer.newsletter.cta')}
               </button>
             </form>
           </div>
@@ -174,14 +175,14 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="pt-8 border-t border-[#247459]/20 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-[#F6FEFC]/40 text-sm">
-            © {new Date().getFullYear()} Weblyfe.ai · onderdeel van Weblyfe by Techwiz LLC
+            © {new Date().getFullYear()} Weblyfe.ai{t('footer.copyright.suffix')}
           </p>
           <div className="flex gap-6">
             <a href="#" className="text-[#F6FEFC]/40 hover:text-[#F6FEFC]/60 text-sm transition-colors">
-              Privacy Policy
+              {t('footer.privacy')}
             </a>
             <a href="#" className="text-[#F6FEFC]/40 hover:text-[#F6FEFC]/60 text-sm transition-colors">
-              Terms of Service
+              {t('footer.terms')}
             </a>
           </div>
         </div>
