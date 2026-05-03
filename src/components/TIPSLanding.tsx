@@ -272,13 +272,13 @@ export default function TIPSLanding() {
               transition={{ duration: 0.7 }}
               className="md:col-span-5"
             >
-              <div className="relative w-full aspect-square rounded-3xl overflow-hidden ring-1 ring-[#DFB771]/30 hover:ring-[#DFB771]/60 transition-all group">
+              <div className="relative w-full aspect-square">
                 <Image
-                  src="/screenshots/seyed-founder.jpg"
+                  src="/screenshots/seyed-founder.png"
                   alt="Seyed Hosseini aan het werk: presenteren, content maken, op podcast en gastdocent"
                   fill
                   sizes="(max-width: 768px) 100vw, 480px"
-                  className="object-cover"
+                  className="object-contain"
                 />
               </div>
             </motion.div>
