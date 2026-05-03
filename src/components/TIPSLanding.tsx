@@ -7,6 +7,7 @@ import Image from 'next/image';
 import CaseStudySlider, { type CaseStudy } from './CaseStudySlider';
 import ProjectsSlider, { type Project } from './ProjectsSlider';
 import BlogStrip from './BlogStrip';
+import FaqAccordion from './FaqAccordion';
 import MagneticButton from './anim/MagneticButton';
 import HeroReveal from './anim/HeroReveal';
 import CountUp from './anim/CountUp';
@@ -184,7 +185,7 @@ export default function TIPSLanding() {
             transition={{ duration: 0.5 }}
             className="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3 text-xs md:text-sm text-[#F6FEFC]/60 mb-8 uppercase tracking-widest font-semibold"
           >
-            <span className="inline-flex items-center gap-2"><span className="text-[#DFB771]">●</span> 80+ ondernemers gingen je voor</span>
+            <span className="inline-flex items-center gap-2"><span className="text-[#DFB771]">●</span> 100+ bedrijven geholpen</span>
             <span className="hidden md:inline text-[#247459]">/</span>
             <span className="inline-flex items-center gap-2"><span className="text-[#DFB771]">●</span> &lt;30s eerste reactie</span>
             <span className="hidden md:inline text-[#247459]">/</span>
@@ -247,50 +248,125 @@ export default function TIPSLanding() {
         </div>
       </section>
 
-      {/* ── AUTHORITY STRIP ── (TIPS T-block, founder + portfolio proof immediately below the fold) */}
-      <section className="relative py-16 bg-[#0E3D31]/60 border-y border-[#247459]/20">
+      {/* ── ABOUT SEYED ── (founder section, track record + named collaborators) */}
+      <section id="about" className="relative py-20 md:py-24 bg-[#0E3D31]/60 border-y border-[#247459]/20">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center md:text-left mb-12 md:mb-14"
+          >
+            <p className="text-[#DFB771] text-xs font-semibold uppercase tracking-widest mb-3">Wie bouwt dit</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#F6FEFC] max-w-3xl">
+              Seyed Hosseini. Van geneeskunde naar digitaal vakmanschap.
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -16 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="md:col-span-5 flex justify-center md:justify-start"
+              transition={{ duration: 0.7 }}
+              className="md:col-span-5"
             >
               <a
                 href="https://weblyfeuniversity.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative block w-full max-w-sm aspect-[16/9] rounded-2xl overflow-hidden ring-1 ring-[#DFB771]/30 hover:ring-[#DFB771]/60 transition-all"
+                className="group relative block w-full aspect-[16/10] rounded-3xl overflow-hidden ring-1 ring-[#DFB771]/30 hover:ring-[#DFB771]/60 transition-all"
               >
                 <Image
                   src="/screenshots/weblyfeuniversity-vsl.jpg"
-                  alt="Seyed Hosseini · Weblyfe University"
+                  alt="Seyed Hosseini · oprichter Weblyfe en Weblyfe University"
                   fill
-                  sizes="(max-width: 768px) 100vw, 400px"
+                  sizes="(max-width: 768px) 100vw, 480px"
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#031D16]/60 via-[#031D16]/10 to-transparent" />
-                <span className="absolute bottom-3 left-4 text-[#F6FEFC] text-xs font-semibold uppercase tracking-widest">Weblyfe University</span>
+                <div className="absolute inset-0 bg-gradient-to-tr from-[#031D16]/70 via-[#031D16]/10 to-transparent" />
+                <span className="absolute bottom-4 left-5 text-[#F6FEFC] text-xs font-semibold uppercase tracking-widest">Weblyfe University</span>
               </a>
             </motion.div>
+
             <motion.div
               initial={{ opacity: 0, x: 16 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="md:col-span-7 text-center md:text-left"
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="md:col-span-7"
             >
-              <p className="text-[#DFB771] text-xs font-semibold uppercase tracking-widest mb-3">Wie bouwt dit</p>
-              <p className="text-[#F6FEFC] text-xl md:text-2xl font-semibold leading-snug mb-3">
-                Door Seyed Hosseini, oprichter van Weblyfe en Weblyfe University. 80+ websites en Appies gebouwd voor ondernemers.
-              </p>
-              <p className="text-[#F6FEFC]/60 text-sm md:text-base leading-relaxed">
-                Wij bouwen voor onszelf wat we voor jou bouwen. Drie eigen Appies runnen Weblyfe over tijdzones. Wat hier op de site staat draait al maanden bij ons.
-              </p>
+              <div className="space-y-5 text-[#F6FEFC]/80 text-base md:text-lg leading-relaxed">
+                <p>
+                  Seyed begon waar weinig ondernemers beginnen: in de geneeskunde. Niet als eindbestemming, maar als lens. Hij zag hoe systemen vastlopen, hoe communicatie mislukt, hoe goede intenties sneuvelen op slechte processen. In 2019 richtte hij Weblyfe op, gewapend met dezelfde diagnose-aanpak. Geen templates. Geen bureau-taal. Gewoon: wat is het échte probleem, en hoe bouwen we iets dat dat oplost.
+                </p>
+                <p>
+                  Inmiddels werkte Seyed samen met meer dan 100 bedrijven. Van Roslan Bendenia en Lost LeBlanc tot vastgoedondernemers, e-commerce founders en financieel coaches. Niet als uitvoerder, maar als de persoon die meekijkt, meedenkt en de lat legt. Zijn klanten genereerden aantoonbaar meer dan 11 miljoen euro. Hij doceerde digitale strategie aan de American University of Dubai. En hij bouwde Appie: een AI-vloot die de werkweek overneemt zodat jij je kunt richten op wat telt.
+                </p>
+              </div>
             </motion.div>
           </div>
+
+          {/* Track record stat row */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-px mt-14 md:mt-16 bg-[#247459]/20 rounded-2xl overflow-hidden border border-[#247459]/25"
+          >
+            {[
+              { value: <CountUp to={100} suffix="+" />, label: 'bedrijven geholpen' },
+              { value: <CountUp to={7} suffix=" jaar" />, label: 'Weblyfe actief' },
+              { value: <span><CountUp to={11} prefix="€" suffix="M+" /></span>, label: 'gerealiseerd voor klanten' },
+              { value: <span className="text-2xl md:text-3xl">AUD</span>, label: 'gastdocent digitale strategie' },
+            ].map((stat, i) => (
+              <div key={i} className="bg-[#0E3D31] py-7 px-5 text-center">
+                <div className="text-[#DFB771] text-3xl md:text-4xl font-bold mb-2 leading-none">{stat.value}</div>
+                <div className="text-[#F6FEFC]/55 text-xs md:text-sm leading-snug">{stat.label}</div>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Named collaborators strip */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-12 md:mt-14 text-center"
+          >
+            <p className="text-[#247459] text-xs font-semibold uppercase tracking-widest mb-5">Eerder samengewerkt met</p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {[
+                { name: 'Roslan Bendenia', label: 'EKO Evolved' },
+                { name: 'Lost LeBlanc', label: 'Travel creator' },
+                { name: 'Salar Azimi', label: 'Ondernemer' },
+                { name: 'Hesam Zahedi', label: 'CZA Bouwbedrijf' },
+                { name: 'Rabi Adli', label: 'Geld Instituut' },
+                { name: 'Vanessa Nantes', label: 'Creator' },
+                { name: 'Joshua Kaats', label: 'Dropship Academy' },
+                { name: 'Dounia', label: 'LPS Pilates' },
+              ].map((collab, i) => (
+                <motion.span
+                  key={collab.name}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.04, type: 'spring', stiffness: 220, damping: 18 }}
+                  whileHover={{ y: -2, scale: 1.03 }}
+                  className="px-4 py-2 rounded-full bg-[#031D16]/60 border border-[#247459]/30 hover:border-[#DFB771]/40 text-sm transition-colors"
+                >
+                  <span className="text-[#F6FEFC] font-semibold">{collab.name}</span>
+                  <span className="text-[#F6FEFC]/40 ml-2 text-xs">{collab.label}</span>
+                </motion.span>
+              ))}
+              <span className="px-4 py-2 rounded-full bg-[#031D16]/30 border border-[#247459]/20 text-sm text-[#F6FEFC]/40 italic">
+                en 90+ andere ondernemers
+              </span>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -503,20 +579,14 @@ export default function TIPSLanding() {
         </div>
       </section>
 
-      {/* ── FAQ ── */}
+      {/* ── FAQ ── (collapsible accordion) */}
       <section id="faq" className="py-20 bg-[#031D16]">
         <div className="max-w-2xl mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#F6FEFC]">Vragen die je nu hebt</h2>
+            <p className="text-[#DFB771] text-xs font-semibold uppercase tracking-widest mb-3">Veelgestelde vragen</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#F6FEFC]">Vragen die je nu hebt</h2>
           </motion.div>
-          <div className="space-y-4">
-            {FAQS.map((faq, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }} className="p-6 bg-[#1a2e27]/50 rounded-xl border border-[#247459]/20">
-                <h3 className="text-[#F6FEFC] font-semibold text-sm mb-2">{faq.q}</h3>
-                <p className="text-[#F6FEFC]/50 text-sm leading-relaxed">{faq.a}</p>
-              </motion.div>
-            ))}
-          </div>
+          <FaqAccordion items={FAQS} />
         </div>
       </section>
 
