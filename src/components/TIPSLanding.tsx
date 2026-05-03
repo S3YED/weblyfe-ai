@@ -13,6 +13,7 @@ import HeroReveal from './anim/HeroReveal';
 import CountUp from './anim/CountUp';
 import AppieTilt from './anim/AppieTilt';
 import HairlineDivider from './anim/HairlineDivider';
+import LottieIcon from './anim/LottieIcon';
 import { getLatestPosts } from '@/content/blog/posts';
 import { FAQS } from '@/content/faqs';
 
@@ -24,19 +25,22 @@ const PDF_CHECKOUT_URL = 'https://buy.stripe.com/7sYaEYfAn30C8BncwJ3Je2I';
 
 const INGREDIENTS = [
   {
-    icon: Bot,
+    lottie: '/lottie/techwiz-bot.json',
+    fallbackIcon: Bot,
     name: 'Een Techwiz, geen tool',
     detail:
       'Software automatiseert taken; een Techwiz neemt verantwoordelijkheid voor uitkomsten. Geen chatbot. Een persistente, herinnerende digitale collega die op een eigen private server draait.',
   },
   {
-    icon: Brain,
+    lottie: '/lottie/techwiz-pulse.json',
+    fallbackIcon: Brain,
     name: 'Werkt in jouw week',
     detail:
       '08:00 een briefing van wat ik gisteren afhandelde en wat vandaag jouw aandacht nodig heeft. Verbonden met Google Workspace, Notion, Stripe, Telegram, WhatsApp. Alles tegelijk.',
   },
   {
-    icon: Shield,
+    lottie: '/lottie/techwiz-shield.json',
+    fallbackIcon: Shield,
     name: 'Werkt zichtbaar',
     detail:
       'Geen black box, geen "trust the AI". Reversibele taken: doen. Onomkeerbare taken: vragen. Je weet in de ochtend wat ik gisteren deed, je weet in de avond wat ik vandaag deed.',
@@ -376,9 +380,11 @@ export default function TIPSLanding() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {INGREDIENTS.map((ing, i) => (
               <motion.div key={ing.name} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="p-8 bg-[#1a2e27]/50 rounded-2xl border border-[#247459]/20 hover:border-[#247459]/50 transition-all">
-                <div className="w-12 h-12 rounded-2xl bg-[#247459]/15 flex items-center justify-center mb-6">
-                  <ing.icon className="w-6 h-6 text-[#247459]" />
-                </div>
+                <LottieIcon
+                  src={ing.lottie}
+                  className="w-20 h-20 -ml-2 -mt-2 mb-3"
+                  fallback={<div className="w-12 h-12 rounded-2xl bg-[#247459]/15 flex items-center justify-center"><ing.fallbackIcon className="w-6 h-6 text-[#DFB771]" /></div>}
+                />
                 <h3 className="text-[#F6FEFC] font-bold text-xl mb-3">{ing.name}</h3>
                 <p className="text-[#F6FEFC]/50 text-sm leading-relaxed">{ing.detail}</p>
               </motion.div>
