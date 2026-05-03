@@ -370,6 +370,26 @@ export default function TIPSLanding() {
         </div>
       </section>
 
+      {/* ── ECHTE KLANTEN ── (case study slider with Eva/Ben/Appie + Projects, moved here right after About Seyed per Seyed's narrative ordering) */}
+      <section id="case-studies" className="py-24 bg-[#031D16]">
+        <div className="max-w-6xl mx-auto px-4">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+            <p className="text-[#247459] text-sm font-semibold uppercase tracking-widest mb-3">Echt aan het werk</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#F6FEFC]">Wat klanten zien. En wat we zelf doen.</h2>
+          </motion.div>
+          <CaseStudySlider studies={SOCIAL_PROOFS} />
+
+          {/* Projects slider - live websites built by Weblyfe (separate from the case-study quote slider) */}
+          <div id="projects" className="mt-20 pt-12 border-t border-[#247459]/15">
+            <div className="text-center mb-10">
+              <p className="text-[#247459] text-xs font-semibold uppercase tracking-widest mb-2">Projecten</p>
+              <h3 className="text-2xl md:text-3xl font-bold text-[#F6FEFC]">Sites die live staan, met een Techwiz erachter</h3>
+            </div>
+            <ProjectsSlider projects={PROJECTS} />
+          </div>
+        </div>
+      </section>
+
       {/* ── WHAT APPIE IS ── (was: "I = INGREDIENTS") */}
       <section id="t-meet" className="py-24 bg-[#031D16]">
         <div className="max-w-6xl mx-auto px-4">
@@ -418,26 +438,6 @@ export default function TIPSLanding() {
                 </div>
               </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── ECHTE KLANTEN ── (was: "S = SOCIAL PROOF") */}
-      <section id="case-studies" className="py-24 bg-[#031D16]">
-        <div className="max-w-6xl mx-auto px-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <p className="text-[#247459] text-sm font-semibold uppercase tracking-widest mb-3">Echt aan het werk</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#F6FEFC]">Wat klanten zien. En wat we zelf doen.</h2>
-          </motion.div>
-          <CaseStudySlider studies={SOCIAL_PROOFS} />
-
-          {/* Projects slider - live websites built by Weblyfe (separate from the case-study quote slider) */}
-          <div id="projects" className="mt-20 pt-12 border-t border-[#247459]/15">
-            <div className="text-center mb-10">
-              <p className="text-[#247459] text-xs font-semibold uppercase tracking-widest mb-2">Projecten</p>
-              <h3 className="text-2xl md:text-3xl font-bold text-[#F6FEFC]">Sites die live staan, met een Techwiz erachter</h3>
-            </div>
-            <ProjectsSlider projects={PROJECTS} />
           </div>
         </div>
       </section>
