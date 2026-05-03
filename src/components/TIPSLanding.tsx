@@ -125,7 +125,7 @@ const PROJECTS: Project[] = [
   {
     name: 'Boooth',
     url: 'https://boooth.nl',
-    image: '/screenshots/boooth-home-fresh.jpg',
+    image: '/screenshots/boooth-configurator.jpg',
     industry: 'Events',
     scope: 'Photobooth verhuurplatform met booking-engine + automatische factuurflow via n8n.',
   },
