@@ -544,6 +544,19 @@ export default function TIPSLanding() {
             </motion.div>
 
           </div>
+
+          {/* Post-checkout callout (Phase 2 Stap B) */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="mt-10 max-w-3xl mx-auto rounded-2xl border border-[#DFB771]/25 bg-gradient-to-r from-[#DFB771]/8 via-[#247459]/15 to-[#DFB771]/8 p-6 md:p-7 text-center"
+          >
+            <p className="text-[#DFB771] text-xs font-semibold uppercase tracking-widest mb-2">{t('checkout.callout.eyebrow')}</p>
+            <h3 className="text-[#F6FEFC] font-bold text-lg md:text-xl mb-2">{t('checkout.callout.h3')}</h3>
+            <p className="text-[#F6FEFC]/65 text-sm md:text-base leading-relaxed">{t('checkout.callout.body')}</p>
+          </motion.div>
         </div>
       </section>
 

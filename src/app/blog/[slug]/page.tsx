@@ -150,6 +150,25 @@ export default async function BlogPostPage({
 
         <article className="pt-28 pb-20">
           <div className="max-w-3xl mx-auto px-4">
+            <nav aria-label="Breadcrumb" className="mb-8">
+              <ol className="flex flex-wrap items-center gap-2 text-xs text-[#F6FEFC]/40">
+                <li>
+                  <Link href="/" className="hover:text-[#DFB771] transition-colors">
+                    {locale === 'nl' ? 'Home' : 'Home'}
+                  </Link>
+                </li>
+                <li className="text-[#247459]">/</li>
+                <li>
+                  <Link href="/blog" className="hover:text-[#DFB771] transition-colors">
+                    {locale === 'nl' ? 'Blog' : 'Blog'}
+                  </Link>
+                </li>
+                <li className="text-[#247459]">/</li>
+                <li className="text-[#F6FEFC]/65 truncate max-w-[18rem]" aria-current="page">
+                  {post.title}
+                </li>
+              </ol>
+            </nav>
             <Link
               href="/blog"
               className="inline-flex items-center gap-1.5 text-[#F6FEFC]/50 hover:text-[#DFB771] text-sm transition-colors mb-8"

@@ -135,6 +135,12 @@ const nl: Dict = {
   'tier.custom.features':
     'Alles uit Instant Appie|Multi-agent architectuur|Custom automations & workflows|CRM integraties (Brevo, Moneybird, Monday)|Doorlopende optimalisatie|Zoals Eva, Sjaak, Ben',
 
+  // Post-checkout callout (below pricing tiers)
+  'checkout.callout.eyebrow': 'Direct na je bestelling',
+  'checkout.callout.h3': 'Praat al met Appie terwijl hij zichzelf aanzet',
+  'checkout.callout.body':
+    'Geen onboarding-week, geen handleidingen. Zodra je betaalt landt er een gespreksstart in je Telegram. Je vertelt over je bedrijf, hij vraagt door, en samen schakel je de eerste tools in. Eind van dag 1 draait er al een Techwiz mee.',
+
   // PDF preview strip (below pricing)
   'pdfPreview.eyebrow': 'Wat zit er in de gids',
   'pdfPreview.h2': 'Lees mee op je laptop, telefoon of in je hand',
@@ -308,6 +314,12 @@ const en: Dict = {
   'tier.custom.cta': 'Book a call',
   'tier.custom.features':
     'Everything in Instant Appie|Multi-agent architecture|Custom automations & workflows|CRM integrations (Brevo, Moneybird, Monday)|Ongoing optimisation|Like Eva, Sjaak, Ben',
+
+  // Post-checkout callout
+  'checkout.callout.eyebrow': 'Right after checkout',
+  'checkout.callout.h3': 'Talk to Appie while he switches himself on',
+  'checkout.callout.body':
+    'No onboarding week, no manuals. The moment you check out a conversation lands in your Telegram. You tell him about your business, he asks the right questions, and together you switch on the first tools. By the end of day one a Techwiz is running with you.',
 
   // PDF preview strip
   'pdfPreview.eyebrow': "What is inside the guide",
