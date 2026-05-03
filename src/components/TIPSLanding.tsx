@@ -5,6 +5,13 @@ import { ArrowRight, Check, Star, Zap, Bot, Shield, Brain, Calendar, Mail, Users
 import Link from 'next/link';
 import Image from 'next/image';
 import CaseStudySlider, { type CaseStudy } from './CaseStudySlider';
+import BlogStrip from './BlogStrip';
+import MagneticButton from './anim/MagneticButton';
+import HeroReveal from './anim/HeroReveal';
+import CountUp from './anim/CountUp';
+import AppieTilt from './anim/AppieTilt';
+import HairlineDivider from './anim/HairlineDivider';
+import { getLatestPosts } from '@/content/blog/posts';
 
 // IMU TIPS framework structures the page (Tempt → Influence → Persuade → Sell);
 // labels never render. Per PRD-WEBLYFE-AI v1.3 §7.2 hard rule: visitor sees content,
@@ -82,6 +89,7 @@ const SOCIAL_PROOFS: CaseStudy[] = [
       'Eva kwalificeert property inquiries, plant viewings, en kwalificeert kopers. 24/7 op een eigen Mac Mini, Telegram en CRM aangesloten. Niemand meer wakker bellen voor een terugbelnotitie.',
     portrait: '/agents/eva.jpg',
     metric: { value: '24/7', label: 'altijd aan' },
+    audioSrc: '/audio/eva-intro.mp3',
   },
   {
     name: 'Weblyfe zelf',
@@ -168,12 +176,12 @@ export default function TIPSLanding() {
             ))}
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="#t" className="flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-8 py-4 rounded-xl transition-colors">
+            <MagneticButton href="#t" className="flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-8 py-4 rounded-xl transition-colors will-change-transform">
               Maak kennis met je Techwiz <ArrowRight className="w-4 h-4" />
-            </Link>
-            <a href={PDF_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/40 text-[#F6FEFC] font-semibold px-8 py-4 rounded-xl transition-colors">
+            </MagneticButton>
+            <MagneticButton href={PDF_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/40 text-[#F6FEFC] font-semibold px-8 py-4 rounded-xl transition-colors will-change-transform">
               Bouw zelf je Techwiz · €65
-            </a>
+            </MagneticButton>
           </motion.div>
         </div>
       </section>
@@ -189,7 +197,7 @@ export default function TIPSLanding() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Pixar Appie hero render */}
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="order-2 lg:order-1 flex justify-center lg:justify-end">
-              <div className="relative">
+              <AppieTilt className="relative" max={5}>
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#DFB771]/20 to-[#247459]/30 blur-3xl rounded-full" />
                 <Image
                   src="/agents/appie-iconic.png"
@@ -199,22 +207,26 @@ export default function TIPSLanding() {
                   priority
                   className="relative rounded-3xl shadow-2xl shadow-[#031D16]/60 ring-2 ring-[#DFB771]/30"
                 />
-              </div>
+              </AppieTilt>
             </motion.div>
             {/* Copy block */}
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }} className="order-1 lg:order-2 text-center lg:text-left">
-              <p className="text-[#F6FEFC] text-3xl md:text-5xl font-bold leading-[1.1] mb-3">{TRANSFORMATION.title}</p>
-              <p className="text-[#DFB771] text-3xl md:text-5xl font-bold leading-[1.1] mb-8">{TRANSFORMATION.titleAccent}</p>
+              <p className="text-[#F6FEFC] text-3xl md:text-5xl font-bold leading-[1.1] mb-3">
+                <HeroReveal text={TRANSFORMATION.title} delay={0.05} />
+              </p>
+              <p className="text-[#DFB771] text-3xl md:text-5xl font-bold leading-[1.1] mb-8">
+                <HeroReveal text={TRANSFORMATION.titleAccent} delay={0.5} />
+              </p>
               <p className="text-[#F6FEFC]/70 text-lg md:text-xl leading-relaxed mb-8">
                 {TRANSFORMATION.subtitle}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Link href="/openclaw#waitlist" className="flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-8 py-4 rounded-xl transition-colors">
+                <MagneticButton href="/openclaw#waitlist" className="flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-8 py-4 rounded-xl transition-colors will-change-transform">
                   Begin met je Techwiz <ArrowRight className="w-4 h-4" />
-                </Link>
-                <a href={PDF_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 border border-[#247459]/40 hover:border-[#247459] text-[#F6FEFC]/70 hover:text-[#F6FEFC] px-8 py-4 rounded-xl transition-colors text-sm">
+                </MagneticButton>
+                <MagneticButton href={PDF_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 border border-[#247459]/40 hover:border-[#247459] text-[#F6FEFC]/70 hover:text-[#F6FEFC] px-8 py-4 rounded-xl transition-colors text-sm will-change-transform">
                   Bouw zelf · €65 PDF
-                </a>
+                </MagneticButton>
               </div>
             </motion.div>
           </div>
@@ -358,7 +370,7 @@ export default function TIPSLanding() {
               <p className="text-[#247459] text-xs font-bold uppercase tracking-wide mb-4">Bouw zelf</p>
               <h3 className="text-[#F6FEFC] font-bold text-xl mb-1">Bouw je eigen Techwiz</h3>
               <p className="text-[#F6FEFC]/40 text-xs mb-6">Voor builders en no-coders</p>
-              <div className="mb-4"><span className="text-[#F6FEFC] font-bold text-3xl">€65</span><span className="text-[#F6FEFC]/40 text-sm ml-1">eenmalig</span></div>
+              <div className="mb-4"><span className="text-[#F6FEFC] font-bold text-3xl"><CountUp to={65} prefix="€" /></span><span className="text-[#F6FEFC]/40 text-sm ml-1">eenmalig</span></div>
               <ul className="space-y-2 mb-8">
                 {['56-pagina PDF gids', 'Copy/paste templates', 'Eigen private server', '55+ skills library', 'Lifetime updates'].map(f => (
                   <li key={f} className="flex items-center gap-2 text-[#F6FEFC]/60 text-sm"><Check className="w-4 h-4 text-[#247459] flex-shrink-0" />{f}</li>
@@ -373,7 +385,7 @@ export default function TIPSLanding() {
               <p className="text-[#DFB771] text-xs font-bold uppercase tracking-wide mb-4">Managed</p>
               <h3 className="text-[#F6FEFC] font-bold text-xl mb-1">Instant Appie</h3>
               <p className="text-[#F6FEFC]/40 text-xs mb-6">Wij bouwen, wij draaien</p>
-              <div className="mb-4"><span className="text-[#F6FEFC] font-bold text-3xl">€250</span><span className="text-[#F6FEFC]/40 text-sm ml-1">/maand</span></div>
+              <div className="mb-4"><span className="text-[#F6FEFC] font-bold text-3xl"><CountUp to={250} prefix="€" /></span><span className="text-[#F6FEFC]/40 text-sm ml-1">/maand</span></div>
               <ul className="space-y-2 mb-8">
                 {['Alles uit de Bouw-zelf gids', 'Dedicated private server', 'Telegram + WhatsApp aangesloten', 'Persistent geheugen', '55+ skills library', '14 dagen tevreden of geld terug'].map(f => (
                   <li key={f} className="flex items-center gap-2 text-[#F6FEFC]/60 text-sm"><Check className="w-4 h-4 text-[#DFB771] flex-shrink-0" />{f}</li>
@@ -387,7 +399,7 @@ export default function TIPSLanding() {
               <p className="text-[#F6FEFC]/40 text-xs font-bold uppercase tracking-wide mb-4">Custom</p>
               <h3 className="text-[#F6FEFC] font-bold text-xl mb-1">Custom Appie</h3>
               <p className="text-[#F6FEFC]/40 text-xs mb-6">Bespoke voor jouw bedrijf</p>
-              <div className="mb-4"><span className="text-[#F6FEFC] font-bold text-3xl">vanaf €2.000</span><span className="text-[#F6FEFC]/40 text-sm ml-1">/maand</span></div>
+              <div className="mb-4"><span className="text-[#F6FEFC] font-bold text-3xl">vanaf <CountUp to={2000} prefix="€" /></span><span className="text-[#F6FEFC]/40 text-sm ml-1">/maand</span></div>
               <ul className="space-y-2 mb-8">
                 {['Alles uit Instant Appie', 'Multi-agent architectuur', 'Custom automations & workflows', 'CRM integraties (Brevo, Moneybird, Monday)', 'Doorlopende optimalisatie', 'Zoals Eva, Sjaak, Ben'].map(f => (
                   <li key={f} className="flex items-center gap-2 text-[#F6FEFC]/60 text-sm"><Check className="w-4 h-4 text-[#247459] flex-shrink-0" />{f}</li>
@@ -433,6 +445,25 @@ export default function TIPSLanding() {
         </div>
       </section>
 
+      {/* ── BLOG STRIP — Vanuit het brein van Appie ── */}
+      <section id="blog" className="py-24 bg-[#031D16]">
+        <div className="max-w-6xl mx-auto px-4">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
+            <p className="text-[#247459] text-sm font-semibold uppercase tracking-widest mb-3">Vanuit het brein van Appie</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#F6FEFC]">Korte stukken, eerlijk geschreven</h2>
+          </motion.div>
+          <BlogStrip posts={getLatestPosts(3)} />
+          <div className="text-center mt-12">
+            <Link href="/blog" className="inline-flex items-center gap-1.5 text-[#DFB771] hover:text-[#DFB771]/80 text-sm font-semibold transition-colors">
+              Alle posts <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        </div>
+        <div className="max-w-5xl mx-auto px-4 mt-20">
+          <HairlineDivider />
+        </div>
+      </section>
+
       {/* ── FAQ ── */}
       <section id="faq" className="py-20 bg-[#031D16]">
         <div className="max-w-2xl mx-auto px-4">
@@ -456,12 +487,12 @@ export default function TIPSLanding() {
           <h2 className="text-2xl md:text-3xl font-bold text-[#F6FEFC] mb-4">Klaar om je Techwiz te ontmoeten?</h2>
           <p className="text-[#F6FEFC]/50 text-sm mb-8">Tevreden of geld terug — als ik je niet meer tijd bespaar dan ik kost, betaal je niets.</p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/openclaw#waitlist" className="bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-6 py-3 rounded-xl transition-colors">
+            <MagneticButton href="/openclaw#waitlist" className="bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-6 py-3 rounded-xl transition-colors will-change-transform">
               Begin met je Techwiz →
-            </Link>
-            <a href={PDF_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="border border-[#247459]/40 hover:border-[#247459] text-[#F6FEFC]/70 hover:text-[#F6FEFC] px-6 py-3 rounded-xl transition-colors text-sm font-semibold">
+            </MagneticButton>
+            <MagneticButton href={PDF_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="border border-[#247459]/40 hover:border-[#247459] text-[#F6FEFC]/70 hover:text-[#F6FEFC] px-6 py-3 rounded-xl transition-colors text-sm font-semibold will-change-transform">
               Bouw zelf je Techwiz · €65 PDF
-            </a>
+            </MagneticButton>
           </div>
         </div>
       </section>

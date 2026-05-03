@@ -6,10 +6,11 @@ import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 
 const navLinks = [
-  { label: 'Maak kennis', href: '#t' },
-  { label: 'Pricing', href: '#tiers' },
+  { label: 'Maak kennis', href: '/#t' },
+  { label: 'Pricing', href: '/#tiers' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Bouw zelf', href: '/openclaw' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'FAQ', href: '/#faq' },
 ];
 
 export default function Navbar() {
