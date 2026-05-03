@@ -474,49 +474,49 @@ export default function TIPSLanding() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-[#F6FEFC]">Drie manieren om je Techwiz te krijgen</h2>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
 
             {/* Bouw Zelf - €65 PDF */}
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-[#1a2e27]/50 rounded-2xl border border-[#247459]/20 p-8">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="flex flex-col h-full bg-[#1a2e27]/50 rounded-2xl border border-[#247459]/20 p-8">
               <p className="text-[#247459] text-xs font-bold uppercase tracking-wide mb-4">Bouw zelf</p>
               <h3 className="text-[#F6FEFC] font-bold text-xl mb-1">Bouw je eigen Techwiz</h3>
               <p className="text-[#F6FEFC]/40 text-xs mb-6">Voor builders en no-coders</p>
               <div className="mb-4"><span className="text-[#F6FEFC] font-bold text-3xl"><CountUp to={65} prefix="€" /></span><span className="text-[#F6FEFC]/40 text-sm ml-1">eenmalig</span></div>
-              <ul className="space-y-2 mb-8">
+              <ul className="space-y-2 mb-8 flex-1">
                 {['56-pagina PDF gids', 'Copy/paste templates', 'Eigen private server', '55+ skills library', 'Lifetime updates'].map(f => (
                   <li key={f} className="flex items-center gap-2 text-[#F6FEFC]/60 text-sm"><Check className="w-4 h-4 text-[#247459] flex-shrink-0" />{f}</li>
                 ))}
               </ul>
-              <a href={PDF_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="block text-center w-full py-3 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/30 text-[#F6FEFC] font-semibold text-sm rounded-xl transition-colors">Koop de gids · €65</a>
+              <a href={PDF_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="mt-auto block text-center w-full py-3 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/30 text-[#F6FEFC] font-semibold text-sm rounded-xl transition-colors">Koop de gids · €65</a>
             </motion.div>
 
             {/* Instant Appie - €250/mo - COMING SOON */}
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="relative bg-gradient-to-b from-[#247459]/20 to-[#1a2e27]/50 rounded-2xl border-2 border-[#DFB771]/50 p-8 shadow-lg shadow-[#DFB771]/5">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="relative flex flex-col h-full bg-gradient-to-b from-[#247459]/20 to-[#1a2e27]/50 rounded-2xl border-2 border-[#DFB771]/50 p-8 shadow-lg shadow-[#DFB771]/5">
               <div className="absolute -top-3 left-6 bg-[#DFB771] text-[#031D16] text-xs font-bold uppercase px-3 py-1 rounded-full">Coming soon</div>
               <p className="text-[#DFB771] text-xs font-bold uppercase tracking-wide mb-4">Managed</p>
               <h3 className="text-[#F6FEFC] font-bold text-xl mb-1">Instant Appie</h3>
               <p className="text-[#F6FEFC]/40 text-xs mb-6">Wij bouwen, wij draaien</p>
               <div className="mb-4"><span className="text-[#F6FEFC] font-bold text-3xl"><CountUp to={250} prefix="€" /></span><span className="text-[#F6FEFC]/40 text-sm ml-1">/maand</span></div>
-              <ul className="space-y-2 mb-8">
+              <ul className="space-y-2 mb-8 flex-1">
                 {['Alles uit de Bouw-zelf gids', 'Dedicated private server', 'Telegram + WhatsApp aangesloten', 'Persistent geheugen', '55+ skills library', '14 dagen tevreden of geld terug'].map(f => (
                   <li key={f} className="flex items-center gap-2 text-[#F6FEFC]/60 text-sm"><Check className="w-4 h-4 text-[#DFB771] flex-shrink-0" />{f}</li>
                 ))}
               </ul>
-              <button disabled className="block text-center w-full py-3 bg-[#DFB771]/30 text-[#031D16]/60 font-bold text-sm rounded-xl cursor-not-allowed">Coming soon</button>
+              <button disabled className="mt-auto block text-center w-full py-3 bg-[#DFB771]/30 text-[#031D16]/60 font-bold text-sm rounded-xl cursor-not-allowed">Coming soon</button>
             </motion.div>
 
             {/* Custom - €2,000+ */}
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="bg-[#1a2e27]/50 rounded-2xl border border-[#247459]/20 p-8">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="flex flex-col h-full bg-[#1a2e27]/50 rounded-2xl border border-[#247459]/20 p-8">
               <p className="text-[#F6FEFC]/40 text-xs font-bold uppercase tracking-wide mb-4">Custom</p>
               <h3 className="text-[#F6FEFC] font-bold text-xl mb-1">Custom Appie</h3>
               <p className="text-[#F6FEFC]/40 text-xs mb-6">Bespoke voor jouw bedrijf</p>
               <div className="mb-4"><span className="text-[#F6FEFC] font-bold text-3xl">vanaf <CountUp to={2000} prefix="€" /></span><span className="text-[#F6FEFC]/40 text-sm ml-1">/maand</span></div>
-              <ul className="space-y-2 mb-8">
+              <ul className="space-y-2 mb-8 flex-1">
                 {['Alles uit Instant Appie', 'Multi-agent architectuur', 'Custom automations & workflows', 'CRM integraties (Brevo, Moneybird, Monday)', 'Doorlopende optimalisatie', 'Zoals Eva, Sjaak, Ben'].map(f => (
                   <li key={f} className="flex items-center gap-2 text-[#F6FEFC]/60 text-sm"><Check className="w-4 h-4 text-[#247459] flex-shrink-0" />{f}</li>
                 ))}
               </ul>
-              <Link href="/discovery-call" className="block text-center w-full py-3 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/30 text-[#F6FEFC] font-semibold text-sm rounded-xl transition-colors">Plan een gesprek</Link>
+              <Link href="/discovery-call" className="mt-auto block text-center w-full py-3 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/30 text-[#F6FEFC] font-semibold text-sm rounded-xl transition-colors">Plan een gesprek</Link>
             </motion.div>
 
           </div>
