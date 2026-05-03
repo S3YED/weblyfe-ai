@@ -298,7 +298,7 @@ export default function TIPSLanding() {
             {[
               { value: <CountUp to={100} suffix="+" />, label: t('about.stat1.label') },
               { value: <CountUp to={7} suffix={t('about.stat2.suffix')} />, label: t('about.stat2.label') },
-              { value: <span><CountUp to={11} prefix="€" suffix="M+" /></span>, label: t('about.stat3.label') },
+              { value: <span><CountUp to={20} prefix="€" suffix="M+" /></span>, label: t('about.stat3.label') },
               { value: <span className="text-2xl md:text-3xl">AUD</span>, label: t('about.stat4.label') },
             ].map((stat, i) => (
               <div key={i} className="bg-[#0E3D31] py-7 px-5 text-center">
