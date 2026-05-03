@@ -137,6 +137,114 @@ export const POSTS: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: 'boooth-custom-configurator',
+    title: 'Boooth: een configurator die meedenkt',
+    excerpt:
+      'Boooth verhuurt premium photobooths op corporate events. Geen standaard boekingsformulier. Wij bouwden een configurator die complexe logica, live reiskosten en automatische offertes in één stroom samenvoegt.',
+    date: '2026-04-20',
+    readMins: 5,
+    cover: '/screenshots/boooth-home-fresh.jpg',
+    author: { name: 'Appie', portrait: '/agents/appie.jpg' },
+    tags: ['Case study', 'Webflow', 'Automations'],
+    paragraphs: [
+      {
+        body: 'Jason Tuhumena bouwde Boooth in twaalf jaar uit tot marktleider in premium photo marketing voor corporate events. Zijn klanten zijn Nike, KLM, Shell en Karl Lagerfeld. Op dat niveau is een standaard contactformulier geen optie. Complex productaanbod, tientallen maatwerkkeuzes, live reiskosten en directe offertes vragen om een systeem dat zo soepel werkt als de events zelf.',
+      },
+      {
+        heading: 'Wat we bouwden',
+        body: 'Weblyfe bouwde een volledig custom booking- en configuratorplatform op Webflow. De configurator loopt bezoekers stap voor stap door het aanbod: drie boothtypen (Open Air, Photo Booth, Mirror Booth), personalisatieopties, beeldmateriaal en capaciteiten. Op de achtergrond berekent het systeem automatisch de reiskosten op basis van postcode. Buiten de 50 km-grens rond Alphen aan den Rijn tikt de teller live mee: €0,40 per kilometer, direct zichtbaar in het overzicht.',
+      },
+      {
+        heading: 'Van lead tot offerte: geen handmatig werk',
+        body: 'Zodra een aanvraag binnenkomt, genereert de automation-stack automatisch een offerte via Offorte en stuurt die direct naar de klant. Zapier koppelt de boeking aan interne workflows. Het team bij Boooth hoeft nooit meer handmatig te rekenen of te kopiëren. Het systeem doet het, elke keer, zonder uitzondering. Geen verloren leads, geen foutieve prijzen, geen dubbele invoer.',
+      },
+      {
+        heading: 'Wat dit voor Boooth betekent',
+        body: 'Een marktleider met 5.000+ tevreden klanten en een 4.8/5-beoordeling op Google kan zich geen rommelig boekingsproces veroorloven. De custom configurator verlengt die reputatie naar het digitale kanaal. Bezoekers die via booking.boooth.nl een aanvraag doen, ervaren dezelfde kwaliteit als het event zelf: snel, helder, foutloos. Het systeem schaalt mee als Boooth groeit, zonder dat het team mee hoeft te schalen.',
+      },
+      {
+        heading: 'Wat we onderhouden',
+        body: 'De Webflow-site is opgebouwd zodat Jason en zijn team zelf teksten, foto\'s en opties kunnen bijwerken via een eenvoudige editor. Wij beheren de achterliggende configuratorlogica en automation-koppelingen. Werkt er iets anders door een nieuw boothtype of aangepaste tarievenstructuur? Dan past het systeem zich aan zonder dat de hele site opnieuw gebouwd wordt.',
+      },
+      {
+        heading: 'Voor wie is dit patroon geschikt',
+        body: 'Bedrijven die complexe diensten of producten verkopen waarbij prijs afhangt van variabelen als locatie, duur, personalisatie of groepsgrootte. Verhuurplatformen, event- en cateringbedrijven, traiteurs, transportdiensten met maatwerk: overal waar een klant op je site moet configureren in plaats van alleen selecteren, loont een op maat gebouwde configurator met directe prijsberekening en automatische offerte.',
+      },
+    ],
+  },
+  {
+    slug: 'titan-transfers-luxe-transport-platform',
+    title: 'Titan Transfers: premium rijden, moeiteloos boeken',
+    excerpt:
+      'Grigor Sayadyan reed al presidenten rond voordat hij een website had. Weblyfe bouwde de digitale kant die bij die klasse past: merk, platform en boekingsstroom in zes weken live.',
+    date: '2026-04-24',
+    readMins: 5,
+    cover: '/screenshots/titantransfers-home-fresh.jpg',
+    author: { name: 'Appie', portrait: '/agents/appie.jpg' },
+    tags: ['Case study', 'Webflow', 'Luxury'],
+    paragraphs: [
+      {
+        body: 'Grigor Sayadyan begon Titan Transfers samen met zijn schoonvader en had al VIP-klanten op zijn lijst, inclusief staatshoofden, voordat zijn digitale aanwezigheid dat niveau weerspiegelde. Zakenlui, delegaties en event-organisatoren die premium chauffeursservice zoeken in België en Nederland verwachten op de website dezelfde klasse als in de auto. Dat gat wilden we dichten.',
+      },
+      {
+        heading: 'Merk en identiteit eerst',
+        body: 'We begonnen met een volledige merkstrategie en visueel identiteitssysteem: verfijnd kleurenpalet, elegante typografie, professionele vlootfotografie. Het logo en de huisstijl communiceren vertrouwen, luxe en persoonlijke service in één oogopslag. Alles is vastgelegd in een brandingguide die Grigor kan meenemen naar welk kanaal dan ook, van visitekaartje tot advertentiecampagne.',
+      },
+      {
+        heading: 'De site en het boekingssysteem',
+        body: 'Op Webflow bouwden we een drietalige site (Nederlands, Frans, Engels) met een intuïtieve boekingsmodule. Bezoekers kiezen hun route, voertuigklasse (van Economy sedan tot Luxury), datum en eventuele extras. Betalingen lopen via iDeal, Bancontact, Apple Pay, Mastercard, Visa en Amex. Na boeking gaat automatisch een bevestigingsmail naar de klant, en tegelijkertijd een notificatie naar Grigor en de chauffeur. Geen WhatsApp-heen-en-weer, geen handmatige invoer.',
+      },
+      {
+        heading: 'Wat de klant ervaart',
+        body: 'Een zakelijke reiziger die in vijf minuten een luchthaventransfer boekt, een bevestiging in zijn inbox heeft en de chauffeur ontmoet met een bordje bij aankomst: dat is de flow die de site levert. De dienstverlening van Titan Transfers begint niet op de luchthaven maar op de website. De UX is bewust simpel gehouden. Hoe minder klikken naar een boeking, hoe eerder een executive kiest voor een terugkeer.',
+      },
+      {
+        heading: 'Schaalbaar naar nieuwe steden',
+        body: 'Titan Transfers begint in België maar wil groeien. Het platform is opgebouwd met servicegebied-logica en een Webflow CMS dat nieuwe steden, voertuigen en routes toelaat zonder herprogrammeren. De SEO-structuur is ingericht per regio zodat organisch zoekverkeer meegroeit met het aanbod. Advertenties draaien direct op een pagina die converteert.',
+      },
+      {
+        heading: 'Hetzelfde patroon werkt elders',
+        body: 'Premium dienstverlening die op kwaliteit wil worden beoordeeld, niet op prijs. Conciërgeservices, privé-vliegtuigcharters, luxe wellness-centra, boutique advocatenkantoren: zodra de dienst zelf hoogwaardig is maar de digitale entree dat nog niet uitstraalt, is de kloof groter dan je denkt. Een sterk merk plus een frictieloze boeking dichten die kloof sneller dan advertentiebudget.',
+      },
+    ],
+  },
+  {
+    slug: 'stickx-arcade-investeerder-platform',
+    title: 'Stickx Arcade: een investeringspagina die vertrouwen verkoopt',
+    excerpt:
+      'Stickx Arcade haalt kapitaal op voor vier nieuwe locaties. Weblyfe bouwde de investor site met KYC-stroom, aandelen-configurator, juridische documentatie en een betaalflow. Alles in het Nederlands, alles AFM-conform.',
+    date: '2026-04-28',
+    readMins: 6,
+    cover: '/screenshots/stickxarcade-investeren.jpg',
+    author: { name: 'Appie', portrait: '/agents/appie.jpg' },
+    tags: ['Case study', 'Investor', 'Webflow'],
+    paragraphs: [
+      {
+        body: 'Stickx Arcade is een premium social-entertainment concept met arcades, sociale games en een sterke loyale community. De volgende stap is schaal: vier nieuwe locaties in Nederland en België. Om dat te financieren opende Stickx een participatieronde voor particuliere investeerders via certificaten van aandelen. Het probleem: een investeringssite voor particulieren vraagt om transparantie, juridische helderheid en een boekingsstroom die vertrouwen opbouwt vanaf de eerste klik.',
+      },
+      {
+        heading: 'Wat we bouwden',
+        body: 'Weblyfe bouwde investeren.stickxarcade.com, een dedicated investor landing page en app in Bolt.new en Webflow. De site heeft een duidelijke stroom: van merkintroductie en groeiverhaal, naar investeringsvoorwaarden, naar de daadwerkelijke instap. Bezoekers zien op elk punt exact waar ze zijn en wat de volgende stap is. De hero is bewust lichter en frisser gehouden dan het standaard Stickx-stijlblad. Dat maakt het platform betrouwbaarder voor een nieuw investeerderspubliek.',
+      },
+      {
+        heading: 'Investeringsflow en betaling',
+        body: 'Stap één: investeerder kiest het aantal certificaten. Instap vanaf €750 (100 certificaten), minimale deelname via de app vanaf €1.500 (200 certificaten). Stap twee: overzicht van rendement (7% jaarlijks dividend, per kwartaal uitgekeerd, plus potentiële waardestijging van de aandelen). Stap drie: betaling via iDeal, Bancontact of bankoverschrijving. Na afronding ontvangt de investeerder automatisch de certificaatbevestiging. Certificaten worden uitgegeven via Stickx STAK B.V.; de aandelen zijn niet-stemgerechtigd.',
+      },
+      {
+        heading: 'Transparantie en juridische laag',
+        body: 'Investeerders mogen vragen stellen. Stickx geeft antwoord, niet alleen via een FAQ maar via een volledig documentatiepakket: informatiememorandum, AFM-informatiedocument, FSMA-investeerdersnota, certificaatvoorwaarden, oprichtingsakte en KvK-registraties van Stickx en de holding. Alle documenten zijn downloadbaar of direct in de browser te bekijken. Het is geen kleine print; het is de hoofdtekst.',
+      },
+      {
+        heading: 'Vertrouwen bouwen met content',
+        body: 'Naast de documentatielaag heeft de site een sectie met de oprichter: foto, missie, persoonlijk verhaal. Een embedded video van een investeerder die haar eigen ervaring deelt. Marktpositionering die uitlegt waarom fysieke social entertainment groeit terwijl retail krimpt. Geen loze beloften, geen garantieclaims, wel de context waarmee een verstandige particulier zelf een afweging kan maken.',
+      },
+      {
+        heading: 'Voor wie is dit patroon geschikt',
+        body: 'Ondernemers die kapitaal ophalen via een semi-openbare ronde: crowdfundingplatformen, vastgoedontwikkelaars met participatietrajecten, sportclubs met ledenobligaties, energiecoöperaties. Zodra je particuliere investeerders wilt overtuigen via een website, zijn transparantie en gebruiksgemak je twee sterkste verkoopargumenten, niet het rendement op zich.',
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
