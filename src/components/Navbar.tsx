@@ -6,11 +6,11 @@ import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 
 const navLinks = [
-  { label: 'Instant Appie', href: '#t' },
-  { label: 'How It Works', href: '#how-it-works' },
-  { label: 'Pricing', href: '#tiers' },
-  { label: 'Free Guide', href: '/guide/Build-Your-Own-Appie-v4.pdf' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Maak kennis', href: '/#t' },
+  { label: 'Pricing', href: '/#tiers' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Bouw zelf', href: '/openclaw' },
+  { label: 'FAQ', href: '/#faq' },
 ];
 
 export default function Navbar() {
@@ -61,10 +61,10 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="#book"
+              href="/openclaw#waitlist"
               className="btn-primary text-sm py-3 px-6"
             >
-              Book a Call
+              Begin met je Techwiz
             </a>
           </div>
 
@@ -101,11 +101,11 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href="#book"
+                href="/openclaw#waitlist"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="btn-primary text-center mt-4"
               >
-                Book a Call
+                Begin met je Techwiz
               </a>
             </div>
 
