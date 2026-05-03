@@ -471,19 +471,22 @@ export default function TIPSLanding() {
                 {t('pdf.cta')} <ArrowRight className="w-4 h-4" />
               </a>
             </motion.div>
-            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex-shrink-0">
-              <div className="bg-[#F6FEFC] rounded-2xl p-5 w-64">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-12 bg-[#247459] rounded-lg flex items-center justify-center">
-                    <Star className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-[#031D16] font-bold text-xs">{t('pdf.card.title')}</p>
-                    <p className="text-[#031D16]/60 text-xs">{t('pdf.card.subtitle')}</p>
-                    <p className="text-[#031D16]/40 text-xs mt-1">{t('pdf.card.meta')}</p>
-                  </div>
-                </div>
-              </div>
+            <motion.div
+              initial={{ opacity: 0, x: 20, scale: 0.95 }}
+              whileInView={{ opacity: 1, x: 0, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, type: 'spring', stiffness: 100 }}
+              whileHover={{ y: -6, rotate: 1 }}
+              className="flex-shrink-0 relative"
+            >
+              <Image
+                src="/screenshots/appie-pdf-book-mockup.png"
+                alt={`${t('pdf.h2')} - ${t('pdf.card.subtitle')}`}
+                width={360}
+                height={480}
+                sizes="(max-width: 768px) 60vw, 360px"
+                className="rounded-2xl drop-shadow-[0_20px_60px_rgba(223,183,113,0.25)]"
+              />
             </motion.div>
           </div>
         </div>
@@ -540,6 +543,52 @@ export default function TIPSLanding() {
               <Link href="/discovery-call" className="mt-auto block text-center w-full py-3 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/30 text-[#F6FEFC] font-semibold text-sm rounded-xl transition-colors">{t('tier.custom.cta')}</Link>
             </motion.div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* ── PDF PREVIEW (devices mockup, after pricing) ── */}
+      <section className="py-20 bg-[#0E3D31]/40 border-y border-[#247459]/15 relative overflow-hidden">
+        <motion.div
+          aria-hidden="true"
+          animate={{ opacity: [0.06, 0.14, 0.06] }}
+          transition={{ duration: 8, repeat: Infinity }}
+          className="absolute -top-20 -right-40 w-[500px] h-[500px] rounded-full bg-[#DFB771]/30 blur-[120px] pointer-events-none"
+        />
+        <div className="relative z-10 max-w-6xl mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-5"
+            >
+              <p className="text-[#DFB771] text-xs font-semibold uppercase tracking-widest mb-3">{t('pdfPreview.eyebrow')}</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#F6FEFC] mb-5 leading-tight">{t('pdfPreview.h2')}</h2>
+              <p className="text-[#F6FEFC]/65 text-base md:text-lg leading-relaxed mb-7">
+                {t('pdfPreview.sub')}
+              </p>
+              <a href={PDF_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-6 py-3.5 rounded-xl transition-colors">
+                {t('pdfPreview.cta')} <ArrowRight className="w-4 h-4" />
+              </a>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 16, scale: 0.95 }}
+              whileInView={{ opacity: 1, x: 0, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, type: 'spring', stiffness: 90 }}
+              className="lg:col-span-7 flex justify-center lg:justify-end"
+            >
+              <Image
+                src="/screenshots/appie-pdf-devices.png"
+                alt={t('pdfPreview.imgAlt')}
+                width={780}
+                height={520}
+                sizes="(max-width: 1024px) 90vw, 700px"
+                className="rounded-2xl drop-shadow-[0_30px_80px_rgba(223,183,113,0.18)]"
+              />
+            </motion.div>
           </div>
         </div>
       </section>

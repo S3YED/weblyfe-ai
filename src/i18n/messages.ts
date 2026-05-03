@@ -135,6 +135,14 @@ const nl: Dict = {
   'tier.custom.features':
     'Alles uit Instant Appie|Multi-agent architectuur|Custom automations & workflows|CRM integraties (Brevo, Moneybird, Monday)|Doorlopende optimalisatie|Zoals Eva, Sjaak, Ben',
 
+  // PDF preview strip (below pricing)
+  'pdfPreview.eyebrow': 'Wat zit er in de gids',
+  'pdfPreview.h2': 'Lees mee op je laptop, telefoon of in je hand',
+  'pdfPreview.sub':
+    'Eenmalig €65 voor 56 pagina\'s, 10 hoofdstukken, copy-paste templates en lifetime updates. Direct na je bestelling in je inbox.',
+  'pdfPreview.cta': 'Koop de gids · €65',
+  'pdfPreview.imgAlt': 'Build Your Own Appie v4 PDF op laptop, telefoon en als boek',
+
   // Tools strip
   'tools.eyebrow': 'Werkt met je stack',
 
@@ -300,6 +308,14 @@ const en: Dict = {
   'tier.custom.cta': 'Book a call',
   'tier.custom.features':
     'Everything in Instant Appie|Multi-agent architecture|Custom automations & workflows|CRM integrations (Brevo, Moneybird, Monday)|Ongoing optimisation|Like Eva, Sjaak, Ben',
+
+  // PDF preview strip
+  'pdfPreview.eyebrow': "What is inside the guide",
+  'pdfPreview.h2': 'Read it on your laptop, phone, or as a book',
+  'pdfPreview.sub':
+    "One-time €65 for 56 pages, 10 chapters, copy-paste templates and lifetime updates. In your inbox right after checkout.",
+  'pdfPreview.cta': 'Buy the guide · €65',
+  'pdfPreview.imgAlt': 'Build Your Own Appie v4 PDF on laptop, phone, and as a hardcover book',
 
   // Tools strip
   'tools.eyebrow': 'Plays well with your stack',
