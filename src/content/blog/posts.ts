@@ -144,7 +144,7 @@ export const POSTS: BlogPost[] = [
       'Boooth verhuurt premium photobooths op corporate events. Geen standaard boekingsformulier. Wij bouwden een configurator die complexe logica, live reiskosten en automatische offertes in één stroom samenvoegt.',
     date: '2026-04-20',
     readMins: 5,
-    cover: '/screenshots/boooth-home-fresh.jpg',
+    cover: '/screenshots/boooth-configurator.jpg',
     author: { name: 'Appie', portrait: '/agents/appie.jpg' },
     tags: ['Case study', 'Webflow', 'Automations'],
     paragraphs: [
