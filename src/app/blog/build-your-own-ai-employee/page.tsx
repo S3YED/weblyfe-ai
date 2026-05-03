@@ -31,7 +31,7 @@ const articleSchema = {
   },
   datePublished: '2026-03-26',
   description:
-    'The full story of going from medical doctor to running 3 AI employees for $146/month — plus the open-source Appie Kit to build your own.',
+    'The full story of going from medical doctor to running 3 AI employees for $146/month - plus the open-source Appie Kit to build your own.',
   mainEntityOfPage: 'https://weblyfe.ai/blog/build-your-own-ai-employee',
 };
 
@@ -314,7 +314,7 @@ export default function BlogPost() {
               {[
                 { step: '1', title: 'Clone the repo', code: 'git clone https://github.com/S3YED/appie-kit.git\ncd appie-kit' },
                 { step: '2', title: 'Run the installer', code: './install.sh' },
-                { step: '3', title: 'Customize 3 files', code: '# SOUL.md — give your Appie a personality\n# USER.md — tell it who you are\n# TOOLS.md — connect it to your stack' },
+                { step: '3', title: 'Customize 3 files', code: '# SOUL.md - give your Appie a personality\n# USER.md - tell it who you are\n# TOOLS.md - connect it to your stack' },
                 { step: '4', title: 'Start your Appie', code: 'openclaw start' },
                 { step: '5', title: 'Talk to it on Telegram', code: null },
               ].map((item) => (

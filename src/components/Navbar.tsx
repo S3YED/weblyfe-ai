@@ -6,11 +6,12 @@ import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 
 const navLinks = [
-  { label: 'Instant Appie', href: '#t' },
-  { label: 'How It Works', href: '#how-it-works' },
-  { label: 'Pricing', href: '#tiers' },
-  { label: 'Free Guide', href: '/guide/Build-Your-Own-Appie-v4.pdf' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Maak kennis', href: '/#t-meet' },
+  { label: 'Projecten', href: '/#projects' },
+  { label: 'Pricing', href: '/#tiers' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'FAQ', href: '/#faq' },
+  { label: 'Plan gesprek', href: '/discovery-call' },
 ];
 
 export default function Navbar() {
@@ -39,7 +40,7 @@ export default function Navbar() {
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
+          <a href="/" className="flex items-center gap-2" aria-label="Weblyfe.ai homepage">
             <Image
               src="/logo-gold.svg"
               alt="Weblyfe.ai"
@@ -61,10 +62,10 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="#book"
+              href="/#tiers"
               className="btn-primary text-sm py-3 px-6"
             >
-              Book a Call
+              Begin met je Techwiz
             </a>
           </div>
 
@@ -101,11 +102,11 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href="#book"
+                href="/#tiers"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="btn-primary text-center mt-4"
               >
-                Book a Call
+                Begin met je Techwiz
               </a>
             </div>
 

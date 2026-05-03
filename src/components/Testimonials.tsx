@@ -42,7 +42,7 @@ const testimonials = [
   {
     name: 'David Pietersen',
     role: 'SaaS Founder',
-    quote: 'Weblyfe didn\'t just build a chatbot — they understood our business and built something that actually fits.',
+    quote: 'Weblyfe didn\'t just build a chatbot - they understood our business and built something that actually fits.',
     rating: 5,
     avatar: '💡',
   },
@@ -72,7 +72,7 @@ export default function Testimonials() {
             What Our <span className="text-[#DFB771]">Clients Say</span>
           </h2>
           <p className="text-[#F6FEFC]/60 max-w-2xl mx-auto text-lg">
-            Don&apos;t just take our word for it — hear from the founders and teams 
+            Don&apos;t just take our word for it - hear from the founders and teams 
             who&apos;ve transformed their businesses with AI.
           </p>
         </motion.div>

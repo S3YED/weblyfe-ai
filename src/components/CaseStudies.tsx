@@ -239,7 +239,7 @@ export default function CaseStudies() {
                     {study.quote}
                   </p>
                   <footer className="text-sm text-[#DFB771] mt-3 font-medium">
-                    — {study.author}
+                    - {study.author}
                   </footer>
                 </blockquote>
               </div>
