@@ -272,22 +272,15 @@ export default function TIPSLanding() {
               transition={{ duration: 0.7 }}
               className="md:col-span-5"
             >
-              <a
-                href="https://weblyfeuniversity.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative block w-full aspect-[16/10] rounded-3xl overflow-hidden ring-1 ring-[#DFB771]/30 hover:ring-[#DFB771]/60 transition-all"
-              >
+              <div className="relative w-full aspect-square rounded-3xl overflow-hidden ring-1 ring-[#DFB771]/30 hover:ring-[#DFB771]/60 transition-all group">
                 <Image
-                  src="/screenshots/weblyfeuniversity-vsl.jpg"
-                  alt="Seyed Hosseini · oprichter Weblyfe en Weblyfe University"
+                  src="/screenshots/seyed-founder.jpg"
+                  alt="Seyed Hosseini aan het werk: presenteren, content maken, op podcast en gastdocent"
                   fill
                   sizes="(max-width: 768px) 100vw, 480px"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#031D16]/70 via-[#031D16]/10 to-transparent" />
-                <span className="absolute bottom-4 left-5 text-[#F6FEFC] text-xs font-semibold uppercase tracking-widest">Weblyfe University</span>
-              </a>
+              </div>
             </motion.div>
 
             <motion.div
