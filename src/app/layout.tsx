@@ -12,52 +12,55 @@ const rethinkSans = Rethink_Sans({
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: '#031D16',
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://weblyfe.ai'),
   title: {
-    default: 'AI Automation for Creators & Agencies | Weblyfe.ai',
+    default: 'Appie — Jouw persoonlijke Techwiz | Weblyfe.ai',
     template: '%s | Weblyfe.ai',
   },
   description:
-    'We build custom AI agents, chatbots, and workflow automations that handle your leads, support, and operations 24/7. Clients save 20+ hours per week. No coding needed.',
+    'Hoi, ik ben Appie. Jouw persoonlijke Techwiz — een geniale werknemer met de laagste kosten. Ik doe het werk dat je week opvreet: inbox, intake, agenda, admin. Bouw zelf vanaf €65 of kies Instant Appie vanaf €250/mo.',
   keywords: [
-    'AI automation agency',
-    'custom AI agent',
-    'AI chatbot for business',
+    'Techwiz',
+    'persoonlijke AI',
+    'AI medewerker Nederland',
+    'AI agent voor MKB',
     'workflow automation',
     'AI lead qualification',
+    'WhatsApp intake',
     'n8n automation',
-    'digital employee',
-    'AI business automation Netherlands',
-    'Weblyfe',
     'OpenClaw',
-    'no-code automation',
-    'AI for agencies',
-    'AI for creators',
+    'Weblyfe',
+    'AI voor agencies',
+    'AI voor creators',
+    'digitale werknemer',
+    'inbox automation',
   ],
   authors: [{ name: 'Weblyfe', url: 'https://weblyfe.ai' }],
   creator: 'Weblyfe by Techwiz LLC',
   publisher: 'Weblyfe by Techwiz LLC',
   category: 'Technology',
   openGraph: {
-    title: 'AI Automation That Actually Works | Weblyfe.ai',
+    title: 'Appie — Jouw persoonlijke Techwiz | Weblyfe.ai',
     description:
-      'Custom AI chatbots, workflow automation, and digital employees for creators, agencies, and service businesses. Clients save 20+ hours per week.',
+      'Een geniale werknemer met de laagste kosten — die het werk doet dat je week opvreet. Bouw zelf vanaf €65 of kies Instant Appie vanaf €250/mo.',
     type: 'website',
     url: 'https://weblyfe.ai',
     siteName: 'Weblyfe.ai',
-    locale: 'en_US',
+    locale: 'nl_NL',
+    alternateLocale: ['en_US'],
     images: [
       {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Weblyfe.ai — AI Automation for Creators & Agencies',
-        type: 'image/jpeg',
+        url: '/agents/appie-iconic.png',
+        width: 1408,
+        height: 768,
+        alt: 'Appie — jouw persoonlijke Techwiz',
+        type: 'image/png',
       },
     ],
   },
@@ -65,10 +68,10 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@weblyfenl',
     creator: '@weblyfenl',
-    title: 'AI Automation That Actually Works | Weblyfe.ai',
+    title: 'Appie — Jouw persoonlijke Techwiz | Weblyfe.ai',
     description:
-      'Custom AI agents, chatbots, and workflow automation. Save 20+ hours per week.',
-    images: ['/og-image.jpg'],
+      'Een geniale werknemer met de laagste kosten. Inbox, intake, agenda, admin — Appie pakt het op.',
+    images: ['/agents/appie-iconic.png'],
   },
   robots: {
     index: true,
@@ -107,7 +110,7 @@ const organizationSchema = {
     height: 60,
   },
   description:
-    'Weblyfe builds custom AI agents, chatbots, and workflow automations for creators, agencies, and service businesses.',
+    'Weblyfe bouwt persoonlijke Techwizes — geniale digitale werknemers met de laagste kosten — voor creators, agencies en service businesses.',
   foundingDate: '2022',
   areaServed: 'Worldwide',
   contactPoint: {
@@ -144,9 +147,8 @@ const websiteSchema = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`scroll-smooth ${rethinkSans.variable}`}>
+    <html lang="nl" className={`scroll-smooth ${rethinkSans.variable}`}>
       <head>
-        <meta name="theme-color" content="#031D16" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
