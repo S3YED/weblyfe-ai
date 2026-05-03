@@ -94,7 +94,27 @@ const SOCIAL_PROOFS: CaseStudy[] = [
   },
 ];
 
-const TOOLS = ['Google Workspace', 'Notion', 'Telegram', 'WhatsApp', 'Stripe', 'n8n', 'Slack', 'HubSpot', 'Airtable', 'Webflow'];
+const RECENT_BUILDS: { name: string; href: string; image: string }[] = [
+  { name: 'CZA Bouwbedrijf', href: 'https://cza.nl', image: '/screenshots/cza-fresh.jpg' },
+  { name: 'Boooth', href: 'https://boooth.nl', image: '/screenshots/boooth-home-fresh.jpg' },
+  { name: 'Privanotify', href: 'https://privanotify.com', image: '/screenshots/privanotify-fresh.jpg' },
+  { name: 'Safesite', href: 'https://safesitestaff.com', image: '/screenshots/safesite-fresh.jpg' },
+  { name: 'Titan Transfers', href: 'https://titantransfers.com', image: '/screenshots/titantransfers-home-fresh.jpg' },
+  { name: 'LPS Pilates', href: 'https://lpspilates.nl', image: '/screenshots/lps-pilates-fresh.jpg' },
+];
+
+const TOOLS: { name: string; logo: string }[] = [
+  { name: 'Google Workspace', logo: '/logos/google.svg' },
+  { name: 'Notion', logo: '/logos/notion.svg' },
+  { name: 'Telegram', logo: '/logos/telegram.svg' },
+  { name: 'WhatsApp', logo: '/logos/whatsapp.svg' },
+  { name: 'Stripe', logo: '/logos/stripe.svg' },
+  { name: 'n8n', logo: '/logos/n8n.svg' },
+  { name: 'Slack', logo: '/logos/slack.svg' },
+  { name: 'HubSpot', logo: '/logos/hubspot.svg' },
+  { name: 'Airtable', logo: '/logos/airtable.svg' },
+  { name: 'Webflow', logo: '/logos/webflow.svg' },
+];
 
 const FAQS = [
   {
@@ -253,6 +273,43 @@ export default function TIPSLanding() {
             <h2 className="text-4xl md:text-5xl font-bold text-[#F6FEFC]">Wat klanten zien — en wat we zelf doen</h2>
           </motion.div>
           <CaseStudySlider studies={SOCIAL_PROOFS} />
+
+          {/* Recent shipped — live websites from the same Techwiz fleet */}
+          <div className="mt-20 pt-12 border-t border-[#247459]/15">
+            <div className="text-center mb-10">
+              <p className="text-[#247459] text-xs font-semibold uppercase tracking-widest mb-2">Recent gelanceerd</p>
+              <h3 className="text-2xl md:text-3xl font-bold text-[#F6FEFC]">Sites die live staan, met een Techwiz erachter</h3>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
+              {RECENT_BUILDS.map((build, i) => (
+                <motion.a
+                  key={build.name}
+                  href={build.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.06, duration: 0.4 }}
+                  whileHover={{ y: -4 }}
+                  className="group relative aspect-[16/10] rounded-2xl overflow-hidden border border-[#247459]/25 hover:border-[#DFB771]/50 bg-[#1a2e27]/40 transition-colors"
+                >
+                  <Image
+                    src={build.image}
+                    alt={`${build.name} screenshot`}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                    className="object-cover object-top opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#031D16] via-[#031D16]/40 to-transparent opacity-90 group-hover:opacity-70 transition-opacity" />
+                  <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
+                    <span className="text-[#F6FEFC] font-semibold text-sm">{build.name}</span>
+                    <ArrowRight className="w-4 h-4 text-[#DFB771] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                  </div>
+                </motion.a>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -344,11 +401,34 @@ export default function TIPSLanding() {
       </section>
 
       {/* ── TOOLS STRIP ── */}
-      <section className="py-12 bg-[#0E3D31] border-y border-[#247459]/20">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <p className="text-[#F6FEFC]/20 text-xs uppercase tracking-widest mb-6 font-semibold">Werkt met je stack</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {TOOLS.map(tool => <span key={tool} className="px-4 py-2 bg-[#031D16]/50 border border-[#247459]/20 rounded-full text-[#F6FEFC]/60 text-xs font-medium">{tool}</span>)}
+      <section className="py-14 bg-[#0E3D31] border-y border-[#247459]/20 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, #DFB771 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+        <div className="max-w-6xl mx-auto px-4 text-center relative z-10">
+          <p className="text-[#DFB771]/70 text-xs uppercase tracking-widest mb-8 font-semibold">Werkt met je stack</p>
+          <div className="flex flex-wrap justify-center items-center gap-x-10 gap-y-6">
+            {TOOLS.map((tool, i) => (
+              <motion.div
+                key={tool.name}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.04, duration: 0.4 }}
+                whileHover={{ y: -4, scale: 1.05 }}
+                className="group flex items-center gap-2.5"
+                title={tool.name}
+              >
+                <Image
+                  src={tool.logo}
+                  alt={tool.name}
+                  width={26}
+                  height={26}
+                  className="h-6 w-6 opacity-50 group-hover:opacity-100 transition-opacity"
+                />
+                <span className="text-[#F6FEFC]/50 group-hover:text-[#F6FEFC]/80 text-sm font-medium transition-colors">
+                  {tool.name}
+                </span>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
