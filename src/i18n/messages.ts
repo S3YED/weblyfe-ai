@@ -20,7 +20,7 @@ const nl: Dict = {
   // Hero
   'hero.stat1': '100+ bedrijven geholpen',
   'hero.stat2': '<30s eerste reactie',
-  'hero.stat3': '€11M+ gerealiseerd voor klanten',
+  'hero.stat3': '€20M+ gerealiseerd voor klanten',
   'hero.h1.line1': 'Runt je agenda',
   'hero.h1.line2': 'je werkweek?',
   'hero.h1.line3': 'Vanaf nu niet meer.',
@@ -37,7 +37,7 @@ const nl: Dict = {
   'about.p1':
     'Seyed begon waar weinig ondernemers beginnen: in de geneeskunde. Niet als eindbestemming, maar als lens. Hij zag hoe systemen vastlopen, hoe communicatie mislukt, hoe goede intenties sneuvelen op slechte processen. In 2019 richtte hij Weblyfe op, gewapend met dezelfde diagnose-aanpak. Geen templates. Geen bureau-taal. Gewoon: wat is het échte probleem, en hoe bouwen we iets dat dat oplost.',
   'about.p2':
-    'Inmiddels werkte Seyed samen met meer dan 100 bedrijven. Van Roslan Bendenia en Lost LeBlanc tot vastgoedondernemers, e-commerce founders en financieel coaches. Niet als uitvoerder, maar als de persoon die meekijkt, meedenkt en de lat legt. Zijn klanten genereerden aantoonbaar meer dan 11 miljoen euro. Hij doceerde digitale strategie aan de American University of Dubai. En hij bouwde Appie: een AI-vloot die de werkweek overneemt zodat jij je kunt richten op wat telt.',
+    'Inmiddels werkte Seyed samen met meer dan 100 bedrijven. Van Roslan Bendenia en Lost LeBlanc tot vastgoedondernemers, e-commerce founders en financieel coaches. Niet als uitvoerder, maar als de persoon die meekijkt, meedenkt en de lat legt. Zijn klanten genereerden samen meer dan 20 miljoen euro aan omzet sinds hij met ze werkt. Hij doceerde digitale strategie aan de American University of Dubai. En hij bouwde Appie: een AI-vloot die de werkweek overneemt zodat jij je kunt richten op wat telt.',
   'about.stat1.label': 'bedrijven geholpen',
   'about.stat2.label': 'Weblyfe actief',
   'about.stat2.suffix': ' jaar',
@@ -164,7 +164,7 @@ const en: Dict = {
   // Hero
   'hero.stat1': '100+ businesses helped',
   'hero.stat2': '<30s first response',
-  'hero.stat3': '€11M+ generated for clients',
+  'hero.stat3': '€20M+ generated for clients',
   'hero.h1.line1': 'Is your calendar',
   'hero.h1.line2': 'running your week?',
   'hero.h1.line3': 'Not anymore.',
@@ -181,7 +181,7 @@ const en: Dict = {
   'about.p1':
     'Seyed started where few entrepreneurs do: in medicine. Not as a destination, but as a lens. He saw how systems break down, how communication fails, how good intentions die on bad processes. In 2019 he founded Weblyfe, armed with that same diagnostic approach. No templates. No agency-speak. Just: what is the real problem, and how do we build something that solves it.',
   'about.p2':
-    'Today Seyed has worked with more than 100 companies. From Roslan Bendenia and Lost LeBlanc to real estate entrepreneurs, e-commerce founders and financial coaches. Not as an executor, but as the person who looks along, thinks along, and raises the bar. His clients have demonstrably generated more than 11 million euros. He has lectured on digital strategy at the American University of Dubai. And he built Appie: an AI fleet that takes over your work week so you can focus on what matters.',
+    'Today Seyed has worked with more than 100 companies. From Roslan Bendenia and Lost LeBlanc to real estate entrepreneurs, e-commerce founders and financial coaches. Not as an executor, but as the person who looks along, thinks along, and raises the bar. His clients have together generated more than 20 million euros in revenue since he started working with them. He has lectured on digital strategy at the American University of Dubai. And he built Appie: an AI fleet that takes over your work week so you can focus on what matters.',
   'about.stat1.label': 'businesses helped',
   'about.stat2.label': 'years running Weblyfe',
   'about.stat2.suffix': ' yrs',
