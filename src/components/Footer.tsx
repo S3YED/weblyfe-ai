@@ -159,7 +159,7 @@ export default function Footer() {
               <input
                 type="email"
                 placeholder="jouw@email.nl"
-                className="w-full sm:w-64 px-4 py-3 rounded-xl bg-[#031D16] border border-[#247459]/30 text-[#F6FEFC] placeholder-[#F6FEFC]/40 focus:outline-none focus:border-[#DFB771] transition-colors"
+                className="w-full sm:w-64 px-4 py-3 rounded-xl bg-[#031D16] border border-[#247459]/30 text-[#F6FEFC] placeholder-[#F6FEFC]/40 focus:outline-none focus:border-[#DFB771] focus:ring-2 focus:ring-[#DFB771]/30 focus:shadow-[0_0_0_4px_rgba(223,183,113,0.12)] transition-all duration-300"
               />
               <button
                 type="submit"

@@ -4,6 +4,7 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
 import Image from 'next/image';
+import AppieTilt from './anim/AppieTilt';
 
 export type CaseStudy = {
   name: string;
@@ -70,12 +71,21 @@ export default function CaseStudySlider({ studies }: Props) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.5, delay: i * 0.08 }}
-            className="snap-center shrink-0 w-[88%] sm:w-[70%] md:w-[55%] lg:w-[42%] bg-gradient-to-b from-[#1a2e27]/80 to-[#0E3D31]/40 rounded-3xl border border-[#247459]/30 p-8 md:p-10 hover:border-[#DFB771]/50 transition-colors"
+            className="snap-center shrink-0 w-[88%] sm:w-[70%] md:w-[55%] lg:w-[42%]"
           >
+            <AppieTilt max={4} className="bg-gradient-to-b from-[#1a2e27]/80 to-[#0E3D31]/40 rounded-3xl border border-[#247459]/30 p-8 md:p-10 hover:border-[#DFB771]/50 transition-colors h-full">
             <div className="flex items-center justify-between mb-5">
               <div className="flex gap-1">
                 {[1, 2, 3, 4, 5].map(s => (
-                  <Star key={s} className="w-4 h-4 text-[#DFB771] fill-[#DFB771]" />
+                  <motion.span
+                    key={s}
+                    initial={{ opacity: 0, scale: 0.4, rotate: -25 }}
+                    whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + s * 0.08, type: 'spring', stiffness: 220, damping: 14 }}
+                  >
+                    <Star className="w-4 h-4 text-[#DFB771] fill-[#DFB771]" />
+                  </motion.span>
                 ))}
               </div>
               {sp.metric && (
@@ -118,6 +128,7 @@ export default function CaseStudySlider({ studies }: Props) {
                 <p className="text-[#F6FEFC]/50 text-sm">{sp.role}</p>
               </div>
             </div>
+            </AppieTilt>
           </motion.article>
         ))}
       </div>

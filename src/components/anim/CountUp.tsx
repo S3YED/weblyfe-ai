@@ -10,6 +10,7 @@ type Props = {
   duration?: number;
   decimals?: number;
   separator?: string;
+  padTo?: number;
   className?: string;
 };
 
@@ -20,6 +21,7 @@ export default function CountUp({
   duration = 1.4,
   decimals = 0,
   separator = '.',
+  padTo,
   className,
 }: Props) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -36,9 +38,12 @@ export default function CountUp({
     return () => controls.stop();
   }, [inView, to, duration]);
 
+  const rounded = Math.round(value);
   const formatted = decimals > 0
     ? value.toFixed(decimals)
-    : Math.round(value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator);
+    : padTo
+      ? rounded.toString().padStart(padTo, '0')
+      : rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator);
 
   return (
     <span ref={ref} className={className}>

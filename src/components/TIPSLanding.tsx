@@ -264,9 +264,15 @@ export default function TIPSLanding() {
           <div className="space-y-0">
             {PROCESS_STEPS.map((step, i) => (
               <motion.div key={step.n} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }} className="flex gap-8 py-10 border-b border-[#247459]/20 last:border-0">
-                <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-[#DFB771]/10 border border-[#DFB771]/20 flex items-center justify-center">
-                  <span className="text-[#DFB771] font-bold text-xl">{step.n}</span>
-                </div>
+                <motion.div
+                  initial={{ scale: 0.5, opacity: 0, rotate: -8 }}
+                  whileInView={{ scale: 1, opacity: 1, rotate: 0 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ delay: i * 0.15 + 0.1, type: 'spring', stiffness: 180, damping: 14 }}
+                  className="flex-shrink-0 w-16 h-16 rounded-2xl bg-[#DFB771]/10 border border-[#DFB771]/20 flex items-center justify-center"
+                >
+                  <CountUp to={parseInt(step.n)} padTo={2} duration={1.0} className="text-[#DFB771] font-bold text-xl" />
+                </motion.div>
                 <div>
                   <h3 className="text-[#F6FEFC] font-bold text-xl mb-2">{step.title}</h3>
                   <p className="text-[#F6FEFC]/50 text-base leading-relaxed">{step.desc}</p>
@@ -421,10 +427,10 @@ export default function TIPSLanding() {
             {TOOLS.map((tool, i) => (
               <motion.div
                 key={tool.name}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.04, duration: 0.4 }}
+                initial={{ opacity: 0, y: 22, scale: 0.85 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: '-30px' }}
+                transition={{ delay: i * 0.05, type: 'spring', stiffness: 220, damping: 18, mass: 0.6 }}
                 whileHover={{ y: -4, scale: 1.05 }}
                 className="group flex items-center gap-2.5"
                 title={tool.name}
