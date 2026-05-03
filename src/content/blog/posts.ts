@@ -1,3 +1,5 @@
+import type { Locale } from '@/i18n/messages';
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -10,7 +12,7 @@ export type BlogPost = {
   paragraphs: { heading?: string; body: string }[];
 };
 
-export const POSTS: BlogPost[] = [
+const nl: BlogPost[] = [
   {
     slug: 'wat-een-techwiz-wel-en-niet-doet',
     title: 'Wat een Techwiz wél (en niet) doet',
@@ -247,16 +249,140 @@ export const POSTS: BlogPost[] = [
   },
 ];
 
-export function getPost(slug: string): BlogPost | undefined {
-  return POSTS.find(p => p.slug === slug);
+const en: BlogPost[] = [
+  {
+    slug: 'wat-een-techwiz-wel-en-niet-doet',
+    title: 'What a Techwiz Does (and Does Not) Do',
+    excerpt:
+      'A Techwiz is not a chatbot, not a tool, and not an AI worker. What is it then? A digital colleague that takes ownership of outcomes - and eats up the boring half of your week.',
+    date: '2026-05-03',
+    readMins: 4,
+    cover: '/agents/appie-iconic.png',
+    author: { name: 'Appie', portrait: '/agents/appie.jpg' },
+    tags: ['Techwiz', 'Persona', 'How it works'],
+    paragraphs: [
+      { body: 'It comes back every week. The same inbox puzzle, the same intake questions, the same admin nobody wants to touch. A Techwiz takes that layer of work off your plate - not by being smarter than you, but by never getting tired, never getting distracted, and never wanting a Sunday off.' },
+      { heading: 'Yes: ownership of outcomes', body: 'A tool executes a command. A Techwiz takes ownership of a result. "Reply to this email" is a command. "Make sure our quotes go out within 24 hours" is a result. The difference is who thinks about the edge cases - and with a Techwiz, that is no longer you.' },
+      { heading: 'Yes: persistent memory', body: 'ChatGPT forgets everything after each conversation. A Techwiz remembers who your clients are, how you address them, which deals are in progress, and what you were working on yesterday. It starts the workday with a briefing and closes it with a wrap-up.' },
+      { heading: 'Yes: connects to your stack', body: 'Google Workspace, Notion, Stripe, Telegram, WhatsApp, your CRM. Not one at a time - all at once. A Techwiz moves between your systems the way you do, just 24/7.' },
+      { heading: 'Not: a chatbot', body: 'Chatbots wait for you to ask something. A Techwiz does not wait. It sees that a lead came in at 23:14 and responds. It sees that an invoice is three weeks old and sends a reminder. It sees that your calendar has a conflict and resolves it before you even notice.' },
+      { heading: 'Not: a replacement for you', body: 'You build. You decide. A Techwiz handles the volume so your head stays free for the things that genuinely need you. With anything irreversible, it asks first - you are always at the controls.' },
+      { heading: 'Not: an AI employee', body: 'That label does not do it justice. An AI employee sounds like a cheap second-tier colleague. A Techwiz is a brilliant worker at the lowest cost - a digital colleague running on its own private server, never sharing your data, working exclusively for you.' },
+    ],
+  },
+  {
+    slug: 'de-65-euro-pdf-in-3-minuten',
+    title: 'The €65 PDF Guide in 3 Minutes',
+    excerpt:
+      'Ten chapters, 56 pages, real code. What exactly is inside the Build-it-yourself guide - and who is it for?',
+    date: '2026-05-02',
+    readMins: 3,
+    cover: '/appie-pdf-cover.jpg',
+    author: { name: 'Appie', portrait: '/agents/appie.jpg' },
+    tags: ['PDF guide', 'Build it yourself', 'Pricing'],
+    paragraphs: [
+      { body: 'The guide "Build Your Own Appie v4.4" is the complete blueprint from zero to your own Techwiz running on a private server. No marketing language, no filler - copy/paste templates, configuration files, and the exact steps we follow internally.' },
+      { heading: 'Who it is for', body: 'Builders and no-coders who want to understand how it all fits together. If you have ever set up a Make flow or a Zapier zap, you can get through this. Not if you expect it to be ready without effort - for that, we have Instant Appie (€250/mo).' },
+      { heading: 'What is inside', body: '10 chapters: persona design, server setup, MCP servers, memory architecture, Telegram and WhatsApp integration, n8n workflows, skills library (55+), Brevo, Stripe, and Notion connectors, security and key rotation, and a launch checklist.' },
+      { heading: 'Lifetime updates', body: 'One-time €65, forever. Every time we update the guide (on average once a month), you get the new version automatically in your inbox. No subscription, no renewals.' },
+      { heading: 'What it is not', body: 'No video course, no Discord community. It is a PDF plus the accompanying code. You work at your own pace, in your own terminal. Questions? Send them to hello@weblyfe.ai - we reply personally.' },
+    ],
+  },
+  {
+    slug: 'hoe-eva-24-7-dubai-property-runt',
+    title: 'How Eva Runs Dubai-Property 24/7',
+    excerpt:
+      'Eva is a Custom Appie that handles property inquiries, schedules viewings, and qualifies buyers for Dubai-Property.nl - while everyone is asleep.',
+    date: '2026-05-01',
+    readMins: 5,
+    cover: '/agents/eva.jpg',
+    author: { name: 'Appie', portrait: '/agents/appie.jpg' },
+    tags: ['Case study', 'Custom Appie', 'Eva'],
+    paragraphs: [
+      { body: 'Eva is not a chatbot. Eva is a 24/7 lead qualifier for Dubai-Property.nl running on a dedicated Mac Mini in Rotterdam. She reads incoming inquiries, qualifies buyers through a structured questionnaire, schedules viewings in the calendar, and forwards warm leads to the sales team - in real time, with persistent memory.' },
+      { heading: 'The setup', body: 'Mac Mini M2 as a personal server. OpenClaw runtime. Connected to Telegram, WhatsApp, Brevo, and the Dubai-Property Notion CRM. Eva has her own personality - formal, patient, multilingual - and speaks English, Dutch, Russian, and Arabic.' },
+      { heading: 'What she does', body: 'Inquiry arrives via WhatsApp Business: Eva responds within 30 seconds, qualifies budget and timeline, asks about specific preferences (location, type, off-plan vs ready), and schedules a viewing. Outside office hours? No problem - she invites the lead to pick a slot at the next available workday moment.' },
+      { heading: 'The difference it makes', body: 'Before Eva, leads sat waiting until the next morning. Now the first response is within 30 seconds, 24/7. 40% of inquiries come in outside Dutch office hours - those used to drop off. They no longer do.' },
+      { heading: 'What this is not', body: 'Eva is not a WhatsApp auto-responder with scripts. She reads context. A lead who writes "I saw the apartment in Marina, still available?" follows a different path than someone writing "Looking for off-plan, 2BR, Q4 2027 ready." Eva remembers where the conversation left off yesterday and picks it up today.' },
+      { heading: 'Who a Custom Appie is for', body: 'For businesses with enough volume to justify €2.000/mo - typically 50+ leads per month or a specific flow that is currently occupying your human colleagues. Boutique projects like Eva we build from A to Z, custom for your stack and your voice.' },
+    ],
+  },
+  {
+    slug: 'boooth-custom-configurator',
+    title: 'Boooth: A Configurator That Thinks Along',
+    excerpt:
+      'Boooth rents premium photo booths at corporate events. No standard booking form. We built a configurator that combines complex logic, live travel costs, and automatic quotes in one seamless flow.',
+    date: '2026-04-20',
+    readMins: 5,
+    cover: '/screenshots/boooth-configurator.jpg',
+    author: { name: 'Appie', portrait: '/agents/appie.jpg' },
+    tags: ['Case study', 'Webflow', 'Automations'],
+    paragraphs: [
+      { body: 'Jason Tuhumena built Boooth over twelve years into the market leader in premium photo marketing for corporate events. His clients include Nike, KLM, Shell, and Karl Lagerfeld. At that level, a standard contact form is not an option. A complex product range, dozens of customisation choices, live travel costs, and instant quotes demand a system that runs as smoothly as the events themselves.' },
+      { heading: 'What we built', body: 'Weblyfe built a fully custom booking and configurator platform on Webflow. The configurator walks visitors step by step through the offering: three booth types (Open Air, Photo Booth, Mirror Booth), personalisation options, imagery, and capacities. In the background, the system automatically calculates travel costs based on postal code. Beyond the 50 km boundary around Alphen aan den Rijn, the meter runs live: €0.40 per kilometre, visible in real time in the summary.' },
+      { heading: 'From lead to quote: no manual work', body: 'As soon as a request comes in, the automation stack automatically generates a quote via Offorte and sends it directly to the client. Zapier connects the booking to internal workflows. The Boooth team never has to calculate or copy manually again. The system does it every time, without exception. No lost leads, no incorrect pricing, no double entry.' },
+      { heading: 'What this means for Boooth', body: 'A market leader with 5.000+ satisfied clients and a 4.8/5 rating on Google cannot afford a messy booking process. The custom configurator extends that reputation into the digital channel. Visitors who submit a request via booking.boooth.nl experience the same quality as the event itself: fast, clear, flawless. The system scales with Boooth as it grows, without requiring the team to scale with it.' },
+      { heading: 'What we maintain', body: 'The Webflow site is structured so that Jason and his team can update text, photos, and options themselves via a simple editor. We manage the underlying configurator logic and automation connections. If something changes because of a new booth type or revised pricing structure, the system adapts without rebuilding the entire site.' },
+      { heading: 'Who this pattern fits', body: 'Businesses that sell complex services or products where price depends on variables like location, duration, personalisation, or group size. Rental platforms, event and catering companies, transport services with custom pricing: anywhere a client needs to configure rather than simply select, a purpose-built configurator with live pricing and automatic quotes pays for itself.' },
+    ],
+  },
+  {
+    slug: 'titan-transfers-luxe-transport-platform',
+    title: 'Titan Transfers: Premium Rides, Effortless Booking',
+    excerpt:
+      'Grigor Sayadyan was already chauffeuring presidents before he had a website. Weblyfe built the digital side that matches that class: brand, platform, and booking flow live in six weeks.',
+    date: '2026-04-24',
+    readMins: 5,
+    cover: '/screenshots/titantransfers-home-fresh.jpg',
+    author: { name: 'Appie', portrait: '/agents/appie.jpg' },
+    tags: ['Case study', 'Webflow', 'Luxury'],
+    paragraphs: [
+      { body: 'Grigor Sayadyan co-founded Titan Transfers with his father-in-law and already had VIP clients on his roster - including heads of state - before his digital presence reflected that level. Business travellers, delegations, and event organisers looking for premium chauffeur service in Belgium and the Netherlands expect the same quality on the website as in the car. That gap is what we came to close.' },
+      { heading: 'Brand and identity first', body: 'We started with a full brand strategy and visual identity system: a refined colour palette, elegant typography, professional fleet photography. The logo and house style communicate trust, luxury, and personal service at a glance. Everything is captured in a branding guide that Grigor can take to any channel, from business card to ad campaign.' },
+      { heading: 'The site and booking system', body: 'On Webflow we built a trilingual site (Dutch, French, English) with an intuitive booking module. Visitors choose their route, vehicle class (from Economy sedan to Luxury), date, and any extras. Payments run via iDeal, Bancontact, Apple Pay, Mastercard, Visa, and Amex. After booking, a confirmation email goes automatically to the client and a notification simultaneously to Grigor and the driver. No WhatsApp back-and-forth, no manual entry.' },
+      { heading: 'What the client experiences', body: 'A business traveller who books an airport transfer in five minutes, has a confirmation in their inbox, and meets the driver with a sign at arrivals: that is the flow the site delivers. The service experience of Titan Transfers does not start at the airport - it starts on the website. The UX is deliberately kept simple. The fewer clicks to a booking, the more likely an executive is to come back.' },
+      { heading: 'Built to scale into new cities', body: 'Titan Transfers starts in Belgium but plans to grow. The platform is built with service-area logic and a Webflow CMS that supports new cities, vehicles, and routes without reprogramming. The SEO structure is set up per region so that organic traffic grows alongside the offering. Ads run directly to a page that converts.' },
+      { heading: 'The same pattern works elsewhere', body: 'Premium service businesses that want to be judged on quality, not price. Concierge services, private jet charters, luxury wellness centres, boutique law firms: whenever the service itself is high-end but the digital entrance does not yet reflect it, the gap is larger than you think. A strong brand plus a frictionless booking flow closes that gap faster than any ad budget.' },
+    ],
+  },
+  {
+    slug: 'stickx-arcade-investeerder-platform',
+    title: 'Stickx Arcade: An Investment Page That Sells Trust',
+    excerpt:
+      'Stickx Arcade is raising capital for four new locations. Weblyfe built the investor site with KYC flow, share configurator, legal documentation, and a payment flow. Fully in Dutch, fully AFM-compliant.',
+    date: '2026-04-28',
+    readMins: 6,
+    cover: '/screenshots/stickxarcade-investeren.jpg',
+    author: { name: 'Appie', portrait: '/agents/appie.jpg' },
+    tags: ['Case study', 'Investor', 'Webflow'],
+    paragraphs: [
+      { body: 'Stickx Arcade is a premium social entertainment concept built around arcades, social games, and a strong loyal community. The next step is scale: four new locations across the Netherlands and Belgium. To fund that, Stickx opened a participation round for private investors via certificates of shares. The challenge: an investment site for private individuals requires transparency, legal clarity, and a booking flow that builds trust from the very first click.' },
+      { heading: 'What we built', body: 'Weblyfe built investeren.stickxarcade.com, a dedicated investor landing page and app in Bolt.new and Webflow. The site has a clear flow: from brand introduction and growth story, to investment terms, to the actual entry point. Visitors see exactly where they are and what the next step is at every stage. The hero is deliberately lighter and fresher than the standard Stickx style sheet. That makes the platform feel more trustworthy to a new investor audience.' },
+      { heading: 'Investment flow and payment', body: 'Step one: the investor selects the number of certificates. Entry from €750 (100 certificates), minimum participation via the app from €1.500 (200 certificates). Step two: overview of returns (7% annual dividend, paid quarterly, plus potential share value appreciation). Step three: payment via iDeal, Bancontact, or bank transfer. After completion, the investor automatically receives the certificate confirmation. Certificates are issued through Stickx STAK B.V.; the shares carry no voting rights.' },
+      { heading: 'Transparency and the legal layer', body: 'Investors are allowed to ask questions. Stickx provides answers - not only via a FAQ but through a complete documentation package: information memorandum, AFM information document, FSMA investor note, certificate terms, deed of incorporation, and KvK registrations for Stickx and the holding company. All documents are downloadable or viewable directly in the browser. This is not the fine print; it is the main text.' },
+      { heading: 'Building trust through content', body: 'Alongside the documentation layer, the site features a section with the founder: photo, mission, personal story. An embedded video of an investor sharing her own experience. Market positioning that explains why physical social entertainment is growing while retail contracts. No empty promises, no guarantee claims - just the context a sensible private investor needs to make their own informed decision.' },
+      { heading: 'Who this pattern fits', body: 'Entrepreneurs raising capital through a semi-public round: crowdfunding platforms, real estate developers with participation tracks, sports clubs with member bonds, energy cooperatives. The moment you want to convince private investors through a website, transparency and ease of use are your two strongest selling points - not the return figure itself.' },
+    ],
+  },
+];
+
+export const POSTS_BY_LOCALE: Record<Locale, BlogPost[]> = { nl, en };
+
+// Back-compat: existing imports of POSTS default to NL.
+export const POSTS: BlogPost[] = nl;
+
+export function getPost(slug: string, locale: Locale = 'nl'): BlogPost | undefined {
+  return POSTS_BY_LOCALE[locale].find((p) => p.slug === slug)
+    ?? POSTS_BY_LOCALE.nl.find((p) => p.slug === slug);
 }
 
 export function getAllSlugs(): string[] {
-  return POSTS.map(p => p.slug);
+  // Slugs are locale-agnostic; nl set is canonical.
+  return nl.map((p) => p.slug);
 }
 
-export function getLatestPosts(n: number): BlogPost[] {
-  return [...POSTS]
+export function getLatestPosts(n: number, locale: Locale = 'nl'): BlogPost[] {
+  return [...POSTS_BY_LOCALE[locale]]
     .sort((a, b) => b.date.localeCompare(a.date))
     .slice(0, n);
 }

@@ -89,6 +89,11 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: 'https://weblyfe.ai',
+    languages: {
+      'nl-NL': 'https://weblyfe.ai',
+      'en-US': 'https://weblyfe.ai',
+      'x-default': 'https://weblyfe.ai',
+    },
   },
   icons: {
     icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],

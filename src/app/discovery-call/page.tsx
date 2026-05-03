@@ -5,10 +5,33 @@ import Footer from '@/components/Footer';
 import ScrollProgress from '@/components/ScrollProgress';
 
 export const metadata: Metadata = {
-  title: 'Plan een discovery call | Weblyfe',
+  title: 'Plan een discovery call met Seyed | Weblyfe',
   description:
-    'Plan een gratis 45 minuten discovery call met Seyed. We bespreken jouw bedrijf, je werkweek, en of een Custom Appie de juiste keuze is.',
-  alternates: { canonical: 'https://weblyfe.ai/discovery-call' },
+    'Plan een gratis 45 minuten discovery call met Seyed Hosseini. We bespreken jouw bedrijf, je werkweek, en of een Custom Appie de juiste keuze is. Geen verkoop-script.',
+  keywords: ['discovery call', 'Custom Appie', 'AI consultancy', 'Seyed Hosseini', 'Weblyfe'],
+  alternates: {
+    canonical: 'https://weblyfe.ai/discovery-call',
+    languages: {
+      'nl-NL': 'https://weblyfe.ai/discovery-call',
+      'en-US': 'https://weblyfe.ai/discovery-call',
+      'x-default': 'https://weblyfe.ai/discovery-call',
+    },
+  },
+  openGraph: {
+    title: 'Plan een discovery call met Seyed',
+    description: '45 minuten, geen verkooppraat. Vertel mij over je bedrijf, ik luister.',
+    url: 'https://weblyfe.ai/discovery-call',
+    type: 'website',
+    locale: 'nl_NL',
+    alternateLocale: ['en_US'],
+    images: [{ url: '/screenshots/seyed-founder.png', width: 1305, height: 1272, alt: 'Seyed Hosseini' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Plan een discovery call met Seyed | Weblyfe',
+    description: '45 minuten, geen verkooppraat.',
+    images: ['/screenshots/seyed-founder.png'],
+  },
   robots: { index: true, follow: true },
 };
 

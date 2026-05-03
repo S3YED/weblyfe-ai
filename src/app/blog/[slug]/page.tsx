@@ -1,12 +1,16 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, Clock } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollProgress from '@/components/ScrollProgress';
-import { POSTS, getPost, getAllSlugs } from '@/content/blog/posts';
+import { POSTS_BY_LOCALE, getPost, getAllSlugs } from '@/content/blog/posts';
+import { LOCALES, DEFAULT_LOCALE, type Locale } from '@/i18n/messages';
+
+export const dynamic = 'force-dynamic';
 
 type Params = { slug: string };
 
@@ -20,28 +24,58 @@ export async function generateMetadata({
   params: Promise<Params>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPost(slug);
+  const cookieStore = await cookies();
+  const cookieLocale = cookieStore.get('locale')?.value;
+  const locale: Locale = (LOCALES as readonly string[]).includes(cookieLocale ?? '')
+    ? (cookieLocale as Locale)
+    : DEFAULT_LOCALE;
+  const post = getPost(slug, locale);
   if (!post) return {};
+  const url = `https://weblyfe.ai/blog/${post.slug}`;
   return {
     title: `${post.title} | Weblyfe Blog`,
     description: post.excerpt,
-    alternates: { canonical: `https://weblyfe.ai/blog/${post.slug}` },
+    keywords: post.tags,
+    authors: [{ name: post.author.name }],
+    alternates: {
+      canonical: url,
+      languages: {
+        'nl-NL': url,
+        'en-US': url,
+        'x-default': url,
+      },
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,
+      url,
       type: 'article',
       publishedTime: post.date,
       authors: [post.author.name],
+      tags: post.tags,
+      siteName: 'Weblyfe',
+      locale: locale === 'nl' ? 'nl_NL' : 'en_US',
+      alternateLocale: locale === 'nl' ? ['en_US'] : ['nl_NL'],
+      images: post.cover
+        ? [{ url: post.cover, width: 1200, height: 630, alt: post.title }]
+        : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
       images: post.cover ? [post.cover] : undefined,
     },
   };
 }
 
-const dateFormatter = new Intl.DateTimeFormat('nl-NL', {
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric',
-});
+function makeDateFormatter(locale: Locale) {
+  return new Intl.DateTimeFormat(locale === 'nl' ? 'nl-NL' : 'en-US', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
 
 export default async function BlogPostPage({
   params,
@@ -49,33 +83,66 @@ export default async function BlogPostPage({
   params: Promise<Params>;
 }) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const cookieStore = await cookies();
+  const cookieLocale = cookieStore.get('locale')?.value;
+  const locale: Locale = (LOCALES as readonly string[]).includes(cookieLocale ?? '')
+    ? (cookieLocale as Locale)
+    : DEFAULT_LOCALE;
+  const dateFormatter = makeDateFormatter(locale);
+  const post = getPost(slug, locale);
   if (!post) notFound();
 
+  const url = `https://weblyfe.ai/blog/${post.slug}`;
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.excerpt,
     datePublished: post.date,
-    author: { '@type': 'Person', name: post.author.name },
+    dateModified: post.date,
+    author: {
+      '@type': 'Person',
+      name: post.author.name,
+      url: 'https://weblyfe.ai',
+    },
     publisher: {
       '@type': 'Organization',
+      '@id': 'https://weblyfe.ai/#organization',
       name: 'Weblyfe',
-      logo: { '@type': 'ImageObject', url: 'https://weblyfe.ai/logo-gold.svg' },
+      logo: { '@type': 'ImageObject', url: 'https://weblyfe.ai/logo-gold.svg', width: 180, height: 60 },
     },
-    mainEntityOfPage: `https://weblyfe.ai/blog/${post.slug}`,
-    image: post.cover ? `https://weblyfe.ai${post.cover}` : undefined,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    url,
+    image: post.cover
+      ? { '@type': 'ImageObject', url: `https://weblyfe.ai${post.cover}`, width: 1200, height: 630 }
+      : undefined,
     keywords: post.tags.join(', '),
+    articleSection: post.tags[0] ?? 'Techwiz',
+    inLanguage: locale === 'nl' ? 'nl-NL' : 'en-US',
+    wordCount: post.paragraphs.reduce((n, p) => n + p.body.split(/\s+/).length, 0),
   };
 
-  const others = POSTS.filter((p) => p.slug !== post.slug).slice(0, 2);
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://weblyfe.ai' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://weblyfe.ai/blog' },
+      { '@type': 'ListItem', position: 3, name: post.title, item: url },
+    ],
+  };
+
+  const others = POSTS_BY_LOCALE[locale].filter((p) => p.slug !== post.slug).slice(0, 2);
 
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <main className="min-h-screen bg-[#031D16] text-[#F6FEFC]">
         <ScrollProgress />
@@ -88,7 +155,7 @@ export default async function BlogPostPage({
               className="inline-flex items-center gap-1.5 text-[#F6FEFC]/50 hover:text-[#DFB771] text-sm transition-colors mb-8"
             >
               <ArrowLeft className="w-4 h-4" />
-              Terug naar blog
+              {locale === "nl" ? "Terug naar blog" : "Back to blog"}
             </Link>
 
             <div className="flex flex-wrap items-center gap-3 text-sm text-[#F6FEFC]/40 mb-5">
@@ -98,7 +165,7 @@ export default async function BlogPostPage({
               <span className="text-[#247459]">·</span>
               <span className="flex items-center gap-1">
                 <Clock className="w-3.5 h-3.5" />
-                {post.readMins} min lezen
+                {post.readMins} {locale === "nl" ? "min lezen" : "min read"}
               </span>
               <span className="text-[#247459]">·</span>
               <span>{post.tags.join(' · ')}</span>
@@ -155,13 +222,13 @@ export default async function BlogPostPage({
 
             <div className="mt-16 pt-10 border-t border-[#247459]/20 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
               <p className="text-[#F6FEFC]/60">
-                Begin met je eigen Techwiz vanaf €65.
+                {locale === "nl" ? "Begin met je eigen Techwiz vanaf €65." : "Start your own Techwiz from €65."}
               </p>
               <Link
                 href="/#tiers"
                 className="inline-flex items-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-6 py-3 rounded-xl transition-colors"
               >
-                Bekijk de tiers
+                {locale === "nl" ? "Bekijk de tiers" : "View pricing"}
               </Link>
             </div>
           </div>
@@ -170,7 +237,7 @@ export default async function BlogPostPage({
         {others.length > 0 && (
           <section className="py-16 bg-[#0E3D31] border-t border-[#247459]/20">
             <div className="max-w-5xl mx-auto px-4">
-              <h2 className="text-2xl font-bold mb-8">Lees verder</h2>
+              <h2 className="text-2xl font-bold mb-8">{locale === "nl" ? "Lees verder" : "Read more"}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {others.map((other) => (
                   <Link

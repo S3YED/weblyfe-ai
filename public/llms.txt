@@ -1,6 +1,6 @@
 # Weblyfe.ai
 
-> Weblyfe builds custom AI agents, chatbots, and workflow automations for creators, agencies, and service businesses. Our flagship product is Appie — an autonomous AI employee powered by OpenClaw that handles emails, calendar, leads, and business operations 24/7.
+> Weblyfe builds custom AI agents, chatbots, and workflow automations for creators, agencies, and service businesses. Our flagship product is Appie - an autonomous AI employee powered by OpenClaw that handles emails, calendar, leads, and business operations 24/7.
 
 ## What We Do
 
@@ -8,13 +8,13 @@ Weblyfe is an AI automation agency based in the Netherlands (Techwiz LLC), servi
 
 - **Custom AI Agents (Appie)**: Autonomous digital employees that run on your own server, connect to all your tools, and handle operations 24/7 through Telegram or WhatsApp.
 - **Workflow Automation**: n8n and Zapier-based automations that connect 400+ apps including Notion, Gmail, HubSpot, Airtable, Webflow, and Stripe.
-- **AI Chatbots**: Custom-trained chatbots for lead qualification, customer support, and sales — trained on your brand voice.
+- **AI Chatbots**: Custom-trained chatbots for lead qualification, customer support, and sales - trained on your brand voice.
 - **AI-Powered CRM**: Automated lead tracking, follow-up sequences, and pipeline management.
 - **Training Bots**: Internal AI assistants that answer employee and customer questions based on your documentation.
 
 ## Technology
 
-- **OpenClaw**: Our core AI runtime — an agent operating system with persistent memory, multi-agent orchestration, and deep tool integrations.
+- **OpenClaw**: Our core AI runtime - an agent operating system with persistent memory, multi-agent orchestration, and deep tool integrations.
 - **Stack**: Next.js, Vercel, Supabase, n8n, Claude (Anthropic), OpenRouter, Telegram/WhatsApp APIs.
 - **Infrastructure**: Private deployment on DigitalOcean or client's own cloud. Data never leaves your infrastructure.
 

@@ -548,7 +548,7 @@ export default function TIPSLanding() {
             <p className="text-[#247459] text-sm font-semibold uppercase tracking-widest mb-3">{t('blog.eyebrow')}</p>
             <h2 className="text-3xl md:text-4xl font-bold text-[#F6FEFC]">{t('blog.h2')}</h2>
           </motion.div>
-          <BlogStrip posts={getLatestPosts(3)} />
+          <BlogStrip posts={getLatestPosts(3, locale)} />
           <div className="text-center mt-12">
             <Link href="/blog" className="inline-flex items-center gap-1.5 text-[#DFB771] hover:text-[#DFB771]/80 text-sm font-semibold transition-colors">
               {t('blog.viewAll')} <ArrowRight className="w-3.5 h-3.5" />

@@ -1,30 +1,94 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { cookies } from 'next/headers';
 import { Clock, ArrowRight } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollProgress from '@/components/ScrollProgress';
-import { POSTS } from '@/content/blog/posts';
+import { POSTS_BY_LOCALE } from '@/content/blog/posts';
+import { LOCALES, DEFAULT_LOCALE, type Locale } from '@/i18n/messages';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Blog - Vanuit het brein van Appie | Weblyfe',
+  title: 'Techwiz Blog - Nieuws en case studies over AI werknemers | Weblyfe',
   description:
-    'Praktische verhalen over Techwizes, automation en hoe je je werkweek terugwint. Geschreven door Appie en het Weblyfe team.',
-  alternates: { canonical: 'https://weblyfe.ai/blog' },
+    'Praktische verhalen over Techwizes, AI werknemers, automation, en case studies van CZA, Dubai-Property, Boooth en meer. Geschreven door Appie en het Weblyfe team.',
+  keywords: ['Techwiz blog', 'AI werknemers', 'AI automation', 'case studies', 'Weblyfe', 'OpenClaw'],
+  alternates: {
+    canonical: 'https://weblyfe.ai/blog',
+    languages: {
+      'nl-NL': 'https://weblyfe.ai/blog',
+      'en-US': 'https://weblyfe.ai/blog',
+      'x-default': 'https://weblyfe.ai/blog',
+    },
+  },
+  openGraph: {
+    title: 'Techwiz Blog | Weblyfe',
+    description: 'Nieuws, case studies en praktische tips over AI werknemers en automation.',
+    url: 'https://weblyfe.ai/blog',
+    type: 'website',
+    locale: 'nl_NL',
+    alternateLocale: ['en_US'],
+    images: [{ url: '/agents/appie-iconic.png', width: 1408, height: 768, alt: 'Techwiz Blog' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Techwiz Blog | Weblyfe',
+    description: 'Nieuws, case studies en praktische tips over AI werknemers.',
+    images: ['/agents/appie-iconic.png'],
+  },
 };
 
-const dateFormatter = new Intl.DateTimeFormat('nl-NL', {
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric',
-});
+function makeDateFormatter(locale: Locale) {
+  return new Intl.DateTimeFormat(locale === 'nl' ? 'nl-NL' : 'en-US', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
 
-export default function BlogIndex() {
-  const posts = [...POSTS].sort((a, b) => b.date.localeCompare(a.date));
+const blogIndexSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  '@id': 'https://weblyfe.ai/blog#blog',
+  name: 'Techwiz Blog',
+  description:
+    'Praktische verhalen over Techwizes, AI werknemers, automation en case studies.',
+  url: 'https://weblyfe.ai/blog',
+  publisher: { '@id': 'https://weblyfe.ai/#organization' },
+  inLanguage: ['nl-NL', 'en-US'],
+};
+
+const blogBreadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://weblyfe.ai' },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://weblyfe.ai/blog' },
+  ],
+};
+
+export default async function BlogIndex() {
+  const cookieStore = await cookies();
+  const cookieLocale = cookieStore.get('locale')?.value;
+  const locale: Locale = (LOCALES as readonly string[]).includes(cookieLocale ?? '')
+    ? (cookieLocale as Locale)
+    : DEFAULT_LOCALE;
+  const dateFormatter = makeDateFormatter(locale);
+  const posts = [...POSTS_BY_LOCALE[locale]].sort((a, b) => b.date.localeCompare(a.date));
 
   return (
     <main className="min-h-screen bg-[#031D16] text-[#F6FEFC]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogIndexSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogBreadcrumb) }}
+      />
       <ScrollProgress />
       <Navbar />
 

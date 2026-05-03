@@ -5,18 +5,19 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight, Clock } from 'lucide-react';
 import type { BlogPost } from '@/content/blog/posts';
+import { useI18n } from '@/i18n/I18nProvider';
 
 type Props = {
   posts: BlogPost[];
 };
 
-const dateFormatter = new Intl.DateTimeFormat('nl-NL', {
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric',
-});
-
 export default function BlogStrip({ posts }: Props) {
+  const { locale } = useI18n();
+  const dateFormatter = new Intl.DateTimeFormat(locale === 'nl' ? 'nl-NL' : 'en-US', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {posts.map((post, i) => (
@@ -63,7 +64,7 @@ export default function BlogStrip({ posts }: Props) {
                 {post.excerpt}
               </p>
               <span className="inline-flex items-center gap-1 text-[#DFB771] text-sm font-semibold">
-                Lees verder
+                {locale === 'nl' ? 'Lees verder' : 'Read more'}
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
               </span>
             </div>
