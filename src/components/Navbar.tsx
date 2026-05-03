@@ -6,10 +6,10 @@ import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 
 const navLinks = [
-  { label: 'Maak kennis', href: '/#t' },
+  { label: 'Maak kennis', href: '/#t-meet' },
+  { label: 'Projecten', href: '/#projects' },
   { label: 'Pricing', href: '/#tiers' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Bouw zelf', href: '/openclaw' },
   { label: 'FAQ', href: '/#faq' },
 ];
 

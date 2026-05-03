@@ -5,6 +5,7 @@ import { ArrowRight, Check, Star, Zap, Bot, Shield, Brain, Calendar, Mail, Users
 import Link from 'next/link';
 import Image from 'next/image';
 import CaseStudySlider, { type CaseStudy } from './CaseStudySlider';
+import ProjectsSlider, { type Project } from './ProjectsSlider';
 import BlogStrip from './BlogStrip';
 import MagneticButton from './anim/MagneticButton';
 import HeroReveal from './anim/HeroReveal';
@@ -19,13 +20,6 @@ import { FAQS } from '@/content/faqs';
 // not framework jargon. Voice locked in APPIE-PERSONA v1.2.
 
 const PDF_CHECKOUT_URL = 'https://buy.stripe.com/7sYaEYfAn30C8BncwJ3Je2I';
-
-const TRANSFORMATION = {
-  title: 'Hoi, ik ben Appie.',
-  titleAccent: 'Jouw persoonlijke Techwiz.',
-  subtitle:
-    'Een geniale werknemer met de laagste kosten. Ik doe het werk dat je week opvreet — inbox, intake, agenda, admin. Jij bouwt. Ik houd de boel draaiend.',
-};
 
 const INGREDIENTS = [
   {
@@ -103,13 +97,58 @@ const SOCIAL_PROOFS: CaseStudy[] = [
   },
 ];
 
-const RECENT_BUILDS: { name: string; href: string; image: string }[] = [
-  { name: 'CZA Bouwbedrijf', href: 'https://cza.nl', image: '/screenshots/cza-fresh.jpg' },
-  { name: 'Boooth', href: 'https://boooth.nl', image: '/screenshots/boooth-home-fresh.jpg' },
-  { name: 'Privanotify', href: 'https://privanotify.com', image: '/screenshots/privanotify-fresh.jpg' },
-  { name: 'Safesite', href: 'https://safesitestaff.com', image: '/screenshots/safesite-fresh.jpg' },
-  { name: 'Titan Transfers', href: 'https://titantransfers.com', image: '/screenshots/titantransfers-home-fresh.jpg' },
-  { name: 'StickX Arcade · Investeren', href: 'https://investeren.stickxarcade.com', image: '/screenshots/stickxarcade-investeren.jpg' },
+const PROJECTS: Project[] = [
+  {
+    name: 'CZA Bouwbedrijf',
+    url: 'https://cza.nl',
+    image: '/screenshots/cza-fresh.jpg',
+    industry: 'Bouw',
+    scope: 'Volledige website-bouw + WhatsApp lead intake door Ben de Voorman. Eerste reactie binnen 30 seconden, 24/7.',
+    highlight: 'Reactietijd: 4-6 uur → onder 30 seconden',
+  },
+  {
+    name: 'Dubai-Property.nl',
+    url: 'https://dubai-property.nl',
+    image: '/screenshots/dubai-property.jpg',
+    industry: 'Real Estate',
+    scope: 'Lead-qualification site + Eva: 24/7 multilingual property inquiries, viewing scheduling, buyer kwalificatie.',
+    highlight: '550+ woningen verkocht via het team',
+  },
+  {
+    name: 'StickX Arcade · Investeren',
+    url: 'https://investeren.stickxarcade.com',
+    image: '/screenshots/stickxarcade-investeren.jpg',
+    industry: 'Investing',
+    scope: 'Investor-site met pitchdeck integration en lead capture. Volledige funnel inclusief KYC-flow.',
+  },
+  {
+    name: 'Boooth',
+    url: 'https://boooth.nl',
+    image: '/screenshots/boooth-home-fresh.jpg',
+    industry: 'Events',
+    scope: 'Photobooth verhuurplatform met booking-engine + automatische factuurflow via n8n.',
+  },
+  {
+    name: 'Privanotify',
+    url: 'https://privanotify.com',
+    image: '/screenshots/privanotify-fresh.jpg',
+    industry: 'Privacy SaaS',
+    scope: 'GDPR-monitoring app met dashboard, alerts en compliance-audit voor MKB.',
+  },
+  {
+    name: 'Safesite',
+    url: 'https://safesitestaff.com',
+    image: '/screenshots/safesite-fresh.jpg',
+    industry: 'Construction Safety',
+    scope: 'Site-management platform voor bouwprojecten — incident reporting, staff scheduling, compliance docs.',
+  },
+  {
+    name: 'Titan Transfers',
+    url: 'https://titantransfers.com',
+    image: '/screenshots/titantransfers-home-fresh.jpg',
+    industry: 'Transport',
+    scope: 'Premium transfer-service site met booking-flow, fleet showcase en chauffeur portal.',
+  },
 ];
 
 const TOOLS: { name: string; logo: string }[] = [
@@ -129,50 +168,71 @@ export default function TIPSLanding() {
   return (
     <div className="min-h-screen bg-[#031D16] text-[#F6FEFC]">
 
-      {/* ── SECTION ZERO: THE BRIDGE ── */}
-      {/* Acknowledge the OLD way — the problem before the transformation */}
-      <section className="relative overflow-hidden pt-24 pb-20">
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#DFB771 1px, transparent 1px), linear-gradient(90deg, #DFB771 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
-        <motion.div animate={{ opacity: [0.12, 0.25, 0.12] }} transition={{ duration: 6, repeat: Infinity }} className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full bg-[#247459] blur-[100px]" />
-        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-6">De week die je opvreet</motion.p>
-          <motion.h1 initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }} className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#F6FEFC] leading-tight mb-8">
-            Het is half zes.
-          </motion.h1>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="space-y-4 max-w-2xl mx-auto mb-10">
-            {[
-              'Je hebt nog 47 ongelezen mails.',
-              'Drie WhatsApp intakes wachten op een reactie.',
-              'De agenda heeft een conflict, niemand zegt het.',
-              'Het kantoor sluit, de week niet.',
-            ].map(line => (
-              <p key={line} className="text-[#F6FEFC]/50 text-lg md:text-xl leading-relaxed">{line}</p>
-            ))}
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="flex flex-col sm:flex-row gap-4 justify-center">
-            <MagneticButton href="#t" className="flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-8 py-4 rounded-xl transition-colors will-change-transform">
-              Maak kennis met je Techwiz <ArrowRight className="w-4 h-4" />
-            </MagneticButton>
-            <MagneticButton href={PDF_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-[#247459]/10 hover:bg-[#247459]/20 border border-[#247459]/40 text-[#F6FEFC] font-semibold px-8 py-4 rounded-xl transition-colors will-change-transform">
-              Bouw zelf je Techwiz · €65
-            </MagneticButton>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── HERO: APPIE PROTAGONIST ── */}
-      <section id="t" className="relative py-24 bg-[#0E3D31] overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#DFB771 1px, transparent 1px), linear-gradient(90deg, #DFB771 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
-        <motion.div animate={{ opacity: [0.10, 0.22, 0.10] }} transition={{ duration: 8, repeat: Infinity }} className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-[#DFB771]/30 blur-[120px]" />
+      {/* ── MAIN HERO ── (TIPS T = Tempt; visitor-egocentric outcome + 3-stat proof + price-free CTA) */}
+      <section id="t" className="relative pt-28 pb-16 lg:pt-32 lg:pb-24 overflow-hidden">
+        <motion.div
+          aria-hidden="true"
+          animate={{ opacity: [0.10, 0.22, 0.10] }}
+          transition={{ duration: 10, repeat: Infinity }}
+          className="absolute -top-40 -right-40 w-[640px] h-[640px] rounded-full bg-[#DFB771]/25 blur-[140px] pointer-events-none"
+        />
         <div className="relative z-10 max-w-6xl mx-auto px-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">Maak kennis met Appie</p>
+          {/* Stat strip — TIPS authority block, lifted above headline per Dropship-Academy / Lost-LeBlanc pattern */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3 text-xs md:text-sm text-[#F6FEFC]/60 mb-8 uppercase tracking-widest font-semibold"
+          >
+            <span className="inline-flex items-center gap-2"><span className="text-[#DFB771]">●</span> 80+ ondernemers gingen je voor</span>
+            <span className="hidden md:inline text-[#247459]">/</span>
+            <span className="inline-flex items-center gap-2"><span className="text-[#DFB771]">●</span> &lt;30s eerste reactie</span>
+            <span className="hidden md:inline text-[#247459]">/</span>
+            <span className="inline-flex items-center gap-2"><span className="text-[#DFB771]">●</span> €11M+ gerealiseerd voor klanten</span>
           </motion.div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Pixar Appie hero render */}
-            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="order-2 lg:order-1 flex justify-center lg:justify-end">
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            {/* Copy block — left 7 cols on desktop, full on mobile */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="lg:col-span-7 text-center lg:text-left"
+            >
+              <h1 className="text-[#F6FEFC] text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.02] mb-6 tracking-tight">
+                <HeroReveal text="Jouw werkweek" delay={0.1} />
+                <span className="block text-[#DFB771]">
+                  <HeroReveal text="runt zichzelf." delay={0.45} />
+                </span>
+              </h1>
+              <p className="text-[#F6FEFC]/75 text-lg md:text-xl leading-relaxed max-w-xl mx-auto lg:mx-0 mb-10">
+                Appie is jouw persoonlijke Techwiz — hij beheert je inbox, intake en agenda terwijl jij slaapt. Geen chatbot, geen tool. Een digitale collega die verantwoordelijkheid neemt voor uitkomsten.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 items-center justify-center lg:justify-start mb-6">
+                <MagneticButton href="#tiers" className="inline-flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-8 py-4 rounded-xl transition-colors will-change-transform shadow-lg shadow-[#DFB771]/20">
+                  Start je Appie <ArrowRight className="w-4 h-4" />
+                </MagneticButton>
+                <a
+                  href="#t-meet"
+                  className="text-[#F6FEFC]/70 hover:text-[#DFB771] text-sm font-semibold underline-offset-4 hover:underline transition-colors"
+                >
+                  of leer Appie eerst kennen →
+                </a>
+              </div>
+              <p className="text-[#F6FEFC]/40 text-xs md:text-sm">
+                Tevreden of geld terug · Maandelijks opzegbaar · Jouw private server
+              </p>
+            </motion.div>
+
+            {/* Pixar Appie hero render — right 5 cols on desktop, above on mobile */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="lg:col-span-5 flex justify-center lg:justify-end order-first lg:order-last"
+            >
               <AppieTilt className="relative" max={5}>
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#DFB771]/20 to-[#247459]/30 blur-3xl rounded-full" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-[#DFB771]/30 to-[#247459]/40 blur-3xl rounded-full" />
                 <Image
                   src="/agents/appie-iconic.png"
                   alt="Appie — jouw persoonlijke Techwiz"
@@ -183,32 +243,59 @@ export default function TIPSLanding() {
                 />
               </AppieTilt>
             </motion.div>
-            {/* Copy block */}
-            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }} className="order-1 lg:order-2 text-center lg:text-left">
-              <p className="text-[#F6FEFC] text-3xl md:text-5xl font-bold leading-[1.1] mb-3">
-                <HeroReveal text={TRANSFORMATION.title} delay={0.05} />
+          </div>
+        </div>
+      </section>
+
+      {/* ── AUTHORITY STRIP ── (TIPS T-block, founder + portfolio proof immediately below the fold) */}
+      <section className="relative py-16 bg-[#0E3D31]/60 border-y border-[#247459]/20">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="md:col-span-5 flex justify-center md:justify-start"
+            >
+              <a
+                href="https://weblyfeuniversity.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative block w-full max-w-sm aspect-[16/9] rounded-2xl overflow-hidden ring-1 ring-[#DFB771]/30 hover:ring-[#DFB771]/60 transition-all"
+              >
+                <Image
+                  src="/screenshots/weblyfeuniversity-vsl.jpg"
+                  alt="Seyed Hosseini · Weblyfe University"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 400px"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-[#031D16]/60 via-[#031D16]/10 to-transparent" />
+                <span className="absolute bottom-3 left-4 text-[#F6FEFC] text-xs font-semibold uppercase tracking-widest">Weblyfe University</span>
+              </a>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="md:col-span-7 text-center md:text-left"
+            >
+              <p className="text-[#DFB771] text-xs font-semibold uppercase tracking-widest mb-3">Wie bouwt dit</p>
+              <p className="text-[#F6FEFC] text-xl md:text-2xl font-semibold leading-snug mb-3">
+                Door Seyed Hosseini — oprichter van Weblyfe en Weblyfe University. 80+ websites en Appies gebouwd voor ondernemers.
               </p>
-              <p className="text-[#DFB771] text-3xl md:text-5xl font-bold leading-[1.1] mb-8">
-                <HeroReveal text={TRANSFORMATION.titleAccent} delay={0.5} />
+              <p className="text-[#F6FEFC]/60 text-sm md:text-base leading-relaxed">
+                Wij bouwen voor onszelf wat we voor jou bouwen. Drie eigen Appies runnen Weblyfe over tijdzones — wat hier op de site staat draait al maanden bij ons.
               </p>
-              <p className="text-[#F6FEFC]/70 text-lg md:text-xl leading-relaxed mb-8">
-                {TRANSFORMATION.subtitle}
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <MagneticButton href="/openclaw#waitlist" className="flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#DFB771]/90 text-[#031D16] font-bold px-8 py-4 rounded-xl transition-colors will-change-transform">
-                  Begin met je Techwiz <ArrowRight className="w-4 h-4" />
-                </MagneticButton>
-                <MagneticButton href={PDF_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 border border-[#247459]/40 hover:border-[#247459] text-[#F6FEFC]/70 hover:text-[#F6FEFC] px-8 py-4 rounded-xl transition-colors text-sm will-change-transform">
-                  Bouw zelf · €65 PDF
-                </MagneticButton>
-              </div>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* ── WHAT APPIE IS ── (was: "I = INGREDIENTS") */}
-      <section className="py-24 bg-[#031D16]">
+      <section id="t-meet" className="py-24 bg-[#031D16]">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <p className="text-[#247459] text-sm font-semibold uppercase tracking-widest mb-3">Drie principes</p>
@@ -266,41 +353,13 @@ export default function TIPSLanding() {
           </motion.div>
           <CaseStudySlider studies={SOCIAL_PROOFS} />
 
-          {/* Recent shipped — live websites from the same Techwiz fleet */}
-          <div className="mt-20 pt-12 border-t border-[#247459]/15">
+          {/* Projects slider — live websites built by Weblyfe (separate from the case-study quote slider) */}
+          <div id="projects" className="mt-20 pt-12 border-t border-[#247459]/15">
             <div className="text-center mb-10">
-              <p className="text-[#247459] text-xs font-semibold uppercase tracking-widest mb-2">Recent gelanceerd</p>
-              <h3 className="text-2xl md:text-3xl font-bold text-[#F6FEFC]">Sites die live staan, met een Techwiz erachter</h3>
+              <p className="text-[#247459] text-xs font-semibold uppercase tracking-widest mb-2">Projecten</p>
+              <h3 className="text-2xl md:text-3xl font-bold text-[#F6FEFC]">Sites die live staan — met een Techwiz erachter</h3>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
-              {RECENT_BUILDS.map((build, i) => (
-                <motion.a
-                  key={build.name}
-                  href={build.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.06, duration: 0.4 }}
-                  whileHover={{ y: -4 }}
-                  className="group relative aspect-[16/10] rounded-2xl overflow-hidden border border-[#247459]/25 hover:border-[#DFB771]/50 bg-[#1a2e27]/40 transition-colors"
-                >
-                  <Image
-                    src={build.image}
-                    alt={`${build.name} screenshot`}
-                    fill
-                    sizes="(max-width: 768px) 50vw, 33vw"
-                    className="object-cover object-top opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#031D16] via-[#031D16]/40 to-transparent opacity-90 group-hover:opacity-70 transition-opacity" />
-                  <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
-                    <span className="text-[#F6FEFC] font-semibold text-sm">{build.name}</span>
-                    <ArrowRight className="w-4 h-4 text-[#DFB771] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                  </div>
-                </motion.a>
-              ))}
-            </div>
+            <ProjectsSlider projects={PROJECTS} />
           </div>
         </div>
       </section>
