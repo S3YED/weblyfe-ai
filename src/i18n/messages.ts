@@ -7,6 +7,7 @@ type Dict = Record<string, string>;
 const nl: Dict = {
   // Navbar
   'nav.meet': 'Maak kennis',
+  'nav.capabilities': 'Mogelijkheden',
   'nav.projects': 'Projecten',
   'nav.pricing': 'Pricing',
   'nav.blog': 'Blog',
@@ -25,7 +26,7 @@ const nl: Dict = {
   'hero.h1.line2': 'je werkweek?',
   'hero.h1.line3': 'Vanaf nu niet meer.',
   'hero.sub':
-    'Ontmoet Appie, jouw 24/7 Techwiz. Hij beheert je inbox, intake en agenda terwijl jij slaapt. Geen chatbot, geen tool. Een digitale collega die verantwoordelijkheid neemt voor uitkomsten.',
+    'Ontmoet Appie, jouw 24/7 Techwiz. Hij beheert je inbox, intake en agenda. Hij bouwt je apps, designs en content. Een hele digitale collega, geen chatbot, geen tool.',
   'hero.cta.primary': 'Start je Appie',
   'hero.cta.secondary': 'of leer Appie eerst kennen →',
   'hero.trust': 'Tevreden of geld terug · Maandelijks opzegbaar · Jouw private server',
@@ -64,6 +65,27 @@ const nl: Dict = {
   'ing.3.name': 'Werkt zichtbaar',
   'ing.3.detail':
     'Geen black box, geen "trust the AI". Reversibele taken: doen. Onomkeerbare taken: vragen. Je weet in de ochtend wat ik gisteren deed, je weet in de avond wat ik vandaag deed.',
+
+  // Capabilities (new Phase 2 section)
+  'caps.eyebrow': 'Mogelijkheden',
+  'caps.h2': 'Een hele digitale collega, geen chat-tool',
+  'caps.sub':
+    'Appie is geen functie maar een collega. Hij regelt je werkweek, bouwt waar nodig, en houdt het systeem draaiend. Vraag wat je wilt, hij pakt het op of zegt waarom niet.',
+  'caps.develop.title': 'Hij ontwikkelt',
+  'caps.develop.detail':
+    'Custom apps, landing pages en interne tools. Bouwt je site terwijl jij slaapt, deployt naar Vercel, beheert versies. Deze site bouwde een Appie zelf.',
+  'caps.design.title': 'Hij ontwerpt',
+  'caps.design.detail':
+    'Brand assets, illustraties, social posts, 3D modellen. Tool calls naar fal.ai, Figma en Kling.ai. Consistent met jouw stijlgids, snel klaar.',
+  'caps.create.title': 'Hij maakt content',
+  'caps.create.detail':
+    'Video, voice-overs, blog artikelen, captions. ElevenLabs-stem, Kling-video, copy in jouw toon. Klaar om te publiceren in een ochtend.',
+  'caps.distribute.title': 'Hij distribueert',
+  'caps.distribute.detail':
+    'Posts naar je social kanalen, follow-ups in WhatsApp en mail, agenda-uitnodigingen. Schedules in jouw werkweek, niet als spam-bot.',
+  'caps.manage.title': 'Hij regelt het systeem',
+  'caps.manage.detail':
+    'Notion, Stripe, Brevo, Moneybird, Google Workspace, je CRM. Alles aangesloten, je vraagt en hij doet, of legt uit waarom niet.',
 
   // Process steps
   'process.eyebrow': 'Drie stappen',
@@ -151,6 +173,7 @@ const nl: Dict = {
 const en: Dict = {
   // Navbar
   'nav.meet': 'Meet Appie',
+  'nav.capabilities': 'Capabilities',
   'nav.projects': 'Projects',
   'nav.pricing': 'Pricing',
   'nav.blog': 'Blog',
@@ -169,7 +192,7 @@ const en: Dict = {
   'hero.h1.line2': 'running your week?',
   'hero.h1.line3': 'Not anymore.',
   'hero.sub':
-    'Meet Appie, your 24/7 Techwiz. He runs your inbox, intake and calendar while you sleep. Not a chatbot, not a tool. A digital colleague who takes ownership of outcomes.',
+    'Meet Appie, your 24/7 Techwiz. He runs your inbox, intake and calendar. He builds your apps, designs and content. A full digital colleague, not a chatbot, not a tool.',
   'hero.cta.primary': 'Start your Appie',
   'hero.cta.secondary': 'or get to know Appie first →',
   'hero.trust': 'Money-back guarantee · Cancel monthly · Your private server',
@@ -208,6 +231,27 @@ const en: Dict = {
   'ing.3.name': 'Works visibly',
   'ing.3.detail':
     'No black box, no "trust the AI". Reversible tasks: do them. Irreversible tasks: ask first. You know in the morning what I did yesterday, and in the evening what I did today.',
+
+  // Capabilities
+  'caps.eyebrow': 'Capabilities',
+  'caps.h2': 'A full digital colleague, not a chat tool',
+  'caps.sub':
+    'Appie is not a feature, he is a colleague. He runs your week, builds when needed, and keeps the system flowing. Ask whatever you want; he picks it up or tells you why not.',
+  'caps.develop.title': 'He develops',
+  'caps.develop.detail':
+    'Custom apps, landing pages, and internal tools. Builds your site while you sleep, ships to Vercel, manages versions. This site was built by an Appie.',
+  'caps.design.title': 'He designs',
+  'caps.design.detail':
+    'Brand assets, illustrations, social posts, 3D models. Tool calls into fal.ai, Figma, and Kling.ai. Consistent with your brand guide, ready fast.',
+  'caps.create.title': 'He creates content',
+  'caps.create.detail':
+    'Video, voice-overs, blog articles, captions. ElevenLabs voice, Kling video, copy in your tone. Ready to publish in a single morning.',
+  'caps.distribute.title': 'He distributes',
+  'caps.distribute.detail':
+    'Posts to your social channels, follow-ups on WhatsApp and email, calendar invites. Scheduled into your workweek, not a spam bot.',
+  'caps.manage.title': 'He runs the system',
+  'caps.manage.detail':
+    'Notion, Stripe, Brevo, Moneybird, Google Workspace, your CRM. All connected, you ask and he does it, or explains why not.',
 
   // Process
   'process.eyebrow': 'Three steps',

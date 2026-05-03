@@ -11,6 +11,7 @@ type NavLink = { labelKey: MessageKey; href: string };
 
 const navLinks: NavLink[] = [
   { labelKey: 'nav.meet', href: '/#t-meet' },
+  { labelKey: 'nav.capabilities', href: '/#capabilities' },
   { labelKey: 'nav.projects', href: '/#projects' },
   { labelKey: 'nav.pricing', href: '/#tiers' },
   { labelKey: 'nav.blog', href: '/blog' },

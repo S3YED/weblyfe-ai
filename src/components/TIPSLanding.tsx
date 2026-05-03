@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Check, Star, Zap, Bot, Shield, Brain, Calendar, Mail, Users, Clock, Wrench } from 'lucide-react';
+import { ArrowRight, Check, Star, Zap, Bot, Shield, Brain, Calendar, Mail, Users, Clock, Wrench, Code2, Palette, Clapperboard, Send, Network } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import CaseStudySlider, { type CaseStudy } from './CaseStudySlider';
@@ -386,6 +386,42 @@ export default function TIPSLanding() {
                 />
                 <h3 className="text-[#F6FEFC] font-bold text-xl mb-3">{t(ing.nameKey)}</h3>
                 <p className="text-[#F6FEFC]/50 text-sm leading-relaxed">{t(ing.detailKey)}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CAPABILITIES ── (Phase 2: full-stack Appie, 5 lanes) */}
+      <section id="capabilities" className="py-24 bg-[#0E3D31]/30">
+        <div className="max-w-6xl mx-auto px-4">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12 max-w-2xl mx-auto">
+            <p className="text-[#DFB771] text-sm font-semibold uppercase tracking-widest mb-3">{t('caps.eyebrow')}</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#F6FEFC] mb-5">{t('caps.h2')}</h2>
+            <p className="text-[#F6FEFC]/60 text-base md:text-lg leading-relaxed">{t('caps.sub')}</p>
+          </motion.div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {[
+              { Icon: Code2, titleKey: 'caps.develop.title' as const, detailKey: 'caps.develop.detail' as const },
+              { Icon: Palette, titleKey: 'caps.design.title' as const, detailKey: 'caps.design.detail' as const },
+              { Icon: Clapperboard, titleKey: 'caps.create.title' as const, detailKey: 'caps.create.detail' as const },
+              { Icon: Send, titleKey: 'caps.distribute.title' as const, detailKey: 'caps.distribute.detail' as const },
+              { Icon: Network, titleKey: 'caps.manage.title' as const, detailKey: 'caps.manage.detail' as const },
+            ].map((cap, i) => (
+              <motion.div
+                key={cap.titleKey}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-30px' }}
+                transition={{ delay: i * 0.06, type: 'spring', stiffness: 200, damping: 18 }}
+                whileHover={{ y: -3 }}
+                className="bg-[#1a2e27]/60 hover:bg-[#1a2e27] border border-[#247459]/25 hover:border-[#DFB771]/40 rounded-2xl p-5 md:p-6 transition-colors"
+              >
+                <div className="w-11 h-11 rounded-xl bg-[#DFB771]/10 border border-[#DFB771]/20 flex items-center justify-center mb-4">
+                  <cap.Icon className="w-5 h-5 text-[#DFB771]" />
+                </div>
+                <h3 className="text-[#F6FEFC] font-bold text-base mb-2">{t(cap.titleKey)}</h3>
+                <p className="text-[#F6FEFC]/55 text-sm leading-relaxed">{t(cap.detailKey)}</p>
               </motion.div>
             ))}
           </div>
