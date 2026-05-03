@@ -58,5 +58,5 @@ const en: Faq[] = [
 
 export const FAQS_BY_LOCALE: Record<Locale, Faq[]> = { nl, en };
 
-// Back-compat shim for any importers still using FAQS — defaults to NL.
+// Back-compat shim for any importers still using FAQS - defaults to NL.
 export const FAQS: Faq[] = nl;

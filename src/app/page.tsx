@@ -83,6 +83,65 @@ const serviceSchema = {
   },
 };
 
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': 'https://weblyfe.ai/#seyed',
+  name: 'Seyed Hosseini',
+  jobTitle: 'Founder, Weblyfe',
+  url: 'https://weblyfe.ai',
+  image: 'https://weblyfe.ai/screenshots/seyed-founder.png',
+  worksFor: { '@id': 'https://weblyfe.ai/#organization' },
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: 'American University of Dubai',
+  },
+  sameAs: [
+    'https://instagram.com/seyed.jpg',
+    'https://linkedin.com/in/seyedhosseini',
+    'https://weblyfeuniversity.com',
+  ],
+  description:
+    'Seyed Hosseini is the founder of Weblyfe and Weblyfe University. He has worked with 100+ companies, lectured digital strategy at the American University of Dubai, and built Appie, an AI Techwiz that takes over your work week.',
+};
+
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  '@id': 'https://weblyfe.ai/#appie',
+  name: 'Appie - Jouw persoonlijke Techwiz',
+  description:
+    'Een geniale werknemer met de laagste kosten. Een AI Techwiz die je inbox, intake en agenda overneemt op een eigen private server.',
+  brand: { '@id': 'https://weblyfe.ai/#organization' },
+  offers: [
+    {
+      '@type': 'Offer',
+      name: 'Bouw zelf je Techwiz (PDF Gids)',
+      price: '65',
+      priceCurrency: 'EUR',
+      url: 'https://buy.stripe.com/7sYaEYfAn30C8BncwJ3Je2I',
+      availability: 'https://schema.org/InStock',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Instant Appie (Managed)',
+      price: '250',
+      priceCurrency: 'EUR',
+      priceSpecification: { '@type': 'UnitPriceSpecification', price: '250', priceCurrency: 'EUR', billingDuration: 'P1M' },
+      availability: 'https://schema.org/PreOrder',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Custom Appie',
+      price: '2000',
+      priceCurrency: 'EUR',
+      priceSpecification: { '@type': 'UnitPriceSpecification', price: '2000', priceCurrency: 'EUR', billingDuration: 'P1M' },
+      url: 'https://weblyfe.ai/discovery-call',
+      availability: 'https://schema.org/InStock',
+    },
+  ],
+};
+
 export default function Home() {
   return (
     <>
@@ -93,6 +152,14 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
       />
       <main className="min-h-screen">
         <ScrollProgress />
