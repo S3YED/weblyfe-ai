@@ -93,15 +93,19 @@ const productSchema = {
   offers: [
     {
       '@type': 'Offer',
-      name: 'Build Your Own Appie',
+      name: 'Build Your Own Techwiz (PDF v4.5)',
+      description:
+        "100+ pagina PDF + 150+ skills voor OpenClaw of Hermes Agent. Werkt met Claude Opus 4.7 en OpenAI Codex 5.4. Eenmalig €65, lifetime updates.",
       price: '65',
       priceCurrency: 'EUR',
       availability: 'https://schema.org/InStock',
-      url: 'https://weblyfe.ai/buy/pdf',
+      url: 'https://weblyfe.ai/pdf',
     },
     {
       '@type': 'Offer',
-      name: 'Instant Appie',
+      name: 'Instant Appie BETA',
+      description:
+        '5-10 plekken. Beta-prijs €250/mo voor altijd, ook na de publieke launch naar €488. Telegram dag 1, agenda, inbox, CRM. 1-op-1 onboarding met Seyed.',
       price: '250',
       priceCurrency: 'EUR',
       priceSpecification: {
@@ -110,8 +114,8 @@ const productSchema = {
         priceCurrency: 'EUR',
         unitText: 'MONTH',
       },
-      availability: 'https://schema.org/InStock',
-      url: 'https://weblyfe.ai/buy/instant',
+      availability: 'https://schema.org/LimitedAvailability',
+      url: 'https://weblyfe.ai/beta',
     },
     {
       '@type': 'Offer',

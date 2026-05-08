@@ -1006,7 +1006,7 @@ export default function TIPSLanding() {
                 ))}
               </ul>
               <Link
-                href="/buy/pdf"
+                href="/pdf"
                 className="block text-center w-full py-3 bg-[#247459]/15 hover:bg-[#247459]/25 border border-[#247459]/40 font-semibold text-sm rounded-xl transition-colors"
               >
                 {PRICING.pdfGuide.cta.nl}
@@ -1052,7 +1052,7 @@ export default function TIPSLanding() {
                 ))}
               </ul>
               <Link
-                href="/buy/instant"
+                href="/beta"
                 className="block text-center w-full py-3 bg-[#DFB771] hover:bg-[#FFD99A] text-[#031D16] font-bold text-sm rounded-xl transition-colors"
               >
                 {PRICING.instantAppie.cta.nl} →
@@ -1209,7 +1209,7 @@ export default function TIPSLanding() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.97 }}>
               <Link
-                href="/buy/instant"
+                href="/beta"
                 className="flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#FFD99A] text-[#031D16] font-bold px-8 py-4 rounded-xl transition-colors"
               >
                 {PRICING.instantAppie.cta.nl} → €250/mnd
@@ -1217,7 +1217,7 @@ export default function TIPSLanding() {
             </motion.div>
             <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.97 }}>
               <Link
-                href="/buy/pdf"
+                href="/pdf"
                 className="flex items-center justify-center gap-2 bg-[#247459]/15 hover:bg-[#247459]/25 border border-[#247459]/40 hover:border-[#DFB771]/50 text-[#F6FEFC] font-semibold px-8 py-4 rounded-xl transition-colors"
               >
                 {PRICING.pdfGuide.cta.nl},€65
