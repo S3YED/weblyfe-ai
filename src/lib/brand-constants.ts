@@ -223,7 +223,7 @@ export const KPI_90D = {
 
 export const INTEGRATIONS = {
   stripe: { state: 'live', notes: 'Checkout + webhook for €65 PDF live; €250/mo subscription build in progress' },
-  brevo: { state: 'live', notes: '17 templates wired, list 18 = waitlist' },
+  brevo: { state: 'live', notes: '8 templates wired (audited 2026-04-29 per Iter 1); 9 more to build/port during Phase 3 W2-W6. List 18 = waitlist (currently 0 subscribers; backfill from Stripe events pending).' },
   airtable: { state: 'live', notes: 'leads + sales record' },
   tidycal: { state: 'live', notes: 'discovery call booking' },
   hetzner: { state: 'live', notes: 'Custom Appie provisioning via Hetzner Cloud API' },
