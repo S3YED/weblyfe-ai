@@ -193,10 +193,10 @@ const SOCIAL_PROOF = [
     image: '/agents/eva.jpg',
   },
   {
-    name: 'HODM Dubai',
-    client: 'Onderwijs',
-    quote: '3 Appies draaien 50+ taken per dag. Setup volledig door Weblyfe.',
-    image: '/cases/beyondschool.avif',
+    name: 'Privanotify',
+    client: 'Privacy SaaS',
+    quote: '3 Appies draaien 50+ taken per dag voor GDPR-monitoring en compliance-audit. Setup volledig door Weblyfe.',
+    image: '/screenshots/privanotify-fresh.jpg',
   },
   {
     name: 'Ben de Voorman',

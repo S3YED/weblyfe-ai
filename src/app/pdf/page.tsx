@@ -137,11 +137,11 @@ const CASE_STUDIES = [
     image: '/agents/ben.jpg',
   },
   {
-    name: 'HODM Dubai',
-    client: 'Onderwijs',
-    quote: '50+ taken per dag afgehandeld op 3 Appies.',
+    name: 'Privanotify',
+    client: 'Privacy SaaS',
+    quote: '50+ taken per dag afgehandeld op 3 Appies. GDPR-monitoring, alerts, compliance-audit volledig geautomatiseerd.',
     metrics: [{ label: 'Dagelijkse taken', value: '50+ via 3 Appies' }],
-    image: '/cases/beyondschool.avif',
+    image: '/screenshots/privanotify-fresh.jpg',
   },
   {
     name: 'CZA Bouwbedrijf',
@@ -161,11 +161,11 @@ const CASE_STUDIES = [
     image: '/cases/beyondschool.avif',
   },
   {
-    name: 'Luminaire Coaching',
-    client: 'Coaching',
-    quote: 'Inbox- en lead-loop volledig geautomatiseerd. 18 uur per week vrij.',
+    name: 'Luminaire Coaching · Hamid Zahedi',
+    client: 'Spiritual coaching',
+    quote: 'Artemis doet readings, esoterische kennis, content creation en business building. 18 uur per week vrij voor klantgesprekken.',
     metrics: [{ label: 'Tijd bespaard', value: '18 uur per week' }],
-    image: '/cases/bali-with-flow.avif',
+    image: '/agents/artemis.jpg',
   },
 ];
 
@@ -198,7 +198,7 @@ const TOC = [
   'Lead capture + CRM-koppeling',
   'Content-productie en video-generatie',
   'Geavanceerde configuratie - memory, SOUL.md, persona-afstemming',
-  'Case studies: Eva, Ben, HODM, CZA',
+  'Case studies: Eva, Ben, Privanotify, CZA',
   'Troubleshooting + FAQ',
   'Roadmap en updates (v4.5+)',
 ];
