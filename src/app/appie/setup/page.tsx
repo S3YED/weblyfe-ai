@@ -159,52 +159,55 @@ export default function SetupWizardPage() {
         </header>
 
         <section className="grid flex-1 gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-start lg:gap-16">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`hero-${step}`}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.35, ease: 'easeOut' }}
-              className="lg:sticky lg:top-16"
-            >
-              {step === 1 && (
-                <StepHero
-                  icon={UserIcon}
-                  kicker="01 · Identiteit"
-                  caption="Appie spreekt jou en je klanten persoonlijk aan. Begin met je naam."
-                />
-              )}
-              {step === 2 && (
-                <StepHero
-                  icon={Target}
-                  kicker="02 · Doelklant"
-                  caption="Hoe scherper je doelklant, hoe beter Appie triëert wat belangrijk is."
-                />
-              )}
-              {step === 3 && (
-                <StepHero
-                  icon={Mic}
-                  kicker="03 · Stem"
-                  caption="Toon en taal waarmee Appie schrijft, mailt en praat."
-                />
-              )}
-              {step === 4 && (
-                <StepHero
-                  icon={Send}
-                  kicker="04 · Telegram"
-                  caption="Appie pingt jou hier zodra hij online is. Geen apps, geen logins."
-                />
-              )}
-              {step === 5 && (
-                <StepHero
-                  icon={CalendarIcon}
-                  kicker="05 · Eerste tool"
-                  caption="Beta levert één tool. De rest komt er stapsgewijs bij."
-                />
-              )}
-            </motion.div>
+          <div className="lg:sticky lg:top-16">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`hero-${step}`}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+              >
+                {step === 1 && (
+                  <StepHero
+                    icon={UserIcon}
+                    kicker="01 · Identiteit"
+                    caption="Appie spreekt jou en je klanten persoonlijk aan. Begin met je naam."
+                  />
+                )}
+                {step === 2 && (
+                  <StepHero
+                    icon={Target}
+                    kicker="02 · Doelklant"
+                    caption="Hoe scherper je doelklant, hoe beter Appie triëert wat belangrijk is."
+                  />
+                )}
+                {step === 3 && (
+                  <StepHero
+                    icon={Mic}
+                    kicker="03 · Stem"
+                    caption="Toon en taal waarmee Appie schrijft, mailt en praat."
+                  />
+                )}
+                {step === 4 && (
+                  <StepHero
+                    icon={Send}
+                    kicker="04 · Telegram"
+                    caption="Appie pingt jou hier zodra hij online is. Geen apps, geen logins."
+                  />
+                )}
+                {step === 5 && (
+                  <StepHero
+                    icon={CalendarIcon}
+                    kicker="05 · Eerste tool"
+                    caption="Beta levert één tool. De rest komt er stapsgewijs bij."
+                  />
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
+          <AnimatePresence mode="wait">
             <motion.div
               key={`form-${step}`}
               initial={{ opacity: 0, x: 24 }}

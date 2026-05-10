@@ -17,7 +17,7 @@ type Props = {
   sessionId?: string | null;
 };
 
-export default function WelcomeView({ name, sessionId: _ }: Props) {
+export default function WelcomeView({ name }: Props) {
   const router = useRouter();
   const [paused, setPaused] = useState(false);
   const [remaining, setRemaining] = useState(REDIRECT_MS);

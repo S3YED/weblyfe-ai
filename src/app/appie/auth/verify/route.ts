@@ -8,15 +8,20 @@ import { consumeMagicLink } from '@/lib/auth/magic-link';
 import { buildSessionCookie, signSessionJwt, SESSION_TTL_MS } from '@/lib/auth/tokens';
 import { logInfo, logWarn } from '@/lib/log';
 import { __testStore__, isE2eMode } from '@/lib/test-store';
+import { renderExpiredLinkHtml, renderInternalErrorHtml } from '@/lib/auth/expired-page';
 
 export const runtime = 'nodejs';
 
 export async function GET(req: NextRequest) {
   const token = req.nextUrl.searchParams.get('token');
   if (!token) {
-    return new Response('Invalid or expired link', {
+    return new Response(renderExpiredLinkHtml(), {
       status: 410,
-      headers: { 'Referrer-Policy': 'no-referrer' },
+      headers: {
+        'Referrer-Policy': 'no-referrer',
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'no-store',
+      },
     });
   }
 
@@ -37,17 +42,25 @@ export async function GET(req: NextRequest) {
       });
     } catch (err) {
       logWarn('magic-link.verify-error', { error: String(err) });
-      return new Response('Internal', {
+      return new Response(renderInternalErrorHtml(), {
         status: 500,
-        headers: { 'Referrer-Policy': 'no-referrer' },
+        headers: {
+          'Referrer-Policy': 'no-referrer',
+          'Content-Type': 'text/html; charset=utf-8',
+          'Cache-Control': 'no-store',
+        },
       });
     }
   }
 
   if (!userId) {
-    return new Response('Invalid or expired link', {
+    return new Response(renderExpiredLinkHtml(), {
       status: 410,
-      headers: { 'Referrer-Policy': 'no-referrer' },
+      headers: {
+        'Referrer-Policy': 'no-referrer',
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'no-store',
+      },
     });
   }
 
