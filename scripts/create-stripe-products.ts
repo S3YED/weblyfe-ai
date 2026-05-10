@@ -59,7 +59,7 @@ async function main() {
     'subscription_data[metadata][product]': 'instant_appie_beta_250_locked',
     'subscription_data[metadata][source]': 'beta_payment_link',
     after_completion: 'redirect',
-    'after_completion[redirect][url]': `${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}/appie/setup?paid=1`,
+    'after_completion[redirect][url]': `${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}/appie/welcome?session_id={CHECKOUT_SESSION_ID}`,
   });
   console.log('[stripe] payment link:', link.url);
   console.log('\nDone. Test the flow with the URL above.');
