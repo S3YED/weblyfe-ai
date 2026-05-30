@@ -108,7 +108,7 @@ async function createLead(email: string, fullName: string, phone?: string): Prom
     'Status': 'Close',
     'Lead Heat': 'Hot',
     'Sign-up Date': new Date().toISOString(),
-    'Lead notes': 'Auto-created from Stripe PDF purchase (Build Your Own Appie v4.1)',
+    'Lead notes': 'Auto-created from Stripe PDF purchase (Build Your Own Appie v4.5)',
   };
   if (lastName) fields['Last Name'] = lastName;
   if (phone) fields['Phone'] = phone;
@@ -294,12 +294,12 @@ function generateEmailHTML(firstName: string, password: string, downloadUrl: str
         
         <!-- Header -->
         <div style="text-align:center;margin-bottom:28px;">
-          <div style="font-size:48px;margin-bottom:8px;">🎉</div>
+          <p style="color:#DFB771;font-size:11px;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;margin:0 0 10px;">Welcome to Weblyfe</p>
           <h1 class="text-dark" style="color:#031D16;font-size:26px;font-weight:800;margin:0 0 6px;">
-            Hey ${firstName}, welcome!
+            ${firstName ? `Welkom, ${firstName}` : 'Welkom'}
           </h1>
           <p class="text-mid" style="color:#4a5568;font-size:15px;margin:0;">
-            Your copy of <strong>Build Your Own Appie v4.1</strong> is ready to download.
+            Your copy of <strong>Build Your Own Appie v4.5</strong> is ready to download.
           </p>
         </div>
 
@@ -341,7 +341,7 @@ function generateEmailHTML(firstName: string, password: string, downloadUrl: str
                   </td>
                   <td>
                     <p class="text-dark" style="color:#031D16;margin:0;font-size:14px;font-weight:600;">Open the PDF and start reading</p>
-                    <p class="text-mid" style="color:#718096;margin:3px 0 0;font-size:13px;">62 pages of step-by-step instructions to build your AI employee.</p>
+                    <p class="text-mid" style="color:#718096;margin:3px 0 0;font-size:13px;">97 pages of step-by-step instructions to build your AI employee.</p>
                   </td>
                 </tr>
               </table>
@@ -360,7 +360,7 @@ function generateEmailHTML(firstName: string, password: string, downloadUrl: str
                   </td>
                   <td>
                     <p class="text-dark" style="color:#031D16;margin:0;font-size:14px;font-weight:600;">Follow the guide and build your Appie</p>
-                    <p class="text-mid" style="color:#718096;margin:3px 0 0;font-size:13px;">Start from Chapter 1 and work your way through. Join our Discord if you need help.</p>
+                    <p class="text-mid" style="color:#718096;margin:3px 0 0;font-size:13px;">Start from Chapter 1 and work your way through. Reply to this email anytime if you need help.</p>
                   </td>
                 </tr>
               </table>
