@@ -19,11 +19,10 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FaqAccordion from '@/components/FaqAccordion';
 
-// Use TEST link in dev/preview, LIVE in production. Override via env var.
-// Set NEXT_PUBLIC_STRIPE_PDF_CHECKOUT_URL in Vercel env (preview = test_, production = live)
+// Production-safe default. Optional env override for experiments/previews.
 const STRIPE_CHECKOUT_URL =
   process.env.NEXT_PUBLIC_STRIPE_PDF_CHECKOUT_URL ||
-  'https://buy.stripe.com/test_REPLACE_ME_BEFORE_PROD';
+  'https://buy.stripe.com/7sYaEYfAn30C8BncwJ3Je2I';
 
 export const metadata: Metadata = {
   title: 'Build Your Own Techwiz PDF v4.5 - €65',
