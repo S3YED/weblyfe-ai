@@ -113,7 +113,7 @@ describe('POST /api/appie/bot/connect', () => {
     expect(dbQuery).not.toHaveBeenCalled();
   });
 
-  it('validates, sets webhook, stores encrypted, returns username + deep-link', async () => {
+  it('validates, sets per-appie webhook, stores encrypted, returns username + deep-link', async () => {
     // getMe ok, then setWebhook ok.
     globalThis.fetch = vi
       .fn()
@@ -128,10 +128,12 @@ describe('POST /api/appie/bot/connect', () => {
         json: async () => ({ ok: true }),
       }) as unknown as typeof fetch;
 
-    // DB: SELECT existing (none) -> INSERT returns id -> issueBindToken (mocked) -> audit insert
+    // DB flow now: txn1 SELECT existing (none) -> INSERT returns id;
+    // then setWebhook; then txn2 issueBindToken (mocked) -> audit insert.
+    const appieId = '11111111-1111-4111-8111-111111111111';
     dbQuery
       .mockResolvedValueOnce({ rowCount: 0, rows: [] }) // SELECT existing
-      .mockResolvedValueOnce({ rowCount: 1, rows: [{ id: 'appie-1' }] }) // INSERT
+      .mockResolvedValueOnce({ rowCount: 1, rows: [{ id: appieId }] }) // INSERT
       .mockResolvedValueOnce({ rowCount: 1, rows: [] }); // audit_log INSERT
 
     const res = await connectPOST(req({ token: GOOD_TOKEN }) as never);
@@ -143,6 +145,13 @@ describe('POST /api/appie/bot/connect', () => {
     expect(json.telegramDeepLink).toBe('https://t.me/my_appie_bot?start=bind_test_token');
     expect(JSON.stringify(json)).not.toContain(GOOD_TOKEN);
 
+    // The webhook URL must carry the appie id (per-tenant isolation).
+    const calls = (globalThis.fetch as unknown as { mock: { calls: unknown[][] } }).mock.calls;
+    const setWebhookCall = calls.find((c) => /setWebhook/.test(String(c[0])));
+    expect(setWebhookCall).toBeTruthy();
+    const sentBody = JSON.parse((setWebhookCall![1] as RequestInit).body as string);
+    expect(sentBody.url).toContain(`/api/appie/bot/webhook/${appieId}`);
+
     // The INSERT must carry an encrypted token (Buffer), not the raw string.
     const insertCall = dbQuery.mock.calls.find((c) => /INSERT INTO appies/.test(c[0]));
     expect(insertCall).toBeTruthy();
@@ -153,7 +162,7 @@ describe('POST /api/appie/bot/connect', () => {
     expect(params.some((p) => Buffer.isBuffer(p))).toBe(true);
   });
 
-  it('502 webhook-failed when setWebhook fails (and does not store)', async () => {
+  it('502 webhook-failed when setWebhook fails', async () => {
     globalThis.fetch = vi
       .fn()
       .mockResolvedValueOnce({
@@ -167,9 +176,13 @@ describe('POST /api/appie/bot/connect', () => {
         json: async () => ({ ok: false }),
       }) as unknown as typeof fetch;
 
+    const appieId = '22222222-2222-4222-8222-222222222222';
+    dbQuery
+      .mockResolvedValueOnce({ rowCount: 0, rows: [] }) // SELECT existing
+      .mockResolvedValueOnce({ rowCount: 1, rows: [{ id: appieId }] }); // INSERT
+
     const res = await connectPOST(req({ token: GOOD_TOKEN }) as never);
     expect(res.status).toBe(502);
     expect((await res.json()).error).toBe('webhook-failed');
-    expect(dbQuery).not.toHaveBeenCalled();
   });
 });

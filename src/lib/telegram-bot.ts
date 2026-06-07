@@ -121,6 +121,16 @@ export async function setWebhook(
 
 // Build the webhook URL for a given app base URL. Single source of truth so the
 // route and any future caller agree on the path.
+// DEPRECATED for new connects: the unified per-appie webhook below carries the
+// appie id in the path so an inbound update maps to exactly one customer. Kept
+// for back-compat with any bot already pointed at the old bind-only endpoint.
 export function buildRegisterChatWebhookUrl(appUrl: string): string {
   return `${appUrl.replace(/\/$/, '')}/api/appie/register-chat`;
+}
+
+// Unified per-appie webhook URL. The appie id lives IN the path so each
+// customer's bot posts to its own URL, letting us map an inbound Telegram update
+// to exactly one appie row (per-tenant isolation) without trusting the body.
+export function buildBotWebhookUrl(appUrl: string, appieId: string): string {
+  return `${appUrl.replace(/\/$/, '')}/api/appie/bot/webhook/${encodeURIComponent(appieId)}`;
 }

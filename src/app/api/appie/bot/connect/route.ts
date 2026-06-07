@@ -19,7 +19,7 @@ import { encryptToBuffers } from '@/lib/secretbox';
 import {
   validateBotToken,
   setWebhook,
-  buildRegisterChatWebhookUrl,
+  buildBotWebhookUrl,
 } from '@/lib/telegram-bot';
 import { issueBindToken, buildBindDeepLink } from '@/lib/telegram-bind';
 import { getEnv } from '@/lib/env';
@@ -55,32 +55,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: validation.error }, { status });
   }
   const username = validation.username;
-
-  // Set the webhook so the bot relays /start <bindToken> to register-chat.
   const appUrl = getEnv().NEXT_PUBLIC_APP_URL;
-  const webhookUrl = buildRegisterChatWebhookUrl(appUrl);
-  const webhook = await setWebhook(token, webhookUrl);
-  if (!webhook.ok) {
-    // Webhook failed: do not store a half-wired bot. Surface a clear error.
-    logWarn('telegram.bot.connect.webhook-failed', { userId, error: webhook.error });
-    return NextResponse.json(
-      { ok: false, error: 'webhook-failed' },
-      { status: webhook.error === 'network' ? 502 : 502 }
-    );
-  }
-
   const tokenEnc = encryptToBuffers(token);
 
   try {
-    const { telegramDeepLink } = await withUserScope(userId, async (client) => {
-      // Upsert the appie row: store encrypted token + username on the customer's
-      // most recent appie, or create one if none exists yet.
+    // 1) Resolve-or-create the appie row + store the encrypted token, so we know
+    //    the appie id BEFORE wiring the webhook (the webhook URL carries the id).
+    const { appieId } = await withUserScope(userId, async (client) => {
       const existing = await client.query<{ id: string }>(
         `SELECT id FROM appies WHERE user_id = $1 ORDER BY created_at DESC LIMIT 1`,
         [userId]
       );
 
-      let appieId: string;
+      let resolvedId: string;
       if (existing.rowCount === 0) {
         const inserted = await client.query<{ id: string }>(
           `INSERT INTO appies (
@@ -90,28 +77,43 @@ export async function POST(req: NextRequest) {
            RETURNING id`,
           [userId, tokenEnc.ciphertext, tokenEnc.nonce, username]
         );
-        appieId = inserted.rows[0].id;
+        resolvedId = inserted.rows[0].id;
       } else {
-        appieId = existing.rows[0].id;
+        resolvedId = existing.rows[0].id;
         await client.query(
           `UPDATE appies
              SET telegram_bot_token_enc = $2,
                  telegram_bot_token_nonce = $3,
                  telegram_bot_username = $4
            WHERE id = $1`,
-          [appieId, tokenEnc.ciphertext, tokenEnc.nonce, username]
+          [resolvedId, tokenEnc.ciphertext, tokenEnc.nonce, username]
         );
       }
+      return { appieId: resolvedId };
+    });
 
+    // 2) Set the webhook to this appie's OWN URL so its updates (both the
+    //    /start bind and normal onboarding messages) land on the unified
+    //    per-appie webhook and map to exactly this customer.
+    const webhookUrl = buildBotWebhookUrl(appUrl, appieId);
+    const webhook = await setWebhook(token, webhookUrl);
+    if (!webhook.ok) {
+      logWarn('telegram.bot.connect.webhook-failed', { userId, error: webhook.error });
+      return NextResponse.json(
+        { ok: false, error: 'webhook-failed' },
+        { status: 502 }
+      );
+    }
+
+    // 3) Mint the bind deep-link + audit. Token already stored above.
+    const telegramDeepLink = await withUserScope(userId, async (client) => {
       const { token: bindToken } = await issueBindToken(client, appieId);
-
       await client.query(
         `INSERT INTO audit_log (user_id, event, payload)
          VALUES ($1, 'telegram.bot.connected', $2)`,
         [userId, JSON.stringify({ username })]
       );
-
-      return { telegramDeepLink: buildBindDeepLink(username, bindToken) };
+      return buildBindDeepLink(username, bindToken);
     });
 
     logInfo('telegram.bot.connect.ok', { userId, username });
