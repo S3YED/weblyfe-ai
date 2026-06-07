@@ -26,7 +26,7 @@ const FALLBACK_STEPS: { id: string; label: string; detail: string }[] = [
   { id: 'server-creating', label: 'Server reserveren', detail: 'Hetzner CX32 EU' },
   { id: 'network-attaching', label: 'Netwerk + firewall', detail: 'Tailscale mesh + dichte firewall' },
   { id: 'cloud-init-running', label: 'Cloud-init draaien', detail: 'Hermes Agent installeren' },
-  { id: 'telegram-bot-leasing', label: 'Telegram bot leasen', detail: 'Eigen bot uit pool' },
+  { id: 'telegram-bot-leasing', label: 'Telegram bot koppelen', detail: 'Jouw eigen bot' },
   { id: 'agent-starting', label: 'Persoonlijke Techwiz instellen', detail: 'Naam, stem, doelklant' },
   { id: 'first-ping', label: 'Eerste briefing voorbereiden', detail: 'Eerste persoonlijke ping' },
 ];
@@ -209,8 +209,8 @@ export default function ProvisioningPage() {
               [NET] Koppel je Telegram nu alvast
             </p>
             <p className="mx-auto mt-1 max-w-sm text-[13px] leading-relaxed text-[#a2d0bf]/70">
-              Tik op de knop om je chat te verbinden. Je Appie stuurt zijn eerste
-              bericht zodra hij online is.
+              Tik op de knop om je chat te verbinden. Zodra Appie online is, stuur
+              je hem gewoon een voicenote, dan pakt hij het op.
             </p>
             <a
               href={deepLink}

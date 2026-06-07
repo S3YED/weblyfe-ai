@@ -22,9 +22,9 @@ export type FirstPingArgs = {
 
 function renderFirstPing(args: FirstPingArgs): string {
   if (args.language === 'en') {
-    return `Hi ${args.customerName}, your Appie is online. I focus on: ${args.icp}. Reply with anything you want me to take off your plate today.`;
+    return `Hi ${args.customerName}, your Appie is online. I focus on: ${args.icp}. Easiest start: just send me a voicenote with whatever you want off your plate today.`;
   }
-  return `Hoi ${args.customerName}, je Appie staat aan. Ik focus op: ${args.icp}. Stuur me waar ik vandaag aan moet werken.`;
+  return `Hoi ${args.customerName}, je Appie staat aan. Ik focus op: ${args.icp}. Het makkelijkst: stuur me gewoon een voicenote met waar ik vandaag aan moet werken.`;
 }
 
 // Low-level: send a message to a chat through a specific bot token.

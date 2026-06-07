@@ -20,6 +20,7 @@ import {
   Users,
 } from 'lucide-react';
 import CosmicBackdrop from './CosmicBackdrop';
+import BotConnectPanel from './BotConnectPanel';
 import CountUp from '@/components/anim/CountUp';
 
 export type DashboardViewData = {
@@ -152,23 +153,37 @@ export default function DashboardView({ data }: { data: DashboardViewData }) {
             </div>
           </Card>
 
-          <Card kicker="Telegram" title="Direct contact">
+          <Card kicker="Telegram" title="Bot-status">
             {data.telegramBotUsername ? (
               <div className="space-y-3">
-                <p className="text-sm text-[#a2d0bf]/60">Je bot:</p>
+                <span className="hud-mono inline-flex items-center gap-2 rounded-sm border border-[#dfb771]/30 bg-[#dfb771]/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-[#fdd38a]">
+                  <CheckCircle2 size={13} />
+                  Verbonden
+                </span>
                 <Link
                   href={`https://t.me/${data.telegramBotUsername}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="hud-mono inline-flex items-center gap-2 text-base font-semibold text-[#fdd38a] underline-offset-4 hover:underline"
+                  className="hud-mono flex items-center gap-2 text-base font-semibold text-[#fdd38a] underline-offset-4 hover:underline"
+                  data-testid="dashboard-bot-username"
                 >
                   @{data.telegramBotUsername}
                   <ArrowUpRight size={14} />
                 </Link>
-                <p className="hud-mono text-xs text-[#a2d0bf]/40">Laatst actief: net</p>
+                <p className="text-xs text-[#a2d0bf]/55">
+                  Stuur je Appie gewoon een voicenote, dan pakt hij het op.
+                </p>
               </div>
             ) : (
-              <p className="text-sm text-[#a2d0bf]/60">Bot wordt geleased zodra Appie online is.</p>
+              <div className="space-y-3">
+                <span className="hud-mono inline-flex items-center gap-2 rounded-sm border border-[#a2d0bf]/15 bg-[#0a241d]/70 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-[#a2d0bf]/70">
+                  <CircleDot size={13} />
+                  Niet verbonden
+                </span>
+                <p className="text-sm text-[#a2d0bf]/60">
+                  Koppel je eigen Telegram-bot hieronder om te starten.
+                </p>
+              </div>
             )}
           </Card>
 
@@ -244,6 +259,13 @@ export default function DashboardView({ data }: { data: DashboardViewData }) {
             </p>
           </Card>
         </div>
+
+        {/* Bring-your-own bot: show the connect flow until a bot is wired. */}
+        {!data.telegramBotUsername ? (
+          <div className="mt-5">
+            <BotConnectPanel lang="nl" />
+          </div>
+        ) : null}
 
         {data.telegramBotUsername ? (
           <Link

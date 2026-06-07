@@ -189,7 +189,13 @@ async function provisionReal(userId: string, body: WizardBody): Promise<NextResp
     );
   }
 
-  // Phase 1 (transactional): lease a bot + persist the row + mint the bind link.
+  // Phase 1 (transactional): resolve the customer's bot + persist the row + mint
+  // the bind link.
+  //
+  // Token selection (Seyed decision 2026-06-07, TG 2890): PREFER the customer's
+  // OWN bot token if they already connected one via /api/appie/bot/connect.
+  // Only fall back to leasing from TELEGRAM_BOT_TOKEN_POOL when no customer
+  // token is present on their appie row.
   let prepared: {
     appieId: string;
     botToken: string;
@@ -197,33 +203,65 @@ async function provisionReal(userId: string, body: WizardBody): Promise<NextResp
   };
   try {
     prepared = await withUserScope(userId, async (client) => {
-      // Tokens already leased to other appies -> never double-assign a bot.
-      const leasedRows = await client.query<{ enc: Buffer | null; nonce: Buffer | null }>(
-        `SELECT telegram_bot_token_enc AS enc, telegram_bot_token_nonce AS nonce
-           FROM appies
-          WHERE telegram_bot_token_enc IS NOT NULL`
+      const { decryptFromBuffers } = await import('@/lib/secretbox');
+
+      // Look up the customer's existing appie row (may already hold their own bot).
+      const existing = await client.query<{
+        id: string;
+        enc: Buffer | null;
+        nonce: Buffer | null;
+        username: string | null;
+      }>(
+        `SELECT id, telegram_bot_token_enc AS enc,
+                telegram_bot_token_nonce AS nonce,
+                telegram_bot_username AS username
+           FROM appies WHERE user_id = $1 ORDER BY created_at DESC LIMIT 1`,
+        [userId]
       );
-      const leasedTokens = new Set<string>();
-      for (const r of leasedRows.rows) {
-        if (r.enc && r.nonce) {
-          try {
-            const { decryptFromBuffers } = await import('@/lib/secretbox');
-            leasedTokens.add(decryptFromBuffers(r.enc, r.nonce));
-          } catch {
-            // Skip undecryptable rows (e.g. mock tokens); they won't collide.
-          }
+      const current = existing.rows[0] ?? null;
+
+      // 1) Customer brought their own token -> use it, skip the pool entirely.
+      let bot: { token: string; username: string } | null = null;
+      if (current?.enc && current.nonce && current.username) {
+        try {
+          bot = {
+            token: decryptFromBuffers(current.enc, current.nonce),
+            username: current.username,
+          };
+          logInfo('provision.real.token-source', { userId, source: 'customer' });
+        } catch {
+          // Undecryptable (corrupt/mock) -> fall through to pool lease.
+          bot = null;
         }
       }
 
-      const bot = leaseBot(process.env.TELEGRAM_BOT_TOKEN_POOL, leasedTokens);
-      const tokenEnc = encryptToBuffers(bot.token);
+      // 2) No customer token -> FALLBACK: lease one from the pool, never reusing
+      //    a token already assigned to another appie.
+      if (!bot) {
+        const leasedRows = await client.query<{ enc: Buffer | null; nonce: Buffer | null }>(
+          `SELECT telegram_bot_token_enc AS enc, telegram_bot_token_nonce AS nonce
+             FROM appies
+            WHERE telegram_bot_token_enc IS NOT NULL`
+        );
+        const leasedTokens = new Set<string>();
+        for (const r of leasedRows.rows) {
+          if (r.enc && r.nonce) {
+            try {
+              leasedTokens.add(decryptFromBuffers(r.enc, r.nonce));
+            } catch {
+              // Skip undecryptable rows (e.g. mock tokens); they won't collide.
+            }
+          }
+        }
+        bot = leaseBot(process.env.TELEGRAM_BOT_TOKEN_POOL, leasedTokens);
+        logInfo('provision.real.token-source', { userId, source: 'pool' });
+      }
 
-      const existing = await client.query<{ id: string }>(
-        `SELECT id FROM appies WHERE user_id = $1 ORDER BY created_at DESC LIMIT 1`,
-        [userId]
-      );
+      const resolvedBot = bot;
+      const tokenEnc = encryptToBuffers(resolvedBot.token);
+
       let appieId: string;
-      if (existing.rowCount === 0) {
+      if (!current) {
         const inserted = await client.query<{ id: string }>(
           `INSERT INTO appies (
              user_id, telegram_bot_token_enc, telegram_bot_token_nonce,
@@ -232,11 +270,11 @@ async function provisionReal(userId: string, body: WizardBody): Promise<NextResp
              heartbeat_secret
            ) VALUES ($1, $2, $3, $4, $5, 'provisioning', 'queued', '0', now(), $6)
            RETURNING id`,
-          [userId, tokenEnc.ciphertext, tokenEnc.nonce, bot.username, JSON.stringify(body), heartbeatSecret]
+          [userId, tokenEnc.ciphertext, tokenEnc.nonce, resolvedBot.username, JSON.stringify(body), heartbeatSecret]
         );
         appieId = inserted.rows[0].id;
       } else {
-        appieId = existing.rows[0].id;
+        appieId = current.id;
         await client.query(
           `UPDATE appies
              SET telegram_bot_token_enc = $2, telegram_bot_token_nonce = $3,
@@ -245,7 +283,7 @@ async function provisionReal(userId: string, body: WizardBody): Promise<NextResp
                  provision_percent = '0', provision_started_at = now(),
                  heartbeat_secret = $6
            WHERE id = $1`,
-          [appieId, tokenEnc.ciphertext, tokenEnc.nonce, bot.username, JSON.stringify(body), heartbeatSecret]
+          [appieId, tokenEnc.ciphertext, tokenEnc.nonce, resolvedBot.username, JSON.stringify(body), heartbeatSecret]
         );
       }
 
@@ -257,8 +295,8 @@ async function provisionReal(userId: string, body: WizardBody): Promise<NextResp
 
       return {
         appieId,
-        botToken: bot.token,
-        telegramDeepLink: buildBindDeepLink(bot.username, bindToken),
+        botToken: resolvedBot.token,
+        telegramDeepLink: buildBindDeepLink(resolvedBot.username, bindToken),
       };
     });
   } catch (err) {
