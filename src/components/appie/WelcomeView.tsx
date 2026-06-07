@@ -42,7 +42,7 @@ export default function WelcomeView({ name }: Props) {
   const sec = Math.ceil(remaining / 1000);
 
   return (
-    <main className="relative min-h-screen text-white">
+    <main className="hud relative min-h-screen text-[#cce9dd]">
       <CosmicBackdrop intensity="medium" />
       <div className="mx-auto flex min-h-screen w-full max-w-2xl flex-col items-center justify-center px-5 py-16 text-center sm:px-8">
         <motion.div
@@ -60,9 +60,9 @@ export default function WelcomeView({ name }: Props) {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="space-y-5"
         >
-          <p className="text-[11px] uppercase tracking-[0.22em] text-[#DFB771]">Welkom bij Instant Appie</p>
-          <h1 className="text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">{greeting}.</h1>
-          <p className="mx-auto max-w-md text-[15px] leading-relaxed text-white/65">
+          <p className="hud-mono text-[11px] uppercase tracking-[0.22em] text-[#fdd38a]">WELKOM BIJ INSTANT_APPIE</p>
+          <h1 className="text-4xl font-bold leading-[1.05] tracking-tight text-[#cce9dd] sm:text-5xl">{greeting}.</h1>
+          <p className="mx-auto max-w-md text-[15px] leading-relaxed text-[#a2d0bf]/75">
             We sturen je nu een setup-link via mail. Check je inbox, klik op de knop, en je Appie staat over 30 seconden aan.
           </p>
         </motion.div>
@@ -75,7 +75,7 @@ export default function WelcomeView({ name }: Props) {
         >
           <Link
             href="/appie/auth/login"
-            className="inline-flex h-14 items-center gap-3 rounded-full bg-[#DFB771] px-7 text-[15px] font-bold tracking-tight text-[#031D16] shadow-[0_18px_50px_-15px_rgba(223,183,113,0.7)] transition hover:bg-[#e8c889]"
+            className="inline-flex h-14 items-center gap-3 rounded-sm bg-[#dfb771] px-7 text-[15px] font-bold tracking-tight text-[#422d00] shadow-[0_0_28px_-8px_rgba(253,211,138,0.7)] transition hover:bg-[#fdd38a]"
           >
             Ik check mijn inbox
             <ArrowRight size={18} />
@@ -83,14 +83,14 @@ export default function WelcomeView({ name }: Props) {
           <button
             type="button"
             onClick={() => setPaused((p) => !p)}
-            className="text-[12px] uppercase tracking-[0.18em] text-white/40 transition hover:text-white/70"
+            className="hud-mono text-[12px] uppercase tracking-[0.18em] text-[#a2d0bf]/40 transition hover:text-[#cce9dd]/70"
           >
             {paused ? 'Hervat redirect' : `Doorsturen over ${sec}s · pauzeer`}
           </button>
         </motion.div>
 
-        <p className="mt-16 inline-flex items-center gap-2 text-xs text-white/40">
-          <Sparkles size={12} className="text-[#DFB771]" />
+        <p className="mt-16 inline-flex items-center gap-2 text-xs text-[#a2d0bf]/40">
+          <Sparkles size={12} className="text-[#fdd38a]" />
           Geen mail ontvangen? Check spam, of vraag op /appie/auth/login een nieuwe link aan.
         </p>
       </div>
@@ -103,22 +103,22 @@ function EnvelopeWithSeal() {
     <div className="relative">
       <motion.div
         aria-hidden
-        className="absolute inset-0 -z-10 rounded-full bg-[#DFB771]/15 blur-3xl"
+        className="absolute inset-0 -z-10 rounded-full bg-[#fdd38a]/15 blur-3xl"
         animate={{ scale: [1, 1.08, 1], opacity: [0.55, 0.85, 0.55] }}
         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
         animate={{ y: [0, -6, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-        className="relative flex h-32 w-32 items-center justify-center rounded-3xl border border-[#DFB771]/30 bg-gradient-to-br from-[#DFB771]/15 to-transparent backdrop-blur-xl"
+        className="hud-frame hud-frame-active relative flex h-32 w-32 items-center justify-center rounded-sm border border-[#dfb771]/30 bg-gradient-to-br from-[#dfb771]/15 to-transparent backdrop-blur-xl"
       >
-        <Mail className="h-14 w-14 text-[#DFB771]" strokeWidth={1.4} />
+        <Mail className="h-14 w-14 text-[#fdd38a]" strokeWidth={1.3} />
         <motion.span
           aria-hidden
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.4, type: 'spring', stiffness: 220, damping: 14 }}
-          className="absolute -bottom-2 -right-2 flex h-9 w-9 items-center justify-center rounded-full bg-[#DFB771] text-[#031D16] shadow-[0_10px_25px_-10px_rgba(223,183,113,0.8)]"
+          className="absolute -bottom-2 -right-2 flex h-9 w-9 items-center justify-center rounded-sm bg-[#dfb771] text-[#422d00] shadow-[0_0_18px_-6px_rgba(253,211,138,0.8)]"
         >
           <Sparkles size={16} strokeWidth={2.4} />
         </motion.span>

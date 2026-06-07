@@ -47,7 +47,7 @@ export default function LoginView() {
   }
 
   return (
-    <main className="relative min-h-screen text-white">
+    <main className="hud relative min-h-screen text-[#cce9dd]">
       <CosmicBackdrop intensity="medium" />
       <div className="mx-auto flex min-h-screen w-full max-w-xl flex-col items-center justify-center px-5 py-16 sm:px-8">
         <AnimatePresence mode="wait">
@@ -61,10 +61,10 @@ export default function LoginView() {
               className="w-full text-center"
             >
               <SuccessIllustration />
-              <p className="mt-8 text-[11px] uppercase tracking-[0.22em] text-[#DFB771]">Check je inbox</p>
-              <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">Link onderweg</h1>
-              <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-white/60">
-                Als <span className="text-white">{email}</span> bij ons bekend is, hebben we een setup-link gestuurd. De link werkt 15 minuten en kan één keer gebruikt worden.
+              <p className="mt-8 hud-mono text-[11px] uppercase tracking-[0.22em] text-[#fdd38a]">[NET] CHECK JE INBOX</p>
+              <h1 className="mt-2 text-3xl font-bold tracking-tight text-[#cce9dd] sm:text-4xl">Link onderweg</h1>
+              <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-[#a2d0bf]/70">
+                Als <span className="hud-mono text-[#cce9dd]">{email}</span> bij ons bekend is, hebben we een setup-link gestuurd. De link werkt 15 minuten en kan één keer gebruikt worden.
               </p>
               <button
                 type="button"
@@ -73,7 +73,7 @@ export default function LoginView() {
                   setEmail('');
                   setTouched(false);
                 }}
-                className="mt-8 inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.18em] text-white/40 transition hover:text-white/70"
+                className="mt-8 hud-mono inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.18em] text-[#a2d0bf]/40 transition hover:text-[#cce9dd]/70"
               >
                 <RotateCw size={12} />
                 Verkeerd adres? Probeer opnieuw
@@ -89,11 +89,11 @@ export default function LoginView() {
               className="w-full"
             >
               <header className="mb-10 text-center">
-                <p className="text-[11px] uppercase tracking-[0.22em] text-[#DFB771]">Instant Appie</p>
-                <h1 className="mt-2 text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl">
+                <p className="hud-mono text-[11px] uppercase tracking-[0.22em] text-[#fdd38a]">INSTANT_APPIE</p>
+                <h1 className="mt-2 text-3xl font-bold leading-[1.1] tracking-tight text-[#cce9dd] sm:text-4xl">
                   Stuur me een nieuwe link
                 </h1>
-                <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-white/60">
+                <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-[#a2d0bf]/70">
                   Wachtwoordloos. Vul je e-mailadres in, wij sturen een veilige eenmalige link.
                 </p>
               </header>
@@ -114,7 +114,7 @@ export default function LoginView() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="group inline-flex h-14 w-full items-center justify-center gap-3 rounded-full bg-[#DFB771] px-7 text-[15px] font-bold tracking-tight text-[#031D16] shadow-[0_18px_50px_-15px_rgba(223,183,113,0.7)] transition hover:bg-[#e8c889] disabled:opacity-60"
+                  className="group inline-flex h-14 w-full items-center justify-center gap-3 rounded-sm bg-[#dfb771] px-7 text-[15px] font-bold tracking-tight text-[#422d00] shadow-[0_0_28px_-8px_rgba(253,211,138,0.7)] transition hover:bg-[#fdd38a] disabled:opacity-60"
                   data-testid="login-submit"
                 >
                   {submitting ? 'Bezig.' : 'Stuur link'}
@@ -122,13 +122,13 @@ export default function LoginView() {
                 </button>
 
                 {error ? (
-                  <p className="rounded-2xl border border-[#FF9C92]/30 bg-[#FF9C92]/10 p-3 text-sm text-[#FFD2CC]">
-                    {error}
+                  <p className="hud-mono rounded-sm border border-[#ffb4ab]/40 border-l-2 border-l-[#ffb4ab] bg-[#ffb4ab]/[0.08] p-3 text-sm text-[#ffb4ab]">
+                    [ERR] {error}
                   </p>
                 ) : null}
 
-                <p className="flex items-center justify-center gap-2 pt-4 text-[11px] uppercase tracking-[0.18em] text-white/35">
-                  <ShieldCheck size={12} className="text-[#DFB771]" />
+                <p className="hud-mono flex items-center justify-center gap-2 pt-4 text-[11px] uppercase tracking-[0.18em] text-[#a2d0bf]/35">
+                  <ShieldCheck size={12} className="text-[#fdd38a]" />
                   Geen wachtwoord, geen gedoe
                 </p>
               </form>
@@ -145,16 +145,16 @@ function SuccessIllustration() {
     <div className="relative mx-auto h-32 w-32">
       <motion.div
         aria-hidden
-        className="absolute inset-0 rounded-full bg-[#DFB771]/15 blur-3xl"
+        className="absolute inset-0 rounded-full bg-[#fdd38a]/15 blur-3xl"
         animate={{ scale: [1, 1.1, 1], opacity: [0.55, 0.85, 0.55] }}
         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
         animate={{ y: [0, -5, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-        className="relative flex h-full w-full items-center justify-center rounded-3xl border border-[#DFB771]/30 bg-gradient-to-br from-[#DFB771]/15 to-transparent backdrop-blur-xl"
+        className="hud-frame hud-frame-active relative flex h-full w-full items-center justify-center rounded-sm border border-[#dfb771]/30 bg-gradient-to-br from-[#dfb771]/15 to-transparent backdrop-blur-xl"
       >
-        <Mail className="h-14 w-14 text-[#DFB771]" strokeWidth={1.4} />
+        <Mail className="h-14 w-14 text-[#fdd38a]" strokeWidth={1.3} />
       </motion.div>
     </div>
   );
