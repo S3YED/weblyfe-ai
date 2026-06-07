@@ -21,7 +21,7 @@ export default function GoldConfetti({ fire }: Props) {
         const mod = await import('canvas-confetti');
         const confetti = mod.default;
         if (cancelled) return;
-        const colors = ['#DFB771', '#FFD99A', '#F6FEFC'];
+        const colors = ['#fdd38a', '#dfb771', '#cce9dd'];
         confetti({
           particleCount: 60,
           spread: 70,

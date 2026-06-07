@@ -49,18 +49,18 @@ const DETAILS: { id: string; title: string; body: string }[] = [
 export default function StepDetailsAccordion() {
   const [open, setOpen] = useState(false);
   return (
-    <section className="overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.025] backdrop-blur-xl">
+    <section className="hud-panel overflow-hidden">
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
         className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left"
       >
         <span>
-          <span className="text-[10px] uppercase tracking-[0.22em] text-[#DFB771]">Educatie</span>
-          <p className="mt-1 text-sm font-semibold text-white">Wat gebeurt er nu?</p>
+          <span className="hud-mono text-[10px] uppercase tracking-[0.22em] text-[#fdd38a]">[SYS] DIAGNOSTIEK</span>
+          <p className="mt-1 text-sm font-semibold text-[#cce9dd]">Wat gebeurt er nu?</p>
         </span>
         <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25 }}>
-          <ChevronDown size={18} className="text-white/55" />
+          <ChevronDown size={18} className="text-[#a2d0bf]/55" />
         </motion.span>
       </button>
       <AnimatePresence initial={false}>
@@ -75,9 +75,9 @@ export default function StepDetailsAccordion() {
           >
             <div className="space-y-4 px-5 pb-5">
               {DETAILS.map((d) => (
-                <div key={d.id} className="border-l border-[#DFB771]/30 pl-4">
-                  <p className="text-sm font-semibold text-white">{d.title}</p>
-                  <p className="mt-1 text-xs leading-relaxed text-white/55">{d.body}</p>
+                <div key={d.id} className="border-l border-[#dfb771]/30 pl-4">
+                  <p className="text-sm font-semibold text-[#cce9dd]">{d.title}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-[#a2d0bf]/60">{d.body}</p>
                 </div>
               ))}
             </div>

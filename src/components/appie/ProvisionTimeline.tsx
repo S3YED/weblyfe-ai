@@ -40,6 +40,17 @@ const DEFAULT_DETAILS: Record<string, string> = {
   'first-ping': 'Eerste briefing voorbereiden',
 };
 
+// HUD tactical-log channel tag per step, matching onboarding_final_deployment
+// log lines: [SYS] infra, [NET] networking, [AGT] agent runtime.
+const CHANNEL_BY_ID: Record<string, string> = {
+  'server-creating': '[SYS]',
+  'network-attaching': '[NET]',
+  'cloud-init-running': '[SYS]',
+  'telegram-bot-leasing': '[NET]',
+  'agent-starting': '[AGT]',
+  'first-ping': '[AGT]',
+};
+
 type Props = {
   steps: TimelineStep[];
   activeIdx: number;
@@ -56,44 +67,49 @@ export default function ProvisionTimeline({ steps, activeIdx, online, completedA
         const active = !online && activeIdx === i;
         const detail = s.detail || DEFAULT_DETAILS[s.id] || s.label;
         const ts = completedAt.get(s.id);
+        const channel = CHANNEL_BY_ID[s.id] ?? '[SYS]';
         return (
           <motion.li
             key={s.id}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.08 * i, duration: 0.4 }}
-            className="relative flex items-start gap-4 rounded-2xl border border-white/[0.06] bg-white/[0.025] px-4 py-4 backdrop-blur-xl"
+            className={`hud-frame ${active ? 'hud-frame-active' : ''} hud-panel relative flex items-start gap-4 overflow-hidden px-4 py-4`}
           >
+            {active ? (
+              <span aria-hidden className="hud-scanline pointer-events-none absolute inset-x-0 top-0 h-12" />
+            ) : null}
             <div className="relative">
               {active ? (
                 <motion.span
                   aria-hidden
-                  className="absolute inset-0 rounded-2xl bg-[#DFB771]/30 blur-md"
+                  className="absolute inset-0 rounded-sm bg-[#fdd38a]/30 blur-md"
                   animate={{ opacity: [0.25, 0.7, 0.25] }}
                   transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                 />
               ) : null}
               <span
-                className={`relative flex h-10 w-10 items-center justify-center rounded-2xl border ${
+                className={`relative flex h-10 w-10 items-center justify-center rounded-sm border ${
                   done
-                    ? 'border-[#DFB771]/60 bg-[#DFB771] text-[#031D16]'
+                    ? 'border-[#dfb771]/60 bg-[#dfb771] text-[#422d00]'
                     : active
-                    ? 'border-[#DFB771]/60 bg-[#DFB771]/15 text-[#DFB771]'
-                    : 'border-white/10 bg-white/[0.03] text-white/40'
+                    ? 'border-[#dfb771]/60 bg-[#dfb771]/15 text-[#fdd38a]'
+                    : 'border-[#a2d0bf]/12 bg-[#00110c]/60 text-[#a2d0bf]/40'
                 }`}
               >
                 {done ? <Check size={16} strokeWidth={3} /> : <Icon size={16} strokeWidth={1.6} />}
               </span>
             </div>
             <div className="min-w-0 flex-1">
-              <p className={`text-sm font-semibold ${done ? 'text-white' : active ? 'text-white' : 'text-white/55'}`}>
+              <p className={`text-sm font-semibold ${done || active ? 'text-[#cce9dd]' : 'text-[#a2d0bf]/55'}`}>
+                <span className={`hud-mono mr-2 text-xs ${active ? 'text-[#fdd38a]' : 'text-[#a2d0bf]/45'}`}>{channel}</span>
                 {s.label}
               </p>
-              <p className="mt-0.5 text-xs text-white/45">{detail}</p>
+              <p className="mt-0.5 hud-mono text-xs text-[#a2d0bf]/45">{detail}</p>
             </div>
             <div className="shrink-0 text-right">
               {done && ts ? (
-                <span className="text-[11px] uppercase tracking-[0.16em] text-white/45 tabular-nums">{ts}</span>
+                <span className="hud-mono text-[11px] tracking-[0.1em] text-[#a2d0bf]/45 tabular-nums">{ts}</span>
               ) : active ? (
                 <motion.span
                   className="inline-flex items-end gap-0.5"
@@ -102,14 +118,14 @@ export default function ProvisionTimeline({ steps, activeIdx, online, completedA
                   {[0, 0.2, 0.4].map((d) => (
                     <motion.span
                       key={d}
-                      className="block h-1 w-1 rounded-full bg-[#DFB771]"
+                      className="block h-1 w-1 rounded-full bg-[#fdd38a]"
                       animate={{ opacity: [0.2, 1, 0.2] }}
                       transition={{ duration: 1.2, repeat: Infinity, delay: d, ease: 'easeInOut' }}
                     />
                   ))}
                 </motion.span>
               ) : (
-                <span className="text-[11px] text-white/25">.</span>
+                <span className="hud-mono text-[11px] text-[#a2d0bf]/25">--:--</span>
               )}
             </div>
           </motion.li>

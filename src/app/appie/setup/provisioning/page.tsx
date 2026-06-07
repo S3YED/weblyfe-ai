@@ -182,14 +182,14 @@ export default function ProvisioningPage() {
   });
 
   return (
-    <main className="relative min-h-screen text-white">
+    <main className="hud relative min-h-screen text-[#cce9dd]">
       <CosmicBackdrop intensity="high" />
       <GoldConfetti fire={confettiFired} />
       <div className="mx-auto flex min-h-screen w-full max-w-3xl flex-col px-5 pb-[max(2rem,env(safe-area-inset-bottom))] pt-[max(2rem,env(safe-area-inset-top))] sm:px-8 sm:py-14">
         <header className="mb-10 text-center">
-          <p className="text-[11px] uppercase tracking-[0.22em] text-[#DFB771]">Activeren</p>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">Je Appie wordt klaargezet</h1>
-          <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-white/55">
+          <p className="hud-mono text-[11px] uppercase tracking-[0.22em] text-[#fdd38a]">DEPLOYMENT</p>
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-[#cce9dd] sm:text-4xl">Je Appie wordt klaargezet</h1>
+          <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-[#a2d0bf]/70">
             Dit duurt ongeveer 30 seconden. Je krijgt zo een eerste bericht in Telegram.
           </p>
         </header>
@@ -204,11 +204,11 @@ export default function ProvisioningPage() {
         </div>
 
         {deepLink ? (
-          <div className="mb-8 rounded-2xl border border-[#DFB771]/30 bg-[#DFB771]/10 p-4 text-center">
-            <p className="text-[13px] font-semibold text-[#DFB771]">
-              Koppel je Telegram nu alvast
+          <div className="hud-frame hud-frame-active hud-panel relative mb-8 p-4 text-center">
+            <p className="hud-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[#fdd38a]">
+              [NET] Koppel je Telegram nu alvast
             </p>
-            <p className="mx-auto mt-1 max-w-sm text-[13px] leading-relaxed text-white/60">
+            <p className="mx-auto mt-1 max-w-sm text-[13px] leading-relaxed text-[#a2d0bf]/70">
               Tik op de knop om je chat te verbinden. Je Appie stuurt zijn eerste
               bericht zodra hij online is.
             </p>
@@ -216,7 +216,7 @@ export default function ProvisioningPage() {
               href={deepLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center justify-center rounded-full bg-[#DFB771] px-5 py-2 text-sm font-semibold text-black transition hover:brightness-105"
+              className="mt-3 inline-flex items-center justify-center rounded-sm bg-[#dfb771] px-5 py-2 text-sm font-semibold text-[#422d00] shadow-[0_0_18px_-6px_rgba(253,211,138,0.6)] transition hover:bg-[#fdd38a]"
             >
               Open in Telegram
             </a>
@@ -231,8 +231,8 @@ export default function ProvisioningPage() {
         />
 
         {error ? (
-          <p className="mt-6 rounded-2xl border border-[#FF9C92]/30 bg-[#FF9C92]/10 p-3 text-sm text-[#FFD2CC]">
-            {error}
+          <p className="mt-6 hud-mono rounded-sm border border-[#ffb4ab]/40 border-l-2 border-l-[#ffb4ab] bg-[#ffb4ab]/[0.08] p-3 text-sm text-[#ffb4ab]">
+            [ERR] {error}
           </p>
         ) : null}
 
@@ -243,7 +243,7 @@ export default function ProvisioningPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4, delay: 0.3 }}
-              className="mt-8 text-center text-sm font-semibold text-[#DFB771]"
+              className="mt-8 hud-mono text-center text-sm font-semibold uppercase tracking-[0.1em] text-[#fdd38a] hud-glow-text"
             >
               {isDemo ? 'Demo loop. We resetten zo en starten opnieuw.' : 'Klaar. Je gaat door naar het dashboard.'}
             </motion.p>
