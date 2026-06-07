@@ -41,6 +41,8 @@ export const appies = pgTable('appies', {
   telegramBotTokenEnc: bytea('telegram_bot_token_enc'),
   telegramBotTokenNonce: bytea('telegram_bot_token_nonce'),
   telegramBotUsername: text('telegram_bot_username'),
+  // Customer's Telegram chat id, bound via the t.me deep-link /start flow.
+  telegramChatId: text('telegram_chat_id'),
   sshPubkey: text('ssh_pubkey'),
   onboardingState: jsonb('onboarding_state'),
   status: text('status'),
@@ -48,6 +50,9 @@ export const appies = pgTable('appies', {
   provisionStep: text('provision_step'),
   provisionPercent: text('provision_percent'),
   provisionStartedAt: timestamp('provision_started_at', { withTimezone: true }),
+  // Heartbeat: per-appie shared secret + last seen, set at provision time.
+  heartbeatSecret: text('heartbeat_secret'),
+  lastHeartbeatAt: timestamp('last_heartbeat_at', { withTimezone: true }),
   // Google Calendar OAuth tokens (encrypted)
   googleAccessTokenEnc: bytea('google_access_token_enc'),
   googleAccessTokenNonce: bytea('google_access_token_nonce'),
@@ -59,6 +64,16 @@ export const appies = pgTable('appies', {
 export const magicTokens = pgTable('magic_tokens', {
   token: text('token').primaryKey(),
   userId: uuid('user_id').references(() => users.id),
+  expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+  usedAt: timestamp('used_at', { withTimezone: true }),
+});
+
+// One-time tokens for binding a customer's Telegram chat to their appie.
+// The customer opens t.me/<bot>?start=<token>; the bot relays /start to
+// POST /api/appie/register-chat which validates + consumes the token.
+export const telegramBindTokens = pgTable('telegram_bind_tokens', {
+  token: text('token').primaryKey(),
+  appieId: uuid('appie_id').references(() => appies.id),
   expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
   usedAt: timestamp('used_at', { withTimezone: true }),
 });
