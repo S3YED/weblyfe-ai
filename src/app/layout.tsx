@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Rethink_Sans } from 'next/font/google';
+import { Rethink_Sans, JetBrains_Mono } from 'next/font/google';
 import { cookies } from 'next/headers';
 import './globals.css';
 import { I18nProvider } from '@/i18n/I18nProvider';
@@ -10,6 +10,15 @@ const rethinkSans = Rethink_Sans({
   weight: ['400', '500', '600', '700', '800'],
   display: 'swap',
   variable: '--font-rethink',
+});
+
+// JetBrains Mono powers the Aetheris HUD data layer: IDs, log lines,
+// timestamps, SEQ labels. Loaded as a CSS var so the theme can opt in.
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-mono',
 });
 
 export const viewport: Viewport = {
@@ -160,7 +169,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     ? (cookieLocale as Locale)
     : DEFAULT_LOCALE;
   return (
-    <html lang={locale} className={`scroll-smooth ${rethinkSans.variable}`}>
+    <html lang={locale} className={`scroll-smooth ${rethinkSans.variable} ${jetbrainsMono.variable}`}>
       <head>
         <script
           type="application/ld+json"
