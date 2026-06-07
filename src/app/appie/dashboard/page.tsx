@@ -53,7 +53,7 @@ async function loadDashboard(userId: string): Promise<DashboardViewData> {
 
 export default async function DashboardPage() {
   const userId = await getCurrentUserId();
-  if (!userId) redirect('/appie/setup');
+  if (!userId) redirect('/appie/auth/login');
 
   let data: DashboardViewData;
   if (isE2eMode()) {
