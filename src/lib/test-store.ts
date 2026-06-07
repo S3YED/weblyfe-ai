@@ -15,6 +15,9 @@ type AppieRow = {
   telegramBotUsername: string | null;
   hetznerIp: string | null;
   hetznerServerId: string | null;
+  telegramChatId?: string | null;
+  heartbeatSecret?: string | null;
+  bindToken?: string | null;
 };
 
 type Store = {
