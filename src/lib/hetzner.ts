@@ -1,24 +1,17 @@
-// Real Hetzner Cloud API provisioner.
-// TODO: Production cutover requires Hetzner Cloud API key + STRIPE_LIVE_OK: provision_real_servers approval.
-// At time of writing this module is intentionally NOT wired. /appie/api/provision
-// always uses hetzner-mock unless HETZNER_API_KEY is set AND PROVISION_MODE=real.
+// Compatibility shim. The real Hetzner provisioner now lives in
+// src/lib/provisioning/hetzner.ts (driven by the Orgo->Hetzner orchestrator in
+// src/lib/provisioning/index.ts). This module is kept so any older imports keep
+// resolving; new code should import from '@/lib/provisioning'.
 
-import { logInfo } from './log';
+export { hetznerProvisioner, HetznerProvisioner } from './provisioning/hetzner';
 
-export async function provisionRealCx32(_args: {
-  userId: string;
-  email: string;
-  sshPubkey: string;
-  cloudInitYaml: string;
-}): Promise<never> {
-  logInfo('hetzner.provision.blocked', {
-    reason: 'real-provision-disabled-pre-approval',
-  });
-  throw new Error(
-    'Real Hetzner provisioning is disabled. Set PROVISION_MODE=real and obtain STRIPE_LIVE_OK: provision_real_servers approval before enabling.'
-  );
-}
-
+// Real provisioning is gated on PROVISION_MODE=real + a provider token.
+// (Historically this was a hard-throw stub; the gate now lives in the provision
+// route via PROVISION_MODE, with the orchestrator emitting per-provider
+// not-configured errors when a token is missing.)
 export function isRealProvisionEnabled(): boolean {
-  return Boolean(process.env.HETZNER_API_KEY) && process.env.PROVISION_MODE === 'real';
+  return (
+    Boolean(process.env.HETZNER_API_TOKEN ?? process.env.HETZNER_API_KEY) &&
+    process.env.PROVISION_MODE === 'real'
+  );
 }

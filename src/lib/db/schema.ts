@@ -53,6 +53,9 @@ export const appies = pgTable('appies', {
   // Heartbeat: per-appie shared secret + last seen, set at provision time.
   heartbeatSecret: text('heartbeat_secret'),
   lastHeartbeatAt: timestamp('last_heartbeat_at', { withTimezone: true }),
+  // Provisioning provider chosen at provision time + opaque provider-side id.
+  provider: text('provider'),
+  providerId: text('provider_id'),
   // Google Calendar OAuth tokens (encrypted)
   googleAccessTokenEnc: bytea('google_access_token_enc'),
   googleAccessTokenNonce: bytea('google_access_token_nonce'),
