@@ -55,8 +55,12 @@ export async function GET() {
         status: string | null;
         provision_started_at: Date | null;
         onboarding_state: { name?: string; icp?: string; voiceLanguage?: 'nl' | 'en' } | null;
+        telegram_chat_id: string | null;
+        telegram_bot_token_enc: Buffer | null;
+        telegram_bot_token_nonce: Buffer | null;
       }>(
-        `SELECT id, status, provision_started_at, onboarding_state
+        `SELECT id, status, provision_started_at, onboarding_state,
+                telegram_chat_id, telegram_bot_token_enc, telegram_bot_token_nonce
          FROM appies WHERE user_id = $1 ORDER BY created_at DESC LIMIT 1`,
         [userId]
       );
@@ -86,6 +90,9 @@ export async function GET() {
           customerName: onboarding.name || 'daar',
           icp: onboarding.icp || 'jouw doelklant',
           language: (onboarding.voiceLanguage as 'nl' | 'en') || 'nl',
+          telegramChatId: appie.telegram_chat_id,
+          botTokenEnc: appie.telegram_bot_token_enc,
+          botTokenNonce: appie.telegram_bot_token_nonce,
         });
         logInfo('provision.online', { appieId: appie.id });
         return { step: 'online', percent: 100, online: true, appieId: appie.id };
