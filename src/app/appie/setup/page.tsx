@@ -133,6 +133,11 @@ export default function SetupWizardPage() {
       try {
         localStorage.removeItem('appie:wizard:state');
         localStorage.removeItem('appie:wizard:step');
+        // Stash the chat-bind deep-link so the provisioning page can show the
+        // customer a tap-to-bind link (P0 follow-up).
+        if (data.telegramDeepLink) {
+          localStorage.setItem('appie:telegramDeepLink', String(data.telegramDeepLink));
+        }
       } catch {}
       router.push('/appie/setup/provisioning');
     } catch (e) {

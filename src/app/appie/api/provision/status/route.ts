@@ -58,15 +58,20 @@ export async function GET() {
         telegram_chat_id: string | null;
         telegram_bot_token_enc: Buffer | null;
         telegram_bot_token_nonce: Buffer | null;
+        provider: string | null;
+        last_heartbeat_at: Date | null;
       }>(
         `SELECT id, status, provision_started_at, onboarding_state,
-                telegram_chat_id, telegram_bot_token_enc, telegram_bot_token_nonce
+                telegram_chat_id, telegram_bot_token_enc, telegram_bot_token_nonce,
+                provider, last_heartbeat_at
          FROM appies WHERE user_id = $1 ORDER BY created_at DESC LIMIT 1`,
         [userId]
       );
       if (r.rowCount === 0) return null;
       const appie = r.rows[0];
 
+      // Online (either provider): flip + first ping below covers it. If already
+      // online, short-circuit.
       if (appie.status === 'online') {
         return { step: 'online', percent: 100, online: true, appieId: appie.id };
       }
@@ -74,7 +79,20 @@ export async function GET() {
         return { step: 'queued', percent: 0, online: false, appieId: appie.id };
       }
 
-      const progress = computeMockProgress(new Date(appie.provision_started_at));
+      // Real provider: the box is authoritative via /api/appie/heartbeat, which
+      // sets status='online'. We DON'T run the time-mock here; we just report
+      // the provisioning state and wait for the heartbeat to flip it. The first
+      // ping is sent on that flip (handled by the shared block below when the
+      // heartbeat has marked status online between polls).
+      const isReal = Boolean(appie.provider);
+      const progress = isReal
+        ? {
+            // No heartbeat yet -> still bringing the box up. Cap below 100 so the
+            // UI keeps polling until the box phones home.
+            step: 'agent-starting' as const,
+            percent: 70,
+          }
+        : computeMockProgress(new Date(appie.provision_started_at));
       // Persist progress
       await client.query(
         `UPDATE appies SET provision_step = $2, provision_percent = $3 WHERE id = $1`,

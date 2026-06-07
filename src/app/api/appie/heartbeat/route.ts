@@ -9,6 +9,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { timingSafeEqual } from 'node:crypto';
 import { withUserScope } from '@/lib/db';
 import { logInfo, logWarn } from '@/lib/log';
+import { sendFirstPing } from '@/lib/telegram';
 import { __testStore__, isE2eMode } from '@/lib/test-store';
 
 export const runtime = 'nodejs';
@@ -48,23 +49,64 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: 'unauthorized' }, { status: 401 });
   }
 
+  // Narrow once so the value stays `string` inside the async closure below.
+  const appieId = body.appie_id;
+  const presentedSecret = body.secret;
+
   try {
     const result = await withUserScope(null, async (client) => {
       const r = await client.query<{ heartbeat_secret: string | null }>(
         `SELECT heartbeat_secret FROM appies WHERE id = $1`,
-        [body.appie_id]
+        [appieId]
       );
       if (r.rowCount === 0) return 'not-found' as const;
       const stored = r.rows[0].heartbeat_secret;
-      if (!stored || !body.secret || !secretsMatch(stored, body.secret)) {
+      if (!stored || !secretsMatch(stored, presentedSecret)) {
         return 'unauthorized' as const;
       }
-      await client.query(
+      // Flip online + stamp heartbeat. RETURNING tells us if THIS call was the
+      // first online transition (xmax = 0 means inserted, not relevant here;
+      // instead we detect transition by the WHERE on prior status).
+      const flip = await client.query<{ id: string }>(
         `UPDATE appies
            SET status = 'online', provision_percent = '100', last_heartbeat_at = now()
-         WHERE id = $1`,
-        [body.appie_id]
+         WHERE id = $1 AND status IS DISTINCT FROM 'online'
+         RETURNING id`,
+        [appieId]
       );
+      const firstOnline = (flip.rowCount ?? 0) > 0;
+      if (!firstOnline) {
+        // Already online: just refresh last_heartbeat_at (liveness ping).
+        await client.query(`UPDATE appies SET last_heartbeat_at = now() WHERE id = $1`, [
+          appieId,
+        ]);
+        return 'ok' as const;
+      }
+
+      // First online transition: send the customer's first ping (idempotent -
+      // only runs on the transition, not on subsequent liveness pings).
+      const detail = await client.query<{
+        onboarding_state: { name?: string; icp?: string; voiceLanguage?: 'nl' | 'en' } | null;
+        telegram_chat_id: string | null;
+        telegram_bot_token_enc: Buffer | null;
+        telegram_bot_token_nonce: Buffer | null;
+      }>(
+        `SELECT onboarding_state, telegram_chat_id,
+                telegram_bot_token_enc, telegram_bot_token_nonce
+           FROM appies WHERE id = $1`,
+        [appieId]
+      );
+      const row = detail.rows[0];
+      const onboarding = row?.onboarding_state || {};
+      await sendFirstPing(client, {
+        appieId,
+        customerName: onboarding.name || 'daar',
+        icp: onboarding.icp || 'jouw doelklant',
+        language: (onboarding.voiceLanguage as 'nl' | 'en') || 'nl',
+        telegramChatId: row?.telegram_chat_id ?? null,
+        botTokenEnc: row?.telegram_bot_token_enc ?? null,
+        botTokenNonce: row?.telegram_bot_token_nonce ?? null,
+      });
       return 'ok' as const;
     });
 

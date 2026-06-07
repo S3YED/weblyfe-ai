@@ -7,11 +7,18 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getCurrentUserId } from '@/lib/auth/session';
 import { withUserScope } from '@/lib/db';
 import { buildMockProvisionResult } from '@/lib/hetzner-mock';
-import { isRealProvisionEnabled } from '@/lib/hetzner';
 import { encryptToBuffers } from '@/lib/secretbox';
 import { issueBindToken, buildBindDeepLink } from '@/lib/telegram-bind';
-import { logInfo } from '@/lib/log';
+import { logInfo, logWarn } from '@/lib/log';
 import { __testStore__, isE2eMode } from '@/lib/test-store';
+import { provision } from '@/lib/provisioning';
+import { leaseBot } from '@/lib/provisioning/bot-pool';
+
+// Real provisioning runs the Orgo->Hetzner orchestrator. Gate: PROVISION_MODE=real.
+// Mock stays the default so dev/preview never touches a cloud provider.
+function isRealMode(): boolean {
+  return process.env.PROVISION_MODE === 'real';
+}
 
 // Per-appie heartbeat shared secret. The box presents this back to
 // POST /api/appie/heartbeat to prove identity. 32 bytes base64url.
@@ -51,15 +58,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: 'missing-fields' }, { status: 400 });
   }
 
-  if (isRealProvisionEnabled()) {
-    return NextResponse.json(
-      {
-        ok: false,
-        error: 'real-provision-blocked',
-        hint: 'STRIPE_LIVE_OK: provision_real_servers approval required.',
-      },
-      { status: 503 }
-    );
+  // Real mode: lease a bot, persist the appie row, run the Orgo->Hetzner
+  // orchestrator, then record the chosen provider. E2E never enters here.
+  if (isRealMode() && !isE2eMode()) {
+    return provisionReal(userId, body);
   }
 
   const mock = buildMockProvisionResult(userId);
@@ -167,4 +169,151 @@ export async function POST(req: NextRequest) {
     mode: 'mock',
     telegramDeepLink,
   });
+}
+
+// ── Real provisioning path ────────────────────────────────────────────────
+// 1. Lease a bot from the pool (one per customer; never reuse a leased token).
+// 2. Upsert the appie row with identity (heartbeat_secret) + encrypted bot token.
+// 3. Mint the chat-bind deep-link.
+// 4. Run the orchestrator (Orgo primary, Hetzner fallback) and persist the
+//    chosen provider + provider_id.
+// The box phones home to /api/appie/heartbeat with {appie_id, secret}; the
+// status route flips it online on that signal (real-heartbeat preferred path).
+async function provisionReal(userId: string, body: WizardBody): Promise<NextResponse> {
+  const heartbeatSecret = generateHeartbeatSecret();
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? '';
+  if (!appUrl) {
+    return NextResponse.json(
+      { ok: false, error: 'misconfigured', hint: 'NEXT_PUBLIC_APP_URL required for real mode.' },
+      { status: 500 }
+    );
+  }
+
+  // Phase 1 (transactional): lease a bot + persist the row + mint the bind link.
+  let prepared: {
+    appieId: string;
+    botToken: string;
+    telegramDeepLink: string;
+  };
+  try {
+    prepared = await withUserScope(userId, async (client) => {
+      // Tokens already leased to other appies -> never double-assign a bot.
+      const leasedRows = await client.query<{ enc: Buffer | null; nonce: Buffer | null }>(
+        `SELECT telegram_bot_token_enc AS enc, telegram_bot_token_nonce AS nonce
+           FROM appies
+          WHERE telegram_bot_token_enc IS NOT NULL`
+      );
+      const leasedTokens = new Set<string>();
+      for (const r of leasedRows.rows) {
+        if (r.enc && r.nonce) {
+          try {
+            const { decryptFromBuffers } = await import('@/lib/secretbox');
+            leasedTokens.add(decryptFromBuffers(r.enc, r.nonce));
+          } catch {
+            // Skip undecryptable rows (e.g. mock tokens); they won't collide.
+          }
+        }
+      }
+
+      const bot = leaseBot(process.env.TELEGRAM_BOT_TOKEN_POOL, leasedTokens);
+      const tokenEnc = encryptToBuffers(bot.token);
+
+      const existing = await client.query<{ id: string }>(
+        `SELECT id FROM appies WHERE user_id = $1 ORDER BY created_at DESC LIMIT 1`,
+        [userId]
+      );
+      let appieId: string;
+      if (existing.rowCount === 0) {
+        const inserted = await client.query<{ id: string }>(
+          `INSERT INTO appies (
+             user_id, telegram_bot_token_enc, telegram_bot_token_nonce,
+             telegram_bot_username, onboarding_state, status,
+             provision_step, provision_percent, provision_started_at,
+             heartbeat_secret
+           ) VALUES ($1, $2, $3, $4, $5, 'provisioning', 'queued', '0', now(), $6)
+           RETURNING id`,
+          [userId, tokenEnc.ciphertext, tokenEnc.nonce, bot.username, JSON.stringify(body), heartbeatSecret]
+        );
+        appieId = inserted.rows[0].id;
+      } else {
+        appieId = existing.rows[0].id;
+        await client.query(
+          `UPDATE appies
+             SET telegram_bot_token_enc = $2, telegram_bot_token_nonce = $3,
+                 telegram_bot_username = $4, onboarding_state = $5,
+                 status = 'provisioning', provision_step = 'queued',
+                 provision_percent = '0', provision_started_at = now(),
+                 heartbeat_secret = $6
+           WHERE id = $1`,
+          [appieId, tokenEnc.ciphertext, tokenEnc.nonce, bot.username, JSON.stringify(body), heartbeatSecret]
+        );
+      }
+
+      const { token: bindToken } = await issueBindToken(client, appieId);
+      await client.query(
+        `INSERT INTO audit_log (user_id, event, payload) VALUES ($1, 'provision.queued', $2)`,
+        [userId, JSON.stringify({ mode: 'real' })]
+      );
+
+      return {
+        appieId,
+        botToken: bot.token,
+        telegramDeepLink: buildBindDeepLink(bot.username, bindToken),
+      };
+    });
+  } catch (err) {
+    logWarn('provision.real.prepare-failed', { userId, error: String(err) });
+    return NextResponse.json(
+      { ok: false, error: 'provision-prepare-failed' },
+      { status: 503 }
+    );
+  }
+
+  // Phase 2 (no DB txn held while we hit the cloud): orchestrate the box.
+  try {
+    const outcome = await provision({
+      appieId: prepared.appieId,
+      heartbeatSecret,
+      appUrl,
+      botToken: prepared.botToken,
+      onboardingState: body as unknown as Record<string, unknown>,
+    });
+
+    // Persist the chosen provider + provider-side id for status/destroy.
+    await withUserScope(userId, async (client) => {
+      await client.query(
+        `UPDATE appies
+           SET provider = $2, provider_id = $3,
+               hetzner_server_id = $3, hetzner_ip = $4,
+               provision_step = 'server-creating', provision_percent = '20'
+         WHERE id = $1`,
+        [prepared.appieId, outcome.provider, outcome.providerId, outcome.ip ?? null]
+      );
+    });
+
+    logInfo('provision.real.queued', {
+      userId,
+      provider: outcome.provider,
+      appieId: prepared.appieId,
+    });
+
+    return NextResponse.json({
+      ok: true,
+      provisionId: outcome.providerId,
+      mode: 'real',
+      provider: outcome.provider,
+      telegramDeepLink: prepared.telegramDeepLink,
+    });
+  } catch (err) {
+    // Both providers failed. Mark the row failed but keep the deep-link so the
+    // customer can still bind once we retry; surface a 503.
+    logWarn('provision.real.failed', { userId, error: String(err) });
+    await withUserScope(userId, async (client) => {
+      await client.query(`UPDATE appies SET status = 'failed' WHERE id = $1`, [prepared.appieId]);
+    }).catch(() => undefined);
+    return NextResponse.json(
+      { ok: false, error: 'provision-failed', telegramDeepLink: prepared.telegramDeepLink },
+      { status: 503 }
+    );
+  }
 }

@@ -49,6 +49,7 @@ export default function ProvisioningPage() {
     steps: FALLBACK_STEPS,
   });
   const [error, setError] = useState<string | null>(null);
+  const [deepLink, setDeepLink] = useState<string | null>(null);
   const [completed, setCompleted] = useState<Map<string, string>>(new Map());
   const [confettiFired, setConfettiFired] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -86,6 +87,18 @@ export default function ProvisioningPage() {
     const t = setTimeout(() => router.push('/appie/dashboard'), 1500);
     return () => clearTimeout(t);
   }, [state.online, state.steps, isDemo, router]);
+
+  // Pull the chat-bind deep-link the provision response stashed (P0 follow-up).
+  useEffect(() => {
+    if (isDemo) {
+      setDeepLink('https://t.me/appie_demo_bot?start=demo');
+      return;
+    }
+    try {
+      const link = localStorage.getItem('appie:telegramDeepLink');
+      if (link) setDeepLink(link);
+    } catch {}
+  }, [isDemo]);
 
   // Demo mode: synthesize a 28s loop locally.
   useEffect(() => {
@@ -189,6 +202,26 @@ export default function ProvisioningPage() {
             online={state.online}
           />
         </div>
+
+        {deepLink ? (
+          <div className="mb-8 rounded-2xl border border-[#DFB771]/30 bg-[#DFB771]/10 p-4 text-center">
+            <p className="text-[13px] font-semibold text-[#DFB771]">
+              Koppel je Telegram nu alvast
+            </p>
+            <p className="mx-auto mt-1 max-w-sm text-[13px] leading-relaxed text-white/60">
+              Tik op de knop om je chat te verbinden. Je Appie stuurt zijn eerste
+              bericht zodra hij online is.
+            </p>
+            <a
+              href={deepLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center justify-center rounded-full bg-[#DFB771] px-5 py-2 text-sm font-semibold text-black transition hover:brightness-105"
+            >
+              Open in Telegram
+            </a>
+          </div>
+        ) : null}
 
         <ProvisionTimeline
           steps={timelineSteps}
