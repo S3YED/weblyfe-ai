@@ -27,7 +27,9 @@ export async function POST(req: NextRequest) {
   const env = getEnv();
 
   try {
-    const { token, expiresAt, didMintNew } = await withUserScope(null, async (client) => {
+    const autocreate = process.env.APPIE_AUTOCREATE_ON_REQUEST === '1';
+
+    const { token, expiresAt, didMintNew, noAccount } = await withUserScope(null, async (client) => {
       // Don't auto-create users here. Auth must follow a paid Stripe webhook.
       // But for dev convenience, allow creation if APPIE_AUTOCREATE_ON_REQUEST=1.
       let userRes = await client.query<{ id: string }>(
@@ -35,24 +37,27 @@ export async function POST(req: NextRequest) {
         [email]
       );
       if (userRes.rowCount === 0) {
-        if (process.env.APPIE_AUTOCREATE_ON_REQUEST === '1') {
+        if (autocreate) {
           userRes = await client.query<{ id: string }>(
             `INSERT INTO users (email) VALUES ($1) RETURNING id`,
             [email]
           );
         } else {
-          return { token: null, expiresAt: null, didMintNew: false };
+          return { token: null, expiresAt: null, didMintNew: false, noAccount: true };
         }
       }
       const userId = userRes.rows[0].id;
       const issued = await issueMagicLink(client, userId);
-      return { token: issued.token, expiresAt: issued.expiresAt, didMintNew: true };
+      return { token: issued.token, expiresAt: issued.expiresAt, didMintNew: true, noAccount: false };
     });
 
     if (!didMintNew || !token) {
-      // Generic 200 to avoid leaking which emails are registered.
+      // No account for this email AND autocreate is off. Direct them to
+      // weblyfe.ai to purchase. Enumeration is acceptable here because this
+      // path only triggers in production where autocreate is off and the
+      // product intentionally tells buyers where to sign up.
       logWarn('magic-link.unknown-email', { email });
-      return NextResponse.json({ ok: true });
+      return NextResponse.json({ ok: true, noAccount: Boolean(noAccount) });
     }
 
     const url = `${env.NEXT_PUBLIC_APP_URL}/appie/auth/verify?token=${encodeURIComponent(token)}`;

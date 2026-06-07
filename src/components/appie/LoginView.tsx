@@ -17,6 +17,7 @@ export default function LoginView() {
   const [email, setEmail] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
+  const [noAccount, setNoAccount] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [touched, setTouched] = useState(false);
 
@@ -35,7 +36,12 @@ export default function LoginView() {
         body: JSON.stringify({ email: email.trim().toLowerCase() }),
       });
       if (res.ok) {
-        setSent(true);
+        const data = (await res.json().catch(() => ({}))) as { noAccount?: boolean };
+        if (data.noAccount) {
+          setNoAccount(true);
+        } else {
+          setSent(true);
+        }
       } else {
         setError(`Onbekende fout (${res.status})`);
       }
@@ -51,7 +57,44 @@ export default function LoginView() {
       <CosmicBackdrop intensity="medium" />
       <div className="mx-auto flex min-h-screen w-full max-w-xl flex-col items-center justify-center px-5 py-16 sm:px-8">
         <AnimatePresence mode="wait">
-          {sent ? (
+          {noAccount ? (
+            <motion.div
+              key="no-account"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.4 }}
+              className="w-full text-center"
+              data-testid="login-no-account"
+            >
+              <p className="hud-mono text-[11px] uppercase tracking-[0.22em] text-[#fdd38a]">[404] GEEN ACCOUNT</p>
+              <h1 className="mt-2 text-3xl font-bold tracking-tight text-[#cce9dd] sm:text-4xl">Nog geen account?</h1>
+              <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-[#a2d0bf]/70">
+                We vonden geen account voor <span className="hud-mono text-[#cce9dd]">{email}</span>. Bestel je
+                Instant Appie op weblyfe.ai, dan staat je dashboard direct klaar.
+              </p>
+              <a
+                href="https://weblyfe.ai"
+                className="group mt-8 inline-flex h-14 items-center justify-center gap-3 rounded-sm bg-[#dfb771] px-7 text-[15px] font-bold tracking-tight text-[#422d00] shadow-[0_0_28px_-8px_rgba(253,211,138,0.7)] transition hover:bg-[#fdd38a]"
+                data-testid="login-goto-weblyfe"
+              >
+                Ga naar weblyfe.ai
+                <ArrowRight size={18} className="transition-transform group-hover:translate-x-0.5" />
+              </a>
+              <button
+                type="button"
+                onClick={() => {
+                  setNoAccount(false);
+                  setEmail('');
+                  setTouched(false);
+                }}
+                className="mt-8 hud-mono flex w-full items-center justify-center gap-2 text-[12px] uppercase tracking-[0.18em] text-[#a2d0bf]/40 transition hover:text-[#cce9dd]/70"
+              >
+                <RotateCw size={12} />
+                Ander e-mailadres
+              </button>
+            </motion.div>
+          ) : sent ? (
             <motion.div
               key="success"
               initial={{ opacity: 0, y: 12 }}
