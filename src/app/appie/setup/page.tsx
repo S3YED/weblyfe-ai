@@ -147,15 +147,17 @@ export default function SetupWizardPage() {
   }
 
   return (
-    <main className="relative min-h-screen text-white">
+    <main className="hud relative min-h-screen text-[#cce9dd]">
       <CosmicBackdrop />
       <div className="mx-auto flex min-h-screen w-full max-w-5xl flex-col px-5 pb-[max(2rem,env(safe-area-inset-bottom))] pt-[max(2rem,env(safe-area-inset-top))] sm:px-8 sm:py-14">
         <header className="mb-8 flex flex-wrap items-center justify-between gap-3">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.22em] text-[#DFB771]">Instant Appie</p>
-            <p className="mt-1 text-[13px] text-white/55">Stap {step} van {TOTAL_STEPS}</p>
+            <p className="hud-mono text-[11px] uppercase tracking-[0.22em] text-[#fdd38a]">INSTANT_APPIE</p>
+            <p className="mt-1 hud-mono text-[13px] tracking-[0.08em] text-[#a2d0bf]/70">
+              SEQ: {String(step).padStart(2, '0')}/{String(TOTAL_STEPS).padStart(2, '0')}
+            </p>
           </div>
-          <div className="flex flex-col items-end gap-1">
+          <div className="flex flex-col items-end gap-2">
             <div className="-mr-1 max-w-full overflow-x-auto">
               <StepIndicator total={TOTAL_STEPS} current={step} />
             </div>
@@ -176,35 +178,35 @@ export default function SetupWizardPage() {
                 {step === 1 && (
                   <StepHero
                     icon={UserIcon}
-                    kicker="01 · Identiteit"
+                    kicker="SEQ 01 · IDENTITEIT"
                     caption="Appie spreekt jou en je klanten persoonlijk aan. Begin met je naam."
                   />
                 )}
                 {step === 2 && (
                   <StepHero
                     icon={Target}
-                    kicker="02 · Doelklant"
+                    kicker="SEQ 02 · DOELKLANT"
                     caption="Hoe scherper je doelklant, hoe beter Appie triëert wat belangrijk is."
                   />
                 )}
                 {step === 3 && (
                   <StepHero
                     icon={Mic}
-                    kicker="03 · Stem"
+                    kicker="SEQ 03 · STEM"
                     caption="Toon en taal waarmee Appie schrijft, mailt en praat."
                   />
                 )}
                 {step === 4 && (
                   <StepHero
                     icon={Send}
-                    kicker="04 · Telegram"
+                    kicker="SEQ 04 · TELEGRAM"
                     caption="Appie pingt jou hier zodra hij online is. Geen apps, geen logins."
                   />
                 )}
                 {step === 5 && (
                   <StepHero
                     icon={CalendarIcon}
-                    kicker="05 · Eerste tool"
+                    kicker="SEQ 05 · EERSTE TOOL"
                     caption="Beta levert één tool. De rest komt er stapsgewijs bij."
                   />
                 )}
@@ -230,8 +232,8 @@ export default function SetupWizardPage() {
         </section>
 
         {error ? (
-          <p className="mt-4 rounded-2xl border border-[#FF9C92]/30 bg-[#FF9C92]/10 p-3 text-sm text-[#FFD2CC]">
-            {error}
+          <p className="mt-4 hud-mono rounded-sm border border-[#ffb4ab]/40 border-l-2 border-l-[#ffb4ab] bg-[#ffb4ab]/[0.08] p-3 text-sm text-[#ffb4ab]">
+            [ERR] {error}
           </p>
         ) : null}
 
@@ -240,7 +242,7 @@ export default function SetupWizardPage() {
             type="button"
             onClick={() => setStep((s) => Math.max(1, s - 1))}
             disabled={step === 1 || submitting}
-            className="inline-flex h-12 items-center gap-2 rounded-full px-5 text-sm font-medium text-white/55 transition hover:bg-white/5 hover:text-white disabled:pointer-events-none disabled:opacity-0"
+            className="hud-mono inline-flex h-12 items-center gap-2 rounded-sm px-5 text-xs uppercase tracking-[0.12em] text-[#a2d0bf]/60 transition hover:bg-[#a2d0bf]/[0.06] hover:text-[#cce9dd] disabled:pointer-events-none disabled:opacity-0"
           >
             <ArrowLeft size={16} /> Terug
           </button>
@@ -251,7 +253,7 @@ export default function SetupWizardPage() {
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: 'spring', stiffness: 320, damping: 22 }}
-              className="group inline-flex h-14 items-center gap-3 rounded-full bg-[#DFB771] px-7 text-[15px] font-bold tracking-tight text-[#031D16] shadow-[0_10px_40px_-12px_rgba(223,183,113,0.6)] transition hover:bg-[#e8c889] disabled:opacity-50"
+              className="group inline-flex h-14 items-center gap-3 rounded-sm bg-[#dfb771] px-7 text-[15px] font-bold tracking-tight text-[#422d00] shadow-[0_0_24px_-6px_rgba(253,211,138,0.6)] transition hover:bg-[#fdd38a] disabled:opacity-50"
             >
               Volgende
               <ArrowRight size={18} className="transition-transform group-hover:translate-x-0.5" />
@@ -263,7 +265,7 @@ export default function SetupWizardPage() {
               disabled={submitting}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className="group inline-flex h-14 items-center gap-3 rounded-full bg-[#DFB771] px-7 text-[15px] font-bold tracking-tight text-[#031D16] shadow-[0_10px_40px_-12px_rgba(223,183,113,0.6)] transition hover:bg-[#e8c889] disabled:opacity-50"
+              className="group inline-flex h-14 items-center gap-3 rounded-sm bg-[#dfb771] px-7 text-[15px] font-bold tracking-tight text-[#422d00] shadow-[0_0_24px_-6px_rgba(253,211,138,0.6)] transition hover:bg-[#fdd38a] disabled:opacity-50"
               data-testid="finish-wizard"
             >
               {submitting ? 'Bezig.' : 'Activeer Appie'}
@@ -280,8 +282,8 @@ function Step1Name({ state, setState, error }: { state: WizardState; setState: (
   return (
     <div className="space-y-6">
       <header className="space-y-3">
-        <h1 className="text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl">Hoe heet je?</h1>
-        <p className="text-[15px] leading-relaxed text-white/55">
+        <h1 className="text-3xl font-bold leading-[1.1] tracking-tight text-[#cce9dd] sm:text-4xl">Hoe heet je?</h1>
+        <p className="text-[15px] leading-relaxed text-[#a2d0bf]/75">
           Zo spreekt Appie je in Telegram aan en zo introduceert hij zich tegen je klanten.
         </p>
       </header>
@@ -302,8 +304,8 @@ function Step2Icp({ state, setState, error }: { state: WizardState; setState: (s
   return (
     <div className="space-y-6">
       <header className="space-y-3">
-        <h1 className="text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl">Wie is je doelklant?</h1>
-        <p className="text-[15px] leading-relaxed text-white/55">
+        <h1 className="text-3xl font-bold leading-[1.1] tracking-tight text-[#cce9dd] sm:text-4xl">Wie is je doelklant?</h1>
+        <p className="text-[15px] leading-relaxed text-[#a2d0bf]/75">
           Een tot twee zinnen. Hoe scherper, hoe beter Appie weet wat hij voor je triëert.
         </p>
       </header>
@@ -331,14 +333,14 @@ function Step3Voice({ state, setState }: { state: WizardState; setState: (s: Wiz
   return (
     <div className="space-y-8">
       <header className="space-y-3">
-        <h1 className="text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl">Welke stem past bij jou?</h1>
-        <p className="text-[15px] leading-relaxed text-white/55">
+        <h1 className="text-3xl font-bold leading-[1.1] tracking-tight text-[#cce9dd] sm:text-4xl">Welke stem past bij jou?</h1>
+        <p className="text-[15px] leading-relaxed text-[#a2d0bf]/75">
           Taal en toon waarmee Appie je klanten benadert. Je kunt dit later bijschaven.
         </p>
       </header>
 
       <div className="space-y-3">
-        <p className="text-[10px] uppercase tracking-[0.2em] text-[#DFB771]">Taal</p>
+        <p className="hud-mono text-[10px] uppercase tracking-[0.2em] text-[#fdd38a]">Taal</p>
         <div className="grid grid-cols-2 gap-3">
           {(['nl', 'en'] as const).map((lang) => {
             const active = state.voiceLanguage === lang;
@@ -347,16 +349,16 @@ function Step3Voice({ state, setState }: { state: WizardState; setState: (s: Wiz
                 key={lang}
                 type="button"
                 onClick={() => setState({ ...state, voiceLanguage: lang })}
-                className={`group relative h-14 overflow-hidden rounded-2xl border px-5 text-left text-sm font-semibold transition backdrop-blur-xl ${
+                className={`hud-frame group relative h-14 overflow-hidden rounded-sm border px-5 text-left text-sm font-semibold transition backdrop-blur-xl ${
                   active
-                    ? 'border-[#DFB771] bg-[#DFB771]/15 text-white'
-                    : 'border-white/10 bg-white/[0.04] text-white/75 hover:border-white/25 hover:bg-white/[0.07]'
+                    ? 'hud-frame-active border-[#dfb771]/40 bg-[#dfb771]/12 text-[#cce9dd]'
+                    : 'border-[#a2d0bf]/12 bg-[#0a241d]/60 text-[#cce9dd]/80 hover:border-[#a2d0bf]/25 hover:bg-[#0a241d]/80'
                 }`}
                 data-testid={`wizard-lang-${lang}`}
               >
                 <span className="flex items-center justify-between">
                   <span>{lang === 'nl' ? 'Nederlands' : 'English'}</span>
-                  <span className={`text-[11px] uppercase tracking-[0.18em] ${active ? 'text-[#DFB771]' : 'text-white/35'}`}>
+                  <span className={`hud-mono text-[11px] uppercase tracking-[0.18em] ${active ? 'text-[#fdd38a]' : 'text-[#a2d0bf]/40'}`}>
                     {lang}
                   </span>
                 </span>
@@ -367,7 +369,7 @@ function Step3Voice({ state, setState }: { state: WizardState; setState: (s: Wiz
       </div>
 
       <div className="space-y-3">
-        <p className="text-[10px] uppercase tracking-[0.2em] text-[#DFB771]">Toon</p>
+        <p className="hud-mono text-[10px] uppercase tracking-[0.2em] text-[#fdd38a]">Toon</p>
         <div className="space-y-3">
           {tones.map((t) => {
             const active = state.voiceTone === t.value;
@@ -376,16 +378,16 @@ function Step3Voice({ state, setState }: { state: WizardState; setState: (s: Wiz
                 key={t.value}
                 type="button"
                 onClick={() => setState({ ...state, voiceTone: t.value })}
-                className={`group flex w-full items-center justify-between gap-4 rounded-2xl border p-4 text-left transition backdrop-blur-xl ${
+                className={`hud-frame group flex w-full items-center justify-between gap-4 rounded-sm border p-4 text-left transition backdrop-blur-xl ${
                   active
-                    ? 'border-[#DFB771] bg-[#DFB771]/12'
-                    : 'border-white/10 bg-white/[0.04] hover:border-white/25 hover:bg-white/[0.07]'
+                    ? 'hud-frame-active border-[#dfb771]/40 bg-[#dfb771]/10'
+                    : 'border-[#a2d0bf]/12 bg-[#0a241d]/60 hover:border-[#a2d0bf]/25 hover:bg-[#0a241d]/80'
                 }`}
                 data-testid={`wizard-tone-${t.value}`}
               >
                 <div className="min-w-0">
-                  <div className="font-semibold text-white">{t.label}</div>
-                  <div className="text-xs text-white/55">{t.desc}</div>
+                  <div className="font-semibold text-[#cce9dd]">{t.label}</div>
+                  <div className="text-xs text-[#a2d0bf]/60">{t.desc}</div>
                 </div>
                 <Waveform active={active} seed={t.seed} />
               </button>
@@ -409,8 +411,8 @@ function Step4Telegram({
   return (
     <div className="space-y-6">
       <header className="space-y-3">
-        <h1 className="text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl">Wat is je Telegram-handle?</h1>
-        <p className="text-[15px] leading-relaxed text-white/55">
+        <h1 className="text-3xl font-bold leading-[1.1] tracking-tight text-[#cce9dd] sm:text-4xl">Wat is je Telegram-handle?</h1>
+        <p className="text-[15px] leading-relaxed text-[#a2d0bf]/75">
           Appie pingt jou hier zodra hij online is. Nog geen Telegram? Download de app, maak een account, en geef je handle.
         </p>
       </header>
@@ -440,8 +442,8 @@ function Step5Tool({ state, setState }: { state: WizardState; setState: (s: Wiza
   return (
     <div className="space-y-6">
       <header className="space-y-3">
-        <h1 className="text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl">Welke tool koppel je als eerste?</h1>
-        <p className="text-[15px] leading-relaxed text-white/55">
+        <h1 className="text-3xl font-bold leading-[1.1] tracking-tight text-[#cce9dd] sm:text-4xl">Welke tool koppel je als eerste?</h1>
+        <p className="text-[15px] leading-relaxed text-[#a2d0bf]/75">
           Beta levert één tool. De rest, Notion, Brevo en Moneybird, komt na launch.
         </p>
       </header>
@@ -454,25 +456,25 @@ function Step5Tool({ state, setState }: { state: WizardState; setState: (s: Wiza
               type="button"
               onClick={() => setState({ ...state, primaryTool: t.value })}
               disabled={!t.enabled}
-              className={`flex items-center justify-between rounded-2xl border p-4 text-left transition backdrop-blur-xl ${
+              className={`hud-frame flex items-center justify-between rounded-sm border p-4 text-left transition backdrop-blur-xl ${
                 active
-                  ? 'border-[#DFB771] bg-[#DFB771]/12'
-                  : 'border-white/10 bg-white/[0.04] hover:border-white/25'
+                  ? 'hud-frame-active border-[#dfb771]/40 bg-[#dfb771]/10'
+                  : 'border-[#a2d0bf]/12 bg-[#0a241d]/60 hover:border-[#a2d0bf]/25'
               }`}
               data-testid={`wizard-tool-${t.value}`}
             >
               <div className="flex items-center gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5">
-                  <CalendarIcon size={18} className="text-[#DFB771]" />
+                <span className="flex h-10 w-10 items-center justify-center rounded-sm bg-[#00110c]/70 border border-[#a2d0bf]/10">
+                  <CalendarIcon size={18} className="text-[#fdd38a]" />
                 </span>
                 <div>
-                  <div className="font-semibold text-white">{t.label}</div>
-                  <div className="text-xs text-white/55">{t.desc}</div>
+                  <div className="font-semibold text-[#cce9dd]">{t.label}</div>
+                  <div className="text-xs text-[#a2d0bf]/60">{t.desc}</div>
                 </div>
               </div>
               {active ? (
-                <span className="rounded-full bg-[#DFB771] px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.18em] text-[#031D16]">
-                  Gekozen
+                <span className="hud-mono rounded-sm bg-[#dfb771] px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.18em] text-[#422d00]">
+                  ACTIEF
                 </span>
               ) : null}
             </button>
@@ -481,7 +483,7 @@ function Step5Tool({ state, setState }: { state: WizardState; setState: (s: Wiza
       </div>
       <CalendarPreview />
       {!oauthConfigured ? (
-        <p className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-xs text-white/55">
+        <p className="hud-panel p-3 text-xs text-[#a2d0bf]/65">
           De Google Calendar koppeling staat klaar, OAuth productie-review loopt nog. Je kunt nu door, en koppelen vanaf het dashboard zodra Appie online is.
         </p>
       ) : null}

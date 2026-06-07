@@ -1,7 +1,8 @@
 'use client';
 
-// Linear-style tall input with floating label, backdrop blur, gold focus ring.
-// Works for input and textarea via the `multiline` flag.
+// Aetheris HUD input: darker-than-panel field with a bottom-only gold border
+// that expands to the full perimeter on focus. Floating mono label, sharp 4px
+// corners. Works for input and textarea via the `multiline` flag.
 
 import { useId, useState } from 'react';
 
@@ -34,13 +35,15 @@ export default function FloatingInput(props: Props) {
   const id = useId();
   const [focused, setFocused] = useState(false);
   const isFloating = focused || value.length > 0;
+
+  // Base field: deepest surface, sharp corners, full thin border + bottom accent.
   const baseClass =
-    'peer w-full rounded-2xl border bg-white/[0.04] px-4 pb-3 pt-7 text-base text-white outline-none ring-0 backdrop-blur-xl transition placeholder:text-white/25 focus:bg-white/[0.06]';
+    'peer w-full rounded-sm bg-[#00110c]/80 px-4 pb-3 pt-7 text-base text-[#cce9dd] outline-none ring-0 backdrop-blur-xl transition placeholder:text-[#a2d0bf]/30 border border-b-2';
   const borderClass = error
-    ? 'border-[#FF9C92]/60 focus:border-[#FF9C92]'
+    ? 'border-[#ffb4ab]/40 border-b-[#ffb4ab] focus:border-[#ffb4ab]'
     : focused
-    ? 'border-[#DFB771]'
-    : 'border-white/10 hover:border-white/20';
+    ? 'border-[#dfb771] hud-glow-box'
+    : 'border-[#a2d0bf]/12 border-b-[#dfb771]/40 hover:border-[#a2d0bf]/25';
 
   return (
     <div className="relative">
@@ -48,8 +51,8 @@ export default function FloatingInput(props: Props) {
         htmlFor={id}
         className={`pointer-events-none absolute left-4 z-10 origin-top-left transition-all ${
           isFloating
-            ? 'top-2 text-[10px] uppercase tracking-[0.18em] text-[#DFB771]'
-            : 'top-1/2 -translate-y-1/2 text-sm text-white/55'
+            ? 'top-2 hud-mono text-[10px] uppercase tracking-[0.2em] text-[#fdd38a]'
+            : 'top-1/2 -translate-y-1/2 text-sm text-[#a2d0bf]/70'
         }`}
       >
         {label}
@@ -83,9 +86,9 @@ export default function FloatingInput(props: Props) {
         />
       )}
       {error ? (
-        <p className="mt-2 pl-1 text-xs text-[#FF9C92]">{error}</p>
+        <p className="mt-2 pl-1 hud-mono text-xs text-[#ffb4ab]">{error}</p>
       ) : hint ? (
-        <p className="mt-2 pl-1 text-xs text-white/45">{hint}</p>
+        <p className="mt-2 pl-1 text-xs text-[#a2d0bf]/50">{hint}</p>
       ) : null}
     </div>
   );

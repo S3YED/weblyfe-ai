@@ -15,11 +15,11 @@ export default function CalendarPreview() {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
-      className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur-xl"
+      className="hud-panel overflow-hidden p-4"
     >
-      <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-white/55">
-        <Calendar size={14} className="text-[#DFB771]" />
-        Google Calendar
+      <div className="mb-3 flex items-center gap-2 hud-mono text-xs uppercase tracking-[0.18em] text-[#a2d0bf]/70">
+        <Calendar size={14} className="text-[#fdd38a]" />
+        GOOGLE_CALENDAR
       </div>
       <div className="grid grid-cols-7 gap-1.5">
         {cells.map((_, i) => {
@@ -30,14 +30,14 @@ export default function CalendarPreview() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.04 * i, duration: 0.25 }}
-              className={`block aspect-square rounded-md ${
-                highlight ? 'bg-[#DFB771]/70' : 'bg-white/[0.06]'
+              className={`block aspect-square rounded-sm ${
+                highlight ? 'bg-[#dfb771]/70' : 'bg-[#a2d0bf]/[0.07]'
               }`}
             />
           );
         })}
       </div>
-      <p className="mt-3 text-[11px] text-white/45">
+      <p className="mt-3 text-[11px] text-[#a2d0bf]/50">
         Voorbeeld. Appie leest je agenda en stelt slots voor.
       </p>
     </motion.div>

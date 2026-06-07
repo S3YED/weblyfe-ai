@@ -27,7 +27,7 @@ export default function SavedIndicator({ trigger }: Props) {
   }, [trigger]);
 
   return (
-    <div className="h-4 text-[11px] text-white/45" aria-live="polite">
+    <div className="hud-mono h-4 text-[11px] uppercase tracking-[0.14em] text-[#a2d0bf]/55" aria-live="polite">
       <AnimatePresence>
         {visible ? (
           <motion.span
@@ -35,10 +35,10 @@ export default function SavedIndicator({ trigger }: Props) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 4 }}
             transition={{ duration: 0.25 }}
-            className="inline-flex items-center gap-1"
+            className="inline-flex items-center gap-1.5"
           >
-            <Cloud size={11} className="text-[#DFB771]" />
-            Opgeslagen
+            <Cloud size={11} className="text-[#fdd38a]" />
+            [SYS] saved
           </motion.span>
         ) : null}
       </AnimatePresence>

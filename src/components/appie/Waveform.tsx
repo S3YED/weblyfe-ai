@@ -22,7 +22,7 @@ export default function Waveform({ active, seed = 0 }: Props) {
         return (
           <motion.span
             key={i}
-            className="block w-[2px] rounded-full bg-[#DFB771]/70"
+            className={`block w-[2px] rounded-full ${active ? 'bg-[#fdd38a]/80' : 'bg-[#a2d0bf]/40'}`}
             animate={
               active
                 ? { height: [baseHeight, peakHeight, baseHeight] }

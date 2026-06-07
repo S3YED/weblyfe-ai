@@ -79,13 +79,13 @@ const nl: Dict = {
     'Inbox triage, intake, scheduling, follow-ups, admin: afgehandeld. Jij houdt over wat alleen jij kan: bouwen, verkopen, beslissen.',
 
   // PDF promo
-  'pdf.eyebrow': 'PDF Gids · v4.4 · €65',
+  'pdf.eyebrow': 'PDF Gids · v4.5 · €65',
   'pdf.h2': 'Bouw zelf je 24/7 Techwiz',
   'pdf.body':
     "10 hoofdstukken, 56 pagina's, echte code. Het complete blueprint van nul tot je eigen Techwiz. Lifetime updates. Eenmalig €65.",
   'pdf.cta': 'Koop de gids · €65',
   'pdf.card.title': 'Bouw zelf je Techwiz',
-  'pdf.card.subtitle': 'Build Your Own Appie v4.4',
+  'pdf.card.subtitle': 'Build Your Own Appie v4.5',
   'pdf.card.meta': "56 pagina's · €65 · April 2026",
 
   // Pricing
@@ -223,13 +223,13 @@ const en: Dict = {
     'Inbox triage, intake, scheduling, follow-ups, admin: handled. You keep what only you can do: build, sell, decide.',
 
   // PDF promo
-  'pdf.eyebrow': 'PDF Guide · v4.4 · €65',
+  'pdf.eyebrow': 'PDF Guide · v4.5 · €65',
   'pdf.h2': 'Build your own 24/7 Techwiz',
   'pdf.body':
     '10 chapters, 56 pages, real code. The complete blueprint from zero to your own Techwiz. Lifetime updates. One-time €65.',
   'pdf.cta': 'Buy the guide · €65',
   'pdf.card.title': 'Build your own Techwiz',
-  'pdf.card.subtitle': 'Build Your Own Appie v4.4',
+  'pdf.card.subtitle': 'Build Your Own Appie v4.5',
   'pdf.card.meta': '56 pages · €65 · April 2026',
 
   // Pricing
