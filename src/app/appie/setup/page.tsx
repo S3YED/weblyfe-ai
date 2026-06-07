@@ -2,7 +2,8 @@
 
 // Instant Appie BETA: 5-step onboarding wizard.
 // Steps: name -> ICP -> voice -> Telegram handle -> primary tool (Google Calendar).
-// Mobile-first. Brand: #031D16 + #DFB771. Rethink Sans loaded globally.
+// Mobile-first. Aetheris HUD theme (.hud scope): surface #001711 + gold
+// #fdd38a + mint #cce9dd. Rethink Sans + JetBrains Mono loaded globally.
 // All copy in Dutch (Seyed's audience).
 
 import { useEffect, useMemo, useState } from 'react';
