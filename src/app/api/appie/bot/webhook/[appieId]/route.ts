@@ -236,6 +236,8 @@ async function handleOnboardingMessage(
       history,
       userMessage: text,
       appUrl: process.env.NEXT_PUBLIC_APP_URL,
+      // Optional ops override if the default free model is unavailable.
+      model: process.env.OPENROUTER_MODEL,
     });
 
     const replyText = result.ok ? result.reply : fallbackText(lang);

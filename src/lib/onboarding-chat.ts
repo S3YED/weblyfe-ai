@@ -86,8 +86,13 @@ export async function generateOnboardingReply(args: {
   userMessage: string;
   fetchImpl?: FetchLike;
   appUrl?: string;
+  // Optional model override. Defaults to ONBOARDING_MODEL. Lets ops point at a
+  // different OpenRouter model (e.g. a paid fallback) via OPENROUTER_MODEL
+  // without a code change if the chosen free model is unavailable.
+  model?: string;
 }): Promise<OnboardingReply> {
   const { apiKey, ctx, history, userMessage } = args;
+  const model = args.model || ONBOARDING_MODEL;
   const fetchImpl = args.fetchImpl ?? fetch;
   if (!apiKey) return { ok: false, error: 'no-key' };
 
@@ -109,7 +114,7 @@ export async function generateOnboardingReply(args: {
         'X-Title': 'Instant Appie Onboarding',
       },
       body: JSON.stringify({
-        model: ONBOARDING_MODEL,
+        model,
         messages,
         max_tokens: 400,
         temperature: 0.6,
