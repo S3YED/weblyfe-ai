@@ -7,9 +7,25 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Mail, RotateCw, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Mail, RotateCw, Lock } from 'lucide-react';
 import CosmicBackdrop from './CosmicBackdrop';
 import FloatingInput from './FloatingInput';
+
+function TopNav() {
+  return (
+    <nav className="absolute inset-x-0 top-0 z-10 flex h-16 items-center justify-between px-5 sm:px-8">
+      {/* Subtle Weblyfe wordmark, left */}
+      <a href="https://weblyfe.ai" aria-label="Weblyfe" className="flex items-center opacity-80 transition hover:opacity-100">
+        <img src="/logo-gold.svg" alt="Weblyfe" className="h-5 w-auto sm:h-[22px]" />
+      </a>
+      {/* Encryption trust cue, right */}
+      <span className="hud-mono flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] text-[#a2d0bf]/45">
+        <Lock size={11} className="text-[#fdd38a]" />
+        Versleuteld
+      </span>
+    </nav>
+  );
+}
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -55,6 +71,7 @@ export default function LoginView() {
   return (
     <main className="hud relative min-h-screen text-[#cce9dd]">
       <CosmicBackdrop intensity="medium" />
+      <TopNav />
       <div className="mx-auto flex min-h-screen w-full max-w-xl flex-col items-center justify-center px-5 py-16 sm:px-8">
         <AnimatePresence mode="wait">
           {noAccount ? (
@@ -105,9 +122,9 @@ export default function LoginView() {
             >
               <SuccessIllustration />
               <p className="mt-8 hud-mono text-[11px] uppercase tracking-[0.22em] text-[#fdd38a]">[NET] CHECK JE INBOX</p>
-              <h1 className="mt-2 text-3xl font-bold tracking-tight text-[#cce9dd] sm:text-4xl">Link onderweg</h1>
+              <h1 className="mt-2 text-3xl font-bold tracking-tight text-[#cce9dd] sm:text-4xl">Je link is onderweg</h1>
               <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-[#a2d0bf]/70">
-                Als <span className="hud-mono text-[#cce9dd]">{email}</span> bij ons bekend is, hebben we een setup-link gestuurd. De link werkt 15 minuten en kan één keer gebruikt worden.
+                We hebben een beveiligde login-link gestuurd naar <span className="hud-mono text-[#cce9dd]">{email}</span>. Open 'm op dit apparaat. De link werkt 15 minuten en kan één keer gebruikt worden.
               </p>
               <button
                 type="button"
@@ -134,10 +151,10 @@ export default function LoginView() {
               <header className="mb-10 text-center">
                 <p className="hud-mono text-[11px] uppercase tracking-[0.22em] text-[#fdd38a]">INSTANT_APPIE</p>
                 <h1 className="mt-2 text-3xl font-bold leading-[1.1] tracking-tight text-[#cce9dd] sm:text-4xl">
-                  Stuur me een nieuwe link
+                  Welkom terug
                 </h1>
                 <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-[#a2d0bf]/70">
-                  Wachtwoordloos. Vul je e-mailadres in, wij sturen een veilige eenmalige link.
+                  Vul je e-mailadres in, dan sturen we je een beveiligde login-link. Geen wachtwoord om te onthouden, geen gedoe.
                 </p>
               </header>
 
@@ -160,7 +177,7 @@ export default function LoginView() {
                   className="group inline-flex h-14 w-full items-center justify-center gap-3 rounded-sm bg-[#dfb771] px-7 text-[15px] font-bold tracking-tight text-[#422d00] shadow-[0_0_28px_-8px_rgba(253,211,138,0.7)] transition hover:bg-[#fdd38a] disabled:opacity-60"
                   data-testid="login-submit"
                 >
-                  {submitting ? 'Bezig.' : 'Stuur link'}
+                  {submitting ? 'Bezig.' : 'Stuur mijn login-link'}
                   <ArrowRight size={18} className="transition-transform group-hover:translate-x-0.5" />
                 </button>
 
@@ -171,8 +188,8 @@ export default function LoginView() {
                 ) : null}
 
                 <p className="hud-mono flex items-center justify-center gap-2 pt-4 text-[11px] uppercase tracking-[0.18em] text-[#a2d0bf]/35">
-                  <ShieldCheck size={12} className="text-[#fdd38a]" />
-                  Geen wachtwoord, geen gedoe
+                  <Lock size={12} className="text-[#fdd38a]" />
+                  End-to-end versleuteld · link verloopt na 15 min
                 </p>
               </form>
             </motion.div>
