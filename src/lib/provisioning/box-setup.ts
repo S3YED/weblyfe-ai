@@ -12,6 +12,7 @@
 // install identically.
 
 import type { ProvisionInput } from './types';
+import { BOX_AGENT_SOURCE_B64, BOX_AGENT_SERVICE_B64 } from './box-agent-embed';
 
 // Minimal SOUL derived from onboarding answers when no pre-rendered SOUL given.
 function deriveSoul(input: ProvisionInput): string {
@@ -41,6 +42,57 @@ function writeFileHeredoc(path: string, content: string): string {
   // Use a delimiter unlikely to appear in content.
   const delim = 'WEBLYFE_EOF';
   return [`cat > ${path} <<'${delim}'`, content, delim].join('\n');
+}
+
+// Decode a base64 blob to a target path on the box. Base64 survives every layer
+// of quoting (heredoc -> YAML -> shell), so the agent source ships intact.
+function writeBase64(path: string, b64: string): string {
+  const delim = 'WEBLYFE_B64_EOF';
+  return [
+    `cat > ${path}.b64 <<'${delim}'`,
+    b64,
+    delim,
+    `base64 -d ${path}.b64 > ${path}`,
+    `rm -f ${path}.b64`,
+  ].join('\n');
+}
+
+// Install + start the on-box Appie agent: a self-contained Node program that
+// long-polls Telegram with the customer bot token and replies via OpenRouter.
+// Requires Node (installed earlier in buildBoxSetup) and the /etc/appie config.
+// faster-whisper is best-effort: installed via pip when python3/pip exist; the
+// agent degrades to "please type" if the binary is absent.
+function agentInstall(): string {
+  return [
+    // Agent program + systemd unit (base64-decoded to avoid quoting hazards).
+    writeBase64('/opt/appie/agent.mjs', BOX_AGENT_SOURCE_B64),
+    'chmod 700 /opt/appie/agent.mjs',
+    writeBase64('/etc/systemd/system/appie-agent.service', BOX_AGENT_SERVICE_B64),
+    'mkdir -p /var/lib/appie && chmod 700 /var/lib/appie',
+    // faster-whisper (best-effort: never fail the whole setup on it).
+    'apt-get install -y python3 python3-pip ffmpeg || true',
+    'pip3 install --break-system-packages faster-whisper || pip3 install faster-whisper || true',
+    // Make the systemd unit point at the real node path (nodesource = /usr/bin/node).
+    'NODE_BIN="$(command -v node || echo /usr/bin/node)"',
+    'sed -i "s#/usr/bin/node#${NODE_BIN}#" /etc/systemd/system/appie-agent.service || true',
+    'systemctl daemon-reload || true',
+    'systemctl enable --now appie-agent.service || true',
+  ].join('\n');
+}
+
+// SSH access for ops: add the ops public key to root authorized_keys and allow
+// inbound SSH through UFW (UFW otherwise stays deny-incoming). Returns '' when
+// no key is provided (Tailscale SSH still works for mesh management).
+function sshOpsAccess(pubKey: string | undefined): string {
+  if (!pubKey) return '';
+  return [
+    'mkdir -p /root/.ssh && chmod 700 /root/.ssh',
+    'touch /root/.ssh/authorized_keys && chmod 600 /root/.ssh/authorized_keys',
+    writeFileHeredoc('/root/.ssh/appie-ops.pub', pubKey.trim()),
+    'grep -qxF "$(cat /root/.ssh/appie-ops.pub)" /root/.ssh/authorized_keys || cat /root/.ssh/appie-ops.pub >> /root/.ssh/authorized_keys',
+    'rm -f /root/.ssh/appie-ops.pub',
+    'ufw allow 22/tcp || true',
+  ].join('\n');
 }
 
 // The heartbeat loop the box runs to phone home. Posts the seam payload.
@@ -117,10 +169,11 @@ export function buildBoxSetup(
     // Node 22 (idempotent: skip if already present).
     'command -v node >/dev/null 2>&1 || (curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && apt-get install -y nodejs)',
     'mkdir -p /opt/appie /etc/appie && chmod 700 /etc/appie',
-    // Hermes install (NousResearch installer per orgo skill reference).
-    'curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash || true',
-    // Per-customer SOUL.
+    // Per-customer SOUL (written to both /opt/appie and /etc/appie; the agent
+    // reads /etc/appie/SOUL.md first, falls back to /opt/appie/SOUL.md).
     writeFileHeredoc('/opt/appie/SOUL.md', soul),
+    writeFileHeredoc('/etc/appie/SOUL.md', soul),
+    'chmod 600 /etc/appie/SOUL.md',
     // Bot token in a 600 env file (never an arg / never logged).
     writeFileHeredoc('/etc/appie/bot.env', `TELEGRAM_BOT_TOKEN=${input.botToken}`),
     'chmod 600 /etc/appie/bot.env',
@@ -176,6 +229,15 @@ export function buildBoxSetup(
     );
   }
 
+  // Ops SSH key (so we can shell in and manage/verify the agent) + UFW SSH allow.
+  const ssh = sshOpsAccess(input.opsSshPubKey);
+  if (ssh) lines.push(ssh);
+
+  // Install + start the real on-box agent LAST: by now Node is present and the
+  // /etc/appie config (bot.env, llm.env, heartbeat.env, SOUL.md) is written, so
+  // the agent has everything it needs the moment systemd starts it.
+  lines.push(agentInstall());
+
   return lines.join('\n');
 }
 
@@ -190,6 +252,14 @@ export function buildCloudInit(input: ProvisionInput): string {
     .split('\n')
     .map((l) => `      ${l}`)
     .join('\n');
+  // Ops SSH key block. Injecting via cloud-init's native `ssh_authorized_keys`
+  // (applied at first boot, before runcmd) is far more reliable than appending
+  // to authorized_keys late in setup.sh, and it stops Hetzner's ubuntu image
+  // from leaving root in a password-expired state that blocks key login.
+  const sshBlock = input.opsSshPubKey
+    ? ['ssh_pwauth: false', 'ssh_authorized_keys:', `  - ${input.opsSshPubKey.trim()}`]
+    : [];
+
   return [
     '#cloud-config',
     'package_update: true',
@@ -199,18 +269,23 @@ export function buildCloudInit(input: ProvisionInput): string {
     '  - jq',
     '  - ufw',
     '  - fail2ban',
+    ...sshBlock,
     'write_files:',
     `  - path: ${scriptPath}`,
     '    permissions: "0700"',
     '    content: |',
     indented,
     'runcmd:',
-    '  # Tailscale (mesh + SSH); UFW deny-incoming baseline.',
+    '  # Clear any forced root password-change that would block key login.',
+    '  - chage -d 99999 root || true',
+    '  - passwd -x -1 root || true',
+    '  # Tailscale (mesh + SSH); UFW deny-incoming baseline but SSH allowed.',
     '  - curl -fsSL https://tailscale.com/install.sh | sh',
     '  - ufw default deny incoming',
     '  - ufw default allow outgoing',
+    '  - ufw allow 22/tcp',
     '  - ufw --force enable',
     `  - bash ${scriptPath}`,
-    'final_message: "Appie box ready; heartbeat armed."',
+    'final_message: "Appie box ready; agent + heartbeat armed."',
   ].join('\n');
 }

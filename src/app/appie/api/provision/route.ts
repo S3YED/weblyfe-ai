@@ -316,6 +316,9 @@ async function provisionReal(userId: string, body: WizardBody): Promise<NextResp
       appUrl,
       botToken: prepared.botToken,
       onboardingState: body as unknown as Record<string, unknown>,
+      // Ops SSH public key (so we can shell in to manage/verify the on-box
+      // agent). Configured via APPIE_OPS_SSH_PUBKEY; absent = Tailscale-only mgmt.
+      opsSshPubKey: process.env.APPIE_OPS_SSH_PUBKEY,
       // Inject the box's LLM config (free primary + credit-backed backup) so the
       // on-box agent can call OpenRouter. Omitted when no key is configured.
       llm: openRouterKey

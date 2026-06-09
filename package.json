@@ -12,7 +12,8 @@
     "test:unit": "vitest run",
     "test:e2e": "playwright test",
     "test": "npm run test:unit && npm run test:e2e",
-    "stripe:setup-test": "node --experimental-vm-modules --import tsx/esm scripts/create-stripe-products.ts"
+    "stripe:setup-test": "node --experimental-vm-modules --import tsx/esm scripts/create-stripe-products.ts",
+    "gen:box-agent": "node box-agent/gen-embed.mjs"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",

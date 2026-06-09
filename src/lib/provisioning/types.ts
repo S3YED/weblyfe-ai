@@ -33,6 +33,10 @@ export type ProvisionInput = {
     readonly model: string;
     readonly backupModel?: string;
   };
+  // Optional ops SSH public key. When set it is added to the box root
+  // authorized_keys so we can SSH in to verify/manage the on-box agent. The box
+  // keeps UFW deny-incoming except for SSH (Tailscale carries day-to-day mgmt).
+  readonly opsSshPubKey?: string;
 };
 
 // What a provisioner returns once a box exists and the setup has been kicked off.
