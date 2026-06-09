@@ -61,6 +61,16 @@ export const appies = pgTable('appies', {
   googleAccessTokenNonce: bytea('google_access_token_nonce'),
   googleRefreshTokenEnc: bytea('google_refresh_token_enc'),
   googleRefreshTokenNonce: bytea('google_refresh_token_nonce'),
+  // Bring-your-own-token integrations (encrypted at rest). Non-secret label
+  // (workspace / base name) stored alongside for display without decrypting.
+  notionTokenEnc: bytea('notion_token_enc'),
+  notionTokenNonce: bytea('notion_token_nonce'),
+  notionWorkspaceLabel: text('notion_workspace_label'),
+  notionConnectedAt: timestamp('notion_connected_at', { withTimezone: true }),
+  airtableTokenEnc: bytea('airtable_token_enc'),
+  airtableTokenNonce: bytea('airtable_token_nonce'),
+  airtableBaseLabel: text('airtable_base_label'),
+  airtableConnectedAt: timestamp('airtable_connected_at', { withTimezone: true }),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
 });
 
