@@ -126,6 +126,25 @@ export function buildBoxSetup(
     'chmod 600 /etc/appie/bot.env',
   ];
 
+  // LLM config (OpenRouter key + primary/backup models + identity) in a 600 env
+  // file so the on-box agent can call the model. Written only when provided.
+  if (input.llm) {
+    const appUrl = input.appUrl.replace(/\/$/, '');
+    lines.push(
+      writeFileHeredoc(
+        '/etc/appie/llm.env',
+        [
+          `OPENROUTER_API_KEY=${input.llm.openRouterKey}`,
+          `OPENROUTER_MODEL=${input.llm.model}`,
+          `OPENROUTER_BACKUP_MODEL=${input.llm.backupModel ?? ''}`,
+          `APPIE_ID=${input.appieId}`,
+          `APP_URL=${appUrl}`,
+        ].join('\n')
+      ),
+      'chmod 600 /etc/appie/llm.env'
+    );
+  }
+
   if (opts.useSystemd) {
     lines.push(heartbeatUnit(input.appieId, input.heartbeatSecret, input.appUrl));
   } else {

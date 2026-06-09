@@ -18,7 +18,11 @@ import {
 } from './types';
 
 const HETZNER_BASE_URL = 'https://api.hetzner.cloud/v1';
-const SERVER_TYPE = 'cx32'; // 4 vCPU / 8GB - meets Hermes >=8GB/4CPU
+// Server type meeting Hermes >=8GB/4CPU. The legacy `cx32` line was retired by
+// Hetzner; the current shared-vCPU line is `cx*3` (cx33 = 4 vCPU / 8GB) and the
+// AMD line is `cpx31`/`cpx32`. Default to cx33 (nbg1) but allow ops override via
+// HETZNER_SERVER_TYPE without a code change.
+const SERVER_TYPE = process.env.HETZNER_SERVER_TYPE ?? 'cx33';
 const IMAGE = 'ubuntu-24.04';
 const LOCATION = process.env.HETZNER_LOCATION ?? 'nbg1';
 

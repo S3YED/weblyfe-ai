@@ -309,12 +309,22 @@ async function provisionReal(userId: string, body: WizardBody): Promise<NextResp
 
   // Phase 2 (no DB txn held while we hit the cloud): orchestrate the box.
   try {
+    const openRouterKey = process.env.OPENROUTER_API_KEY;
     const outcome = await provision({
       appieId: prepared.appieId,
       heartbeatSecret,
       appUrl,
       botToken: prepared.botToken,
       onboardingState: body as unknown as Record<string, unknown>,
+      // Inject the box's LLM config (free primary + credit-backed backup) so the
+      // on-box agent can call OpenRouter. Omitted when no key is configured.
+      llm: openRouterKey
+        ? {
+            openRouterKey,
+            model: process.env.OPENROUTER_MODEL ?? 'nvidia/nemotron-3-super-120b-a12b:free',
+            backupModel: process.env.OPENROUTER_BACKUP_MODEL ?? 'deepseek/deepseek-v4-pro',
+          }
+        : undefined,
     });
 
     // Persist the chosen provider + provider-side id for status/destroy.

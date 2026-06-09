@@ -25,6 +25,14 @@ export type ProvisionInput = {
   // Optional pre-rendered SOUL markdown. When absent the box build derives a
   // minimal SOUL from onboardingState.
   readonly soul?: string;
+  // LLM config injected into the box so the on-box agent can call OpenRouter.
+  // Primary is a free model; backup is a credit-backed model used on failure.
+  // The key is written to a 0600 env file on the box, never logged.
+  readonly llm?: {
+    readonly openRouterKey: string;
+    readonly model: string;
+    readonly backupModel?: string;
+  };
 };
 
 // What a provisioner returns once a box exists and the setup has been kicked off.
