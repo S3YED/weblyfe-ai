@@ -21,8 +21,11 @@ async function loadDashboard(userId: string): Promise<DashboardViewData> {
       provision_percent: string | null;
       telegram_bot_username: string | null;
       onboarding_state: { name?: string } | null;
+      notion_workspace_label: string | null;
+      airtable_base_label: string | null;
     }>(
-      `SELECT status, provision_percent, telegram_bot_username, onboarding_state
+      `SELECT status, provision_percent, telegram_bot_username, onboarding_state,
+              notion_workspace_label, airtable_base_label
        FROM appies WHERE user_id = $1 ORDER BY created_at DESC LIMIT 1`,
       [userId]
     );
@@ -44,6 +47,14 @@ async function loadDashboard(userId: string): Promise<DashboardViewData> {
         ? parseInt(appieRes.rows[0].provision_percent, 10)
         : null,
       telegramBotUsername: appieRes.rows[0]?.telegram_bot_username ?? null,
+      notion: {
+        connected: Boolean(appieRes.rows[0]?.notion_workspace_label),
+        label: appieRes.rows[0]?.notion_workspace_label ?? null,
+      },
+      airtable: {
+        connected: Boolean(appieRes.rows[0]?.airtable_base_label),
+        label: appieRes.rows[0]?.airtable_base_label ?? null,
+      },
       subscriptionStatus: subRes.rows[0]?.status ?? null,
       subscriptionTier: subRes.rows[0]?.tier ?? null,
       betaLocked: subRes.rows[0]?.beta_locked_pricing ?? false,
@@ -65,6 +76,8 @@ export default async function DashboardPage() {
       appieStatus: appie?.status ?? 'pending_setup',
       appiePercent: appie?.status === 'online' ? 100 : null,
       telegramBotUsername: appie?.telegramBotUsername ?? null,
+      notion: { connected: false, label: null },
+      airtable: { connected: false, label: null },
       subscriptionStatus: 'active',
       subscriptionTier: 'instant_appie_beta_250_locked',
       betaLocked: true,
@@ -80,6 +93,8 @@ export default async function DashboardPage() {
         appieStatus: 'unknown',
         appiePercent: null,
         telegramBotUsername: null,
+        notion: { connected: false, label: null },
+        airtable: { connected: false, label: null },
         subscriptionStatus: null,
         subscriptionTier: null,
         betaLocked: false,

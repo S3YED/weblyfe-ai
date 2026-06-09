@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import CosmicBackdrop from './CosmicBackdrop';
 import BotConnectPanel from './BotConnectPanel';
+import IntegrationsPanel, { type IntegrationState } from './IntegrationsPanel';
 import CountUp from '@/components/anim/CountUp';
 
 export type DashboardViewData = {
@@ -29,6 +30,8 @@ export type DashboardViewData = {
   appieStatus: string | null;
   appiePercent: number | null;
   telegramBotUsername: string | null;
+  notion: IntegrationState;
+  airtable: IntegrationState;
   subscriptionStatus: string | null;
   subscriptionTier: string | null;
   betaLocked: boolean;
@@ -124,10 +127,23 @@ export default function DashboardView({ data }: { data: DashboardViewData }) {
   return (
     <main className="hud relative min-h-screen text-[#cce9dd]">
       <CosmicBackdrop />
-      <div className="mx-auto w-full max-w-5xl px-5 pb-32 pt-[max(2rem,env(safe-area-inset-top))] sm:px-8 sm:py-14">
-        <header className="mb-12 flex flex-wrap items-end justify-between gap-4">
+      <nav className="relative z-10 mx-auto flex h-16 w-full max-w-5xl items-center justify-between px-5 sm:px-8">
+        <a
+          href="https://weblyfe.ai"
+          aria-label="Weblyfe"
+          className="flex items-center opacity-80 transition hover:opacity-100"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo-gold.svg" alt="Weblyfe" className="h-5 w-auto sm:h-[22px]" />
+        </a>
+        <span className="hud-mono inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] text-[#a2d0bf]/45">
+          Instant Appie
+        </span>
+      </nav>
+      <div className="mx-auto w-full max-w-5xl px-5 pb-32 pt-4 sm:px-8 sm:pb-14 sm:pt-6">
+        <header className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="hud-mono text-[11px] uppercase tracking-[0.22em] text-[#fdd38a]">WEBLYFE.AI_CORE</p>
+            <p className="hud-mono text-[11px] uppercase tracking-[0.22em] text-[#fdd38a]">INSTANT_APPIE</p>
             <h1 className="mt-2 text-3xl font-bold tracking-tight text-[#cce9dd] sm:text-4xl">{greeting}</h1>
             {data.email ? (
               <p className="mt-1 hud-mono text-sm text-[#a2d0bf]/45">{data.email}</p>
@@ -143,6 +159,12 @@ export default function DashboardView({ data }: { data: DashboardViewData }) {
             <p className="hud-mono text-[11px] text-[#a2d0bf]/40">{isOnline ? 'Net klaar met inbox-triage' : `${data.appiePercent ?? 0}% klaar`}</p>
           </div>
         </header>
+
+        {/* Headline: bring-your-own-token integrations. The clearest, simplest
+            thing on the dashboard. */}
+        <div className="mb-10">
+          <IntegrationsPanel lang="nl" notion={data.notion} airtable={data.airtable} />
+        </div>
 
         <div className="grid gap-5 sm:grid-cols-2">
           <Card kicker="Vandaag" title="Wat Appie afhandelde">
