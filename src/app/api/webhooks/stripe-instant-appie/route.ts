@@ -39,10 +39,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: 'malformed-json' }, { status: 400 });
   }
 
-  // Test/live mode separation: refuse mismatch.
-  const isLiveSecret = env.STRIPE_WEBHOOK_SECRET.startsWith('whsec_live') ||
-    process.env.STRIPE_LIVE === '1';
-  if (event.livemode && !isLiveSecret) {
+  // Test/live mode separation. Stripe webhook signing secrets are ALWAYS
+  // `whsec_…` regardless of mode, so the secret string cannot indicate the mode
+  // (the old `startsWith('whsec_live')` check was a no-op and silently rejected
+  // every live payment). Gate on an explicit STRIPE_LIVE=1 env flag, which MUST
+  // be set in the production Vercel environment.
+  const isLiveEnv = process.env.STRIPE_LIVE === '1';
+  if (event.livemode && !isLiveEnv) {
     logWarn('stripe.livemode-mismatch', { eventId: event.id });
     return NextResponse.json({ ok: false, error: 'livemode-mismatch' }, { status: 400 });
   }

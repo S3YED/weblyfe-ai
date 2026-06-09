@@ -13,6 +13,7 @@ import { logInfo, logWarn } from '@/lib/log';
 import { __testStore__, isE2eMode } from '@/lib/test-store';
 import { provision } from '@/lib/provisioning';
 import { leaseBot } from '@/lib/provisioning/bot-pool';
+import { setBotWebhook } from '@/lib/telegram';
 
 // Real provisioning runs the Orgo->Hetzner orchestrator. Gate: PROVISION_MODE=real.
 // Mock stays the default so dev/preview never touches a cloud provider.
@@ -305,6 +306,21 @@ async function provisionReal(userId: string, body: WizardBody): Promise<NextResp
       { ok: false, error: 'provision-prepare-failed' },
       { status: 503 }
     );
+  }
+
+  // Phase 1.5 (G13): register the Telegram webhook for the resolved bot so the
+  // customer's `/start <bindToken>` deep-link reaches the dashboard and binds
+  // telegram_chat_id during the provisioning window. Without this, pool bots
+  // never receive /start, the chat never binds, and the first-ping silently
+  // falls back to the ops bot (customer gets no magic moment). The on-box agent
+  // calls deleteWebhook on startup and takes over via long-poll once online.
+  // Non-fatal on failure: binding can be retried and the ops-bot fallback still
+  // fires; we log and continue so provisioning isn't blocked by a transient.
+  try {
+    await setBotWebhook(prepared.botToken, `${appUrl}/api/appie/bot/webhook/${prepared.appieId}`);
+    logInfo('provision.real.webhook-set', { userId, appieId: prepared.appieId });
+  } catch (err) {
+    logWarn('provision.real.webhook-set-failed', { userId, appieId: prepared.appieId, error: String(err) });
   }
 
   // Phase 2 (no DB txn held while we hit the cloud): orchestrate the box.

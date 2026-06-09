@@ -27,6 +27,23 @@ function renderFirstPing(args: FirstPingArgs): string {
   return `Hoi ${args.customerName}, je Appie staat aan. Ik focus op: ${args.icp}. Het makkelijkst: stuur me gewoon een voicenote met waar ik vandaag aan moet werken.`;
 }
 
+// Register a Telegram webhook for a bot so the customer's `/start <token>`
+// deep-link reaches the dashboard (POST /api/appie/bot/webhook/<appieId>) and
+// binds telegram_chat_id during the provisioning window. Once the box is online
+// its on-box agent calls deleteWebhook and takes over via long-poll.
+// Throws on transport error; provisioning treats failure as non-fatal (the
+// ops-bot fallback still covers the first ping) and may retry.
+export async function setBotWebhook(botToken: string, url: string): Promise<void> {
+  const res = await fetch(`https://api.telegram.org/bot${botToken}/setWebhook`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ url, allowed_updates: ['message'] }),
+  });
+  if (!res.ok) {
+    throw new Error(`telegram setWebhook failed: ${res.status}`);
+  }
+}
+
 // Low-level: send a message to a chat through a specific bot token.
 // Throws on transport error; the caller decides how to degrade.
 export async function sendCustomerMessage(
