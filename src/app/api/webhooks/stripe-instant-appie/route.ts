@@ -9,7 +9,7 @@ import { verifyStripeSignature } from '@/lib/stripe-webhook';
 import { withUserScope } from '@/lib/db';
 import { getEnv } from '@/lib/env';
 import { issueMagicLink } from '@/lib/auth/magic-link';
-import { sendMagicLinkEmail } from '@/lib/brevo';
+import { sendWelcomeEmail } from '@/lib/brevo';
 import { logInfo, logWarn } from '@/lib/log';
 
 export const runtime = 'nodejs';
@@ -136,8 +136,10 @@ async function handleSubscriptionCreated(event: StripeEvent) {
     };
   });
 
-  await sendMagicLinkEmail({ toEmail: email, magicLinkUrl: magicUrl });
-  logInfo('stripe.magic-link-emitted', { eventId: event.id });
+  // Post-payment: send the warm welcome email (voicenotes-first nudge), with the
+  // one-time setup link as the CTA, rather than the bare magic-link email.
+  await sendWelcomeEmail({ toEmail: email, setupUrl: magicUrl });
+  logInfo('stripe.welcome-emitted', { eventId: event.id });
 }
 
 async function handlePaymentFailed(event: StripeEvent) {
