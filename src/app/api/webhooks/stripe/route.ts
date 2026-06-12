@@ -451,6 +451,16 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ received: true });
       }
 
+      // This endpoint delivers the one-time PDF guide ONLY. The same live
+      // Stripe account also runs Instant Appie subscriptions (handled by
+      // dash.weblyfe.ai); on 2026-06-12 a subscription checkout cross-fired
+      // the guide email to a dashboard customer. PDF checkouts are
+      // mode='payment'; anything else is not ours.
+      if (session.mode !== 'payment') {
+        console.log(`Webhook: session mode ${session.mode}, not a PDF purchase, skipping:`, session.id);
+        return NextResponse.json({ received: true, skipped: 'non-payment-mode' });
+      }
+
       const email = await getCustomerEmail(session);
       if (!email) {
         console.error('Webhook: no email for session:', session.id);
