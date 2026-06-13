@@ -3,10 +3,9 @@
 import { useState } from 'react';
 
 // Site-wide floating WhatsApp widget, Weblyfe-branded (dark green + gold).
-// Number comes from NEXT_PUBLIC_WHATSAPP_NUMBER (digits only, incl. country
-// code, no + or spaces). Falls back to a placeholder so the build never breaks;
-// set the env in Vercel to go live.
-const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '00000000000';
+// Seyed's public business WhatsApp (digits only, country code, no + / spaces).
+// Override per-env with NEXT_PUBLIC_WHATSAPP_NUMBER if needed.
+const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '31682099627';
 const PREFILL = encodeURIComponent(
   'Hoi Seyed, ik kom van weblyfe.ai en ik wil meer weten over Instant Appie.',
 );
@@ -14,9 +13,6 @@ const WA_LINK = `https://wa.me/${WA_NUMBER}?text=${PREFILL}`;
 
 export default function WhatsAppWidget() {
   const [open, setOpen] = useState(false);
-
-  // Don't render a broken link: only show once a real number is configured.
-  if (!process.env.NEXT_PUBLIC_WHATSAPP_NUMBER) return null;
 
   return (
     <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3">
