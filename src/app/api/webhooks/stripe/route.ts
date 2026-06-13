@@ -43,10 +43,10 @@ function generateDownloadToken(email: string): string {
   if (!PDF_SIGNING_SECRET) throw new Error('PDF_SIGNING_SECRET env var is required');
   const expiry = Math.floor(Date.now() / 1000) + TOKEN_EXPIRY_DAYS * 24 * 60 * 60;
   const payload = Buffer.from(`${email.toLowerCase().trim()}:${expiry}`).toString('base64url');
+  // Full 256-bit HMAC (must match verifyToken in download/appie-guide).
   const sig = createHmac('sha256', PDF_SIGNING_SECRET)
     .update(payload)
-    .digest('hex')
-    .slice(0, 16);
+    .digest('hex');
   return `${payload}.${sig}`;
 }
 
@@ -90,7 +90,10 @@ async function airtableFetch(table: string, options: { method?: string; body?: u
 }
 
 async function findLeadByEmail(email: string): Promise<{ id: string; fields: Record<string, unknown> } | null> {
-  const formula = encodeURIComponent(`LOWER({Email}) = "${email.toLowerCase().trim()}"`);
+  // Escape double-quotes + backslashes so a crafted email can't break out of the
+  // Airtable formula string literal (encodeURIComponent only handles URL encoding).
+  const safeEmail = email.toLowerCase().trim().replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+  const formula = encodeURIComponent(`LOWER({Email}) = "${safeEmail}"`);
   const data = await airtableFetch(AIRTABLE_LEADS_TABLE, { params: `filterByFormula=${formula}&maxRecords=1` });
   const records = data.records || [];
   return records.length > 0 ? records[0] : null;
