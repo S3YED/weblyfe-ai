@@ -309,7 +309,7 @@ export default function BetaPage() {
             <div className="relative mx-auto lg:mx-0 w-full max-w-md">
               <div className="relative aspect-square rounded-3xl overflow-hidden border-2 border-[#DFB771]/40 shadow-[0_0_60px_-15px_rgba(223,183,113,0.5)]">
                 <Image
-                  src="/agents/appie-3d.jpg"
+                  src="/agents/appie-iconic.png"
                   alt="Appie - jouw persoonlijke Techwiz"
                   fill
                   sizes="(min-width: 1024px) 420px, 80vw"

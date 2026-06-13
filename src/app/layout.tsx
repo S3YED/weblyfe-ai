@@ -4,6 +4,7 @@ import { cookies } from 'next/headers';
 import './globals.css';
 import { I18nProvider } from '@/i18n/I18nProvider';
 import { LOCALES, DEFAULT_LOCALE, type Locale } from '@/i18n/messages';
+import WhatsAppWidget from '@/components/WhatsAppWidget';
 
 const rethinkSans = Rethink_Sans({
   subsets: ['latin'],
@@ -182,6 +183,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body className={`antialiased ${rethinkSans.className}`}>
         <I18nProvider initialLocale={locale}>{children}</I18nProvider>
+        <WhatsAppWidget />
       </body>
     </html>
   );
