@@ -25,6 +25,11 @@ import {
   TrendingUp,
   Zap,
   Star,
+  PenLine,
+  BarChart2,
+  Wallet,
+  CalendarClock,
+  MessagesSquare,
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -138,6 +143,11 @@ const USE_CASES = [
   { id: 'domain', icon: Link, titleKey: 'beta.usecases.uc3.title' as const, bodyKey: 'beta.usecases.uc3.body' as const },
   { id: 'funnel', icon: Layers, titleKey: 'beta.usecases.uc4.title' as const, bodyKey: 'beta.usecases.uc4.body' as const },
   { id: 'ecom', icon: Store, titleKey: 'beta.usecases.uc5.title' as const, bodyKey: 'beta.usecases.uc5.body' as const },
+  { id: 'content', icon: PenLine, titleKey: 'beta.usecases.uc6.title' as const, bodyKey: 'beta.usecases.uc6.body' as const },
+  { id: 'leads', icon: BarChart2, titleKey: 'beta.usecases.uc7.title' as const, bodyKey: 'beta.usecases.uc7.body' as const },
+  { id: 'finance', icon: Wallet, titleKey: 'beta.usecases.uc8.title' as const, bodyKey: 'beta.usecases.uc8.body' as const },
+  { id: 'admin', icon: CalendarClock, titleKey: 'beta.usecases.uc9.title' as const, bodyKey: 'beta.usecases.uc9.body' as const },
+  { id: 'whatsapp', icon: MessagesSquare, titleKey: 'beta.usecases.uc10.title' as const, bodyKey: 'beta.usecases.uc10.body' as const },
 ] as const;
 
 const CHATBOT_ROWS = [
@@ -424,24 +434,30 @@ export default async function BetaPage() {
               {OUTCOMES.map((o) => (
                 <div
                   key={o.id}
-                  className="rounded-2xl bg-[#1a2e27]/50 border border-[#247459]/20 p-6 hover:border-[#DFB771]/40 transition-colors"
+                  className="rounded-2xl bg-[#1a2e27]/50 border border-[#247459]/20 overflow-hidden hover:border-[#DFB771]/40 transition-colors"
                 >
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-9 h-9 rounded-xl bg-[#DFB771]/10 border border-[#DFB771]/30 flex items-center justify-center flex-shrink-0">
-                      <o.icon className="w-4 h-4 text-[#DFB771]" />
-                    </div>
-                    <p className="text-[#DFB771] text-xs font-mono uppercase tracking-wider">
-                      {t(o.labelKey)}
-                    </p>
+                  {/* Screenshot slot - drop a real PNG here later */}
+                  <div className="w-full h-24 bg-[#0a2e23]/60 border-b border-[#247459]/20 flex items-center justify-center">
+                    <o.icon className="w-7 h-7 text-[#247459]/40" />
                   </div>
-                  <div className="space-y-3">
-                    <div className="rounded-xl bg-[#1a1a1a]/60 border border-red-900/30 px-4 py-3">
-                      <p className="text-[#F6FEFC]/45 text-xs font-mono uppercase tracking-wider mb-1">{t('beta.outcomes.beforeLabel')}</p>
-                      <p className="text-[#F6FEFC]/65 text-sm leading-relaxed">{t(o.beforeKey)}</p>
+                  <div className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-9 h-9 rounded-xl bg-[#DFB771]/10 border border-[#DFB771]/30 flex items-center justify-center flex-shrink-0">
+                        <o.icon className="w-4 h-4 text-[#DFB771]" />
+                      </div>
+                      <p className="text-[#DFB771] text-xs font-mono uppercase tracking-wider">
+                        {t(o.labelKey)}
+                      </p>
                     </div>
-                    <div className="rounded-xl bg-[#0d2e22]/80 border border-[#247459]/40 px-4 py-3">
-                      <p className="text-[#DFB771] text-xs font-mono uppercase tracking-wider mb-1">{t('beta.outcomes.afterLabel')}</p>
-                      <p className="text-[#F6FEFC]/90 text-sm leading-relaxed">{t(o.afterKey)}</p>
+                    <div className="space-y-3">
+                      <div className="rounded-xl bg-[#1a1a1a]/60 border border-red-900/30 px-4 py-3">
+                        <p className="text-[#F6FEFC]/45 text-xs font-mono uppercase tracking-wider mb-1">{t('beta.outcomes.beforeLabel')}</p>
+                        <p className="text-[#F6FEFC]/65 text-sm leading-relaxed">{t(o.beforeKey)}</p>
+                      </div>
+                      <div className="rounded-xl bg-[#0d2e22]/80 border border-[#247459]/40 px-4 py-3">
+                        <p className="text-[#DFB771] text-xs font-mono uppercase tracking-wider mb-1">{t('beta.outcomes.afterLabel')}</p>
+                        <p className="text-[#F6FEFC]/90 text-sm leading-relaxed">{t(o.afterKey)}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -470,13 +486,19 @@ export default async function BetaPage() {
               {USE_CASES.map((uc) => (
                 <div
                   key={uc.id}
-                  className="rounded-2xl bg-[#1a2e27]/50 border border-[#247459]/20 p-6 hover:border-[#DFB771]/40 transition-colors"
+                  className="rounded-2xl bg-[#1a2e27]/50 border border-[#247459]/20 overflow-hidden hover:border-[#DFB771]/40 transition-colors"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-[#DFB771]/10 border border-[#DFB771]/30 flex items-center justify-center mb-4">
-                    <uc.icon className="w-5 h-5 text-[#DFB771]" />
+                  {/* Screenshot slot - drop a real PNG here later */}
+                  <div className="w-full h-32 bg-[#0a2e23]/60 border-b border-[#247459]/20 flex items-center justify-center">
+                    <uc.icon className="w-8 h-8 text-[#247459]/40" />
                   </div>
-                  <h3 className="font-bold text-base mb-2">{t(uc.titleKey)}</h3>
-                  <p className="text-[#F6FEFC]/65 text-sm leading-relaxed">{t(uc.bodyKey)}</p>
+                  <div className="p-6">
+                    <div className="w-9 h-9 rounded-xl bg-[#DFB771]/10 border border-[#DFB771]/30 flex items-center justify-center mb-3">
+                      <uc.icon className="w-4 h-4 text-[#DFB771]" />
+                    </div>
+                    <h3 className="font-bold text-base mb-2">{t(uc.titleKey)}</h3>
+                    <p className="text-[#F6FEFC]/65 text-sm leading-relaxed">{t(uc.bodyKey)}</p>
+                  </div>
                 </div>
               ))}
             </div>
