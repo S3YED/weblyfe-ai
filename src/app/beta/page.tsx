@@ -10,6 +10,21 @@ import {
   ArrowRight,
   Database,
   ServerCog,
+  Mail,
+  Receipt,
+  Users,
+  FileText,
+  ShoppingBag,
+  Globe,
+  Search,
+  Link,
+  Layers,
+  Store,
+  CheckCircle2,
+  XCircle,
+  TrendingUp,
+  Zap,
+  Star,
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -107,6 +122,55 @@ const SOCIAL_PROOF = [
   { id: 'eva', name: 'Eva', client: 'Dubai-Property.nl', quoteKey: 'beta.social.proof1.quote' as const, image: '/agents/eva.jpg' },
   { id: 'priva', name: 'Privanotify', client: 'Privacy SaaS', quoteKey: 'beta.social.proof2.quote' as const, image: '/screenshots/privanotify-fresh.jpg' },
   { id: 'ben', name: 'Ben de Voorman', client: 'Coach + content', quoteKey: 'beta.social.proof3.quote' as const, image: '/agents/ben.jpg' },
+] as const;
+
+const OUTCOMES = [
+  { id: 'email', icon: Mail, labelKey: 'beta.outcomes.o1.label' as const, beforeKey: 'beta.outcomes.o1.before' as const, afterKey: 'beta.outcomes.o1.after' as const },
+  { id: 'finance', icon: Receipt, labelKey: 'beta.outcomes.o2.label' as const, beforeKey: 'beta.outcomes.o2.before' as const, afterKey: 'beta.outcomes.o2.after' as const },
+  { id: 'leads', icon: Users, labelKey: 'beta.outcomes.o3.label' as const, beforeKey: 'beta.outcomes.o3.before' as const, afterKey: 'beta.outcomes.o3.after' as const },
+  { id: 'content', icon: FileText, labelKey: 'beta.outcomes.o4.label' as const, beforeKey: 'beta.outcomes.o4.before' as const, afterKey: 'beta.outcomes.o4.after' as const },
+  { id: 'shopify', icon: ShoppingBag, labelKey: 'beta.outcomes.o5.label' as const, beforeKey: 'beta.outcomes.o5.before' as const, afterKey: 'beta.outcomes.o5.after' as const },
+] as const;
+
+const USE_CASES = [
+  { id: 'webflow', icon: Globe, titleKey: 'beta.usecases.uc1.title' as const, bodyKey: 'beta.usecases.uc1.body' as const },
+  { id: 'seo', icon: Search, titleKey: 'beta.usecases.uc2.title' as const, bodyKey: 'beta.usecases.uc2.body' as const },
+  { id: 'domain', icon: Link, titleKey: 'beta.usecases.uc3.title' as const, bodyKey: 'beta.usecases.uc3.body' as const },
+  { id: 'funnel', icon: Layers, titleKey: 'beta.usecases.uc4.title' as const, bodyKey: 'beta.usecases.uc4.body' as const },
+  { id: 'ecom', icon: Store, titleKey: 'beta.usecases.uc5.title' as const, bodyKey: 'beta.usecases.uc5.body' as const },
+] as const;
+
+const CHATBOT_ROWS = [
+  { id: 'p1', chatbotKey: 'beta.chatbot.chatbot.p1' as const, agentKey: 'beta.chatbot.agent.p1' as const },
+  { id: 'p2', chatbotKey: 'beta.chatbot.chatbot.p2' as const, agentKey: 'beta.chatbot.agent.p2' as const },
+  { id: 'p3', chatbotKey: 'beta.chatbot.chatbot.p3' as const, agentKey: 'beta.chatbot.agent.p3' as const },
+  { id: 'p4', chatbotKey: 'beta.chatbot.chatbot.p4' as const, agentKey: 'beta.chatbot.agent.p4' as const },
+  { id: 'p5', chatbotKey: 'beta.chatbot.chatbot.p5' as const, agentKey: 'beta.chatbot.agent.p5' as const },
+] as const;
+
+const OLD_NEW_ROWS = [
+  { id: 'r1', oldKey: 'beta.oldnew.old.r1' as const, newKey: 'beta.oldnew.new.r1' as const },
+  { id: 'r2', oldKey: 'beta.oldnew.old.r2' as const, newKey: 'beta.oldnew.new.r2' as const },
+  { id: 'r3', oldKey: 'beta.oldnew.old.r3' as const, newKey: 'beta.oldnew.new.r3' as const },
+  { id: 'r4', oldKey: 'beta.oldnew.old.r4' as const, newKey: 'beta.oldnew.new.r4' as const },
+  { id: 'r5', oldKey: 'beta.oldnew.old.r5' as const, newKey: 'beta.oldnew.new.r5' as const },
+] as const;
+
+const VALUE_STACK_ITEMS = [
+  'beta.value.stack.i1',
+  'beta.value.stack.i2',
+  'beta.value.stack.i3',
+  'beta.value.stack.i4',
+  'beta.value.stack.i5',
+  'beta.value.stack.i6',
+  'beta.value.stack.i7',
+] as const;
+
+const VALUE_EQUATION = [
+  { id: 'dream', icon: Star, labelKey: 'beta.value.dream.label' as const, bodyKey: 'beta.value.dream' as const, positive: true },
+  { id: 'likelihood', icon: TrendingUp, labelKey: 'beta.value.likelihood.label' as const, bodyKey: 'beta.value.likelihood' as const, positive: true },
+  { id: 'delay', icon: Clock, labelKey: 'beta.value.delay.label' as const, bodyKey: 'beta.value.delay' as const, positive: true },
+  { id: 'effort', icon: Zap, labelKey: 'beta.value.effort.label' as const, bodyKey: 'beta.value.effort' as const, positive: true },
 ] as const;
 
 const productSchema = {
@@ -340,6 +404,85 @@ export default async function BetaPage() {
           </div>
         </section>
 
+        {/* OUTCOMES */}
+        <section className="py-20 md:py-28 bg-[#0a2e23]/40 border-y border-[#247459]/20">
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="text-center mb-14">
+              <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-3">
+                {t('beta.outcomes.eyebrow')}
+              </p>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
+                {t('beta.outcomes.h2.line1')}{' '}
+                <span className="text-[#DFB771]">{t('beta.outcomes.h2.line2')}</span>
+              </h2>
+              <p className="text-[#F6FEFC]/70 text-lg max-w-3xl mx-auto leading-relaxed">
+                {t('beta.outcomes.sub')}
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {OUTCOMES.map((o) => (
+                <div
+                  key={o.id}
+                  className="rounded-2xl bg-[#1a2e27]/50 border border-[#247459]/20 p-6 hover:border-[#DFB771]/40 transition-colors"
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-9 h-9 rounded-xl bg-[#DFB771]/10 border border-[#DFB771]/30 flex items-center justify-center flex-shrink-0">
+                      <o.icon className="w-4 h-4 text-[#DFB771]" />
+                    </div>
+                    <p className="text-[#DFB771] text-xs font-mono uppercase tracking-wider">
+                      {t(o.labelKey)}
+                    </p>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="rounded-xl bg-[#1a1a1a]/60 border border-red-900/30 px-4 py-3">
+                      <p className="text-[#F6FEFC]/45 text-xs font-mono uppercase tracking-wider mb-1">Voor</p>
+                      <p className="text-[#F6FEFC]/65 text-sm leading-relaxed">{t(o.beforeKey)}</p>
+                    </div>
+                    <div className="rounded-xl bg-[#0d2e22]/80 border border-[#247459]/40 px-4 py-3">
+                      <p className="text-[#DFB771] text-xs font-mono uppercase tracking-wider mb-1">Na</p>
+                      <p className="text-[#F6FEFC]/90 text-sm leading-relaxed">{t(o.afterKey)}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* REAL USE CASES */}
+        <section className="py-20 md:py-28">
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="text-center mb-14">
+              <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-3">
+                {t('beta.usecases.eyebrow')}
+              </p>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
+                {t('beta.usecases.h2.line1')}{' '}
+                <span className="text-[#DFB771]">{t('beta.usecases.h2.line2')}</span>
+              </h2>
+              <p className="text-[#F6FEFC]/70 text-lg max-w-3xl mx-auto leading-relaxed">
+                {t('beta.usecases.sub')}
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {USE_CASES.map((uc) => (
+                <div
+                  key={uc.id}
+                  className="rounded-2xl bg-[#1a2e27]/50 border border-[#247459]/20 p-6 hover:border-[#DFB771]/40 transition-colors"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-[#DFB771]/10 border border-[#DFB771]/30 flex items-center justify-center mb-4">
+                    <uc.icon className="w-5 h-5 text-[#DFB771]" />
+                  </div>
+                  <h3 className="font-bold text-base mb-2">{t(uc.titleKey)}</h3>
+                  <p className="text-[#F6FEFC]/65 text-sm leading-relaxed">{t(uc.bodyKey)}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* WAT KRIJG JE IN DE BETA */}
         <section className="py-20 md:py-28 bg-[#0a2e23]/40 border-y border-[#247459]/20">
           <div className="max-w-5xl mx-auto px-6">
@@ -379,6 +522,106 @@ export default async function BetaPage() {
             <p className="text-center text-[#F6FEFC]/55 text-sm mt-8 max-w-2xl mx-auto">
               {t('beta.benefits.whatsapp.footnote')}
             </p>
+          </div>
+        </section>
+
+        {/* CHATBOT vs APPIE-AGENT */}
+        <section className="py-20 md:py-28 bg-[#0a2e23]/40 border-y border-[#247459]/20">
+          <div className="max-w-5xl mx-auto px-6">
+            <div className="text-center mb-14">
+              <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-3">
+                {t('beta.chatbot.eyebrow')}
+              </p>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
+                {t('beta.chatbot.h2.line1')}{' '}
+                <span className="text-[#DFB771]">{t('beta.chatbot.h2.line2')}</span>
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Chatbot column */}
+              <div className="rounded-2xl bg-[#1a1a1a]/50 border border-red-900/30 p-6">
+                <div className="flex items-center gap-2 mb-6">
+                  <XCircle className="w-5 h-5 text-red-400/70" />
+                  <p className="font-bold text-lg text-[#F6FEFC]/60">
+                    {t('beta.chatbot.chatbot.label')}
+                  </p>
+                </div>
+                <ul className="space-y-4">
+                  {CHATBOT_ROWS.map((row) => (
+                    <li key={row.id} className="flex items-start gap-3">
+                      <XCircle className="w-4 h-4 text-red-400/50 flex-shrink-0 mt-0.5" />
+                      <p className="text-[#F6FEFC]/55 text-sm leading-relaxed">{t(row.chatbotKey)}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Appie agent column */}
+              <div className="rounded-2xl bg-gradient-to-br from-[#DFB771]/10 to-[#247459]/10 border-2 border-[#DFB771]/60 p-6">
+                <div className="flex items-center gap-2 mb-6">
+                  <CheckCircle2 className="w-5 h-5 text-[#DFB771]" />
+                  <p className="font-bold text-lg text-[#DFB771]">
+                    {t('beta.chatbot.agent.label')}
+                  </p>
+                </div>
+                <ul className="space-y-4">
+                  {CHATBOT_ROWS.map((row) => (
+                    <li key={row.id} className="flex items-start gap-3">
+                      <CheckCircle2 className="w-4 h-4 text-[#DFB771] flex-shrink-0 mt-0.5" />
+                      <p className="text-[#F6FEFC]/90 text-sm leading-relaxed">{t(row.agentKey)}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* OUD vs NIEUW */}
+        <section className="py-20 md:py-28">
+          <div className="max-w-5xl mx-auto px-6">
+            <div className="text-center mb-14">
+              <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-3">
+                {t('beta.oldnew.eyebrow')}
+              </p>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
+                {t('beta.oldnew.h2.line1')}{' '}
+                <span className="text-[#DFB771]">{t('beta.oldnew.h2.line2')}</span>
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Old column */}
+              <div className="rounded-2xl bg-[#1a2e27]/30 border border-[#247459]/20 p-6">
+                <p className="text-[#F6FEFC]/50 text-xs font-mono uppercase tracking-widest mb-5">
+                  {t('beta.oldnew.old.label')}
+                </p>
+                <ul className="space-y-4">
+                  {OLD_NEW_ROWS.map((row) => (
+                    <li key={row.id} className="flex items-start gap-3">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#F6FEFC]/30 flex-shrink-0 mt-2" />
+                      <p className="text-[#F6FEFC]/50 text-sm leading-relaxed">{t(row.oldKey)}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* New column */}
+              <div className="rounded-2xl bg-gradient-to-br from-[#DFB771]/10 to-[#247459]/10 border border-[#DFB771]/40 p-6">
+                <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-5">
+                  {t('beta.oldnew.new.label')}
+                </p>
+                <ul className="space-y-4">
+                  {OLD_NEW_ROWS.map((row) => (
+                    <li key={row.id} className="flex items-start gap-3">
+                      <ArrowRight className="w-4 h-4 text-[#DFB771] flex-shrink-0 mt-0.5" />
+                      <p className="text-[#F6FEFC]/90 text-sm leading-relaxed">{t(row.newKey)}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -456,6 +699,71 @@ export default async function BetaPage() {
             <p className="text-center text-[#F6FEFC]/55 text-sm mt-10 max-w-2xl mx-auto">
               {t('beta.social.footnote')}
             </p>
+          </div>
+        </section>
+
+        {/* VALUE STACK */}
+        <section className="py-20 md:py-28 bg-[#0a2e23]/40 border-y border-[#247459]/20">
+          <div className="max-w-5xl mx-auto px-6">
+            <div className="text-center mb-14">
+              <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-3">
+                {t('beta.value.eyebrow')}
+              </p>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
+                {t('beta.value.h2.line1')}{' '}
+                <span className="text-[#DFB771]">{t('beta.value.h2.line2')}</span>
+              </h2>
+              <p className="text-[#F6FEFC]/70 text-lg max-w-3xl mx-auto leading-relaxed">
+                {t('beta.value.sub')}
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 items-start">
+              {/* Value equation */}
+              <div className="space-y-4">
+                {VALUE_EQUATION.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex items-start gap-4 rounded-2xl bg-[#1a2e27]/50 border border-[#247459]/20 p-5"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-[#DFB771]/10 border border-[#DFB771]/30 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="w-5 h-5 text-[#DFB771]" />
+                    </div>
+                    <div>
+                      <p className="text-[#DFB771] text-xs font-mono uppercase tracking-wider mb-1">
+                        {t(item.labelKey)}
+                      </p>
+                      <p className="text-[#F6FEFC]/80 text-sm leading-relaxed">{t(item.bodyKey)}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Value stack */}
+              <div className="rounded-2xl bg-gradient-to-br from-[#DFB771]/15 to-[#247459]/10 border-2 border-[#DFB771] p-6">
+                <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-5">
+                  {t('beta.value.stack.label')}
+                </p>
+                <ul className="space-y-3 mb-6">
+                  {VALUE_STACK_ITEMS.map((key) => (
+                    <li key={key} className="flex items-start gap-3">
+                      <CheckCircle2 className="w-4 h-4 text-[#DFB771] flex-shrink-0 mt-0.5" />
+                      <p className="text-[#F6FEFC]/90 text-sm leading-relaxed">{t(key)}</p>
+                    </li>
+                  ))}
+                </ul>
+                <div className="border-t border-[#DFB771]/20 pt-5 flex items-center justify-between">
+                  <p className="text-3xl font-bold text-[#DFB771]">€250<span className="text-base font-normal text-[#F6FEFC]/60">/mo</span></p>
+                  <a
+                    href="#beta-form"
+                    className="group inline-flex items-center gap-2 bg-[#DFB771] hover:bg-[#FFD99A] text-[#031D16] font-bold px-5 py-3 rounded-xl transition-colors text-sm"
+                  >
+                    {t('beta.value.cta')}
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
