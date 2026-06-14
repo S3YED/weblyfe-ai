@@ -14,6 +14,7 @@ import {
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FaqAccordion from '@/components/FaqAccordion';
+import ScrollProgress from '@/components/ScrollProgress';
 import BetaSignupForm from './BetaSignupForm';
 import { LOCALES, DEFAULT_LOCALE, type Locale, tFn } from '@/i18n/messages';
 
@@ -157,6 +158,7 @@ export default async function BetaPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
       />
+      <ScrollProgress />
       <main className="min-h-screen bg-[#031D16] text-[#F6FEFC]">
         <Navbar />
 
