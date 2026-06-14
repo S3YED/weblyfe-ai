@@ -436,11 +436,11 @@ export default async function BetaPage() {
                   </div>
                   <div className="space-y-3">
                     <div className="rounded-xl bg-[#1a1a1a]/60 border border-red-900/30 px-4 py-3">
-                      <p className="text-[#F6FEFC]/45 text-xs font-mono uppercase tracking-wider mb-1">Voor</p>
+                      <p className="text-[#F6FEFC]/45 text-xs font-mono uppercase tracking-wider mb-1">{t('beta.outcomes.beforeLabel')}</p>
                       <p className="text-[#F6FEFC]/65 text-sm leading-relaxed">{t(o.beforeKey)}</p>
                     </div>
                     <div className="rounded-xl bg-[#0d2e22]/80 border border-[#247459]/40 px-4 py-3">
-                      <p className="text-[#DFB771] text-xs font-mono uppercase tracking-wider mb-1">Na</p>
+                      <p className="text-[#DFB771] text-xs font-mono uppercase tracking-wider mb-1">{t('beta.outcomes.afterLabel')}</p>
                       <p className="text-[#F6FEFC]/90 text-sm leading-relaxed">{t(o.afterKey)}</p>
                     </div>
                   </div>

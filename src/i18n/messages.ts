@@ -281,6 +281,8 @@ const nl: Dict = {
 
   // Beta page - OUTCOMES section
   'beta.outcomes.eyebrow': 'Wat je krijgt',
+  'beta.outcomes.beforeLabel': 'Voor',
+  'beta.outcomes.afterLabel': 'Na',
   'beta.outcomes.h2.line1': 'Geen features.',
   'beta.outcomes.h2.line2': 'Resultaten.',
   'beta.outcomes.sub':
@@ -670,6 +672,8 @@ const en: Dict = {
 
   // Beta page - OUTCOMES section
   'beta.outcomes.eyebrow': 'What you get',
+  'beta.outcomes.beforeLabel': 'Before',
+  'beta.outcomes.afterLabel': 'After',
   'beta.outcomes.h2.line1': 'Not features.',
   'beta.outcomes.h2.line2': 'Outcomes.',
   'beta.outcomes.sub':
