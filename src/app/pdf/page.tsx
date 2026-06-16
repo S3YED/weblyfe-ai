@@ -14,6 +14,9 @@ import {
   Video,
   Users,
   ArrowRight,
+  Clock,
+  FileText,
+  LockKeyhole,
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -23,6 +26,8 @@ import FaqAccordion from '@/components/FaqAccordion';
 const STRIPE_CHECKOUT_URL =
   process.env.NEXT_PUBLIC_STRIPE_PDF_CHECKOUT_URL ||
   'https://buy.stripe.com/7sYaEYfAn30C8BncwJ3Je2I';
+
+const CHECKOUT_TRACKING_URL = `${STRIPE_CHECKOUT_URL}${STRIPE_CHECKOUT_URL.includes('?') ? '&' : '?'}utm_source=weblyfe-ai&utm_medium=pdf-page&utm_campaign=appie-guide-v45`;
 
 export const metadata: Metadata = {
   title: 'Build Your Own Techwiz PDF v4.5 - €65',
@@ -70,6 +75,18 @@ const productSchema = {
     seller: { '@type': 'Organization', name: 'Weblyfe' },
   },
 };
+
+const HERO_STATS = [
+  { value: '100+', label: "pagina's" },
+  { value: '150+', label: 'skills' },
+  { value: '€65', label: 'eenmalig' },
+];
+
+const TRUST_SIGNALS = [
+  { icon: Clock, label: 'Directe levering', detail: 'PDF + repo toegang in je inbox' },
+  { icon: RefreshCcw, label: 'Lifetime updates', detail: 'v5.0 en latere versies inbegrepen' },
+  { icon: LockKeyhole, label: 'Veilig via Stripe', detail: 'Eenmalig betalen, geen abonnement' },
+];
 
 const PACKAGE_BULLETS = [
   {
@@ -244,88 +261,135 @@ export default function PdfPage() {
         <Navbar />
 
         {/* HERO */}
-        <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
-          <div
-            className="absolute inset-0 opacity-[0.04] pointer-events-none"
-            style={{
-              backgroundImage:
-                'linear-gradient(#DFB771 1px, transparent 1px), linear-gradient(90deg, #DFB771 1px, transparent 1px)',
-              backgroundSize: '60px 60px',
-            }}
-          />
-          <div className="absolute -top-32 left-1/4 w-[480px] h-[480px] rounded-full bg-[#DFB771]/10 blur-3xl pointer-events-none" />
-          <div className="absolute top-32 right-1/4 w-[420px] h-[420px] rounded-full bg-[#247459]/20 blur-3xl pointer-events-none" />
+        <section className="relative overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24">
+          <div className="absolute inset-0 pointer-events-none">
+            <Image
+              src="/appie-pdf-hero-higgsfield.webp"
+              alt=""
+              fill
+              sizes="100vw"
+              className="object-cover opacity-25 saturate-125"
+              priority
+            />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_34%,rgba(223,183,113,0.24),transparent_28%),linear-gradient(90deg,#031D16_0%,rgba(3,29,22,0.94)_34%,rgba(3,29,22,0.68)_66%,#031D16_100%)]" />
+            <div
+              className="absolute inset-0 opacity-[0.055]"
+              style={{
+                backgroundImage:
+                  'linear-gradient(#DFB771 1px, transparent 1px), linear-gradient(90deg, #DFB771 1px, transparent 1px)',
+                backgroundSize: '64px 64px',
+              }}
+            />
+          </div>
 
-          <div className="relative z-10 max-w-6xl mx-auto px-6 grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-16 items-center">
+          <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-center">
             <div className="text-center lg:text-left">
-              <p className="text-[#DFB771]/80 text-xs font-mono uppercase tracking-widest mb-4">
-                v4.5 . 100+ pagina&apos;s . 150+ skills . €65
-              </p>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-6 tracking-tight">
-                Bouw je eigen Techwiz
-                <span className="block text-[#DFB771]">in een weekend.</span>
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#DFB771]/30 bg-[#031D16]/70 px-4 py-2 text-[#DFB771] text-xs font-mono uppercase tracking-[0.22em] mb-5 shadow-[0_12px_60px_rgba(0,0,0,0.25)]">
+                <FileText className="w-3.5 h-3.5" />
+                v4.5 live · DIY Techwiz blueprint
+              </div>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.98] mb-6 tracking-[-0.055em] text-balance">
+                Bouw je eigen AI assistent
+                <span className="block text-[#DFB771]">dit weekend.</span>
               </h1>
-              <p className="text-[#F6FEFC]/75 text-lg md:text-xl mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                De &quot;Build Your Own Techwiz&quot; PDF v4.5. 100+ pagina&apos;s
-                stap-voor-stap, 150+ kant-en-klare skills en het complete Appie Kit.
-                Werkt met Claude Opus 4.7 en OpenAI Codex 5.4. Geen vendor lock-in.
+              <p className="text-[#F6FEFC]/78 text-lg md:text-xl mb-7 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                De complete Weblyfe blueprint voor je eigen Techwiz: 100+ pagina&apos;s,
+                150+ kant-en-klare skills, Appie Kit toegang en lifetime updates.
+                Geen abonnement. Geen vendor lock-in.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-8">
+              <div className="grid grid-cols-3 gap-2.5 max-w-xl mx-auto lg:mx-0 mb-7">
+                {HERO_STATS.map((stat) => (
+                  <div key={stat.label} className="rounded-2xl border border-[#247459]/35 bg-[#031D16]/70 px-4 py-3 backdrop-blur">
+                    <p className="text-2xl md:text-3xl font-bold text-[#DFB771] leading-none">{stat.value}</p>
+                    <p className="mt-1 text-[11px] md:text-xs uppercase tracking-wider text-[#F6FEFC]/55">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-6">
                 <a
-                  href={STRIPE_CHECKOUT_URL}
+                  href={CHECKOUT_TRACKING_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#FFD99A] text-[#031D16] font-bold px-7 py-4 rounded-xl transition-colors"
+                  className="group inline-flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#FFD99A] text-[#031D16] font-black px-8 py-4 rounded-2xl transition-all shadow-[0_18px_55px_-20px_rgba(223,183,113,0.95)] hover:-translate-y-0.5"
                 >
-                  Koop nu voor €65
+                  Koop de gids · €65
                   <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                 </a>
                 <a
-                  href="#faq"
-                  className="inline-flex items-center justify-center gap-2 border-2 border-[#247459]/60 hover:border-[#DFB771] text-[#F6FEFC] font-semibold px-7 py-4 rounded-xl transition-colors"
+                  href="#contents"
+                  className="inline-flex items-center justify-center gap-2 border border-[#F6FEFC]/16 bg-[#F6FEFC]/6 hover:bg-[#F6FEFC]/10 text-[#F6FEFC] font-semibold px-8 py-4 rounded-2xl transition-colors backdrop-blur"
                 >
-                  Lees eerst de FAQ
+                  Bekijk wat je krijgt
                 </a>
               </div>
 
-              <ul className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center lg:justify-start text-sm text-[#F6FEFC]/70">
-                <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-[#DFB771]" />
-                  Eenmalig. Geen abonnement.
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-[#DFB771]" />
-                  Lifetime updates inbegrepen
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-[#DFB771]" />
-                  150+ skills, drag-and-drop
-                </li>
-              </ul>
+              <p className="text-sm text-[#F6FEFC]/58">
+                Direct geleverd via e-mail · veilig betalen via Stripe · zelf bouwen of later upgraden naar Instant Appie
+              </p>
             </div>
 
-            <div className="relative mx-auto lg:mx-0 w-full max-w-md">
-              <div className="relative aspect-[3/4] rounded-3xl overflow-hidden border-2 border-[#DFB771]/40 shadow-[0_0_60px_-15px_rgba(223,183,113,0.5)]">
-                <Image
-                  src="/appie-pdf-cover.jpg"
-                  alt="Build Your Own Techwiz PDF v4.5"
-                  fill
-                  sizes="(min-width: 1024px) 420px, 80vw"
-                  className="object-cover"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#031D16]/40 via-transparent to-transparent" />
-              </div>
-              <div className="absolute -bottom-3 -right-3 bg-[#DFB771] text-[#031D16] px-4 py-2 rounded-xl font-bold text-sm shadow-lg">
-                v4.5 . LIVE
+            <div className="relative mx-auto lg:mx-0 w-full max-w-lg">
+              <div className="absolute -inset-6 rounded-[2.25rem] bg-[#DFB771]/18 blur-3xl" />
+              <div className="relative rounded-[2rem] border border-[#DFB771]/28 bg-[#071f18]/78 p-4 shadow-2xl shadow-black/40 backdrop-blur-xl">
+                <div className="relative aspect-[16/10] rounded-[1.5rem] overflow-hidden border border-[#DFB771]/25 bg-[#031D16]">
+                  <Image
+                    src="/appie-pdf-hero-higgsfield.webp"
+                    alt="Premium Weblyfe AI guide scene"
+                    fill
+                    sizes="(min-width: 1024px) 520px, 92vw"
+                    className="object-cover"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#031D16]/75 via-transparent to-transparent" />
+                </div>
+
+                <div className="mt-4 grid gap-3 sm:grid-cols-[0.72fr_1fr] items-stretch">
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-[#DFB771]/30 bg-[#F6FEFC]">
+                    <Image
+                      src="/appie-pdf-cover.jpg"
+                      alt="Build Your Own Techwiz PDF v4.5 cover"
+                      fill
+                      sizes="180px"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="rounded-2xl border border-[#247459]/35 bg-[#031D16]/72 p-4 flex flex-col justify-between">
+                    <div>
+                      <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-2">Vandaag bouwen</p>
+                      <h2 className="text-xl font-bold leading-tight">Van nul naar een werkende Techwiz setup.</h2>
+                    </div>
+                    <ul className="mt-5 space-y-2 text-sm text-[#F6FEFC]/70">
+                      <li className="flex gap-2"><Check className="w-4 h-4 text-[#DFB771] mt-0.5 flex-shrink-0" />OpenClaw of Hermes Agent</li>
+                      <li className="flex gap-2"><Check className="w-4 h-4 text-[#DFB771] mt-0.5 flex-shrink-0" />Private Appie Kit repo</li>
+                      <li className="flex gap-2"><Check className="w-4 h-4 text-[#DFB771] mt-0.5 flex-shrink-0" />Lifetime updates</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
+        <section className="py-10 bg-[#071f18] border-y border-[#247459]/20">
+          <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-4">
+            {TRUST_SIGNALS.map((signal) => (
+              <div key={signal.label} className="flex items-start gap-3 rounded-2xl border border-[#247459]/24 bg-[#1a2e27]/45 p-5">
+                <div className="w-10 h-10 rounded-xl bg-[#DFB771]/10 border border-[#DFB771]/25 flex items-center justify-center flex-shrink-0">
+                  <signal.icon className="w-5 h-5 text-[#DFB771]" />
+                </div>
+                <div>
+                  <h2 className="text-base font-bold">{signal.label}</h2>
+                  <p className="mt-1 text-sm text-[#F6FEFC]/62 leading-relaxed">{signal.detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* WAT KRIJG JE */}
-        <section className="py-20 md:py-28 bg-[#0a2e23]/40 border-y border-[#247459]/20">
+        <section id="contents" className="py-20 md:py-28 bg-[#0a2e23]/40 border-y border-[#247459]/20 scroll-mt-24">
           <div className="max-w-6xl mx-auto px-6">
             <div className="text-center mb-16">
               <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-3">
@@ -610,7 +674,7 @@ export default function PdfPage() {
               GitHub-toegang in je inbox.
             </p>
             <a
-              href={STRIPE_CHECKOUT_URL}
+              href={CHECKOUT_TRACKING_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#FFD99A] text-[#031D16] font-bold px-9 py-5 rounded-2xl text-lg transition-colors"
