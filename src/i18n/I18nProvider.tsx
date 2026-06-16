@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useCallback, useContext, useState, type ReactNode } from 'react';
+import { useRouter } from 'next/navigation';
 import { LOCALES, messages, DEFAULT_LOCALE, type Locale, type MessageKey } from './messages';
 
 type I18n = {
@@ -23,6 +24,7 @@ export function I18nProvider({
   children: ReactNode;
 }) {
   const [locale, setLocaleState] = useState<Locale>(initialLocale);
+  const router = useRouter();
 
   const setLocale = useCallback((l: Locale) => {
     if (!LOCALES.includes(l)) return;
@@ -31,7 +33,8 @@ export function I18nProvider({
       document.cookie = `locale=${l}; path=/; max-age=31536000; samesite=lax`;
       document.documentElement.lang = l;
     }
-  }, []);
+    router.refresh();
+  }, [router]);
 
   const t = useCallback(
     (key: MessageKey) => messages[locale][key] ?? messages[DEFAULT_LOCALE][key] ?? key,
