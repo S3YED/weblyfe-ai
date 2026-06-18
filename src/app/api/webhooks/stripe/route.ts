@@ -10,6 +10,19 @@ const AIRTABLE_BASE_ID = process.env.AIRTABLE_WEBLYFE_BASE_ID!;
 const AIRTABLE_LEADS_TABLE = 'tblXjrB8K4Mc6U8Xu';
 const AIRTABLE_SALES_TABLE = 'tbl4ghEabTQzC84hV';
 
+// Positive product allowlist. The live Stripe account also sells one-time
+// "Weblyfe Services" (€500/€1000) and Weblyfe University, which are mode=payment
+// too and were cross-firing the PDF delivery email + getting mislabeled as
+// "Appie PDF" in Airtable (reported 2026-06-18). Only these IDs are the guide.
+const PDF_PRICE_IDS = new Set(
+  (process.env.PDF_STRIPE_PRICE_IDS || 'price_1TFzgPLNHXmj2NAs1N95z1gu')
+    .split(',').map((s) => s.trim()).filter(Boolean),
+);
+const PDF_PAYMENT_LINK_IDS = new Set(
+  (process.env.PDF_STRIPE_PAYMENT_LINKS || 'plink_1TFzgYLNHXmj2NAsVzqvy3Ut')
+    .split(',').map((s) => s.trim()).filter(Boolean),
+);
+
 // ─── Stripe Signature Verification ─────────────────────────────────────────────
 
 function verifyStripeSignature(payload: string, signature: string): boolean {
@@ -428,6 +441,35 @@ async function sendPDFDeliveryEmail(email: string, firstName: string): Promise<v
   }
 }
 
+// ─── PDF Product Gate ──────────────────────────────────────────────────────────
+
+// Returns the price IDs on a checkout session (empty on failure).
+async function getSessionPriceIds(sessionId: string): Promise<string[]> {
+  try {
+    const res = await fetch(
+      `https://api.stripe.com/v1/checkout/sessions/${sessionId}/line_items?limit=100`,
+      { headers: { Authorization: `Bearer ${STRIPE_SECRET_KEY}` } },
+    );
+    const data = await res.json();
+    return (data.data || [])
+      .map((li: { price?: { id?: string } }) => li.price?.id)
+      .filter((id: string | undefined): id is string => Boolean(id));
+  } catch (err) {
+    console.error('Webhook: failed to fetch line items for', sessionId, err);
+    return [];
+  }
+}
+
+// Fast path: the PDF payment link. Precise path: the PDF price ID on a line item.
+// Fails closed (non-PDF stays skipped) so other products never trigger delivery.
+async function isPdfPurchase(session: { id: string; payment_link?: string }): Promise<boolean> {
+  if (typeof session.payment_link === 'string' && PDF_PAYMENT_LINK_IDS.has(session.payment_link)) {
+    return true;
+  }
+  const priceIds = await getSessionPriceIds(session.id);
+  return priceIds.some((id) => PDF_PRICE_IDS.has(id));
+}
+
 // ─── Webhook Handler ───────────────────────────────────────────────────────────
 
 export async function POST(req: NextRequest) {
@@ -462,6 +504,13 @@ export async function POST(req: NextRequest) {
       if (session.mode !== 'payment') {
         console.log(`Webhook: session mode ${session.mode}, not a PDF purchase, skipping:`, session.id);
         return NextResponse.json({ received: true, skipped: 'non-payment-mode' });
+      }
+
+      // mode=payment is necessary but not sufficient: "Weblyfe Services" and
+      // Weblyfe University are one-time payments too. Gate on the actual product.
+      if (!(await isPdfPurchase(session))) {
+        console.log(`Webhook: session not the PDF product (payment_link=${session.payment_link}), skipping:`, session.id);
+        return NextResponse.json({ received: true, skipped: 'non-pdf-product' });
       }
 
       const email = await getCustomerEmail(session);
