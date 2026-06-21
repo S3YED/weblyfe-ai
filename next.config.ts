@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  outputFileTracingIncludes: {
+    "/api/download/appie-guide": ["./assets/appie-guide-v4.5.pdf"],
+  },
+
   images: {
     // AVIF first, WebP fallback. next/image transcodes from any source on demand.
     formats: ["image/avif", "image/webp"],
