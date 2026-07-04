@@ -106,13 +106,13 @@ export default function OpenClawPage() {
           </motion.div>
 
           {/* Authority Stats */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }} className="flex flex-wrap items-center justify-center gap-6 mt-10 mb-4">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }} className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-3 sm:gap-6 mt-10 mb-4">
             <span className="text-sm text-[#F6FEFC]/60">1,200+ Hours Saved</span>
-            <span className="text-[#F6FEFC]/20">|</span>
+            <span className="hidden sm:inline text-[#F6FEFC]/20">|</span>
             <span className="text-sm text-[#F6FEFC]/60">€50K+ Revenue Generated</span>
-            <span className="text-[#F6FEFC]/20">|</span>
+            <span className="hidden sm:inline text-[#F6FEFC]/20">|</span>
             <span className="text-sm text-[#F6FEFC]/60">3 Live Agents</span>
-            <span className="text-[#F6FEFC]/20">|</span>
+            <span className="hidden sm:inline text-[#F6FEFC]/20">|</span>
             <span className="text-sm text-[#F6FEFC]/60">99.9% Uptime</span>
           </motion.div>
 
