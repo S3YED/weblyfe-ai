@@ -5,6 +5,7 @@ import './globals.css';
 import { I18nProvider } from '@/i18n/I18nProvider';
 import { LOCALES, DEFAULT_LOCALE, type Locale } from '@/i18n/messages';
 import WhatsAppWidget from '@/components/WhatsAppWidget';
+import MetaPixel from '@/components/MetaPixel';
 
 const rethinkSans = Rethink_Sans({
   subsets: ['latin'],
@@ -113,6 +114,9 @@ export const metadata: Metadata = {
     // Add Google Search Console / Bing verif tokens here when ready
     // google: 'xxx',
   },
+  other: {
+    'facebook-domain-verification': 'rm4egjpe70adpgh1g5qkin5q15681y',
+  },
 };
 
 const organizationSchema = {
@@ -182,6 +186,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
       </head>
       <body className={`antialiased ${rethinkSans.className}`}>
+        <MetaPixel />
         <I18nProvider initialLocale={locale}>{children}</I18nProvider>
         <WhatsAppWidget />
       </body>

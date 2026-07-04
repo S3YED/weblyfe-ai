@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  outputFileTracingRoot: __dirname,
+  turbopack: {
+    root: __dirname,
+  },
   images: {
     // AVIF first, WebP fallback. next/image transcodes from any source on demand.
     formats: ["image/avif", "image/webp"],

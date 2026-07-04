@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import Lottie from 'lottie-react';
+import PurchaseMetaEvent from './PurchaseMetaEvent';
 
 // Green checkbox Lottie animation data (inline to avoid external fetch)
 const checkmarkAnimation = {
@@ -170,7 +171,9 @@ export default function ThankYouPage() {
   }, []);
 
   return (
-    <div
+    <>
+      <PurchaseMetaEvent />
+      <div
       style={{
         minHeight: '100vh',
         background: 'linear-gradient(180deg, #031D16 0%, #0E3D31 100%)',
@@ -358,5 +361,6 @@ export default function ThankYouPage() {
         © 2026 Weblyfe.ai · Techwiz LLC · Rijswijk, NL
       </p>
     </div>
+    </>
   );
 }

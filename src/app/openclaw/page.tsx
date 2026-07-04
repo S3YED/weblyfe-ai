@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { MetaEvent } from '@/components/MetaEvents';
 import OpenClawClient from './OpenClawClient';
 
 export const metadata: Metadata = {
@@ -79,6 +80,7 @@ export default function OpenClawPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(openClawFaqSchema) }}
       />
+      <MetaEvent event="ViewContent" params={{ content_name: 'Build Your Own Appie', content_category: 'PDF Guide', value: 65, currency: 'EUR' }} />
       <OpenClawClient />
     </>
   );
