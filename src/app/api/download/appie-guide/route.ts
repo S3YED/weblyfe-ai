@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createHmac } from 'crypto';
+import { createHmac, timingSafeEqual } from 'crypto';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
 
@@ -19,12 +19,16 @@ function verifyToken(token: string): string | null {
   if (parts.length !== 2) return null;
 
   const [payload, sig] = parts;
+  // Full 256-bit HMAC, compared in constant time. (Previously truncated to
+  // 64 bits + non-constant-time string compare, gratuitously weak for a token
+  // guarding paid content.)
   const expectedSig = createHmac('sha256', PDF_SIGNING_SECRET)
     .update(payload)
-    .digest('hex')
-    .slice(0, 16);
+    .digest('hex');
 
-  if (sig !== expectedSig) return null;
+  const sigBuf = Buffer.from(sig);
+  const expBuf = Buffer.from(expectedSig);
+  if (sigBuf.length !== expBuf.length || !timingSafeEqual(sigBuf, expBuf)) return null;
 
   try {
     const decoded = Buffer.from(payload, 'base64url').toString('utf-8');
@@ -58,14 +62,14 @@ export async function GET(req: NextRequest) {
 
   try {
     // Serve the PDF
-    const pdfPath = join(process.cwd(), 'assets', 'appie-guide-v4.1.pdf');
+    const pdfPath = join(process.cwd(), 'assets', 'appie-guide-v4.5.pdf');
     const pdfBuffer = await readFile(pdfPath);
 
     return new NextResponse(pdfBuffer, {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': 'attachment; filename="Build_Your_Own_Appie_v4.pdf"',
+        'Content-Disposition': 'attachment; filename="Build_Your_Own_Appie_v4.5.pdf"',
         'Content-Length': pdfBuffer.length.toString(),
         'Cache-Control': 'private, no-cache, no-store',
         'X-Robots-Tag': 'noindex',

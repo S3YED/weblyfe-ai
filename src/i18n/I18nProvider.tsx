@@ -33,6 +33,8 @@ export function I18nProvider({
       document.cookie = `locale=${l}; path=/; max-age=31536000; samesite=lax`;
       document.documentElement.lang = l;
     }
+    // Server components (e.g. the /beta page body) render from the cookie at
+    // request time; refresh so they re-render in the newly chosen language.
     router.refresh();
   }, [router]);
 

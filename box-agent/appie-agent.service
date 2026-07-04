@@ -1,0 +1,20 @@
+[Unit]
+Description=Instant Appie on-box agent (Telegram long-poll + OpenRouter)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/node /opt/appie/agent.mjs
+Restart=always
+RestartSec=5
+# Config + secrets live in /etc/appie (mode 600). The agent reads them itself.
+WorkingDirectory=/opt/appie
+StandardOutput=journal
+StandardError=journal
+# Mild hardening: the agent only needs to read /etc/appie and write /var/lib/appie.
+NoNewPrivileges=true
+ReadWritePaths=/var/lib/appie /tmp
+
+[Install]
+WantedBy=multi-user.target

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { cookies } from 'next/headers';
 import {
   Lock,
   Sparkles,
@@ -9,40 +10,178 @@ import {
   ArrowRight,
   Database,
   ServerCog,
+  Mail,
+  Receipt,
+  Users,
+  FileText,
+  ShoppingBag,
+  Globe,
+  Search,
+  Link,
+  Layers,
+  Store,
+  CheckCircle2,
+  XCircle,
+  TrendingUp,
+  Zap,
+  Star,
+  PenLine,
+  BarChart2,
+  Wallet,
+  CalendarClock,
+  MessagesSquare,
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FaqAccordion from '@/components/FaqAccordion';
+import ScrollProgress from '@/components/ScrollProgress';
 import BetaSignupForm from './BetaSignupForm';
+import { LOCALES, DEFAULT_LOCALE, type Locale, tFn } from '@/i18n/messages';
 
-export const metadata: Metadata = {
-  title: 'Instant Appie BETA - €250/mo locked',
-  description:
-    'Jouw volledig managed Techwiz op Telegram. 5-10 plekken, €250/mo voor altijd. 14 dagen geld-terug. 1-op-1 onboarding met Seyed.',
-  alternates: { canonical: 'https://weblyfe.ai/beta' },
-  openGraph: {
-    title: 'Instant Appie BETA - €250/mo voor altijd',
-    description:
-      'Volledig managed Techwiz. Telegram dag 1, agenda, inbox, CRM. 5-10 plekken.',
-    url: 'https://weblyfe.ai/beta',
-    type: 'website',
-    images: [
-      {
-        url: '/agents/appie-3d.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Instant Appie BETA - €250/mo locked',
-      },
-    ],
+// ---------------------------------------------------------------------------
+// Locale resolution (same pattern as layout.tsx)
+// ---------------------------------------------------------------------------
+async function resolveLocale(): Promise<Locale> {
+  const cookieStore = await cookies();
+  const cookieLocale = cookieStore.get('locale')?.value;
+  return (LOCALES as readonly string[]).includes(cookieLocale ?? '')
+    ? (cookieLocale as Locale)
+    : DEFAULT_LOCALE;
+}
+
+// ---------------------------------------------------------------------------
+// Metadata - generated per-locale
+// ---------------------------------------------------------------------------
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await resolveLocale();
+  const t = tFn(locale);
+  return {
+    title: t('beta.meta.title'),
+    description: t('beta.meta.description'),
+    alternates: { canonical: 'https://weblyfe.ai/beta' },
+    openGraph: {
+      title: t('beta.meta.og.title'),
+      description: t('beta.meta.og.description'),
+      url: 'https://weblyfe.ai/beta',
+      type: 'website',
+      images: [
+        {
+          url: '/agents/appie-iconic.png',
+          width: 1200,
+          height: 630,
+          alt: t('beta.meta.og.imgAlt'),
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('beta.meta.tw.title'),
+      description: t('beta.meta.tw.description'),
+      images: ['/agents/appie-iconic.png'],
+    },
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Static data (titles, prices, client names stay language-neutral;
+// body copy and notes are translated at render time via t())
+// ---------------------------------------------------------------------------
+const PRICING_ROWS = [
+  { id: 'diy', title: 'DIY ChatGPT', price: '€20/mo', bodyKey: 'beta.row.diy.body' as const, accent: false },
+  {
+    id: 'instant',
+    title: 'Instant Appie BETA',
+    price: '€250/mo',
+    noteKey: 'beta.row.instant.note' as const,
+    bodyKey: 'beta.row.instant.body' as const,
+    accent: true,
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Instant Appie BETA - €250/mo locked',
-    description:
-      'Volledig managed Techwiz. Telegram dag 1, agenda, inbox, CRM. 5-10 plekken.',
-    images: ['/agents/appie-3d.jpg'],
-  },
-};
+  { id: 'full', title: 'Instant Appie (full launch)', price: '€488/mo', bodyKey: 'beta.row.full.body' as const, accent: false },
+  { id: 'va', title: 'NL VA (8 uur)', price: '€550/mo', bodyKey: 'beta.row.va.body' as const, accent: false },
+  { id: 'ea', title: 'Executive Assistant (fulltime)', price: '€5.000+/mo', bodyKey: 'beta.row.ea.body' as const, accent: false },
+] as const;
+
+const WHAT_IS_BULLETS = [
+  { id: 'server', icon: ServerCog, titleKey: 'beta.what.bullet1.title' as const, bodyKey: 'beta.what.bullet1.body' as const },
+  { id: 'telegram', icon: MessageCircle, titleKey: 'beta.what.bullet2.title' as const, bodyKey: 'beta.what.bullet2.body' as const },
+  { id: 'memory', icon: Database, titleKey: 'beta.what.bullet3.title' as const, bodyKey: 'beta.what.bullet3.body' as const },
+  { id: 'clock', icon: Clock, titleKey: 'beta.what.bullet4.title' as const, bodyKey: 'beta.what.bullet4.body' as const },
+] as const;
+
+const BETA_BENEFITS = [
+  { id: 'onboarding', icon: Sparkles, titleKey: 'beta.benefits.b1.title' as const, bodyKey: 'beta.benefits.b1.body' as const },
+  { id: 'telegram', icon: MessageCircle, titleKey: 'beta.benefits.b2.title' as const, bodyKey: 'beta.benefits.b2.body' as const },
+  { id: 'price', icon: Lock, titleKey: 'beta.benefits.b3.title' as const, bodyKey: 'beta.benefits.b3.body' as const },
+  { id: 'guarantee', icon: ShieldCheck, titleKey: 'beta.benefits.b4.title' as const, bodyKey: 'beta.benefits.b4.body' as const },
+  { id: 'updates', icon: Sparkles, titleKey: 'beta.benefits.b5.title' as const, bodyKey: 'beta.benefits.b5.body' as const },
+] as const;
+
+const HOW_IT_WORKS = [
+  { step: '01', titleKey: 'beta.how.s1.title' as const, bodyKey: 'beta.how.s1.body' as const },
+  { step: '02', titleKey: 'beta.how.s2.title' as const, bodyKey: 'beta.how.s2.body' as const },
+  { step: '03', titleKey: 'beta.how.s3.title' as const, bodyKey: 'beta.how.s3.body' as const },
+  { step: '04', titleKey: 'beta.how.s4.title' as const, bodyKey: 'beta.how.s4.body' as const },
+] as const;
+
+const SOCIAL_PROOF = [
+  { id: 'eva', name: 'Eva', client: 'Dubai-Property.nl', quoteKey: 'beta.social.proof1.quote' as const, image: '/agents/eva.jpg' },
+  { id: 'priva', name: 'Privanotify', client: 'Privacy SaaS', quoteKey: 'beta.social.proof2.quote' as const, image: '/screenshots/privanotify-fresh.jpg' },
+  { id: 'ben', name: 'Ben de Voorman', client: 'Coach + content', quoteKey: 'beta.social.proof3.quote' as const, image: '/agents/ben.jpg' },
+] as const;
+
+const OUTCOMES = [
+  { id: 'email', icon: Mail, labelKey: 'beta.outcomes.o1.label' as const, beforeKey: 'beta.outcomes.o1.before' as const, afterKey: 'beta.outcomes.o1.after' as const },
+  { id: 'finance', icon: Receipt, labelKey: 'beta.outcomes.o2.label' as const, beforeKey: 'beta.outcomes.o2.before' as const, afterKey: 'beta.outcomes.o2.after' as const },
+  { id: 'leads', icon: Users, labelKey: 'beta.outcomes.o3.label' as const, beforeKey: 'beta.outcomes.o3.before' as const, afterKey: 'beta.outcomes.o3.after' as const },
+  { id: 'content', icon: FileText, labelKey: 'beta.outcomes.o4.label' as const, beforeKey: 'beta.outcomes.o4.before' as const, afterKey: 'beta.outcomes.o4.after' as const },
+  { id: 'shopify', icon: ShoppingBag, labelKey: 'beta.outcomes.o5.label' as const, beforeKey: 'beta.outcomes.o5.before' as const, afterKey: 'beta.outcomes.o5.after' as const },
+] as const;
+
+const USE_CASES = [
+  { id: 'webflow', icon: Globe, titleKey: 'beta.usecases.uc1.title' as const, bodyKey: 'beta.usecases.uc1.body' as const },
+  { id: 'seo', icon: Search, titleKey: 'beta.usecases.uc2.title' as const, bodyKey: 'beta.usecases.uc2.body' as const },
+  { id: 'domain', icon: Link, titleKey: 'beta.usecases.uc3.title' as const, bodyKey: 'beta.usecases.uc3.body' as const },
+  { id: 'funnel', icon: Layers, titleKey: 'beta.usecases.uc4.title' as const, bodyKey: 'beta.usecases.uc4.body' as const },
+  { id: 'ecom', icon: Store, titleKey: 'beta.usecases.uc5.title' as const, bodyKey: 'beta.usecases.uc5.body' as const },
+  { id: 'content', icon: PenLine, titleKey: 'beta.usecases.uc6.title' as const, bodyKey: 'beta.usecases.uc6.body' as const },
+  { id: 'leads', icon: BarChart2, titleKey: 'beta.usecases.uc7.title' as const, bodyKey: 'beta.usecases.uc7.body' as const },
+  { id: 'finance', icon: Wallet, titleKey: 'beta.usecases.uc8.title' as const, bodyKey: 'beta.usecases.uc8.body' as const },
+  { id: 'admin', icon: CalendarClock, titleKey: 'beta.usecases.uc9.title' as const, bodyKey: 'beta.usecases.uc9.body' as const },
+  { id: 'whatsapp', icon: MessagesSquare, titleKey: 'beta.usecases.uc10.title' as const, bodyKey: 'beta.usecases.uc10.body' as const },
+] as const;
+
+const CHATBOT_ROWS = [
+  { id: 'p1', chatbotKey: 'beta.chatbot.chatbot.p1' as const, agentKey: 'beta.chatbot.agent.p1' as const },
+  { id: 'p2', chatbotKey: 'beta.chatbot.chatbot.p2' as const, agentKey: 'beta.chatbot.agent.p2' as const },
+  { id: 'p3', chatbotKey: 'beta.chatbot.chatbot.p3' as const, agentKey: 'beta.chatbot.agent.p3' as const },
+  { id: 'p4', chatbotKey: 'beta.chatbot.chatbot.p4' as const, agentKey: 'beta.chatbot.agent.p4' as const },
+  { id: 'p5', chatbotKey: 'beta.chatbot.chatbot.p5' as const, agentKey: 'beta.chatbot.agent.p5' as const },
+] as const;
+
+const OLD_NEW_ROWS = [
+  { id: 'r1', oldKey: 'beta.oldnew.old.r1' as const, newKey: 'beta.oldnew.new.r1' as const },
+  { id: 'r2', oldKey: 'beta.oldnew.old.r2' as const, newKey: 'beta.oldnew.new.r2' as const },
+  { id: 'r3', oldKey: 'beta.oldnew.old.r3' as const, newKey: 'beta.oldnew.new.r3' as const },
+  { id: 'r4', oldKey: 'beta.oldnew.old.r4' as const, newKey: 'beta.oldnew.new.r4' as const },
+  { id: 'r5', oldKey: 'beta.oldnew.old.r5' as const, newKey: 'beta.oldnew.new.r5' as const },
+] as const;
+
+const VALUE_STACK_ITEMS = [
+  'beta.value.stack.i1',
+  'beta.value.stack.i2',
+  'beta.value.stack.i3',
+  'beta.value.stack.i4',
+  'beta.value.stack.i5',
+  'beta.value.stack.i6',
+  'beta.value.stack.i7',
+] as const;
+
+const VALUE_EQUATION = [
+  { id: 'dream', icon: Star, labelKey: 'beta.value.dream.label' as const, bodyKey: 'beta.value.dream' as const, positive: true },
+  { id: 'likelihood', icon: TrendingUp, labelKey: 'beta.value.likelihood.label' as const, bodyKey: 'beta.value.likelihood' as const, positive: true },
+  { id: 'delay', icon: Clock, labelKey: 'beta.value.delay.label' as const, bodyKey: 'beta.value.delay' as const, positive: true },
+  { id: 'effort', icon: Zap, labelKey: 'beta.value.effort.label' as const, bodyKey: 'beta.value.effort' as const, positive: true },
+] as const;
 
 const productSchema = {
   '@context': 'https://schema.org',
@@ -51,7 +190,7 @@ const productSchema = {
   description:
     'Volledig managed persoonlijke Techwiz op Telegram, inbox, agenda en CRM. 5-10 beta-plekken.',
   brand: { '@type': 'Brand', name: 'Weblyfe' },
-  image: 'https://weblyfe.ai/agents/appie-3d.jpg',
+  image: 'https://weblyfe.ai/agents/appie-iconic.png',
   offers: {
     '@type': 'Offer',
     price: '250',
@@ -68,191 +207,32 @@ const productSchema = {
   },
 };
 
-type PricingRow = {
-  title: string;
-  price: string;
-  note?: string;
-  body: string;
-  accent: boolean;
-};
+// ---------------------------------------------------------------------------
+// Page
+// ---------------------------------------------------------------------------
+export default async function BetaPage() {
+  const locale = await resolveLocale();
+  const t = tFn(locale);
 
-const PRICING_ROWS: ReadonlyArray<PricingRow> = [
-  {
-    title: 'DIY ChatGPT',
-    price: '€20/mo',
-    body: 'Chatbot. Geen geheugen. Jij typt alles.',
-    accent: false,
-  },
-  {
-    title: 'Instant Appie BETA',
-    price: '€250/mo',
-    note: 'locked voor altijd',
-    body: 'Volledig managed Techwiz. Telegram dag 1.',
-    accent: true,
-  },
-  {
-    title: 'Instant Appie (full launch)',
-    price: '€488/mo',
-    body: 'WhatsApp + alle connectors.',
-    accent: false,
-  },
-  {
-    title: 'NL VA (8 uur)',
-    price: '€550/mo',
-    body: 'Mens. 8u/week. Vakantie-opvang niet inbegrepen.',
-    accent: false,
-  },
-  {
-    title: 'Executive Assistant (fulltime)',
-    price: '€5.000+/mo',
-    body: 'Menselijk. Schaalt niet.',
-    accent: false,
-  },
-];
+  const betaFaqItems = [
+    { q: t('beta.faq.q1'), a: t('beta.faq.a1') },
+    { q: t('beta.faq.q2'), a: t('beta.faq.a2') },
+    { q: t('beta.faq.q3'), a: t('beta.faq.a3') },
+    { q: t('beta.faq.q4'), a: t('beta.faq.a4') },
+    { q: t('beta.faq.q5'), a: t('beta.faq.a5') },
+    { q: t('beta.faq.q6'), a: t('beta.faq.a6') },
+    { q: t('beta.faq.q7'), a: t('beta.faq.a7') },
+    { q: t('beta.faq.q8'), a: t('beta.faq.a8') },
+    { q: t('beta.faq.q9'), a: t('beta.faq.a9') },
+  ];
 
-const WHAT_IS_BULLETS = [
-  {
-    icon: ServerCog,
-    title: 'Eigen dedicated server',
-    body: 'Hetzner EU, privacy-compliant. Jouw data verlaat nooit Europa.',
-  },
-  {
-    icon: MessageCircle,
-    title: 'Telegram, inbox, agenda en CRM',
-    body: 'Vanaf dag 1 verbonden met de tools waar jouw werk al loopt.',
-  },
-  {
-    icon: Database,
-    title: 'Persistent geheugen',
-    body: 'Onthoudt klanten, afspraken en voorkeuren. Begint nooit bij nul.',
-  },
-  {
-    icon: Clock,
-    title: '24/7 actief',
-    body: 'Werkt door terwijl jij slaapt. Lead om 22:14 wordt om 22:14 gekwalificeerd.',
-  },
-];
-
-const BETA_BENEFITS = [
-  {
-    icon: Sparkles,
-    title: '1-op-1 onboarding met Seyed',
-    body: 'Seyed bouwt en configureert jouw Appie persoonlijk samen met jou. 60-90 minuten sessie.',
-  },
-  {
-    icon: MessageCircle,
-    title: 'Telegram vanaf dag 1',
-    body: 'Inbox-triage, agendabeheer, CRM en lead-notificaties. Allemaal in 1 chat.',
-  },
-  {
-    icon: Lock,
-    title: '€250/mo voor altijd',
-    body: 'Zelfs als we naar €488 gaan bij de publieke launch. Locked-in beta-prijs.',
-  },
-  {
-    icon: ShieldCheck,
-    title: '14 dagen geld-terug',
-    body: 'Niet tevreden? Geld terug, geen gedoe. Daarna maandelijks opzegbaar.',
-  },
-  {
-    icon: Sparkles,
-    title: 'Lifetime updates',
-    body: 'Elke nieuwe feature en connector die we bouwen, krijg jij ook. Inclusief WhatsApp Q3 2026.',
-  },
-];
-
-const HOW_IT_WORKS = [
-  {
-    step: '01',
-    title: 'Aanmelden',
-    body: 'Vul het formulier in. We lezen je use case en motivatie persoonlijk.',
-  },
-  {
-    step: '02',
-    title: 'Call met Seyed',
-    body: 'Binnen 24 uur plant Seyed een korte intake. Past de beta bij jou en jouw bedrijf?',
-  },
-  {
-    step: '03',
-    title: 'Onboarding sessie',
-    body: '60-90 minuten 1-op-1. Seyed bouwt jouw Techwiz live mee, met jouw stem en workflows.',
-  },
-  {
-    step: '04',
-    title: 'Live op Telegram',
-    body: 'Binnen 24-48 uur na onboarding draait jouw Appie. Briefing in Telegram elke ochtend.',
-  },
-];
-
-const SOCIAL_PROOF = [
-  {
-    name: 'Eva',
-    client: 'Dubai-Property.nl',
-    quote:
-      'Appie is live op Telegram, beantwoordt leads binnen 30 seconden. Weblyfe heeft de hele setup gedaan.',
-    image: '/agents/eva.jpg',
-  },
-  {
-    name: 'Privanotify',
-    client: 'Privacy SaaS',
-    quote: '3 Appies draaien 50+ taken per dag voor GDPR-monitoring en compliance-audit. Setup volledig door Weblyfe.',
-    image: '/screenshots/privanotify-fresh.jpg',
-  },
-  {
-    name: 'Ben de Voorman',
-    client: 'Coach + content',
-    quote:
-      'Contentproductie van 4 uur naar 15 minuten per stuk. Mijn Appie draait dag en nacht.',
-    image: '/agents/ben.jpg',
-  },
-];
-
-const BETA_FAQ = [
-  {
-    q: 'Wat is het verschil tussen de beta en de publieke launch?',
-    a: 'In de beta krijg je Telegram, inbox, agenda en CRM. WhatsApp + extra connectors komen erbij bij de publieke launch (€488/mo). Beta-klanten betalen altijd €250, ook daarna.',
-  },
-  {
-    q: 'Wat als ik later wil upgraden naar full launch?',
-    a: 'Niets. Je beta-prijs blijft €250/mo, ook als we WhatsApp en alle connectors toevoegen bij de publieke launch. Je krijgt alles wat nieuwe klanten krijgen, voor jouw locked-in prijs.',
-  },
-  {
-    q: 'Kan ik stoppen als het niets voor mij is?',
-    a: 'Ja. 14 dagen geld-terug garantie zonder vragen. Daarna maandelijks opzegbaar, geen jaarcontract.',
-  },
-  {
-    q: 'Hoe snel ben ik live?',
-    a: 'Binnen 24-48 uur na de onboarding met Seyed ben je live op Telegram. De 1-op-1 sessie zelf duurt 60-90 minuten.',
-  },
-  {
-    q: 'Heb ik technische kennis nodig?',
-    a: 'Nee. Seyed regelt de hele setup. Jij geeft aan wat je wil; hij configureert.',
-  },
-  {
-    q: 'Welke tools kan Appie verbinden?',
-    a: 'Telegram (dag 1), Gmail/Outlook, Google Calendar, Notion, Brevo, Moneybird, HubSpot, Airtable, TidyCal. WhatsApp Business in Q3 2026.',
-  },
-  {
-    q: 'Is mijn data veilig?',
-    a: 'Appie draait op een dedicated private server in de EU (Hetzner, Falkenstein of Helsinki). Je data verlaat nooit de EU en traint geen publieke AI-modellen.',
-  },
-  {
-    q: 'Wat als Appie iets verkeerd doet?',
-    a: 'Risico-acties pingen jou eerst in Telegram. Je hebt altijd override-controle. Seyed is bereikbaar voor de beta-groep.',
-  },
-  {
-    q: 'Hoeveel plekken zijn er?',
-    a: '5 tot 10. Als de plekken vol zijn, sluit de beta. Er komt een publieke wachtlijst, maar die heeft geen €250 lock-in.',
-  },
-];
-
-export default function BetaPage() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
       />
+      <ScrollProgress />
       <main className="min-h-screen bg-[#031D16] text-[#F6FEFC]">
         <Navbar />
 
@@ -272,16 +252,14 @@ export default function BetaPage() {
           <div className="relative z-10 max-w-6xl mx-auto px-6 grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center">
             <div className="text-center lg:text-left">
               <p className="text-[#DFB771]/80 text-xs font-mono uppercase tracking-widest mb-4">
-                BETA . 5-10 plekken . €250/mo locked
+                {t('beta.hero.eyebrow')}
               </p>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-6 tracking-tight">
-                Jouw persoonlijke Techwiz.
-                <span className="block text-[#DFB771]">Volledig voor je gebouwd.</span>
+                {t('beta.hero.h1.line1')}
+                <span className="block text-[#DFB771]">{t('beta.hero.h1.line2')}</span>
               </h1>
               <p className="text-[#F6FEFC]/75 text-lg md:text-xl mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                Instant Appie BETA: op Telegram vanaf dag 1, met agenda, inbox en CRM.
-                Voor een select groep van 5-10 ondernemers: €250/mo voor altijd. Zelfs
-                als de prijs naar €488 gaat.
+                {t('beta.hero.sub')}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-6">
@@ -290,27 +268,27 @@ export default function BetaPage() {
                   className="group inline-flex items-center justify-center gap-2 bg-[#DFB771] hover:bg-[#FFD99A] text-[#031D16] font-bold px-7 py-4 rounded-xl transition-colors"
                 >
                   <Lock className="w-5 h-5" />
-                  Lock mijn €250 prijs
+                  {t('beta.hero.cta.primary')}
                   <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                 </a>
                 <a
                   href="#vergelijk"
                   className="inline-flex items-center justify-center gap-2 border-2 border-[#247459]/60 hover:border-[#DFB771] text-[#F6FEFC] font-semibold px-7 py-4 rounded-xl transition-colors"
                 >
-                  Vergelijk met DIY en VA
+                  {t('beta.hero.cta.secondary')}
                 </a>
               </div>
 
               <p className="text-sm text-[#DFB771] font-semibold">
-                Nog maar 5-10 plekken. Beta sluit als de plekken vol zijn.
+                {t('beta.hero.urgency')}
               </p>
             </div>
 
             <div className="relative mx-auto lg:mx-0 w-full max-w-md">
               <div className="relative aspect-square rounded-3xl overflow-hidden border-2 border-[#DFB771]/40 shadow-[0_0_60px_-15px_rgba(223,183,113,0.5)]">
                 <Image
-                  src="/agents/appie-3d.jpg"
-                  alt="Appie - jouw persoonlijke Techwiz"
+                  src="/agents/appie-iconic.png"
+                  alt={t('beta.hero.imgAlt')}
                   fill
                   sizes="(min-width: 1024px) 420px, 80vw"
                   className="object-cover"
@@ -320,10 +298,12 @@ export default function BetaPage() {
               </div>
               <div className="absolute -bottom-3 -left-3 flex flex-col gap-2">
                 <div className="bg-[#031D16]/80 border border-[#DFB771]/40 px-3 py-2 rounded-xl text-xs font-mono">
-                  <span className="text-[#DFB771]">[Telegram]</span> 23 mails afgehandeld
+                  <span className="text-[#DFB771]">[Telegram]</span>{' '}
+                  {locale === 'nl' ? '23 mails afgehandeld' : '23 emails handled'}
                 </div>
                 <div className="bg-[#031D16]/80 border border-[#247459]/40 px-3 py-2 rounded-xl text-xs font-mono">
-                  <span className="text-[#247459]">[Calendar]</span> 4 calls geboekt
+                  <span className="text-[#247459]">[Calendar]</span>{' '}
+                  {locale === 'nl' ? '4 calls geboekt' : '4 calls booked'}
                 </div>
               </div>
             </div>
@@ -338,18 +318,18 @@ export default function BetaPage() {
           <div className="max-w-6xl mx-auto px-6">
             <div className="text-center mb-14">
               <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-3">
-                Vergelijk zelf
+                {t('beta.compare.eyebrow')}
               </p>
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
-                €250/mo locked.{' '}
-                <span className="text-[#DFB771]">Voor altijd.</span>
+                {t('beta.compare.h2.line1')}{' '}
+                <span className="text-[#DFB771]">{t('beta.compare.h2.line2')}</span>
               </h2>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
               {PRICING_ROWS.map((row) => (
                 <div
-                  key={row.title}
+                  key={row.id}
                   className={
                     row.accent
                       ? 'rounded-2xl bg-gradient-to-br from-[#DFB771]/15 to-[#247459]/10 border-2 border-[#DFB771] p-6 lg:scale-105 shadow-xl'
@@ -363,7 +343,7 @@ export default function BetaPage() {
                         : 'text-[#F6FEFC]/55 text-xs font-mono uppercase tracking-wider mb-2'
                     }
                   >
-                    {row.accent ? 'Beta-prijs' : 'Optie'}
+                    {row.accent ? t('beta.compare.card.label.accent') : t('beta.compare.card.label.default')}
                   </p>
                   <h3 className="font-bold text-lg mb-2">{row.title}</h3>
                   <p
@@ -373,13 +353,13 @@ export default function BetaPage() {
                   >
                     {row.price}
                   </p>
-                  {row.note && (
+                  {'noteKey' in row && row.noteKey && (
                     <p className="text-[#DFB771] text-xs font-semibold mb-2 uppercase tracking-wider">
-                      {row.note}
+                      {t(row.noteKey)}
                     </p>
                   )}
                   <p className="text-[#F6FEFC]/65 text-sm leading-relaxed mt-2">
-                    {row.body}
+                    {t(row.bodyKey)}
                   </p>
                 </div>
               ))}
@@ -387,10 +367,15 @@ export default function BetaPage() {
 
             <div className="mt-10 max-w-3xl mx-auto rounded-2xl bg-[#DFB771]/10 border border-[#DFB771]/30 p-6 text-center">
               <p className="text-[#F6FEFC] text-base md:text-lg font-medium">
-                De beta-prijs van €250 is voor altijd van jou.{' '}
-                <span className="text-[#DFB771]">
-                  Zelfs na de publieke launch naar €488.
-                </span>
+                {t('beta.compare.footnote').split('€488').map((part, i) =>
+                  i === 0 ? (
+                    <span key={i}>{part}</span>
+                  ) : (
+                    <span key={i}>
+                      <span className="text-[#DFB771]">€488{part}</span>
+                    </span>
+                  )
+                )}
               </p>
             </div>
           </div>
@@ -401,30 +386,119 @@ export default function BetaPage() {
           <div className="max-w-6xl mx-auto px-6">
             <div className="text-center mb-14">
               <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-3">
-                Wat is Instant Appie
+                {t('beta.what.eyebrow')}
               </p>
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">
-                Volledig managed.{' '}
-                <span className="text-[#DFB771]">Geen setup.</span>
+                {t('beta.what.h2.line1')}{' '}
+                <span className="text-[#DFB771]">{t('beta.what.h2.line2')}</span>
               </h2>
               <p className="text-[#F6FEFC]/70 text-lg max-w-3xl mx-auto leading-relaxed">
-                Instant Appie is een volledig managed Techwiz die Weblyfe voor je
-                bouwt, instelt en draait op een dedicated server. Geen setup, geen
-                technische kennis nodig. Je geeft aan wat je wil, wij regelen de rest.
+                {t('beta.what.sub')}
               </p>
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {WHAT_IS_BULLETS.map((b) => (
                 <div
-                  key={b.title}
+                  key={b.id}
                   className="rounded-2xl bg-[#1a2e27]/50 border border-[#247459]/20 p-6"
                 >
                   <div className="w-10 h-10 rounded-xl bg-[#DFB771]/10 border border-[#DFB771]/30 flex items-center justify-center mb-4">
                     <b.icon className="w-5 h-5 text-[#DFB771]" />
                   </div>
-                  <h3 className="font-bold text-base mb-2">{b.title}</h3>
-                  <p className="text-[#F6FEFC]/65 text-sm leading-relaxed">{b.body}</p>
+                  <h3 className="font-bold text-base mb-2">{t(b.titleKey)}</h3>
+                  <p className="text-[#F6FEFC]/65 text-sm leading-relaxed">{t(b.bodyKey)}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* OUTCOMES */}
+        <section className="py-20 md:py-28 bg-[#0a2e23]/40 border-y border-[#247459]/20">
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="text-center mb-14">
+              <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-3">
+                {t('beta.outcomes.eyebrow')}
+              </p>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
+                {t('beta.outcomes.h2.line1')}{' '}
+                <span className="text-[#DFB771]">{t('beta.outcomes.h2.line2')}</span>
+              </h2>
+              <p className="text-[#F6FEFC]/70 text-lg max-w-3xl mx-auto leading-relaxed">
+                {t('beta.outcomes.sub')}
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {OUTCOMES.map((o) => (
+                <div
+                  key={o.id}
+                  className="rounded-2xl bg-[#1a2e27]/50 border border-[#247459]/20 overflow-hidden hover:border-[#DFB771]/40 transition-colors"
+                >
+                  {/* Screenshot slot - drop a real PNG here later */}
+                  <div className="w-full h-24 bg-[#0a2e23]/60 border-b border-[#247459]/20 flex items-center justify-center">
+                    <o.icon className="w-7 h-7 text-[#247459]/40" />
+                  </div>
+                  <div className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-9 h-9 rounded-xl bg-[#DFB771]/10 border border-[#DFB771]/30 flex items-center justify-center flex-shrink-0">
+                        <o.icon className="w-4 h-4 text-[#DFB771]" />
+                      </div>
+                      <p className="text-[#DFB771] text-xs font-mono uppercase tracking-wider">
+                        {t(o.labelKey)}
+                      </p>
+                    </div>
+                    <div className="space-y-3">
+                      <div className="rounded-xl bg-[#1a1a1a]/60 border border-red-900/30 px-4 py-3">
+                        <p className="text-[#F6FEFC]/45 text-xs font-mono uppercase tracking-wider mb-1">{t('beta.outcomes.beforeLabel')}</p>
+                        <p className="text-[#F6FEFC]/65 text-sm leading-relaxed">{t(o.beforeKey)}</p>
+                      </div>
+                      <div className="rounded-xl bg-[#0d2e22]/80 border border-[#247459]/40 px-4 py-3">
+                        <p className="text-[#DFB771] text-xs font-mono uppercase tracking-wider mb-1">{t('beta.outcomes.afterLabel')}</p>
+                        <p className="text-[#F6FEFC]/90 text-sm leading-relaxed">{t(o.afterKey)}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* REAL USE CASES */}
+        <section className="py-20 md:py-28">
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="text-center mb-14">
+              <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-3">
+                {t('beta.usecases.eyebrow')}
+              </p>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
+                {t('beta.usecases.h2.line1')}{' '}
+                <span className="text-[#DFB771]">{t('beta.usecases.h2.line2')}</span>
+              </h2>
+              <p className="text-[#F6FEFC]/70 text-lg max-w-3xl mx-auto leading-relaxed">
+                {t('beta.usecases.sub')}
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {USE_CASES.map((uc) => (
+                <div
+                  key={uc.id}
+                  className="rounded-2xl bg-[#1a2e27]/50 border border-[#247459]/20 overflow-hidden hover:border-[#DFB771]/40 transition-colors"
+                >
+                  {/* Screenshot slot - drop a real PNG here later */}
+                  <div className="w-full h-32 bg-[#0a2e23]/60 border-b border-[#247459]/20 flex items-center justify-center">
+                    <uc.icon className="w-8 h-8 text-[#247459]/40" />
+                  </div>
+                  <div className="p-6">
+                    <div className="w-9 h-9 rounded-xl bg-[#DFB771]/10 border border-[#DFB771]/30 flex items-center justify-center mb-3">
+                      <uc.icon className="w-4 h-4 text-[#DFB771]" />
+                    </div>
+                    <h3 className="font-bold text-base mb-2">{t(uc.titleKey)}</h3>
+                    <p className="text-[#F6FEFC]/65 text-sm leading-relaxed">{t(uc.bodyKey)}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -436,17 +510,17 @@ export default function BetaPage() {
           <div className="max-w-5xl mx-auto px-6">
             <div className="text-center mb-14">
               <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-3">
-                Wat krijg je
+                {t('beta.benefits.eyebrow')}
               </p>
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
-                Wat krijg je als beta-klant?
+                {t('beta.benefits.h2')}
               </h2>
             </div>
 
             <div className="space-y-4">
               {BETA_BENEFITS.map((b, i) => (
                 <div
-                  key={b.title}
+                  key={b.id}
                   className="flex items-start gap-5 rounded-2xl bg-[#1a2e27]/50 border border-[#247459]/20 p-5 md:p-6 hover:border-[#DFB771]/40 transition-colors"
                 >
                   <div className="flex-shrink-0">
@@ -456,11 +530,11 @@ export default function BetaPage() {
                   </div>
                   <div className="flex-1">
                     <p className="text-[#DFB771] text-xs font-mono uppercase tracking-wider mb-1">
-                      Voordeel {String(i + 1).padStart(2, '0')}
+                      {t('beta.benefits.label')} {String(i + 1).padStart(2, '0')}
                     </p>
-                    <h3 className="font-bold text-lg md:text-xl mb-2">{b.title}</h3>
+                    <h3 className="font-bold text-lg md:text-xl mb-2">{t(b.titleKey)}</h3>
                     <p className="text-[#F6FEFC]/70 text-sm md:text-base leading-relaxed">
-                      {b.body}
+                      {t(b.bodyKey)}
                     </p>
                   </div>
                 </div>
@@ -468,9 +542,108 @@ export default function BetaPage() {
             </div>
 
             <p className="text-center text-[#F6FEFC]/55 text-sm mt-8 max-w-2xl mx-auto">
-              WhatsApp is geplanned voor Q3 2026 (publieke launch). Beta-klanten worden
-              als eerste toegevoegd aan de WhatsApp-rollout.
+              {t('beta.benefits.whatsapp.footnote')}
             </p>
+          </div>
+        </section>
+
+        {/* CHATBOT vs APPIE-AGENT */}
+        <section className="py-20 md:py-28 bg-[#0a2e23]/40 border-y border-[#247459]/20">
+          <div className="max-w-5xl mx-auto px-6">
+            <div className="text-center mb-14">
+              <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-3">
+                {t('beta.chatbot.eyebrow')}
+              </p>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
+                {t('beta.chatbot.h2.line1')}{' '}
+                <span className="text-[#DFB771]">{t('beta.chatbot.h2.line2')}</span>
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Chatbot column */}
+              <div className="rounded-2xl bg-[#1a1a1a]/50 border border-red-900/30 p-6">
+                <div className="flex items-center gap-2 mb-6">
+                  <XCircle className="w-5 h-5 text-red-400/70" />
+                  <p className="font-bold text-lg text-[#F6FEFC]/60">
+                    {t('beta.chatbot.chatbot.label')}
+                  </p>
+                </div>
+                <ul className="space-y-4">
+                  {CHATBOT_ROWS.map((row) => (
+                    <li key={row.id} className="flex items-start gap-3">
+                      <XCircle className="w-4 h-4 text-red-400/50 flex-shrink-0 mt-0.5" />
+                      <p className="text-[#F6FEFC]/55 text-sm leading-relaxed">{t(row.chatbotKey)}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Appie agent column */}
+              <div className="rounded-2xl bg-gradient-to-br from-[#DFB771]/10 to-[#247459]/10 border-2 border-[#DFB771]/60 p-6">
+                <div className="flex items-center gap-2 mb-6">
+                  <CheckCircle2 className="w-5 h-5 text-[#DFB771]" />
+                  <p className="font-bold text-lg text-[#DFB771]">
+                    {t('beta.chatbot.agent.label')}
+                  </p>
+                </div>
+                <ul className="space-y-4">
+                  {CHATBOT_ROWS.map((row) => (
+                    <li key={row.id} className="flex items-start gap-3">
+                      <CheckCircle2 className="w-4 h-4 text-[#DFB771] flex-shrink-0 mt-0.5" />
+                      <p className="text-[#F6FEFC]/90 text-sm leading-relaxed">{t(row.agentKey)}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* OUD vs NIEUW */}
+        <section className="py-20 md:py-28">
+          <div className="max-w-5xl mx-auto px-6">
+            <div className="text-center mb-14">
+              <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-3">
+                {t('beta.oldnew.eyebrow')}
+              </p>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
+                {t('beta.oldnew.h2.line1')}{' '}
+                <span className="text-[#DFB771]">{t('beta.oldnew.h2.line2')}</span>
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Old column */}
+              <div className="rounded-2xl bg-[#1a2e27]/30 border border-[#247459]/20 p-6">
+                <p className="text-[#F6FEFC]/50 text-xs font-mono uppercase tracking-widest mb-5">
+                  {t('beta.oldnew.old.label')}
+                </p>
+                <ul className="space-y-4">
+                  {OLD_NEW_ROWS.map((row) => (
+                    <li key={row.id} className="flex items-start gap-3">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#F6FEFC]/30 flex-shrink-0 mt-2" />
+                      <p className="text-[#F6FEFC]/50 text-sm leading-relaxed">{t(row.oldKey)}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* New column */}
+              <div className="rounded-2xl bg-gradient-to-br from-[#DFB771]/10 to-[#247459]/10 border border-[#DFB771]/40 p-6">
+                <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-5">
+                  {t('beta.oldnew.new.label')}
+                </p>
+                <ul className="space-y-4">
+                  {OLD_NEW_ROWS.map((row) => (
+                    <li key={row.id} className="flex items-start gap-3">
+                      <ArrowRight className="w-4 h-4 text-[#DFB771] flex-shrink-0 mt-0.5" />
+                      <p className="text-[#F6FEFC]/90 text-sm leading-relaxed">{t(row.newKey)}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -479,10 +652,10 @@ export default function BetaPage() {
           <div className="max-w-6xl mx-auto px-6">
             <div className="text-center mb-14">
               <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-3">
-                Hoe het werkt
+                {t('beta.how.eyebrow')}
               </p>
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
-                Van aanmelding tot live in 4 stappen.
+                {t('beta.how.h2')}
               </h2>
             </div>
 
@@ -495,8 +668,8 @@ export default function BetaPage() {
                   <p className="font-mono text-4xl font-bold text-[#DFB771]/30 mb-3">
                     {s.step}
                   </p>
-                  <h3 className="font-bold text-lg mb-2">{s.title}</h3>
-                  <p className="text-[#F6FEFC]/65 text-sm leading-relaxed">{s.body}</p>
+                  <h3 className="font-bold text-lg mb-2">{t(s.titleKey)}</h3>
+                  <p className="text-[#F6FEFC]/65 text-sm leading-relaxed">{t(s.bodyKey)}</p>
                 </li>
               ))}
             </ol>
@@ -508,18 +681,18 @@ export default function BetaPage() {
           <div className="max-w-6xl mx-auto px-6">
             <div className="text-center mb-14">
               <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-3">
-                Echte klanten
+                {t('beta.social.eyebrow')}
               </p>
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
-                Volledig managed.{' '}
-                <span className="text-[#DFB771]">Door ons gebouwd.</span>
+                {t('beta.social.h2.line1')}{' '}
+                <span className="text-[#DFB771]">{t('beta.social.h2.line2')}</span>
               </h2>
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {SOCIAL_PROOF.map((c) => (
                 <article
-                  key={c.name}
+                  key={c.id}
                   className="rounded-2xl bg-[#1a2e27]/50 border border-[#247459]/20 hover:border-[#DFB771]/40 transition-colors overflow-hidden"
                 >
                   <div className="relative aspect-[16/10] w-full overflow-hidden">
@@ -538,7 +711,7 @@ export default function BetaPage() {
                       {c.client}
                     </p>
                     <p className="text-[#F6FEFC]/80 text-sm leading-relaxed">
-                      &ldquo;{c.quote}&rdquo;
+                      &ldquo;{t(c.quoteKey)}&rdquo;
                     </p>
                   </div>
                 </article>
@@ -546,27 +719,88 @@ export default function BetaPage() {
             </div>
 
             <p className="text-center text-[#F6FEFC]/55 text-sm mt-10 max-w-2xl mx-auto">
-              Alle huidige klanten zijn handmatig onboard gebracht. De beta-route maakt
-              dit schaalbaar.
+              {t('beta.social.footnote')}
             </p>
           </div>
         </section>
 
+        {/* VALUE STACK */}
+        <section className="py-20 md:py-28 bg-[#0a2e23]/40 border-y border-[#247459]/20">
+          <div className="max-w-5xl mx-auto px-6">
+            <div className="text-center mb-14">
+              <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-3">
+                {t('beta.value.eyebrow')}
+              </p>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
+                {t('beta.value.h2.line1')}{' '}
+                <span className="text-[#DFB771]">{t('beta.value.h2.line2')}</span>
+              </h2>
+              <p className="text-[#F6FEFC]/70 text-lg max-w-3xl mx-auto leading-relaxed">
+                {t('beta.value.sub')}
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 items-start">
+              {/* Value equation */}
+              <div className="space-y-4">
+                {VALUE_EQUATION.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex items-start gap-4 rounded-2xl bg-[#1a2e27]/50 border border-[#247459]/20 p-5"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-[#DFB771]/10 border border-[#DFB771]/30 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="w-5 h-5 text-[#DFB771]" />
+                    </div>
+                    <div>
+                      <p className="text-[#DFB771] text-xs font-mono uppercase tracking-wider mb-1">
+                        {t(item.labelKey)}
+                      </p>
+                      <p className="text-[#F6FEFC]/80 text-sm leading-relaxed">{t(item.bodyKey)}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Value stack */}
+              <div className="rounded-2xl bg-gradient-to-br from-[#DFB771]/15 to-[#247459]/10 border-2 border-[#DFB771] p-6">
+                <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-5">
+                  {t('beta.value.stack.label')}
+                </p>
+                <ul className="space-y-3 mb-6">
+                  {VALUE_STACK_ITEMS.map((key) => (
+                    <li key={key} className="flex items-start gap-3">
+                      <CheckCircle2 className="w-4 h-4 text-[#DFB771] flex-shrink-0 mt-0.5" />
+                      <p className="text-[#F6FEFC]/90 text-sm leading-relaxed">{t(key)}</p>
+                    </li>
+                  ))}
+                </ul>
+                <div className="border-t border-[#DFB771]/20 pt-5 flex items-center justify-between">
+                  <p className="text-3xl font-bold text-[#DFB771]">€250<span className="text-base font-normal text-[#F6FEFC]/60">/mo</span></p>
+                  <a
+                    href="#beta-form"
+                    className="group inline-flex items-center gap-2 bg-[#DFB771] hover:bg-[#FFD99A] text-[#031D16] font-bold px-5 py-3 rounded-xl transition-colors text-sm"
+                  >
+                    {t('beta.value.cta')}
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* FAQ */}
-        <section
-          id="faq"
-          className="py-20 md:py-28"
-        >
+        <section id="faq" className="py-20 md:py-28">
           <div className="max-w-4xl mx-auto px-6">
             <div className="text-center mb-12">
               <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-3">
-                FAQ
+                {t('beta.faq.eyebrow')}
               </p>
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
-                Antwoorden op de meest gestelde vragen.
+                {t('beta.faq.h2')}
               </h2>
             </div>
-            <FaqAccordion items={BETA_FAQ} />
+            <FaqAccordion items={betaFaqItems} />
           </div>
         </section>
 
@@ -578,14 +812,13 @@ export default function BetaPage() {
           <div className="max-w-3xl mx-auto px-6">
             <div className="text-center mb-10">
               <p className="text-[#DFB771] text-xs font-mono uppercase tracking-widest mb-3">
-                Reserveer je plek
+                {t('beta.form.eyebrow')}
               </p>
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
-                Pak je plek voordat de beta sluit.
+                {t('beta.form.h2')}
               </h2>
               <p className="text-[#F6FEFC]/70 text-base md:text-lg max-w-2xl mx-auto">
-                Vul het formulier in. Seyed leest je motivatie persoonlijk en plant
-                binnen 24 uur een korte intake.
+                {t('beta.form.sub')}
               </p>
             </div>
 
@@ -594,15 +827,15 @@ export default function BetaPage() {
             <ul className="mt-12 flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center text-sm text-[#F6FEFC]/70">
               <li className="flex items-center gap-2 justify-center">
                 <ShieldCheck className="w-4 h-4 text-[#DFB771]" />
-                14 dagen geld-terug
+                {t('beta.form.trust1')}
               </li>
               <li className="flex items-center gap-2 justify-center">
                 <Lock className="w-4 h-4 text-[#DFB771]" />
-                €250/mo voor altijd
+                {t('beta.form.trust2')}
               </li>
               <li className="flex items-center gap-2 justify-center">
                 <Sparkles className="w-4 h-4 text-[#DFB771]" />
-                1-op-1 onboarding met Seyed
+                {t('beta.form.trust3')}
               </li>
             </ul>
           </div>

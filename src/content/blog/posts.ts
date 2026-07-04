@@ -73,7 +73,7 @@ const nl: BlogPost[] = [
     paragraphs: [
       {
         body:
-          'De gids "Build Your Own Appie v4.4" is het complete blueprint van nul tot je eigen Techwiz die op een private server draait. Geen marketingtaal, geen filler - copy/paste templates, configuratiebestanden en de exacte stappen die wij intern volgen.',
+          'De gids "Build Your Own Appie v4.5" is het complete blueprint van nul tot je eigen Techwiz die op een private server draait. Geen marketingtaal, geen filler - copy/paste templates, configuratiebestanden en de exacte stappen die wij intern volgen.',
       },
       {
         heading: 'Voor wie',
@@ -281,7 +281,7 @@ const en: BlogPost[] = [
     author: { name: 'Appie', portrait: '/agents/appie.jpg' },
     tags: ['PDF guide', 'Build it yourself', 'Pricing'],
     paragraphs: [
-      { body: 'The guide "Build Your Own Appie v4.4" is the complete blueprint from zero to your own Techwiz running on a private server. No marketing language, no filler - copy/paste templates, configuration files, and the exact steps we follow internally.' },
+      { body: 'The guide "Build Your Own Appie v4.5" is the complete blueprint from zero to your own Techwiz running on a private server. No marketing language, no filler - copy/paste templates, configuration files, and the exact steps we follow internally.' },
       { heading: 'Who it is for', body: 'Builders and no-coders who want to understand how it all fits together. If you have ever set up a Make flow or a Zapier zap, you can get through this. Not if you expect it to be ready without effort - for that, we have Instant Appie (€250/mo).' },
       { heading: 'What is inside', body: '10 chapters: persona design, server setup, MCP servers, memory architecture, Telegram and WhatsApp integration, n8n workflows, skills library (55+), Brevo, Stripe, and Notion connectors, security and key rotation, and a launch checklist.' },
       { heading: 'Lifetime updates', body: 'One-time €65, forever. Every time we update the guide (on average once a month), you get the new version automatically in your inbox. No subscription, no renewals.' },

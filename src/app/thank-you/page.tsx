@@ -232,7 +232,7 @@ export default function ThankYouPage() {
             letterSpacing: '-0.02em',
           }}
         >
-          Thank you! 🎉
+          Thank you
         </h1>
 
         <p
@@ -299,7 +299,7 @@ export default function ThankYouPage() {
           </p>
           {[
             { icon: '📥', text: 'Download the PDF from your email' },
-            { icon: '📖', text: 'Read through the 62-page guide' },
+            { icon: '📖', text: 'Read through the 97-page guide' },
             { icon: '🤖', text: 'Build your own Appie, step by step' },
           ].map((step, i) => (
             <div

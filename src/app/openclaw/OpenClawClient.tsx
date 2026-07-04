@@ -6,8 +6,10 @@ import Image from 'next/image';
 import { useState } from 'react';
 import Link from 'next/link';
 import WaitlistForm from '@/components/WaitlistForm';
+import { trackMetaEvent } from '@/components/MetaEvents';
 // StickyCountdown removed - PDF is live, no countdown needed
 import { PAINPOINTS, FEATURES, OUTCOMES, AGENTS, TIERS, FAQS, TOOLS, TRUSTED_CLIENTS, STATS } from './data/content';
+import GoogleReviewsSlider from './GoogleReviewsSlider';
 
 // ─── ICON MAP ──────────────────────────────────────────────────────────────────
 
@@ -41,6 +43,15 @@ function LiveBadge() {
       🔥 The Build Your Own Appie guide is LIVE - get yours for €65
     </div>
   );
+}
+
+function trackGuideCheckoutClick() {
+  trackMetaEvent('InitiateCheckout', {
+    content_name: 'Build Your Own Appie',
+    content_category: 'PDF Guide',
+    value: 65,
+    currency: 'EUR',
+  });
 }
 
 // ─── PAGE ──────────────────────────────────────────────────────────────────────
@@ -337,6 +348,7 @@ export default function OpenClawPage() {
                     href={tier.ctaHref} 
                     target={tier.ctaHref.startsWith('http') ? '_blank' : undefined}
                     rel={tier.ctaHref.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    onClick={tier.ctaHref.includes('buy.stripe.com') ? trackGuideCheckoutClick : undefined}
                     className="btn-primary w-full text-center block"
                   >
                     {tier.cta}
@@ -368,7 +380,7 @@ export default function OpenClawPage() {
             <p className="text-[#F6FEFC]/60 text-lg mb-8 max-w-xl mx-auto">
               The complete playbook is live. 62 pages. Real code. Real prompts. Everything you need to get started.
             </p>
-            <a href="https://buy.stripe.com/7sYaEYfAn30C8BncwJ3Je2I" target="_blank" rel="noopener noreferrer" className="btn-primary group text-lg inline-flex items-center gap-2">
+            <a href="https://buy.stripe.com/7sYaEYfAn30C8BncwJ3Je2I" target="_blank" rel="noopener noreferrer" onClick={trackGuideCheckoutClick} className="btn-primary group text-lg inline-flex items-center gap-2">
               Get the Guide Now <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
             <p className="text-[#F6FEFC]/35 text-sm mt-6">€65 one-time. Lifetime updates. Instant delivery.</p>
@@ -379,6 +391,9 @@ export default function OpenClawPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* ── GOOGLE REVIEWS ── */}
+      <GoogleReviewsSlider />
 
       {/* ── FAQ (SELL) ── */}
       <section id="faq" className="py-28 bg-[#F6FEFC]">

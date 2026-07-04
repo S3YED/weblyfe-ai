@@ -178,10 +178,10 @@ export default function Footer() {
             © {new Date().getFullYear()} Weblyfe.ai{t('footer.copyright.suffix')}
           </p>
           <div className="flex gap-6">
-            <a href="#" className="text-[#F6FEFC]/40 hover:text-[#F6FEFC]/60 text-sm transition-colors">
+            <a href="/privacy" className="text-[#F6FEFC]/40 hover:text-[#F6FEFC]/60 text-sm transition-colors">
               {t('footer.privacy')}
             </a>
-            <a href="#" className="text-[#F6FEFC]/40 hover:text-[#F6FEFC]/60 text-sm transition-colors">
+            <a href="/terms" className="text-[#F6FEFC]/40 hover:text-[#F6FEFC]/60 text-sm transition-colors">
               {t('footer.terms')}
             </a>
           </div>

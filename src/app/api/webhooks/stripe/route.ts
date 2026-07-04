@@ -10,6 +10,19 @@ const AIRTABLE_BASE_ID = process.env.AIRTABLE_WEBLYFE_BASE_ID!;
 const AIRTABLE_LEADS_TABLE = 'tblXjrB8K4Mc6U8Xu';
 const AIRTABLE_SALES_TABLE = 'tbl4ghEabTQzC84hV';
 
+// Positive product allowlist. The live Stripe account also sells one-time
+// "Weblyfe Services" (€500/€1000) and Weblyfe University, which are mode=payment
+// too and were cross-firing the PDF delivery email + getting mislabeled as
+// "Appie PDF" in Airtable (reported 2026-06-18). Only these IDs are the guide.
+const PDF_PRICE_IDS = new Set(
+  (process.env.PDF_STRIPE_PRICE_IDS || 'price_1TFzgPLNHXmj2NAs1N95z1gu')
+    .split(',').map((s) => s.trim()).filter(Boolean),
+);
+const PDF_PAYMENT_LINK_IDS = new Set(
+  (process.env.PDF_STRIPE_PAYMENT_LINKS || 'plink_1TFzgYLNHXmj2NAsVzqvy3Ut')
+    .split(',').map((s) => s.trim()).filter(Boolean),
+);
+
 // ─── Stripe Signature Verification ─────────────────────────────────────────────
 
 function verifyStripeSignature(payload: string, signature: string): boolean {
@@ -43,10 +56,10 @@ function generateDownloadToken(email: string): string {
   if (!PDF_SIGNING_SECRET) throw new Error('PDF_SIGNING_SECRET env var is required');
   const expiry = Math.floor(Date.now() / 1000) + TOKEN_EXPIRY_DAYS * 24 * 60 * 60;
   const payload = Buffer.from(`${email.toLowerCase().trim()}:${expiry}`).toString('base64url');
+  // Full 256-bit HMAC (must match verifyToken in download/appie-guide).
   const sig = createHmac('sha256', PDF_SIGNING_SECRET)
     .update(payload)
-    .digest('hex')
-    .slice(0, 16);
+    .digest('hex');
   return `${payload}.${sig}`;
 }
 
@@ -90,7 +103,10 @@ async function airtableFetch(table: string, options: { method?: string; body?: u
 }
 
 async function findLeadByEmail(email: string): Promise<{ id: string; fields: Record<string, unknown> } | null> {
-  const formula = encodeURIComponent(`LOWER({Email}) = "${email.toLowerCase().trim()}"`);
+  // Escape double-quotes + backslashes so a crafted email can't break out of the
+  // Airtable formula string literal (encodeURIComponent only handles URL encoding).
+  const safeEmail = email.toLowerCase().trim().replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+  const formula = encodeURIComponent(`LOWER({Email}) = "${safeEmail}"`);
   const data = await airtableFetch(AIRTABLE_LEADS_TABLE, { params: `filterByFormula=${formula}&maxRecords=1` });
   const records = data.records || [];
   return records.length > 0 ? records[0] : null;
@@ -108,7 +124,7 @@ async function createLead(email: string, fullName: string, phone?: string): Prom
     'Status': 'Close',
     'Lead Heat': 'Hot',
     'Sign-up Date': new Date().toISOString(),
-    'Lead notes': 'Auto-created from Stripe PDF purchase (Build Your Own Appie v4.1)',
+    'Lead notes': 'Auto-created from Stripe PDF purchase (Build Your Own Appie v4.5)',
   };
   if (lastName) fields['Last Name'] = lastName;
   if (phone) fields['Phone'] = phone;
@@ -294,12 +310,12 @@ function generateEmailHTML(firstName: string, password: string, downloadUrl: str
         
         <!-- Header -->
         <div style="text-align:center;margin-bottom:28px;">
-          <div style="font-size:48px;margin-bottom:8px;">🎉</div>
+          <p style="color:#DFB771;font-size:11px;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;margin:0 0 10px;">Welcome to Weblyfe</p>
           <h1 class="text-dark" style="color:#031D16;font-size:26px;font-weight:800;margin:0 0 6px;">
-            Hey ${firstName}, welcome!
+            ${firstName ? `Welkom, ${firstName}` : 'Welkom'}
           </h1>
           <p class="text-mid" style="color:#4a5568;font-size:15px;margin:0;">
-            Your copy of <strong>Build Your Own Appie v4.1</strong> is ready to download.
+            Your copy of <strong>Build Your Own Appie v4.5</strong> is ready to download.
           </p>
         </div>
 
@@ -341,7 +357,7 @@ function generateEmailHTML(firstName: string, password: string, downloadUrl: str
                   </td>
                   <td>
                     <p class="text-dark" style="color:#031D16;margin:0;font-size:14px;font-weight:600;">Open the PDF and start reading</p>
-                    <p class="text-mid" style="color:#718096;margin:3px 0 0;font-size:13px;">62 pages of step-by-step instructions to build your AI employee.</p>
+                    <p class="text-mid" style="color:#718096;margin:3px 0 0;font-size:13px;">97 pages of step-by-step instructions to build your AI employee.</p>
                   </td>
                 </tr>
               </table>
@@ -360,7 +376,7 @@ function generateEmailHTML(firstName: string, password: string, downloadUrl: str
                   </td>
                   <td>
                     <p class="text-dark" style="color:#031D16;margin:0;font-size:14px;font-weight:600;">Follow the guide and build your Appie</p>
-                    <p class="text-mid" style="color:#718096;margin:3px 0 0;font-size:13px;">Start from Chapter 1 and work your way through. Join our Discord if you need help.</p>
+                    <p class="text-mid" style="color:#718096;margin:3px 0 0;font-size:13px;">Start from Chapter 1 and work your way through. Reply to this email anytime if you need help.</p>
                   </td>
                 </tr>
               </table>
@@ -425,6 +441,35 @@ async function sendPDFDeliveryEmail(email: string, firstName: string): Promise<v
   }
 }
 
+// ─── PDF Product Gate ──────────────────────────────────────────────────────────
+
+// Returns the price IDs on a checkout session (empty on failure).
+async function getSessionPriceIds(sessionId: string): Promise<string[]> {
+  try {
+    const res = await fetch(
+      `https://api.stripe.com/v1/checkout/sessions/${sessionId}/line_items?limit=100`,
+      { headers: { Authorization: `Bearer ${STRIPE_SECRET_KEY}` } },
+    );
+    const data = await res.json();
+    return (data.data || [])
+      .map((li: { price?: { id?: string } }) => li.price?.id)
+      .filter((id: string | undefined): id is string => Boolean(id));
+  } catch (err) {
+    console.error('Webhook: failed to fetch line items for', sessionId, err);
+    return [];
+  }
+}
+
+// Fast path: the PDF payment link. Precise path: the PDF price ID on a line item.
+// Fails closed (non-PDF stays skipped) so other products never trigger delivery.
+async function isPdfPurchase(session: { id: string; payment_link?: string }): Promise<boolean> {
+  if (typeof session.payment_link === 'string' && PDF_PAYMENT_LINK_IDS.has(session.payment_link)) {
+    return true;
+  }
+  const priceIds = await getSessionPriceIds(session.id);
+  return priceIds.some((id) => PDF_PRICE_IDS.has(id));
+}
+
 // ─── Webhook Handler ───────────────────────────────────────────────────────────
 
 export async function POST(req: NextRequest) {
@@ -449,6 +494,23 @@ export async function POST(req: NextRequest) {
       if (session.payment_status !== 'paid') {
         console.log('Webhook: session not paid, skipping:', session.id);
         return NextResponse.json({ received: true });
+      }
+
+      // This endpoint delivers the one-time PDF guide ONLY. The same live
+      // Stripe account also runs Instant Appie subscriptions (handled by
+      // dash.weblyfe.ai); on 2026-06-12 a subscription checkout cross-fired
+      // the guide email to a dashboard customer. PDF checkouts are
+      // mode='payment'; anything else is not ours.
+      if (session.mode !== 'payment') {
+        console.log(`Webhook: session mode ${session.mode}, not a PDF purchase, skipping:`, session.id);
+        return NextResponse.json({ received: true, skipped: 'non-payment-mode' });
+      }
+
+      // mode=payment is necessary but not sufficient: "Weblyfe Services" and
+      // Weblyfe University are one-time payments too. Gate on the actual product.
+      if (!(await isPdfPurchase(session))) {
+        console.log(`Webhook: session not the PDF product (payment_link=${session.payment_link}), skipping:`, session.id);
+        return NextResponse.json({ received: true, skipped: 'non-pdf-product' });
       }
 
       const email = await getCustomerEmail(session);
